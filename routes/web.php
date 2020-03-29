@@ -1,16 +1,15 @@
 <?php
 
 // lang functions
-Route::get('lang/{lang}', function($lang) {
+Route::get('lang/{lang}', function ($lang) {
     session()->has('lang') ? session()->forget('lang') : "";
     $lang == 'ar' ? session()->put('lang', 'ar') : session()->put('lang', 'en');
     return back();
 });
 
 Route::get('/', function () {
-    if(auth('admin')->check()){
+    if (auth('admin')->check()) {
         return redirect('admin/home');
-
     } else {
         return redirect('/login');
     }
@@ -32,6 +31,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
     Route::group(['middleware' => 'admin:admin'], function () {
             Route::get('/home', 'admin\DashboardController@home');
            // Route::get('/Client', 'admin\DashboardController@Client');
+           Route::resource('service', 'ServiceController');
+
             Route::resource('admin', 'AdminController');
             Route::resource('client', 'ClientController');
             Route::resource('car', 'CarController');
