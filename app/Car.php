@@ -8,11 +8,14 @@ class Car extends Model
 {
     //
     protected $fillable = [
-		'carCatogaries_id',
+		'car_brand_category_id',
 		'model',
 		'client_id',
-        'carType_id',
-        'platNo'
+    'carType_id',
+    'platNo',
+    'car_structure_number',
+    'car_color',
+
   ];
   
   public function client()
@@ -26,7 +29,7 @@ class Car extends Model
     
     public function carCatogray()
 	{
-		return $this->HasOne('App\CarCatogray','id','carCatogaries_id');
+		return $this->HasOne('App\CarCatogray','id','car_brand_category_id');
   }
   
 

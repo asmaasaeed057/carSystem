@@ -186,8 +186,8 @@ class ReprairCardController extends Controller
     {
         //
         $clients = Client::get();
-        $carCatogry = CarCatogray::get();
-        return view('admin.repairCard.create',compact('clients','carCatogry'));
+        $cars = Car::get();
+        return view('admin.repairCard.create',compact('clients','cars'));
 
     }
 
@@ -197,27 +197,27 @@ class ReprairCardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
     public function store(Request $request)
     {
-       // dd(request()->all());
-        $rules = [
+        $request->validate([
             'checkReprort'=> 'required ',
             'client_id' => 'required',
             'car_id' => 'required',
+        ]);
 
+        ReprairCard::create($request->all());
 
-         ];
-         $data = $this->validate(request(), $rules, [], [
-            'checkReprort'     => trans('site.name'),
-            'client_id'  => trans('site.email'),
-            'car_id' => trans('site.password'),
-         ]);
-
-         ReprairCard::create($data);
-
-         session()->flash('success', trans('admin.added'));
-         return redirect('admin/reprairCard');
+        session()->flash('success', trans('admin.added'));
+        return redirect('admin/reprairCard');
     }
+
+
+
+
+
+
     /**
      * Display the specified resource.
      *
@@ -238,11 +238,15 @@ class ReprairCardController extends Controller
      * @param  \App\ReprairCard  $reprairCard
      * @return \Illuminate\Http\Response
      */
-    public function edit(ReprairCard $reprairCard)
+    public function edit($id)
     {
-        //
-    }
+        $repairCard = ReprairCard::find($id);
+        $cars = Car::all();
+        $clients = Client::all();
 
+
+        return view('admin.repairCard.edit', compact('repairCard','clients','cars'));
+    }
     /**
      * Update the specified resource in storage.
      *

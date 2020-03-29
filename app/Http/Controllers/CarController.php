@@ -48,32 +48,24 @@ class CarController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    
     public function store(Request $request)
     {
-        //
-        $rules = [
-            'carCatogaries_id'=> 'required ',
+        $request->validate([
+            'car_brand_category_id'=> 'required ',
             'model' => 'required',
             'client_id' => 'required',
             'carType_id' => 'required',
             'platNo' => 'required',
+            'car_structure_number' => 'required',
+            'car_color' => 'required',
+        ]);
 
-         ];
-         $data = $this->validate(request(), $rules, [], [
-            'carCatogaries_id'=> trans('site.name'),
-            'model'  => trans('site.email'),
-            'client_id' => trans('site.password'),
-            'carType_id' => trans('site.address'),
-            'platNo' => trans('site.address'),
+        Car::create($request->all());
 
-         ]);
-
-         Car::create($data);
-
-         session()->flash('success', trans('admin.added'));
-         return redirect('admin/car');
-    }
-
+        session()->flash('success', trans('admin.added'));
+        return redirect('admin/car');
+   }
     /**
      * Display the specified resource.
      *
@@ -113,29 +105,23 @@ class CarController extends Controller
      * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Car $ca,$id)
+
+    public function update(Request $request, $id)
     {
-        //
-
-
-        $rules = [
-            'carCatogaries_id'=> 'required ',
+        $request->validate([
+            'car_brand_category_id'=> 'required ',
             'model' => 'required',
             'client_id' => 'required',
             'carType_id' => 'required',
             'platNo' => 'required',
+            'car_structure_number' => 'required',
+            'car_color' => 'required',
+        ]);
 
-         ];
-         $data = $this->validate(request(), $rules, [], [
-            'carCatogaries_id'     => trans('site.name'),
-            'model'  => trans('site.email'),
-            'client_id' => trans('site.password'),
-            'carType' => trans('site.address'),
-            'platNo' => trans('site.address'),
 
-         ]);
+        $car = Car::find($id);
 
-        Car::where('id', $id)->update($data);
+        $car->update($request->all());
 
         session()->flash('success', trans('admin.updated'));
         return redirect('admin/car');
@@ -147,10 +133,14 @@ class CarController extends Controller
      * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Car $car)
+    public function destroy($id)
     {
-        //
+        $car = Car::find($id);
+        $car->delete();
+
+        return redirect()->route('car.index');
     }
+    
     function get_catagray(Request $request)
     {
         // dd($request->all());

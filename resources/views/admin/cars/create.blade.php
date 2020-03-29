@@ -125,7 +125,7 @@ $(document).ready(function(){
                   </div>
 
 
-                  <div class="col-md-6">
+                  <!-- <div class="col-md-6">
                     <div class="form-group">
                         <label>{{__('site.company')}}</label>
                         <select class="form-control select2" id="company" style="width: 100%;">
@@ -134,23 +134,23 @@ $(document).ready(function(){
                             @endforeach
                         </select>
                     </div>
-                  </div>
+                  </div> -->
 
                   <div class="col-md-6">
                     <div class="form-group">
-                        <label>{{__('site.carCat')}}</label>
-                        <select class="form-control select2" name="carCatogaries_id" id="carCat" style="width: 100%;">
+                        <label>Brand Category</label>
+                        <select class="form-control select2" name="car_brand_category_id" id="carCat" style="width: 100%;">
                         <option>{{ __("site.options") }}</option>
-                            <!-- @foreach($CarCatogray as $value)
+                             @foreach($CarCatogray as $value)
                                 <option value="{{$value->id}}">{{$value->name_ar}}</option>
-                            @endforeach -->
+                            @endforeach 
                         </select>
                     </div>
                   </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
-                        <label>{{__('site.Cartype')}}</label>
+                        <label>Type</label>
                         <select class="form-control select2" name="carType_id" id="CarType" style="width: 100%;">
                             @foreach($CarType as $value)
                                 <option value="{{$value->id}}">{{$value->name_ar}}</option>
@@ -176,6 +176,20 @@ $(document).ready(function(){
                         <input class="form-control " type="text" name="platNo" id="">
                     </div>
                   </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Structure Number</label>
+                        <input class="form-control " type="text" name="car_structure_number" id="">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Color</label>
+                        <input class="form-control " type="text" name="car_color" id="">
+                    </div>
+                  </div>
+
+
             </div>
             </div>
 

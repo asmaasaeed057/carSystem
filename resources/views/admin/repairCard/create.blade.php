@@ -127,7 +127,7 @@ $(document).ready(function(){
                     <div class="form-group">
                         <label>{{__('site.car')}}</label>
                         <select class="form-control select2" name="car_id" id="cars" style="width: 100%;">
-                            @foreach($carCatogry as $value)
+                            @foreach($cars as $value)
                                 <option value="{{$value->id}}">{{$value->name_en}}</option>
                             @endforeach
                         </select>

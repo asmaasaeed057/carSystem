@@ -85,7 +85,7 @@
 
 
               <!-- Companies DropDopwn -->
-                <select style="width:100%;" value="{{$carCatogray->id}}" class="form-control select2"name="company_id" id="company">
+                <select style="width:100%;" value="{{$carCatogray->id}}" class="form-control select2"name="car_brand_id" id="company">
                 @foreach($company as $value)
 
                 <option value="{{$value->id}}" >{{$value->name_en}}</option>

@@ -51,14 +51,14 @@ class CarCatograyController extends Controller
         $rules = [
             'name_en'     => 'required ',
             'name_ar'    => 'required',
-            'company_id'    => 'required',
+            'car_brand_id'    => 'required',
 
 
          ];
          $data = $this->validate(request(), $rules, [], [
             'name_en'     => trans('site.name'),
             'name_ar'    => trans('site.email'),
-            'company_id'    => trans('site.email'),
+            'car_brand_id'    => trans('site.email'),
 
          ]);
 
@@ -106,14 +106,14 @@ class CarCatograyController extends Controller
         $rules = [
             'name_en'     => 'required ',
             'name_ar'    => 'required',
-            'company_id'    => 'required',
+            'car_brand_id'    => 'required',
 
 
          ];
          $data = $this->validate(request(), $rules, [], [
             'name_en'     => trans('site.name'),
             'name_ar'    => trans('site.email'),
-            'company_id'    => trans('site.email'),
+            'car_brand_id'    => trans('site.email'),
 
          ]);
 
@@ -129,8 +129,13 @@ class CarCatograyController extends Controller
      * @param  \App\CarCatogray  $carCatogray
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CarCatogray $carCatogray)
+
+    public function destroy($id)
     {
-        //
+        $category = CarCatogray::find($id);
+        $category->delete();
+
+        return redirect()->route('carCatogray.index');
+
     }
 }

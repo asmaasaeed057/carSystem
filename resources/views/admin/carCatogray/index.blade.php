@@ -80,7 +80,9 @@
 
                   
 
-                  <td><a href="{{route('carCatogray.edit' ,$value->id)}}"><i class="fas fa-edit"></i></a> | <a href=""><i class="fas fa-trash-alt"></i></a> </td>
+                  <td><a href="{{route('carCatogray.edit' ,$value->id)}}"><i class="fas fa-edit"></i></a> |
+
+                   </td>
                 </tr>
                 @endforeach
                 </tbody>

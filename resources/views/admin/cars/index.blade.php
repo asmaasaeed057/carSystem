@@ -61,12 +61,15 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>{{ trans('site.carCat') }}</th>
-                  <th>{{ trans('site.model') }}</th>
-                  <th>{{ trans('site.owner') }}</th>
-                  <th>{{ trans('site.catType') }}</th>
+                  <th>Category</th>
+                  <th>Model</th>
+                  <th>Owner</th>
+                  <th>Type</th>
+                  <th>Structure Number</th>
+                  <th>Color</th>
 
-                  <th>{{ trans('site.Actions') }}</th>
+                  <th>Actions</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -77,9 +80,19 @@
                   <td>{{$value->model}}</td>
                   <td>{{$value->client->fullName}}</td>
                   <td>{{$value->carType->name_en}}</td>
-                  <td></td>
+                  <td>{{$value->car_structure_number}}</td>
+                  <td>{{$value->car_color}}</td>
+                  <td>
+                  <a href="{{route('car.edit' ,$value->id)}}"><i class="fas fa-edit"></i></a> |
+                  <form class="delete" action="{{route('car.destroy',$value->id)}}" method="post">
+                      @csrf
+                      @method('DELETE')
+                      <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
+                    </form>
 
-                  <td><a href="{{route('car.edit' ,$value->id)}}"><i class="fas fa-edit"></i></a> | <a href=""><i class="fas fa-trash-alt"></i></a> </td>
+                  
+                  </td>
+
                 </tr>
                 @endforeach
                 </tbody>
@@ -97,3 +110,13 @@
     <!-- /.content -->
   </div>
 @endsection
+<script>
+$(document).ready(function() {
+    $("#delete").click(function(event) {
+        if( !confirm('هل انت متاكد ؟') ) 
+            event.preventDefault();
+    });
+});
+
+</script>
+

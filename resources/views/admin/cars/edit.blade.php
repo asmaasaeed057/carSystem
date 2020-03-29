@@ -66,7 +66,7 @@ select{
             <div class="box-body">
             <div class="box box-warning">
             <div class="box-header with-border">
-              <h3 class="box-title">{{ trans('site.createClient') }}</h3>
+              <h3 class="box-title">Update Client</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -86,26 +86,15 @@ select{
               </div>
             </div>
 
-
-            <div class="col-md-6">
-              <div class="form-group">
-                  <label>{{__('site.company')}}</label>
-                  <select class="form-control select2" id="company" style="width: 100%;">
-                      @foreach($Company as $value)
-                          <option value="{{$value->id}}" >{{$value->name_ar}}</option>
-                      @endforeach
-                  </select>
-              </div>
-            </div>
-
             <div class="col-md-6">
               <div class="form-group">
                   <label>{{__('site.carCat')}}</label>
-                  <select class="form-control select2" name="carCatogaries_id" id="carCat" style="width: 100%;">
-                  <option>{{ __("site.options") }}</option>
-                      <!-- @foreach($CarCatogray as $value)
-                          <option value="{{$value->id}}">{{$value->name_ar}}</option>
-                      @endforeach -->
+                  <select class="form-control select2" name="car_brand_category_id" id="carCat" style="width: 100%;">
+                  @foreach($CarCatogray as $value)
+                      <option value="{{ $value->id }}" {{($value->id == $car->car_brand_category_id) ? 'selected' : '' }} > 
+                            {{ $value->name_ar }} 
+                      </option>
+                  @endforeach    
                   </select>
               </div>
             </div>
@@ -135,14 +124,28 @@ select{
             <div class="col-md-6">
               <div class="form-group">
                   <label>{{__('site.plat')}}</label>
-                  <input class="form-control " type="text" name="platNo" id="">
+                  <input class="form-control " type="text" name="platNo" id="" value="{{$car->platNo}}">
               </div>
             </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                  <label>Structure Number</label>
+                  <input class="form-control " type="text" name="car_structure_number" id="" value="{{$car->car_structure_number}}">
+              </div>
             </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                  <label>Color</label>
+                  <input class="form-control " type="text" name="car_color" id="" value="{{$car->car_color}}">
+              </div>
             </div>
 
 
-<input type="submit" class="btn  btn-info " value="{{__('site.add')}}">
+            </div>
+            </div>
+            
+
+<input type="submit" class="btn  btn-info " value="Update">
             </form>
             </div>
             <!-- /.box-body -->

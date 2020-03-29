@@ -79,6 +79,7 @@
                   
 
                   <td><a href="{{route('company.edit' ,$value->id)}}"><i class="fas fa-edit"></i></a> | <a href=""><i class="fas fa-trash-alt"></i></a> </td>
+
                 </tr>
                 @endforeach
                 </tbody>

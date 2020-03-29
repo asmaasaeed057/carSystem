@@ -62,34 +62,38 @@
             <div class="box-body">
             <div class="box box-warning">
             <div class="box-header with-border">
-              <h3 class="box-title">{{ trans('site.createClient') }}</h3>
+              <h3 class="box-title">تعديل</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <form action="{{ route('client.update' ,$client->id)}}" method="POST">
+            <form action="{{ route('reprairCard.update' ,$repairCard->id)}}" method="POST">
               @csrf
               @method('PUT')
+              <div class="col-md-6">
+              <div class="form-group">
+                  <label>Client</label>
+                  <select class="form-control select2" name="client_id" style="width: 100%;">
+                  @foreach($clients as $value)
+                      <option value="{{$value->id}}" {{$value->id == $repairCard->client_id ? "selected":""}}>{{$value->fullName}}</option>
+                  @endforeach
+                  </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                  <label>Category</label>
+                  <select class="form-control select2" name="car_brand_category_id" id="carCat" style="width: 100%;">
+                  @foreach($CarCatogray as $value)
+                      <option value="{{ $value->id }}" {{($value->id == $car->car_brand_category_id) ? 'selected' : '' }} > 
+                            {{ $value->name_ar }} 
+                      </option>
+                  @endforeach    
+                  </select>
+              </div>
+            </div>
 
-                <!-- text input -->
-                <div class="form-group">
-                  <label>{{ trans('site.clientName') }}</label>
-                  <input type="text"name="fullName" class="form-control" placeholder="{{ trans('site.hintClientName') }}" value="{{$client->fullName}}">
-                </div>
-                <div class="form-group">
-                  <label>{{ trans('site.phone') }}</label>
-                  <input type="text" name="phone" class="form-control" placeholder="{{ trans('site.hintPhone') }}" value="{{$client->phone}}" >
-                </div>
 
-                <!-- textarea -->
-                <div class="form-group">
-                  <label>{{ trans('site.address') }}</label>
-                  <input type="text" name="address" class="form-control" placeholder="{{ trans('site.hintAddress') }}" value="{{$client->address}}">
-                </div>
-                <div class="form-group">
-                  <label>{{ trans('site.email') }}</label>
-                  <input type="email" name="email" class="form-control" placeholder="{{ trans('site.hintEmail') }}" value="{{$client->email}}">
-                </div>
-                <input type="submit" class="btn btn-info" value="{{ trans('site.add') }}">
+                <input type="submit" class="btn btn-info" value="update">
 
               </form>
             </div>
