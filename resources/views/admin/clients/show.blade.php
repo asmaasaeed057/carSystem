@@ -115,81 +115,6 @@
                   
                 </tr>
               </tbody></table>
-              <br>
-              <div class="table">
-                <button class="btn btn-danger">{{ trans('site.TotalCars') }}: </button>
-                <button class="btn btn-danger">{{ trans('site.TotalRepaircard') }}: </button>
-                <button class="btn btn-danger">{{ trans('site.Totalbills') }}: </button>
-                <button class="btn btn-danger">{{ trans('site.Totaldebit') }}: </button>
-                
-              </div>
-                <!--  -->
-            <br>
-              <div class="tab">
-                <button class="tablinks" onclick="openCity(event, 'London')">{{ trans('site.carList') }}</button>
-                <button class="tablinks" onclick="openCity(event, 'Paris')"> {{ trans('site.RepairCard') }}</button>
-                <button class="tablinks" onclick="openCity(event, 'Tokyo')"> {{ trans('site.bills') }}</button>
-              </div>
-
-              <div id="London" class="tabcontent">
-                <h3>{{ trans('site.carList') }}</h3>
-                <table id="example1" class="table table-bordered table-striped" >
-                <thead>
-                <tr>
-                  <th style="width:20%;">{{ trans('site.carCat') }}</th>
-                  <th style="width:20%;">{{ trans('site.model') }}</th>
-                  <th style="width:10%;">{{ trans('site.plate') }}</th>
-                  <th style="width:20%;">{{ trans('site.created_at') }}</th>
-                 
-                </tr>
-                </thead>
-                <tbody>
-
-                @foreach($cars as $value)
-                <tr >
-                  <td style="width:20%;">{{$value->carCatogray->name_en}}</td> 
-                  <td style="width:20%;">{{$value->model}}</td>
-                  <td style="width:10%;">{{$value->platNo}}</td>
-                  <td style="width:20%;">{{$value->created_at->toDateString()}}</td>
-                </tr>
-                @endforeach
-                </tbody>
-    
-                </table>
-       
-              </div>
-
-              
-              <div id="Paris" class="tabcontent">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th style="width:20%;">{{ trans('site.carName') }}</th>
-                  <th style="width:10%;">{{ trans('site.plate') }}</th>
-                  <th style="width:20%;">{{ trans('site.model') }}</th>
-
-                  <th style="width:15%;">{{ trans('site.companyName_en') }}</th>
-                  <th style="width:15%;">{{ trans('site.status') }}</th>
-                   <th style="width:20%;">{{ trans('site.Actions') }}</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                @foreach($repairCards as $value)
-                <tr>
-                  <td style="width:20%;">{{$value->car->carCatogray->name_en}}</td>    <!-- fromCarTable -->
-                  <td style="width:10%;">{{$value->car->platNo}}</td>    <!-- /// -->
-                  <td style="width:20%;">{{$value->car->model}}</td>    <!-- /// -->
-
-                  <td  style="width:15%;"> {{$value->car->carCatogray->company->name_en}}</td>    <!-- /// -->
-                  <td  style="width:15%;"><button style="width:100%" class="btn btn-primary">{{$value->status}}</button></td>    <!-- /// -->
-
-                  <td  style="width:20%;"><a href="{{route('reprairCard.show' ,$value->id)}}"><i class="fas fa-search"></i> </a> | <a href=""><i class="fas fa-edit"></i></a> </td>
-                </tr>
-                @endforeach
-                </tbody>
-
-              </table>
        
               </div>
 
@@ -209,19 +134,5 @@
     <!-- /.content -->
   </div>
 
-<script>
-function openCity(evt, cityName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-}
-</script>
+
 @endsection
