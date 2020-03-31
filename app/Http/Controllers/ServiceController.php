@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Service;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\Service\StoreServiceRequest;
 class ServiceController extends Controller
 {
 
@@ -20,7 +20,7 @@ class ServiceController extends Controller
         return view('admin.service.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreServiceRequest $request)
     {
         // $rules = [
         //     'service_name'     => 'required ',
