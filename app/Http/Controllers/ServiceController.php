@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 class ServiceController extends Controller
 {
 
-
     public function index()
     {
         $services = Service::all();
@@ -47,19 +46,19 @@ class ServiceController extends Controller
 
         Service::create($request->all());
 
-        session()->flash('success', trans('admin.added'));
-        return redirect('admin/service');
+        session()->flash('success', "Service created successfully");
+        return redirect(route('service.index'));
     }
 
-    public function show(Client $clie, $id)
+    public function show($id)
     {
-        // $service = Service::find($id);
+        $service = Service::find($id);
         // $cars = Car::where('service_id', '=', $id)->get();
         // $repairCards = ReprairCard::where('client_id', '=', $id)->get();
         // // dd($repairCards);
         // $invoice = box::join("reprair_cards", "reprair_cards.id", "=", "boxes.reprairCard_id")->where("reprair_cards.client_id", $id)->get();
         // //dd($invoice);
-        // return view('admin.clients.show', compact('client', 'cars', 'invoice', 'repairCards'));
+        return view('admin.service.show', compact('service'));
     }
 
     public function edit($id)
@@ -68,7 +67,7 @@ class ServiceController extends Controller
         return view('admin.service.edit', compact('service'));
     }
 
-    public function update(Request $request , $id)
+    public function update(Request $request, $id)
     {
         // $rules = [
         //     'fullName'     => 'required',
@@ -85,21 +84,27 @@ class ServiceController extends Controller
         //     'address' => trans('admin.group_id'),
         // ]);
         // Client::where('id', $id)->update($data);
+
         $service = Service::find($id);
 
         $service->update($request->all());
 
-
-        session()->flash('success', trans('admin.updated'));
-        return redirect('admin/service');
+        session()->flash('success', "Service updated successfully");
+        return redirect(route('service.index'));
     }
 
-    public function destroy(Client $client)
+    public function destroy($id)
     {
-        //
+        $service = Service::find($id);
+
+        $service->delete();
+
+        session()->flash('success', "Service deleted successfully");
+        return redirect(route('service.index'));
     }
-    public function clientDetails($id)
-    {
-        echo "ping";
-    }
+    // public function clientDetails($id)        return redirect()->route('about.index');
+
+    // {
+    //     echo "ping";
+    // }
 }

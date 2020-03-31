@@ -62,11 +62,11 @@
                     <div class="box-body">
                         <div class="box box-warning">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Create Client</h3>
+                                <h3 class="box-title">Update Service</h3>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
-                                <form action="{{ route('client.update' ,$client->id)}}" method="POST">
+                                <form action="{{ route('service.update' ,$service->service_id)}}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <!-- text input -->
@@ -78,11 +78,17 @@
                                         <label>Service Number</label>
                                         <input type="text" name="service_number" class="form-control" placeholder="Service Number" value="{{$service->service_number}}">
                                     </div>
+                                   
+
                                     <div class="form-group">
                                         <label>Service Type</label>
-                                        <select>
-                                            <option value="{{$service->service_type}}">{{$service->service_type}}</option>
 
+                                        <select class="form-control" name="service_type">
+                                            <option value="">اختار</option>
+                                            <option value="1" {{($service->service_type == 1) ? 'selected' : '' }}>أجور خدمات اليد )الإصلاحات)</option>
+                                            <option value="2" {{($service->service_type == 2) ? 'selected' : '' }}>أجور الأعمال الخارجية </option>
+                                            <option value="3" {{($service->service_type == 3) ? 'selected' : '' }}>قطع الغيار )مخزن داخلي) </option>
+                                            <option value="4" {{($service->service_type == 4) ? 'selected' : '' }}>قطع غيار )مشتريات خارجية) </option>
 
                                         </select>
                                     </div>
@@ -98,7 +104,7 @@
                                         <label>Service Working Hours</label>
                                         <input type="text" name="service_working_hours" class="form-control" placeholder="Service Working Hours" value="{{$service->service_working_hours}}">
                                     </div>
-                                    <input type="submit" class="btn-primary" value="{{ trans('site.add') }}">
+                                    <input type="submit" class="btn-primary" value="Update">
 
                                 </form>
                             </div>
@@ -115,4 +121,4 @@
     </section>
     <!-- /.content -->
 </div>
-@endsection 
+@endsection

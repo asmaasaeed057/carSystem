@@ -8,6 +8,8 @@
 @section('script')
 <!-- DataTables -->
 <script src="https://kit.fontawesome.com/c099210540.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <script src="{{ asset('FrontEnd') }}/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="{{ asset('FrontEnd') }}/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 @endsection
@@ -59,6 +61,9 @@
                         </div>
                     </div>
                     <!-- /.box-header -->
+                    <div class="box-header">
+                        <a href="{{route('service.create')}}" style="margin-top: 10px;" class="btn btn-success">Add Service </a>
+                    </div>
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
@@ -77,16 +82,41 @@
                                 <tr style=>
                                     <td>{{$service->service_name}}</td>
                                     <td>{{$service->service_number}}</td>
-                                    <td>{{$service->service_type}}</td>
+                                    @if($service->service_type == 1)
+                                    <td>أجور خدمات اليد )الإصلاحات)</td>
+                                    @elseif($service->service_type == 2)
+                                    <td>أجور الأعمال الخارجية</td>
+
+                                    @elseif($service->service_type == 3)
+                                    <td>قطع الغيار )مخزن داخلي)</td>
+
+                                    @else
+                                    <td> قطع غيار )مشتريات خارجية)</td>
+
+                                    @endif
+
 
                                     <td>{{$service->service_cost}}</td>
                                     <td>{{$service->service_client_cost}}</td>
                                     <td>{{$service->service_working_hours}}</td>
 
-                                    <td><a href="{{url('admin/serviceDetails/' ,$service->service_id)}}"><i class="fas fa-edit"></i></a> | <a href=""><i class="fas fa-trash-alt"></i></a> | <a href="{{route('service.show' ,$service->service_id)}}"><i class="fas fa-search"></i></a> </td>
+                                    <td><a href="{{route('service.edit' ,$service->service_id)}}"><i class="fas fa-edit"></i></a> |
+                                        <form class="delete" action="{{route('service.destroy' ,$service->service_id)}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="fas fa-trash-alt" type="submit"></button>
+
+                                        </form>|
+                                        <a href="{{route('service.show' ,$service->service_id)}}"><i class="fas fa-search"></i></a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
+
+
+
+
+
                             <tfoot>
                                 <tr>
 
@@ -110,4 +140,13 @@
     </section>
     <!-- /.content -->
 </div>
-@endsection 
+
+<script>
+    $(document).ready(function() {
+        $(".delete").click(function(event) {
+            if (!confirm('هل انت متاكد ؟'))
+                event.preventDefault();
+        });
+    });
+</script>
+@endsection
