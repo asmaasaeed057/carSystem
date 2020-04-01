@@ -1,0 +1,67 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\CarBrand;
+use App\CarBrandCategory;
+
+use App\Http\Requests\CarBrandCategory\StoreCarBrandCategoryRequest;
+use Illuminate\Http\Request;
+
+
+class CarBrandCategoryController extends Controller
+{
+    public function index()
+    {
+        $brandCategories = CarBrandCategory::all();
+        return view('admin.brandCategory.index', compact('brandCategories'));
+    }
+
+    public function create()
+    {
+        $brands = CarBrand::all();
+
+        return view('admin.brandCategory.create',['brands' => $brands]);
+    }
+
+    public function store(StoreCarBrandCategoryRequest $request)
+    {
+        CarBrandCategory::create($request->all());
+        session()->flash('success', "Car Brand Category created Category successfully");
+        return redirect(route('brandCategory.index'));
+    }
+
+    public function show($id)
+    {
+        // $brand = CarBrandCategory::find($id);
+        // return view('admin.brandCategory.show', compact('brandCategory'));
+    }
+
+    public function edit($id)
+    {
+        $brandCategory = CarBrandCategory::find($id);
+        $brands = CarBrand::all();
+
+        return view('admin.brandCategory.edit', compact('brandCategory'),['brands' => $brands]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $brandCategory = CarBrandCategory::find($id);
+
+        $brandCategory->update($request->all());
+
+        session()->flash('success', "Car Brand Category updated successfully");
+        return redirect(route('brandCategory.index'));
+    }
+
+    public function destroy($id)
+    {
+        $brandCategory = CarBrandCategory::find($id);
+
+        $brandCategory->delete();
+
+        session()->flash('success', "Car Brand Category deleted successfully");
+        return redirect(route('brandCategory.index'));
+    }
+}

@@ -36,12 +36,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
             Route::resource('admin', 'AdminController');
             Route::resource('client', 'ClientController');
             Route::resource('car', 'CarController');
+            Route::resource('brand', 'CarBrandController');
+            Route::resource('brandCategory', 'CarBrandCategoryController');
+
             Route::post('get_catagray', 'CarController@get_catagray')->name('get_catagray');
             Route::post('get_car', 'ReprairCardController@get_car')->name('get_car');
             Route::get('newitem', 'ReprairCardController@newitem')->name('newitem');
             Route::get('print/{id}', 'AccountController@print')->name('print');
             route::get('clientDetails/{id}','ClientController@clientDetails');
-            Route::resource('car', 'CarController');
             Route::resource('permission', 'AdminGroupController');
             Route::resource('company', 'CompanyController');
             Route::resource('carCatogray', 'CarCatograyController');
