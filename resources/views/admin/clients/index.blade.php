@@ -72,7 +72,9 @@
                   <th>{{ trans('site.email') }}</th>
                   <th>Client Type</th>
                   <th>{{ trans('site.Actions') }}</th>
-
+                  <th>Edit</th>
+                  <th>Delete</th>
+                  <th>Show</th>
                 </tr>
               </thead>
               <tbody>
@@ -85,28 +87,23 @@
                   <td>{{$client->email}}</td>
                   <td>{{$client->client_type}}</td>
 
-                  <td><a href="{{route('client.edit' ,$client->id)}}"><i class="fas fa-edit"></i></a> |
+
+
+                  <td><a href="{{route('client.edit' ,$client->id)}}" class="btn btn-info">Edit</a></td>
+                  <td>
+
                     <form class="delete" action="{{route('client.destroy' ,$client->id)}}" method="post">
                       @csrf
                       @method('DELETE')
-                      <button class="fas fa-trash-alt" type="submit"></button>
+                      <button class="btn btn-danger" type="submit">Delete</button>
 
-                    </form>|
-                    <a href="{{route('client.show' ,$client->id)}}"><i class="fas fa-search"></i></a>
+                    </form>
                   </td>
+                  <td><a href="{{route('client.show' ,$client->id)}}" class="btn btn-success">Show</a></td>
                 </tr>
                 @endforeach
               </tbody>
-              <tfoot>
-                <tr>
 
-                  <th>{{ trans('site.clientName') }}</th>
-                  <th>{{ trans('site.phone') }}</th>
-                  <th>{{ trans('site.address') }}</th>
-                  <th>{{ trans('site.email') }}</th>
-                  <th>{{ trans('site.Actions') }}</th>
-                </tr>
-              </tfoot>
             </table>
           </div>
           <!-- /.box-body -->

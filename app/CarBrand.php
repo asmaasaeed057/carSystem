@@ -18,6 +18,6 @@ class CarBrand extends Model
 
     public function carBrandCategory()
     {
-        return $this->hasMany('App\CarBrandCatogray','id');
+        return $this->hasMany('App\CarBrandCategory','id');
     }
 }

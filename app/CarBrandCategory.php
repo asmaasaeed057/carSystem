@@ -1,8 +1,8 @@
 <?php
 
 namespace App;
-
 use App\CarBrand;
+use App\Car;
 use Illuminate\Database\Eloquent\Model;
 
 class CarBrandCategory extends Model
@@ -20,4 +20,9 @@ class CarBrandCategory extends Model
     {
         return $this->belongsTo('App\CarBrand', 'car_brand_id');
     }
+
+    public function car(){
+        return $this->hasMany('App\Car','id');
+    }
+     
 }

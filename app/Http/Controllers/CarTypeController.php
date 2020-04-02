@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\CarType;
+use App\Car;
 use Illuminate\Http\Request;
+use App\Http\Requests\CarType\StoreCarTypeRequest;
 
 class CarTypeController extends Controller
 {
@@ -16,7 +18,7 @@ class CarTypeController extends Controller
     } */
     public function index()
     {
-        //
+        
         $carTypes = CarType::all();
         return view('admin.carType.index',compact('carTypes'));
     }
@@ -38,26 +40,11 @@ class CarTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCarTypeRequest $request)
     {
-        //
-        $rules = [
-            'name_en'     => 'required ',
-            'name_ar'    => 'required',
-
-
-         ];
-         $data = $this->validate(request(), $rules, [], [
-            'name_en'     => trans('site.name'),
-            'name_ar'    => trans('site.email'),
-
-
-         ]);
-
-         CarType::create($data);
-
-         session()->flash('success', trans('admin.added'));
-         return redirect('admin/carType');
+         CarType::create($request->all());
+         session()->flash('success', "Car type created successfully");
+         return redirect(route('carType.index'));
     }
 
     /**
@@ -77,11 +64,8 @@ class CarTypeController extends Controller
      * @param  \App\CarType  $carType
      * @return \Illuminate\Http\Response
      */
-    public function edit(CarType $carT,$id)
+    public function edit($id)
     {
-        //
-
-         //
          $carType = CarType::find($id);
          return view('admin.carType.edit', compact('carType'));
     }
@@ -93,26 +77,15 @@ class CarTypeController extends Controller
      * @param  \App\CarType  $carType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CarType $carT,$id)
+    public function update(Request $request ,$id)
     {
-        //
-         //
-         $rules = [
-            'name_en'     => 'required ',
-            'name_ar'    => 'required',
 
+         $type = carType::find($id);
 
-         ];
-         $data = $this->validate(request(), $rules, [], [
-            'name_en'     => trans('site.name'),
-            'name_ar'    => trans('site.email'),
-
-         ]);
-
-         carType::where('id', $id)->update($data);
-
-         session()->flash('success', trans('admin.updated'));
-         return redirect('admin/carType');
+         $type->update($request->all());
+  
+         session()->flash('success', "Car Type updated successfully");
+         return redirect(route('carType.index'));
     }
 
     /**
@@ -121,8 +94,22 @@ class CarTypeController extends Controller
      * @param  \App\CarType  $carType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CarType $carType)
+    public function destroy($id)
     {
-        //
+        $type = CarType::find($id);
+
+        $cars = Car::all()->where('carType_id' , '=' , $id);
+        $counCars= count($cars);
+
+        if($counCars > 0){
+            session()->flash('error', "You cant remove car type");
+
+        }
+        else{
+            $type->delete();
+            session()->flash('success', "Car Type deleted successfully");
+
+        }
+        return redirect(route('carType.index'));
     }
 }

@@ -70,7 +70,9 @@
                                 <tr>
                                     <th>Car Brand Name EN</th>
                                     <th>Car Brand Name AR</th>
-
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                    <th>Show</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -80,25 +82,21 @@
                                     <td>{{$brand->name_en}}</td>
                                     <td>{{$brand->name_ar}}</td>
 
-                                    <td><a href="{{route('brand.edit' ,$brand->id)}}"><i class="fas fa-edit"></i></a> |
+                                    <td><a href="{{route('brand.edit' ,$brand->id)}}" class="btn btn-info">Edit</a></td>
+                                    <td>
+
                                         <form class="delete" action="{{route('brand.destroy' ,$brand->id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="fas fa-trash-alt" type="submit"></button>
-                                        </form>|
-                                        <a href="{{route('brand.show' ,$brand->id)}}"><i class="fas fa-search"></i></a>
+                                            <button class="btn btn-danger" type="submit">Delete</button>
+
+                                        </form>
                                     </td>
+                                    <td><a href="{{route('brand.show' ,$brand->id)}}" class="btn btn-success">Show</a></td>
+
                                 </tr>
                                 @endforeach
                             </tbody>
-
-
-                            <tfoot>
-                                <tr>
-                                    <th>Car Brand Name EN</th>
-                                    <th>Car Brand Name AR</th>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                     <!-- /.box-body -->

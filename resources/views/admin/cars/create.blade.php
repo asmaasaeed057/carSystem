@@ -117,32 +117,22 @@ $(document).ready(function(){
                     <div class="form-group">
                         <label>{{__('site.clientName')}}</label>
                         <select class="form-control select2" name="client_id" style="width: 100%;">
-                        @foreach($clients as $value)
-                            <option value="{{$value->id}}">{{$value->fullName}}</option>
+                        @foreach($clients as $client)
+                            <option value="{{$client->id}}">{{$client->fullName}}</option>
                         @endforeach
                         </select>
                     </div>
                   </div>
 
 
-                  <!-- <div class="col-md-6">
-                    <div class="form-group">
-                        <label>{{__('site.company')}}</label>
-                        <select class="form-control select2" id="company" style="width: 100%;">
-                            @foreach($Company as $value)
-                                <option value="{{$value->id}}">{{$value->name_ar}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                  </div> -->
-
+            
                   <div class="col-md-6">
                     <div class="form-group">
                         <label>Brand Category</label>
                         <select class="form-control select2" name="car_brand_category_id" id="carCat" style="width: 100%;">
                         <option>{{ __("site.options") }}</option>
-                             @foreach($CarCatogray as $value)
-                                <option value="{{$value->id}}">{{$value->name_ar}}</option>
+                             @foreach($carCategories as $category)
+                                <option value="{{$category->id}}">{{$category->name_ar}}</option>
                             @endforeach 
                         </select>
                     </div>
@@ -152,8 +142,8 @@ $(document).ready(function(){
                     <div class="form-group">
                         <label>Type</label>
                         <select class="form-control select2" name="carType_id" id="CarType" style="width: 100%;">
-                            @foreach($CarType as $value)
-                                <option value="{{$value->id}}">{{$value->name_ar}}</option>
+                            @foreach($carTypes as $type)
+                                <option value="{{$type->id}}">{{$type->name_ar}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -172,7 +162,7 @@ $(document).ready(function(){
 
                   <div class="col-md-6">
                     <div class="form-group">
-                        <label>{{__('site.plat')}}</label>
+                        <label>Plate number</label>
                         <input class="form-control " type="text" name="platNo" id="">
                     </div>
                   </div>

@@ -38,6 +38,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
             Route::resource('car', 'CarController');
             Route::resource('brand', 'CarBrandController');
             Route::resource('brandCategory', 'CarBrandCategoryController');
+            Route::resource('carType', 'CarTypeController');
 
             Route::post('get_catagray', 'CarController@get_catagray')->name('get_catagray');
             Route::post('get_car', 'ReprairCardController@get_car')->name('get_car');
@@ -48,7 +49,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
             Route::resource('company', 'CompanyController');
             Route::resource('carCatogray', 'CarCatograyController');
             Route::resource('Accounting', 'AccountController');
-            Route::resource('carType', 'CarTypeController');
             Route::resource('cost', 'costController');
             Route::resource('reprairCard', 'ReprairCardController');
             Route::get('approved/{id}','ReprairCardController@approved')->name('approved');

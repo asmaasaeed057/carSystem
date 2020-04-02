@@ -12,4 +12,8 @@ class Client extends Model
 		'address',
 		'email',
 	];
+
+	public function car(){
+        return $this->hasMany('App\Car','id');
+	}
 }

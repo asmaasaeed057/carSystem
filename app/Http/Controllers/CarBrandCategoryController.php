@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CarBrand;
 use App\CarBrandCategory;
-
+use App\Car;
 use App\Http\Requests\CarBrandCategory\StoreCarBrandCategoryRequest;
 use Illuminate\Http\Request;
 
@@ -20,12 +20,12 @@ class CarBrandCategoryController extends Controller
     public function create()
     {
         $brands = CarBrand::all();
-
         return view('admin.brandCategory.create',['brands' => $brands]);
     }
 
     public function store(StoreCarBrandCategoryRequest $request)
     {
+        // dd($request);
         CarBrandCategory::create($request->all());
         session()->flash('success', "Car Brand Category created Category successfully");
         return redirect(route('brandCategory.index'));
@@ -59,9 +59,18 @@ class CarBrandCategoryController extends Controller
     {
         $brandCategory = CarBrandCategory::find($id);
 
-        $brandCategory->delete();
+        $categories = Car::all()->where('car_brand_category_id' , '=' , $id);
+        $councategories= count($categories);
 
-        session()->flash('success', "Car Brand Category deleted successfully");
+        if($councategories > 0){
+            session()->flash('error', "You cant remove this category");
+
+        }
+        else{
+            $brandCategory->delete();
+            session()->flash('success', "Category deleted successfully");
+        }
         return redirect(route('brandCategory.index'));
+
     }
 }

@@ -58,11 +58,6 @@ class ClientController extends Controller
     public function show($id)
     {
         $client = Client::find($id);
-        // $cars = Car::where('client_id','=',$id)->get();
-        // $repairCards = ReprairCard::where('client_id','=',$id)->get();
-        // // dd($repairCards);
-        // $invoice = box::join("reprair_cards","reprair_cards.id","=","boxes.reprairCard_id")->where("reprair_cards.client_id",$id)->get();
-        // //dd($invoice);
         return view('admin.clients.show', compact('client'));
     }
 
@@ -102,9 +97,18 @@ class ClientController extends Controller
     {
         $client = Client::find($id);
 
-        $client->delete();
+        $clients = Car::all()->where('client_id' , '=' , $id);
+        $counClients= count($clients);
 
-        session()->flash('success', "Client deleted successfully");
+        if($counClients > 0){
+            session()->flash('error', "You cant remove this client");
+
+        }
+        else{
+            $client->delete();
+            session()->flash('success', "Client deleted successfully");
+
+        }
         return redirect(route('client.index'));
     }
     public function clientDetails($id){

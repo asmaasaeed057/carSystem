@@ -65,7 +65,7 @@
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
-                                <form action="{{ route('brand.store')}}" method="POST">
+                                <form action="{{ route('brandCategory.store')}}" method="POST">
                                     @csrf
                                     @method('POST')
 
@@ -98,7 +98,7 @@
                                         <label>Car Brand</label>
                                         <select class="form-control" name="car_brand_id">
                                             @foreach($brands as $brand)
-                                            <option value="{{$brand->name_en}}">{{$brand->name_en}}</option>
+                                            <option value="{{$brand->id}}">{{$brand->name_en}}</option>
                                             @endforeach
                                         </select>
                                         @if ($errors->get('car_brand_id'))

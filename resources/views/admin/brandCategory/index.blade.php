@@ -70,7 +70,9 @@
                   <th>Brand Category Name (Arabic)</th>
                   <th>Car Brand</th>
 
-                  <th>{{ trans('site.Actions') }}</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                  <!-- <th>Show</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -81,15 +83,17 @@
                   <td>{{$category->name_en}}</td>
                   <td>{{$category->brand->name_en}}</td>
 
+                  <td><a href="{{route('brandCategory.edit' ,$category->id)}}" class="btn btn-info">Edit</a></td>
+                  <td>
 
-
-                  <td><a href="{{route('brandCategory.edit' ,$category->id)}}"><i class="fas fa-edit"></i></a> |
                     <form class="delete" action="{{route('brandCategory.destroy' ,$category->id)}}" method="post">
                       @csrf
                       @method('DELETE')
-                      <button class="fas fa-trash-alt" type="submit"></button>
+                      <button class="btn btn-danger" type="submit">Delete</button>
+
                     </form>
                   </td>
+                  <!-- <td><a href="{{route('brandCategory.show' ,$category->id)}}" class="btn btn-success">Show</a></td> -->
 
                 </tr>
                 @endforeach
