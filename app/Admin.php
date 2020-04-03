@@ -32,7 +32,7 @@ class Admin extends Authenticatable
 
     protected $fillable = [
 
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'group_id',
 
     ];
 
@@ -42,9 +42,11 @@ class Admin extends Authenticatable
         'password', 'remember_token',
 
     ];
-	public function group()
-	{
-		return $this->HasOne('App\AdminGroup','id','group_id');
+
+    public function group()
+    {
+        return $this->belongsTo('App\Group', 'group_id');
     }
+
 
 }

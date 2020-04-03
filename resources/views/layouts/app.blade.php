@@ -458,7 +458,7 @@
                             <li><a href="{{ route('admin.create') }}"><i class="fa fa-circle-o"></i> {{ trans('site.add')}}</a></li>
                         </ul>
                     </li>
-                    <li class="treeview">
+                    <!-- <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
                             <span>{{ trans('site.permissions')}}</span>
@@ -469,6 +469,20 @@
                         <ul class="treeview-menu">
                             <li><a href="{{ route('permission.index') }}"><i class="fa fa-circle-o"></i> {{ trans('site.permissionslist')}}</a></li>
                             <li><a href="{{ route('permission.create') }}"><i class="fa fa-circle-o"></i> {{ trans('site.add')}}</a></li>
+                        </ul>
+                    </li> -->
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-pie-chart"></i>
+                            <span>Permissions</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ route('group.index') }}"><i class="fa fa-circle-o"></i> Groups</a></li>
+                            <li><a href="{{ route('account.index') }}"><i class="fa fa-circle-o"></i> Accounts</a></li>
                         </ul>
                     </li>
                     <li class="treeview">

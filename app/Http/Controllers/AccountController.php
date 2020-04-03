@@ -1,133 +1,118 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Client;
-use App\ReprairCard;
-use App\CarCatogray;
-use App\Account;
+
 use Illuminate\Http\Request;
-use App\ReceiptVoucher;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Controller;
+use App\Admin;
+use App\Group;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
+
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
-        //underMaintance
-        $accounts  = Account::select('reprairCard_id as id','reprairCard_id as reprairCard_id', 'car_id', 'client_id')->distinct()->where('status' , '=','accepted' )->get();
-         $accountCount = (count($accounts));
-       //dd($accounts[0]->);
-        return view('admin.accounting.index',compact('accounts'));
+        $groups = Group::all();
+        $users = Admin::all();
+        return view('admin/account.index', [
+            'groups' => $groups,
+            'users' => $users,
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function confirm($id)
-    {
-        Account::where('reprairCard_id' , $id)->update([
-            'status' => 'underMaintance'
-        ]);
-        ReprairCard::where('id' , $id)->update([
-            'status' => 'underMaintance'
-        ]);
-        session()->flash('success', trans('admin.done'));
-        return back();
-    }
     public function create()
     {
-        //
+        $groups = Group::all();
 
-
+        return view('admin/account.create', [
+            'groups' => $groups,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+        ]);
+        if ($request->input('password') == $request->input('password_confirmation'))
+        {
+            $account = Admin::create([
+                        'group_id' => $request['group_id'],
+                        'password' => Hash::make($request['group_id']),
+                        'name' => $request['name'],
+                        'email' => $request['email'],
+            ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Account  $account
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Account $account)
-    {
-        //
+            return redirect(route('account.index'));
+        }
+        else
+        {
+            return redirect(route('account.create'));
+        }
     }
 
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Account  $account
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
-
-
-    public function print(Account $account,$id)
+    public function edit($id)
     {
-        $repairCard = ReprairCard::find($id);
-        $accounts  = Account::where('reprairCard_id', $id)->get();
-      // dd($accounts);
-      $subTotal = Account::where("reprairCard_id",$id)->get()->sum('subTotal');
-      $tax = Account::where("reprairCard_id",$id)->get()->sum('tax');
-      $ReceiptVoucher  = ReceiptVoucher::where('reprairCard_id', $id)->get();
-      $datt = $ReceiptVoucher->sum('amount');
-      $info  = Account::select('reprairCard_id as id', 'car_id', 'client_id')->distinct()->where('reprairCard_id',$id)->get();
-        return view('admin.accounting.print',compact('accounts','info' ,'subTotal' ,'tax','ReceiptVoucher' ,'datt'));
-    }
-    public function edit(Account $account,$id)
-    {
-        //
-        $repairCard = ReprairCard::find($id);
-        $accounts  = Account::where('reprairCard_id', $id)->get();
-        $ReceiptVoucher  = ReceiptVoucher::where('reprairCard_id', $id)->get();
-        $datt = $ReceiptVoucher->sum('amount');
-      // dd($accounts);
-      $subTotal = Account::where("reprairCard_id",$id)->get()->sum('subTotal');
-      $tax = Account::where("reprairCard_id",$id)->get()->sum('tax');
+        $user = Admin::find($id);
+        $groups = Group::all();
 
-      $info  = Account::select('reprairCard_id as id', 'car_id', 'client_id')->distinct()->where('reprairCard_id',$id)->get();
-        return view('admin.accounting.create',compact('accounts','info' ,'subTotal' ,'tax' ,'ReceiptVoucher' ,'datt'));
+        return view('admin/account.edit', [
+            'user' => $user,
+            'groups' => $groups,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Account  $account
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $id
+     * @return Response
      */
-    public function update(Request $request, Account $account)
+    public function update(Request $request, $id)
     {
-        //
+        $user = Admin::find($id);
+
+        $user->update($request->all());
+
+        return redirect()->route('account.index');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Account  $account
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
-    public function destroy(Account $account ,$id)
+    public function destroy($id)
     {
-        $admin = Account::find($id);
-        $admin->delete();
-        session()->flash('success', trans('admin.deleted'));
-        return back();
+        $user = Admin::find($id);
+
+        $user->delete();
+
+        return redirect()->route('account.index');
     }
+
 }

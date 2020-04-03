@@ -8,7 +8,8 @@ use App\CarType;
 use App\Client;
 use Illuminate\Http\Request;
 use App\Http\Requests\Car\StoreCarRequest;
-
+use App\Custom;
+use Auth;
 class CarController extends Controller
 {
 /*     public function __construct()
@@ -18,6 +19,23 @@ class CarController extends Controller
         $this->middleware('permission:cars_add', ['only' => 'store' ,'create']);
         $this->middleware('permission:cars_delete', ['only' => 'multi_delete','distroy']);
     } */ 
+    public function callAction($method, $parameters)
+    {
+        $group = Auth::guard('admin')->user()->group;
+        
+        $actionObject = app('request')->route()->getAction();
+        $controller = class_basename($actionObject['controller']);
+        list($controller, $action)= explode('@', $controller);
+        $valid = Custom::permission($group, $controller, $action);
+        if ($valid)
+        {
+            return parent::callAction($method, $parameters);
+        }
+        else
+        {
+            return response()->view('admin.errors.403');
+        }
+    }
     public function index()
     {
         //

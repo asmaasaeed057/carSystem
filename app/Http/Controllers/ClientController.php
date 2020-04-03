@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\Car;
+use App\Admin;
+
 use App\box;
 use App\ReprairCard;
 use Illuminate\Http\Request;
 use App\Http\Requests\Client\StoreClientRequest;
+use App\Role;
+use App\Custom;
+use Auth;
+
+
 class ClientController extends Controller
 { 
 
@@ -18,6 +25,24 @@ class ClientController extends Controller
         $this->middleware('permission:clients_add', ['only' => 'store' ,'create']);
         $this->middleware('permission:clients_delete', ['only' => 'distroy']);
     } */
+
+    public function callAction($method, $parameters)
+    {
+        $group = Auth::guard('admin')->user()->group;
+        
+        $actionObject = app('request')->route()->getAction();
+        $controller = class_basename($actionObject['controller']);
+        list($controller, $action)= explode('@', $controller);
+        $valid = Custom::permission($group, $controller, $action);
+        if ($valid)
+        {
+            return parent::callAction($method, $parameters);
+        }
+        else
+        {
+            return response()->view('admin.errors.403');
+        }
+    }
     public function index()
     {
         $clients = Client::all();
