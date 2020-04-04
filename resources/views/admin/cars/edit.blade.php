@@ -79,8 +79,8 @@ select{
               <div class="form-group">
                   <label>{{__('site.clientName')}}</label>
                   <select class="form-control select2" name="client_id" style="width: 100%;">
-                  @foreach($clients as $value)
-                      <option value="{{$value->id}}" {{$value->id == $car->client_id ? "selected":""}}>{{$value->fullName}}</option>
+                  @foreach($clients as $client)
+                      <option value="{{$client->id}}" {{$client->id == $car->client_id ? "selected":""}}>{{$client->fullName}}</option>
                   @endforeach
                   </select>
               </div>
@@ -90,9 +90,9 @@ select{
               <div class="form-group">
                   <label>{{__('site.carCat')}}</label>
                   <select class="form-control select2" name="car_brand_category_id" id="carCat" style="width: 100%;">
-                  @foreach($CarCatogray as $value)
-                      <option value="{{ $value->id }}" {{($value->id == $car->car_brand_category_id) ? 'selected' : '' }} > 
-                            {{ $value->name_ar }} 
+                  @foreach($carCategories as $category)
+                      <option value="{{ $category->id }}" {{($category->id == $car->car_brand_category_id) ? 'selected' : '' }} > 
+                            {{ $category->name_ar }} 
                       </option>
                   @endforeach    
                   </select>
@@ -103,8 +103,8 @@ select{
               <div class="form-group">
                   <label>{{__('site.Cartype')}}</label>
                   <select class="form-control select2"  name="carType_id" id="CarType" style="width: 100%;">
-                      @foreach($CarType as $value)
-                          <option value="{{$value->id}}" {{$value->id == $car->carType_id ? "selected":""}} >{{$value->name_ar}}</option>
+                      @foreach($carTypes as $type)
+                          <option value="{{$type->id}}" {{$type->id == $car->carType_id ? "selected":""}} >{{$type->name_ar}}</option>
                       @endforeach
                   </select>
               </div>
@@ -115,7 +115,7 @@ select{
                   <label>{{__('site.model')}}</label>
                   <select class="form-control select2" name="model" style="width: 100%;">
                       @for($i=2025;$i>=1980;$i--)
-                          <option value="{{$i}}">{{$i}}</option>
+                          <option value="{{$car->model}}" {{$car->model == $i ? "selected" : ""}}> {{$i}}</option>
                       @endfor
                   </select>
               </div>

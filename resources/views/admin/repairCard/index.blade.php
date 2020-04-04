@@ -88,8 +88,8 @@
                 @foreach($repairCards as $value)
                 <tr>
                 <td>{{$value->client->fullName}}</td>
-                  <td>{{$value->car->category->name_en}}</td> 
-                  <td>{{$value->car->category->brand->name_en}}</td>
+                  <td>{{$value->car->carCatogray->name_en}}</td> 
+                  <td>{{$value->car->carCatogray->brand->name_en}}</td>
                   <td>{{$value->car->model}}</td>   
                   <td>{{$value->car->platNo}}</td>    
                   <td>{{$value->status}}</td> 

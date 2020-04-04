@@ -306,8 +306,39 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ route('service.index')}}"><i class="fa fa-circle-o"></i>Show Service</a></li>
+                            <li><a href="{{ route('service.index')}}"><i class="fa fa-circle-o"></i>Services</a></li>
                             <li><a href="{{ route('service.create')}}"><i class="fa fa-circle-o"></i>Add Service</a></li>
+                        </ul>
+                    </li>
+                    <!-- <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-pie-chart"></i>
+                            <span>Car Brand</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ route('brand.index')}}"><i class="fa fa-circle-o"></i>Car Brands</a></li>
+                            <li><a href="{{ route('brand.create')}}"><i class="fa fa-circle-o"></i>Add Car Brand</a></li>
+                        </ul>
+                    </li> -->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-pie-chart"></i>
+                            <span>Cars</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ route('brand.index')}}"><i class="fa fa-circle-o"></i>Car Brands</a></li>
+                            <li><a href="{{ route('brandCategory.index')}}"><i class="fa fa-circle-o"></i>Car Brand Categories</a></li>
+                            <li><a href="{{ route('carType.index')}}"><i class="fa fa-circle-o"></i>Car Types</a></li>
+                            <li><a href="{{ route('car.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.carList') }}</a></li>
+
+
+                            <!-- <li><a href="{{ route('brandCategory.create')}}"><i class="fa fa-circle-o"></i>Add Car Brand Category</a></li> -->
                         </ul>
                     </li>
 
@@ -325,7 +356,7 @@
                         </ul>
                     </li>
 
-                    <li class="treeview">
+                    <!-- <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
                             <span>{{ trans('site.car')}}</span>
@@ -337,10 +368,22 @@
                             <li><a href="{{ route('car.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.carList') }}</a></li>
                             <li><a href="{{ route('car.create')}}"><i class="fa fa-circle-o"></i> {{ trans('site.addCar') }}</a></li>
                         </ul>
-                    </li>
+                    </li> -->
 
+                    <!-- <li class="treeview">
 
-
+                        <a href="#">
+                            <i class="fa fa-pie-chart"></i>
+                            <span>Car Type</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ route('carType.index')}}"><i class="fa fa-circle-o"></i>Car Types</a></li>
+                            <li><a href="{{ route('carType.create')}}"><i class="fa fa-circle-o"></i>Add Car Type</a></li>
+                        </ul>
+                    </li> -->
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
@@ -415,7 +458,7 @@
                             <li><a href="{{ route('admin.create') }}"><i class="fa fa-circle-o"></i> {{ trans('site.add')}}</a></li>
                         </ul>
                     </li>
-                    <li class="treeview">
+                    <!-- <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
                             <span>{{ trans('site.permissions')}}</span>
@@ -426,6 +469,20 @@
                         <ul class="treeview-menu">
                             <li><a href="{{ route('permission.index') }}"><i class="fa fa-circle-o"></i> {{ trans('site.permissionslist')}}</a></li>
                             <li><a href="{{ route('permission.create') }}"><i class="fa fa-circle-o"></i> {{ trans('site.add')}}</a></li>
+                        </ul>
+                    </li> -->
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-pie-chart"></i>
+                            <span>Permissions</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ route('group.index') }}"><i class="fa fa-circle-o"></i> Groups</a></li>
+                            <li><a href="{{ route('account.index') }}"><i class="fa fa-circle-o"></i> Accounts</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -724,4 +781,4 @@
 
 </body>
 
-</html> 
+</html>

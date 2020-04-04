@@ -12,4 +12,8 @@ class CarType extends Model
 		'name_en',
 		
 	];
+
+	public function car(){
+        return $this->hasMany('App\Car','id');
+	}
 }

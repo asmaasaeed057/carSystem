@@ -88,7 +88,7 @@
                   <label>{{ trans('site.email') }}</label>
                   <input type="email" name="email" class="form-control" placeholder="{{ trans('site.hintEmail') }}" value="{{$client->email}}">
                 </div>
-                <input type="submit" class="btn-primary" value="{{ trans('site.add') }}">
+                <input type="submit" class="btn-primary" value="Update">
 
               </form>
             </div>

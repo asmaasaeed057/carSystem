@@ -5,10 +5,25 @@ namespace App\Http\Controllers;
 
 use App\Service;
 use Illuminate\Http\Request;
+use App\Http\Requests\Service\StoreServiceRequest;
+use App\Custom;
+use Auth;
 
 class ServiceController extends Controller
 {
-
+    public function callAction($method, $parameters)
+    {
+        $group = Auth::guard('admin')->user()->group;
+        $actionObject = app('request')->route()->getAction();
+        $controller = class_basename($actionObject['controller']);
+        list($controller, $action) = explode('@', $controller);
+        $valid = Custom::permission($group, $controller, $action);
+        if ($valid) {
+            return parent::callAction($method, $parameters);
+        } else {
+            return response()->view('admin.errors.403');
+        }
+    }
     public function index()
     {
         $services = Service::all();
@@ -20,7 +35,7 @@ class ServiceController extends Controller
         return view('admin.service.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreServiceRequest $request)
     {
         // $rules = [
         //     'service_name'     => 'required ',

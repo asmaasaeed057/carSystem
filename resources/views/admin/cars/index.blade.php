@@ -15,108 +15,111 @@
 @section('js')
 
 <script>
-  $(function () {
+  $(function() {
     $('#example1').DataTable()
     $('#example2').DataTable({
-      'paging'      : true,
+      'paging': true,
       'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
+      'searching': false,
+      'ordering': true,
+      'info': true,
+      'autoWidth': false
     })
   })
 </script>
 @endsection
 
 @section('content')
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
- 
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">{{ trans('site.carList') }}</li>
-      </ol>
-    </section>
-    <!-- Main content -->
-    <section class="content">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">{{ trans('site.carList') }}</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <section class="content">
     @include('layouts.error')
 
-      <div class="row">
-        <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
 
-          <div class="box box-primary">
-            <div class="box-header">
-              <h3 class="box-title">{{ trans('site.carList') }}</h3>
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
+        <div class="box box-primary">
+          <div class="box-header">
+            <h3 class="box-title">{{ trans('site.carList') }}</h3>
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-header">
+            <a href="{{route('car.create')}}" style="margin-top: 10px;" class="btn btn-success">Add Car</a>
+          </div>
+          <div class="box-body">
+            <table id="example1" class="table table-bordered table-striped">
+              <thead>
                 <tr>
                   <th>Category</th>
                   <th>Model</th>
                   <th>Owner</th>
                   <th>Type</th>
                   <th>Structure Number</th>
+                  <th>Plate Number</th>
                   <th>Color</th>
-
-                  <th>Actions</th>
-
+                  <th>Edit</th>
+                  <th>Delete</th>
+                  <!-- <th>Show</th> -->
                 </tr>
-                </thead>
-                <tbody>
+              </thead>
+              <tbody>
 
-                @foreach($cars as $value)
+                @foreach($cars as $car)
                 <tr style=>
-                <td>{{$value->carCatogray->name_en}}</td>
-                  <td>{{$value->model}}</td>
-                  <td>{{$value->client->fullName}}</td>
-                  <td>{{$value->carType->name_en}}</td>
-                  <td>{{$value->car_structure_number}}</td>
-                  <td>{{$value->car_color}}</td>
+                  <td>{{$car->carCatogray->name_en}}</td>
+                  <td>{{$car->model}}</td>
+                  <td>{{$car->client->fullName}}</td>
+                  <td>{{$car->carType->name_en}}</td>
+                  <td>{{$car->car_structure_number}}</td>
+                  <td>{{$car->platNo}}</td>
+                  <td>{{$car->car_color}}</td>
+                  <td><a href="{{route('car.edit' ,$car->id)}}" class="btn btn-info">Edit</a></td>
                   <td>
-                  <a href="{{route('car.edit' ,$value->id)}}"><i class="fas fa-edit"></i></a> |
-                  <form class="delete" action="{{route('car.destroy',$value->id)}}" method="post">
+                    <form class="delete" action="{{route('car.destroy' ,$car->id)}}" method="post">
                       @csrf
                       @method('DELETE')
-                      <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
-                    </form>
+                      <button class="btn btn-danger" type="submit">Delete</button>
 
-                  
+                    </form>
                   </td>
+                  <!-- <td><a href="{{route('car.show' ,$car->id)}}" class="btn btn-success">Show</a></td> -->
 
                 </tr>
                 @endforeach
-                </tbody>
-              
-              </table>
-            </div>
-            <!-- /.box-body -->
+              </tbody>
+
+            </table>
           </div>
-          <!-- /.box -->
+          <!-- /.box-body -->
         </div>
-        <!-- /.col -->
+        <!-- /.box -->
       </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-  </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
 @endsection
 <script>
-$(document).ready(function() {
+  $(document).ready(function() {
     $("#delete").click(function(event) {
-        if( !confirm('هل انت متاكد ؟') ) 
-            event.preventDefault();
+      if (!confirm('هل انت متاكد ؟'))
+        event.preventDefault();
     });
-});
-
+  });
 </script>
-

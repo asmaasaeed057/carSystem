@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Car;
-use App\Company;
+use App\CarBrandCategory;
 use App\CarType;
 use App\Client;
-use App\CarCatogray;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\Car\StoreCarRequest;
+use App\Custom;
+use Auth;
 class CarController extends Controller
 {
 /*     public function __construct()
@@ -18,6 +19,23 @@ class CarController extends Controller
         $this->middleware('permission:cars_add', ['only' => 'store' ,'create']);
         $this->middleware('permission:cars_delete', ['only' => 'multi_delete','distroy']);
     } */ 
+    public function callAction($method, $parameters)
+    {
+        $group = Auth::guard('admin')->user()->group;
+        
+        $actionObject = app('request')->route()->getAction();
+        $controller = class_basename($actionObject['controller']);
+        list($controller, $action)= explode('@', $controller);
+        $valid = Custom::permission($group, $controller, $action);
+        if ($valid)
+        {
+            return parent::callAction($method, $parameters);
+        }
+        else
+        {
+            return response()->view('admin.errors.403');
+        }
+    }
     public function index()
     {
         //
@@ -32,14 +50,11 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
-
-        $Company = Company::all();
-        $CarType = CarType::all();
-        $CarCatogray = CarCatogray::all();
-        //dd($CarCatogray);
+    
+        $carCategories = CarBrandCategory::all();
+        $carTypes = CarType::all();
         $clients = Client::all();
-        return view('admin.cars.create',compact('Company','CarType','CarCatogray','clients'));
+        return view('admin.cars.create',compact('carCategories','carTypes','clients'));
     }
 
     /**
@@ -49,21 +64,11 @@ class CarController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function store(Request $request)
+    public function store(StoreCarRequest $request)
     {
-        $request->validate([
-            'car_brand_category_id'=> 'required ',
-            'model' => 'required',
-            'client_id' => 'required',
-            'carType_id' => 'required',
-            'platNo' => 'required',
-            'car_structure_number' => 'required',
-            'car_color' => 'required',
-        ]);
         Car::create($request->all());
-
-        session()->flash('success', trans('admin.added'));
-        return redirect('admin/car');
+        session()->flash('success', "Car created successfully");
+        return redirect(route('car.index'));
    }
     /**
      * Display the specified resource.
@@ -84,16 +89,16 @@ class CarController extends Controller
      * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function edit(Car $ca,$id)
+    public function edit($id)
     {
         //
         $car= Car::find($id);
 
-        $Company = Company::all();
-        $CarType = CarType::all();
-        $CarCatogray = CarCatogray::all();
+        $carCategories = CarBrandCategory::all();
+        $carTypes = CarType::all();
         $clients = Client::all();
-        return view('admin.cars.edit',compact('Company','CarType','CarCatogray','clients','car'));
+
+        return view('admin.cars.edit',compact('carCategories','carTypes','clients','car'));
 
     }
 
@@ -107,23 +112,14 @@ class CarController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'car_brand_category_id'=> 'required ',
-            'model' => 'required',
-            'client_id' => 'required',
-            'carType_id' => 'required',
-            'platNo' => 'required',
-            'car_structure_number' => 'required',
-            'car_color' => 'required',
-        ]);
-
-
+      
         $car = Car::find($id);
 
         $car->update($request->all());
 
-        session()->flash('success', trans('admin.updated'));
-        return redirect('admin/car');
+        session()->flash('success', "Car updated successfully");
+        return redirect(route('car.index'));
+
     }
 
     /**
@@ -136,25 +132,26 @@ class CarController extends Controller
     {
         $car = Car::find($id);
         $car->delete();
+        session()->flash('success', "Car deleted successfully");
 
         return redirect()->route('car.index');
     }
     
     function get_catagray(Request $request)
     {
-        // dd($request->all());
-        $select = $request->get('select');
-        $value = $request->get('value');
-        $dependent = $request->get('dependent');
-        $data = CarCatogray::where("company_id" , $value)->get();
+        // // dd($request->all());
+        // $select = $request->get('select');
+        // $value = $request->get('value');
+        // $dependent = $request->get('dependent');
+        // $data = CarBrandCategory::where("company_id" , $value)->get();
 
-        $output = '<option value="">'.trans("site.options").'</option>';
-        // dd($data);
-        foreach($data as $row)
-        {
-        $output .= '<option value="'.$row->id.'">'.$row->name_ar.'</option>';
-        }
+        // $output = '<option value="">'.trans("site.options").'</option>';
+        // // dd($data);
+        // foreach($data as $row)
+        // {
+        // $output .= '<option value="'.$row->id.'">'.$row->name_ar.'</option>';
+        // }
 
-        echo $output;
+        // echo $output;
     }
 }

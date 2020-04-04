@@ -15,93 +15,105 @@
 @section('js')
 
 <script>
-  $(function () {
+  $(function() {
     $('#example1').DataTable()
     $('#example2').DataTable({
-      'paging'      : true,
+      'paging': true,
       'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
+      'searching': false,
+      'ordering': true,
+      'info': true,
+      'autoWidth': false
     })
   })
 </script>
 @endsection
 
 @section('content')
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        {{ trans('site.Dashboard') }}
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">{{ trans('site.Dashboard') }}</li>
-      </ol>
-    </section>
-    <!-- Main content -->
-    <section class="content">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      {{ trans('site.Dashboard') }}
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">{{ trans('site.Dashboard') }}</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <section class="content">
     @include('layouts.error')
 
-      <div class="row">
-        <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
 
-          <div class="box box-primary">
-            <div class="box-header">
-              <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
+        <div class="box box-primary">
+          <div class="box-header">
+            <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-header">
+            <a href="{{route('client.create')}}" style="margin-top: 10px;" class="btn btn-success">Add Client </a>
+          </div>
+          <div class="box-body">
+            <table id="example1" class="table table-bordered table-striped">
+              <thead>
                 <tr>
                   <th>{{ trans('site.clientName') }}</th>
                   <th>{{ trans('site.phone') }}</th>
                   <th>{{ trans('site.address') }}</th>
                   <th>{{ trans('site.email') }}</th>
+                  <th>Client Type</th>
                   <th>{{ trans('site.Actions') }}</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                  <th>Show</th>
                 </tr>
-                </thead>
-                <tbody>
+              </thead>
+              <tbody>
 
-                @foreach($clients as $value)
+                @foreach($clients as $client)
                 <tr style=>
-                  <td>{{$value->fullName}}</td>
-                  <td>{{$value->phone}}</td>
-                  <td>{{$value->address}}</td>
-                  <td>{{$value->email}}</td>
-                  <td><a href="{{url('admin/clientDetails/' ,$value->id)}}"><i class="fas fa-edit"></i></a> | <a href=""><i class="fas fa-trash-alt"></i></a> | <a href="{{route('client.show' ,$value->id)}}"><i class="fas fa-search"></i></a> </td>
+                  <td>{{$client->fullName}}</td>
+                  <td>{{$client->phone}}</td>
+                  <td>{{$client->address}}</td>
+                  <td>{{$client->email}}</td>
+                  <td>{{$client->client_type}}</td>
+
+
+
+                  <td><a href="{{route('client.edit' ,$client->id)}}" class="btn btn-info">Edit</a></td>
+                  <td>
+
+                    <form class="delete" action="{{route('client.destroy' ,$client->id)}}" method="post">
+                      @csrf
+                      @method('DELETE')
+                      <button class="btn btn-danger" type="submit">Delete</button>
+
+                    </form>
+                  </td>
+                  <td><a href="{{route('client.show' ,$client->id)}}" class="btn btn-success">Show</a></td>
                 </tr>
                 @endforeach
-                </tbody>
-                <tfoot>
-                <tr>
+              </tbody>
 
-                  <th>{{ trans('site.clientName') }}</th>
-                  <th>{{ trans('site.phone') }}</th>
-                  <th>{{ trans('site.address') }}</th>
-                  <th>{{ trans('site.email') }}</th>
-                  <th>{{ trans('site.Actions') }}</th>
-                </tr>
-                </tfoot>
-              </table>
-            </div>
-            <!-- /.box-body -->
+            </table>
           </div>
-          <!-- /.box -->
+          <!-- /.box-body -->
         </div>
-        <!-- /.col -->
+        <!-- /.box -->
       </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-  </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
 @endsection

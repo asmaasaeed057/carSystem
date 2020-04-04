@@ -33,9 +33,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
            // Route::get('/Client', 'admin\DashboardController@Client');
            Route::resource('service', 'ServiceController');
 
-            Route::resource('admin', 'AdminController');
-            Route::resource('client', 'ClientController');
-            Route::resource('car', 'CarController');
+           Route::resource('service', 'ServiceController');
+
+           Route::resource('admin', 'AdminController');
+           Route::resource('client', 'ClientController');
+           Route::resource('car', 'CarController');
+           Route::resource('brand', 'CarBrandController');
+           Route::resource('brandCategory', 'CarBrandCategoryController');
+           Route::resource('carType', 'CarTypeController');
+           Route::resource('/group', 'GroupController');
+
+           Route::resource('/account', 'AccountController');
             Route::post('get_catagray', 'CarController@get_catagray')->name('get_catagray');
             Route::post('get_car', 'ReprairCardController@getCars')->name('getCars');
             Route::post('getServices', 'ReprairCardController@getServices')->name('getServices');
@@ -43,7 +51,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
             Route::get('newitem', 'ReprairCardController@newitem')->name('newitem');
             Route::get('print/{id}', 'AccountController@print')->name('print');
             route::get('clientDetails/{id}','ClientController@clientDetails');
-            Route::resource('car', 'CarController');
             Route::resource('permission', 'AdminGroupController');
             Route::resource('company', 'CompanyController');
             Route::resource('carCatogray', 'CarCatograyController');

@@ -74,6 +74,10 @@
                                     <th>Service Cost</th>
                                     <th>Service Client Cost</th>
                                     <th>Service Working Hours</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                    <th>Show</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -100,34 +104,24 @@
                                     <td>{{$service->service_client_cost}}</td>
                                     <td>{{$service->service_working_hours}}</td>
 
-                                    <td><a href="{{route('service.edit' ,$service->service_id)}}"><i class="fas fa-edit"></i></a> |
+                                    <td><a href="{{route('service.edit' ,$service->service_id)}}" class="btn btn-info">Edit</a></td>
+                                    <td>
+
                                         <form class="delete" action="{{route('service.destroy' ,$service->service_id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="fas fa-trash-alt" type="submit"></button>
+                                            <button class="btn btn-danger" type="submit">Delete</button>
 
-                                        </form>|
-                                        <a href="{{route('service.show' ,$service->service_id)}}"><i class="fas fa-search"></i></a>
+                                        </form>
                                     </td>
+                                    <td><a href="{{route('service.show' ,$service->service_id)}}" class="btn btn-success">Show</a></td>
+
+                           
                                 </tr>
                                 @endforeach
                             </tbody>
 
-
-
-
-
-                            <tfoot>
-                                <tr>
-
-                                    <th>Service Name</th>
-                                    <th>Service Number</th>
-                                    <th>Service Type</th>
-                                    <th>Service Cost</th>
-                                    <th>Service Client Cost</th>
-                                    <th>Service Working Hours</th>
-                                </tr>
-                            </tfoot>
+   
                         </table>
                     </div>
                     <!-- /.box-body -->

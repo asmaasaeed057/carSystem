@@ -200,7 +200,7 @@ function showPrice(count){
                         @foreach($cars as $car)
                         <option value="{{ $car->id }}" {{($car->id == $repairCard->car_id) ? 'selected' : '' }} > 
 
-                                    {{$car->category->name_en}}-{{ $car->model }}-{{$car->platNo}}
+                                    {{$car->carCatogray->name_en}}-{{ $car->model }}-{{$car->platNo}}
                                 </option>
                                 @endforeach    
                             </select>
