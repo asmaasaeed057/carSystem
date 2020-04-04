@@ -76,35 +76,41 @@
                     </div>
                     <hr>
                     <div class="box-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Expense Name</th>
-                                    <th>Expense Bill</th>
-                                    <th>Expense Price</th>
-                                    <th>Expense Tax</th>
-                                    <th>Expense Date</th>
-                                    <th>Expense Notes</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                        <div id='printMe'>
 
-                                @foreach($expenses as $expense)
-                                <tr>
-                                    <td>{{$expense->expense_name}}</td>
-                                    <td>{{$expense->expense_bill}}</td>
-                                    <td>{{$expense->expense_price}}</td>
-                                    <td>{{$expense->expense_tax}}</td>
-                                    <td>{{$expense->expense_date}}</td>
-                                    <td>{{$expense->expense_notes}}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Expense Name</th>
+                                        <th>Expense Bill</th>
+                                        <th>Expense Price</th>
+                                        <th>Expense Tax</th>
+                                        <th>Expense Date</th>
+                                        <th>Expense Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                        </table>
+                                    @foreach($expenses as $expense)
+                                    <tr>
+                                        <td>{{$expense->expense_name}}</td>
+                                        <td>{{$expense->expense_bill}}</td>
+                                        <td>{{$expense->expense_price}}</td>
+                                        <td>{{$expense->expense_tax}}</td>
+                                        <td>{{$expense->expense_date}}</td>
+                                        <td>{{$expense->expense_notes}}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
+
                     <!-- /.box-body -->
                 </div>
+                <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center">Print</button>
+
                 <!-- /.box -->
             </div>
             <!-- /.col -->
@@ -113,4 +119,18 @@
     </section>
     <!-- /.content -->
 </div>
+
+<script>
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+
+    }
+</script>
 @endsection
