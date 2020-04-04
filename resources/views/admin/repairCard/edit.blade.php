@@ -213,6 +213,9 @@ function showPrice(count){
                     </div>
                   </div>
 
+              <input  type="text" value={{$repairCard->card_taxes}}  name="card_taxes" hidden>
+
+
                 <div class="container">
                   <h2>Items</h2>
                   <table class="table table-condensed">

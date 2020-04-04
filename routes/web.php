@@ -56,12 +56,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
             Route::resource('carCatogray', 'CarCatograyController');
             Route::resource('Accounting', 'AccountController');
             Route::resource('carType', 'CarTypeController');
-            Route::resource('cost', 'costController');
+            Route::resource('cost', 'CostController');
             Route::resource('reprairCard', 'ReprairCardController');
             Route::get('approved/{id}','ReprairCardController@approved')->name('approved');
-            Route::get('denied/{id}','ReprairCardController@denied')->name('denied');
+            Route::get('enied/{id}','ReprairCardController@denied')->name('denied');
+            Route::get('ClientReport','ReprairCardController@ClientReport')->name('ClientReport');
+            Route::get('ClientSearch', 'ReprairCardController@clientSearch')->name('clientSearch');
+            Route::get('cardTaxesReport', 'ReprairCardController@cardTaxesReport')->name('cardTaxesReport');
+            Route::get('cardTaxesSearch', 'ReprairCardController@cardTaxesSearch')->name('cardTaxesSearch');
 
-            
             Route::post('accept','ReprairCardController@accept')->name('accept');
             Route::post('money','ReprairCardController@money')->name('money');
             Route::get('confirm/{id}','AccountController@confirm')->name('confirm');

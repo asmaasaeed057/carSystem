@@ -382,7 +382,55 @@ class ReprairCardController extends Controller
         $output =$data->service_client_cost;
         echo $output;
     }
+    public function ClientReport()
+    {
+        $clients = Client::get();
+        $clientId="";
+        $cards=array();
+        return view('admin.repairCard.clientReport',compact('clientId','clients','cards'));
 
+    }
+    
+    public function clientSearch()
+    {
+        $clientId = $_GET['client_id'];
+        $clients = Client::get();
+        
+        $c = ReprairCard::select("*");
+        if ($clientId)
+        {
+            $c->where('client_id', $clientId);
+        }
+        $cards = $c->get();
+        return view('admin.repairCard.clientReport',compact('clientId','clients','cards'));
+
+    }
+    public function cardTaxesReport()
+    {
+        $datefrom="";
+        $dateto="";
+        $cards=array();
+        return view('admin.repairCard.cardTaxesReport',compact('cards','datefrom','dateto'));
+
+    }
+    public function cardTaxesSearch()
+    {
+        $datefrom = $_GET['card_date_from'];
+        $dateto = $_GET['card_date_to'];
+        $c = ReprairCard::select("*");
+
+
+        if ($datefrom) {
+
+             $c->whereBetween('created_at', [$datefrom, $dateto])->get();
+
+        }
+        $cards = $c->get();
+        return view('admin.repairCard.cardTaxesReport',compact('cards','datefrom','dateto'));
+
+    }
+
+    
     
     
 }

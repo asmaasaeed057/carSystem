@@ -122,8 +122,12 @@
   <th>Total</th>
   <td><?php echo $total ?></td>
   </tr>
-  
-  </tr>   
+  <tr>
+  <?php $taxes=$repairCard->card_taxes/100 ?>
+  <?php $totalWithTaxes=$total+($taxes *$total); ?>
+  <th>Total With Taxes</th>
+  <td><?php echo $totalWithTaxes ?></td>
+  </tr>
   </tbody>
 </table>
 </div>

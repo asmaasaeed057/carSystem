@@ -210,9 +210,9 @@ function showPrice(count){
                     </div>
                   </div>
 
+                <?php $taxes=5 ?>
 
-
-
+                <input  type="text" value={{$taxes}}  name="card_taxes" hidden>
 
 <div class="container">
   <h2>Items</h2>

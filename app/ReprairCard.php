@@ -12,7 +12,8 @@ class ReprairCard extends Model
         'status',
         'checkReprort',
         'client_id',
-        'car_id' 
+        'car_id' ,
+        'card_taxes',
 
 		 
     ];
@@ -41,5 +42,36 @@ class ReprairCard extends Model
     {
         return $this->hasMany('App\RepairCardItem','card_id');
     }
+    public function getTotalAttribute()
+    {
+        $items=$this->items;
+        $total=0;
+        foreach($items as $item){
+            $total+=$item->service_client_cost;
+        }
+        return ($total);
+    }
+    public function getTotalWithTaxesAttribute()
+    {
+        $items=$this->items;
+        $total=0;
+        foreach($items as $item){
+            $total+=$item->service_client_cost;
+        }
+        $taxes=($this->card_taxes*$total)/100;
+        return ($total+$taxes);
+    }
+
+    public function getTaxesAttribute(){
+        $items=$this->items;
+        $total=0;
+        foreach($items as $item){
+            $total+=$item->service_client_cost;
+        }
+        $taxes=($this->card_taxes*$total)/100;
+        return ($taxes);
+
+    }
+
 
 }
