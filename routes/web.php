@@ -43,6 +43,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::resource('expense', 'ExpenseController');
         Route::get('expenseReport', 'ExpenseReportController@index')->name('expenseReport');
         Route::get('expenseSearch', 'ExpenseReportController@search')->name('expenseSearch');
+        Route::get('expenseTaxReport', 'ExpenseTaxReportController@index')->name('expenseTaxReport');
+        Route::get('expenseTaxSearch', 'ExpenseTaxReportController@search')->name('expenseTaxSearch');
 
         Route::post('get_catagray', 'CarController@get_catagray')->name('get_catagray');
         Route::post('get_car', 'ReprairCardController@getCars')->name('getCars');
