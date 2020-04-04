@@ -355,7 +355,20 @@
                             <li><a href="{{ route('client.create')}}"><i class="fa fa-circle-o"></i> {{ trans('site.addClient') }}</a></li>
                         </ul>
                     </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-pie-chart"></i>
+                            <span>Expenses</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ route('expense.index')}}"><i class="fa fa-circle-o"></i>show expenses</a></li>
+                            <li><a href="{{ route('expense.create')}}"><i class="fa fa-circle-o"></i> add expense</a></li>
 
+                        </ul>
+                    </li>
                     <!-- <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
@@ -406,6 +419,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
+                            <li><a href="{{ route('expenseReport')}}"><i class="fa fa-circle-o"></i> Expense Report</a></li>
+
                             <li><a href="{{ url('admin/FilterIncome')}}"><i class="fa fa-circle-o"></i> {{ trans('site.income')}}</a></li>
                             <li><a href="{{ url('admin/FilterIncome')}}"><i class="fa fa-circle-o"></i> {{ trans('site.Expenses')}}</a></li>
                             <li><a href="{{ url('admin/FilterIncome')}}"><i class="fa fa-circle-o"></i> {{ trans('site.isDebit')}}</a></li>
