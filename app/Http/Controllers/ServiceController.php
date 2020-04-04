@@ -14,7 +14,6 @@ class ServiceController extends Controller
     public function callAction($method, $parameters)
     {
         $group = Auth::guard('admin')->user()->group;
-
         $actionObject = app('request')->route()->getAction();
         $controller = class_basename($actionObject['controller']);
         list($controller, $action) = explode('@', $controller);

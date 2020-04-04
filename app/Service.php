@@ -12,5 +12,11 @@ class Service extends Model
     protected $primaryKey = 'service_id';
   
     public $timestamps = false;
+    
+    public function items()
+    {
+        return $this->hasMany('App\ReparCardItem','service_id');
+    }
+
 
 }

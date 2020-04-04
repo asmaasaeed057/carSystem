@@ -26,23 +26,23 @@
       'autoWidth'   : false
     })
   })
+  $(document).ready(function() {
+    $(".approve").click(function(event) {
+        if( !confirm('هل انت متاكد ؟') ) 
+            event.preventDefault();
+    });
+    $(".denied").click(function(event) {
+        if( !confirm('هل انت متاكد ؟') ) 
+            event.preventDefault();
+    });
+
+});
+
 </script>
 @endsection
 
 @section('content')
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        {{ trans('site.Dashboard') }}
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">{{ trans('site.Dashboard') }}</li>
-      </ol>
-    </section>
-    <!-- Main content -->
     <section class="content">
     @include('layouts.error')
 
@@ -63,58 +63,82 @@
             <div class="box-body">
             <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">{{ trans('site.RepairCardD')}}</h3>
+              <h3 class="box-title">Repair Card</h3>
 
-            </div>
+<table class="table table-striped table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Car</th>
+      <td>{{$repairCard->car->model}}</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Client</th>
+      <td>{{$repairCard->client->fullName}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Status</th>
+      <td>{{$repairCard->status}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Check Report</th>
+      <td>{{$repairCard->checkReprort}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
             <!-- /.box-header -->
-            <div class="box-body">
-              <table class="table table-bordered">
-                <tbody>
-                <tr>
-                  <td><h4>{{ trans('site.clientName')}}</h4><p>{{$repairCard->client->fullName}}</p></td>
-                  
-                  <td><h4>{{ trans('site.carName')}}</h4><p>{{$repairCard->car->carCatogray->name_en}}</p></td>
-                  <td ><h4>{{ trans('site.phone')}}</h4><p>{{$repairCard->client->phone}}</p></td>
-                  <td ><h4>{{ trans('site.plat')}}</h4><p>{{$repairCard->car->platNo}}</p></td>
-                  
-                </tr>
-                <tr>
-                  <td><h4>{{ trans('site.companyNameSi')}}</h4><p>{{$repairCard->car->carCatogray->company->name_en}}</p></td>
-                  <td><h4>{{ trans('site.CarTypeNamex')}}</h4><p>{{$repairCard->car->carType->name_en}}</p></td>
-                  <td><h4>{{ trans('site.model')}}</h4><p>{{$repairCard->car->model}}</p></td>
-                 
-                  <td><h4>{{trans('site.status')}}</h4><p>{{$repairCard->status}}</p></td>
-                  
-
-                </tr>            
-              </tbody></table>
-              <br>
-              <div class="box">
-        <div class="box-header with-border">
-          <h1 class="box-title">{{trans('site.repairCheck')}}</h1>
-
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
-              <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="" data-original-title="Remove">
-              <i class="fa fa-times"></i></button>
-          </div>
-        </div>
-        <div class="box-body">
-          <!-- checkReport goes here  -->
-          <p>{{$repairCard->checkReprort}}</p>
-        </div>
-        <!-- /.box-body -->
-
-      </div>
-      <div class="box">
-            
-            
-          </div>
-            </div>
+</div>
             <!-- /.box-body -->
             
-          </div>
+</div>
+
+<div class="box-body">
+<div class="box">
+<div class="box-header with-border">
+<h3 class="box-title">Items</h3>
+
+<table class="table table-striped table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Service</th>
+      <th scope="row">Client Cost</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  <?php $total=0; ?>
+  @foreach($repairCard->items as $item )
+
+    <tr>
+    <td>{{$item->service->service_name}}</td>
+    <td>{{$item->service_client_cost}}</td>
+    </tr>
+    <?php $total+=$item->service_client_cost ?>
+  @endforeach 
+  <tr>
+  <tr>
+  <th>Total</th>
+  <td><?php echo $total ?></td>
+  </tr>
+  
+  </tr>   
+  </tbody>
+</table>
+</div>
+            <!-- /.box-header -->
+</div>
+            <!-- /.box-body -->
+          
+<td><a class="btn btn-danger denied"href="{{route('denied' ,$repairCard->id)}}"><i class="fas fa-search"></i> denied</a></td>
+<td><a class="btn btn-primary approve"href="{{route('approved' ,$repairCard->id)}}"><i class="fas fa-search"></i> Approve</a></td>
+
+        
+</div>
+
+
+
             </div>
             <!-- /.box-body -->
           </div>
