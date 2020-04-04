@@ -37,7 +37,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
             Route::resource('client', 'ClientController');
             Route::resource('car', 'CarController');
             Route::post('get_catagray', 'CarController@get_catagray')->name('get_catagray');
-            Route::post('get_car', 'ReprairCardController@get_car')->name('get_car');
+            Route::post('get_car', 'ReprairCardController@getCars')->name('getCars');
+            Route::post('getServices', 'ReprairCardController@getServices')->name('getServices');
+            Route::post('getPrice', 'ReprairCardController@getPrice')->name('getPrice');
             Route::get('newitem', 'ReprairCardController@newitem')->name('newitem');
             Route::get('print/{id}', 'AccountController@print')->name('print');
             route::get('clientDetails/{id}','ClientController@clientDetails');
@@ -50,6 +52,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
             Route::resource('cost', 'costController');
             Route::resource('reprairCard', 'ReprairCardController');
             Route::get('approved/{id}','ReprairCardController@approved')->name('approved');
+            Route::get('denied/{id}','ReprairCardController@denied')->name('denied');
+
+            
             Route::post('accept','ReprairCardController@accept')->name('accept');
             Route::post('money','ReprairCardController@money')->name('money');
             Route::get('confirm/{id}','AccountController@confirm')->name('confirm');

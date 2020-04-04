@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 use App\Client;
 use App\ReprairCard;
+use App\RepairCardItem;
 use App\CarCatogray;
 use App\Account;
 use App\Car;
 use Illuminate\Http\Request;
 use App\Box;
 use App\ReceiptVoucher;
+use DB;
+use App\Service;
+use App\CardStatus;
+
+
+
 
 class ReprairCardController extends Controller
 {
@@ -93,17 +100,44 @@ class ReprairCardController extends Controller
         return redirect('admin/box');
     }
     public function approved($id){
-        $Card = ReprairCard::find($id);
-        $client = Client::find($Card->client_id);
-        $car = Car::find($Card->car_id);
-        $account = Account::where("reprairCard_id",$id)->get();
+        $card = ReprairCard::find($id);
+        $date = date('Y-m-d H:i:s');
+        $card->status='accepted';
+        $card->save();
+        $status = new CardStatus();
+        $status->card_id=$id;
+        $status->card_status_date=$date;
+        $status->card_status=$card->status;
+        $status->save();
 
-        $subTotal = Account::where("reprairCard_id",$id)->get()->sum('subTotal');
-        $tax = Account::where("reprairCard_id",$id)->get()->sum('tax');
-        // dd($subTotal);
-        return view('admin.repairCard.approved' , \compact('Card','car','client' ,'account' ,'subTotal' ,'tax'));
+        return back();
+
+        // $client = Client::find($Card->client_id);
+        // $car = Car::find($Card->car_id);
+        // $account = Account::where("reprairCard_id",$id)->get();
+
+        // $subTotal = Account::where("reprairCard_id",$id)->get()->sum('subTotal');
+        // $tax = Account::where("reprairCard_id",$id)->get()->sum('tax');
+        // // dd($subTotal);
+        // return view('admin.repairCard.approved' , \compact('Card','car','client' ,'account' ,'subTotal' ,'tax'));
 
     }
+
+
+    public function denied($id){
+        $card = ReprairCard::find($id);
+        $date = date('Y-m-d H:i:s');
+        $card->status='denied';
+        $card->save();
+        $status = new CardStatus();
+        $status->card_id=$id;
+        $status->card_status_date=$date;
+        $status->card_status=$card->status;
+        $status->save();
+
+        return back();
+    }
+
     public function accept(Request $request){
         // dd(request()->All());
 
@@ -172,7 +206,7 @@ class ReprairCardController extends Controller
     public function index()
     {
         //
-        $repairCards = ReprairCard::where('status' ,'=','panding')->get();
+        $repairCards = ReprairCard::get();
         
         return view('admin.repairCard.index',compact('repairCards'));
     }
@@ -187,7 +221,8 @@ class ReprairCardController extends Controller
         //
         $clients = Client::get();
         $cars = Car::get();
-        return view('admin.repairCard.create',compact('clients','cars'));
+        $services=Service::get();
+        return view('admin.repairCard.create',compact('clients','cars','services'));
 
     }
 
@@ -207,8 +242,21 @@ class ReprairCardController extends Controller
             'car_id' => 'required',
         ]);
 
-        ReprairCard::create($request->all());
-
+        $repairCard=ReprairCard::create($request->all());
+        $price =   $request->get('price');
+        foreach ($request->get('services') as $id => $service)
+        {
+            if ($service)
+            {
+                $repairCardItem = new RepairCardItem();
+                $repairCardItem->service_id = $service;
+                $carService=Service::find($service);
+                $repairCardItem->card_id = $repairCard->id;
+                $repairCardItem->service_client_cost=$price[$id];
+                $repairCardItem->service_cost=$carService->service_cost;
+                $repairCardItem->save();
+            }
+        }
         session()->flash('success', trans('admin.added'));
         return redirect('admin/reprairCard');
     }
@@ -241,11 +289,12 @@ class ReprairCardController extends Controller
     public function edit($id)
     {
         $repairCard = ReprairCard::find($id);
-        $cars = Car::all();
+        $cars = Car::where('client_id',$repairCard->client_id)->get();
         $clients = Client::all();
+        $allServices=Service::all();
 
 
-        return view('admin.repairCard.edit', compact('repairCard','clients','cars'));
+        return view('admin.repairCard.edit', compact('repairCard','clients','cars','allServices'));
     }
     /**
      * Update the specified resource in storage.
@@ -254,9 +303,30 @@ class ReprairCardController extends Controller
      * @param  \App\ReprairCard  $reprairCard
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ReprairCard $reprairCard)
+    public function update(Request $request, $id)
     {
-        //
+        $card = ReprairCard::find($id);
+        $items=$card->items;
+        foreach($items as $item)
+        {
+            $item->delete();
+        }
+        $price =   $request->get('price');
+        foreach ($request->get('services') as $id => $service)
+        {
+                $repairCardItem = new RepairCardItem();
+                $repairCardItem->service_id = $service;
+                $carService=Service::find($service);
+                $repairCardItem->card_id = $card->id;
+                $repairCardItem->service_client_cost=$price[$id];
+                $repairCardItem->service_cost=$carService->service_cost;
+                $repairCardItem->save();
+            
+        }
+        session()->flash('success', trans('admin.added'));
+        return redirect('admin/reprairCard');
+
+
     }
 
     /**
@@ -273,19 +343,46 @@ class ReprairCardController extends Controller
         session()->flash('success', trans('admin.deleted'));
         return back();
     }
-    public function get_car(ReprairCard $reprairCard ,Request $request)
+    public function getCars(ReprairCard $reprairCard ,Request $request)
     {
-        // dd($request->all());
         $select = $request->get('select');
         $value = $request->get('value');
         $dependent = $request->get('dependent');
-        $data = Car::join("car_catograys" , 'car_catograys.id', '=' , 'cars.carCatogaries_id')->select("cars.id","car_catograys.name_ar")->where("client_id" , $value)->get();
+        $data = DB::table('cars')
+        ->where('client_id', $value)
+        ->get();
+
         $output = '<option value="">'.trans("site.options").'</option>';
         foreach($data as $row)
         {
-        $output .= '<option value="'.$row->id.'">'.$row->name_ar.'</option>';
+        $output .= '<option value="'.$row->id.'">'.CarCatogray::find($row->car_brand_category_id)->brand->name_en."-".CarCatogray::find($row->car_brand_category_id)->name_en."-".$row->model."-".$row->platNo.'</option>';
         }
 
         echo $output;
     }
+    public function getServices(ReprairCard $reprairCard ,Request $request)
+    {
+        $value = $request->get('value');
+        $data = DB::table('car_services')
+        ->where('service_type', $value)
+        ->get();
+
+        $output = '<option value="">'.trans("site.options").'</option>';
+        foreach($data as $row)
+        {
+        $output .= '<option value="'.$row->service_id.'">'.$row->service_name."_".$row->service_number.'</option>';
+        }
+
+        echo $output;
+    }
+    public function getPrice(ReprairCard $reprairCard ,Request $request)
+    {
+        $value = $request->get('value');
+        $data=Service::where('service_id', $value)->firstOrFail();
+        $output =$data->service_client_cost;
+        echo $output;
+    }
+
+    
+    
 }

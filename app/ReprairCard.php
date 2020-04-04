@@ -15,7 +15,7 @@ class ReprairCard extends Model
         'car_id' 
 
 		 
-    ];	
+    ];
     public function client()
 	{
        return $this->HasOne('App\Client','id','client_id');
@@ -37,5 +37,9 @@ class ReprairCard extends Model
 	{
 		return $this->HasOne('App\Company','id','car_id');
 	}
-    
+    public function items()
+    {
+        return $this->hasMany('App\RepairCardItem','card_id');
+    }
+
 }

@@ -60,7 +60,6 @@ class CarController extends Controller
             'car_structure_number' => 'required',
             'car_color' => 'required',
         ]);
-
         Car::create($request->all());
 
         session()->flash('success', trans('admin.added'));

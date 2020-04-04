@@ -26,6 +26,18 @@
       'autoWidth'   : false
     })
   })
+  $(document).ready(function() {
+    $(".approve").click(function(event) {
+        if( !confirm('هل انت متاكد ؟') ) 
+            event.preventDefault();
+    });
+    $(".denied").click(function(event) {
+        if( !confirm('هل انت متاكد ؟') ) 
+            event.preventDefault();
+    });
+
+});
+
 </script>
 @endsection
 
@@ -62,14 +74,13 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                <th>{{ trans('site.clientName') }}</th>
-                  <th>{{ trans('site.carName') }}</th>
-                  <th>{{ trans('site.companyName_en') }}</th>
-                  <th>{{ trans('site.model') }}</th>
-                  <th>{{ trans('site.plat') }}</th>
-                  <th>{{ trans('site.status') }}</th>
-                  <th>{{ trans('site.Actions') }}</th>
-                  <th></th>
+                <th>Client</th>
+                  <th>Category</th>
+                  <th>Category Brand</th>
+                  <th>Car Model</th>
+                  <th>Car PLat Number</th>
+                  <th>Status</th>
+                  <th colspan="2">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -77,19 +88,16 @@
                 @foreach($repairCards as $value)
                 <tr>
                 <td>{{$value->client->fullName}}</td>
-                  <td>{{$value->car->carCatogray->name_en}}</td>    <!-- fromCarTable -->
-                  <td>{{$value->car->carCatogray->company->name_en}}</td>    <!-- /// -->
-                  <td>{{$value->car->model}}</td>    <!-- /// -->
-                  <td>{{$value->car->platNo}}</td>    <!-- /// -->
-                  <td>{{$value->status}}</td>    <!-- /// -->
-                  <td>
-                  @if($value->status == "panding")
-                  <a href="{{route('approved' ,$value->id)}}" class="btn btn-success" style="margin: 0 5px;">{{ trans('site.aprrove') }} </a>
-                  @endif
+                  <td>{{$value->car->category->name_en}}</td> 
+                  <td>{{$value->car->category->brand->name_en}}</td>
+                  <td>{{$value->car->model}}</td>   
+                  <td>{{$value->car->platNo}}</td>    
+                  <td>{{$value->status}}</td> 
+                  <td><a class="btn btn-primary"href="{{route('reprairCard.edit' ,$value->id)}}"><i class="fas fa-search"></i> EDIT</a></td>
+                  <td><a class="btn btn-danger"href="{{route('reprairCard.show' ,$value->id)}}"><i class="fas fa-search"></i> SHOW</a></td>
+                  <td><a class="btn btn-warning denied"href="{{route('denied' ,$value->id)}}"><i class="fas fa-search"></i> denied</a></td>
+                  <td><a class="btn btn-success approve"href="{{route('approved' ,$value->id)}}"><i class="fas fa-search"></i> Approve</a></td>
 
-                  <a href="#"class="btn btn-danger">{{ trans('site.denied') }}</a>
-                  </td>
-                  <td><a href="{{route('reprairCard.show' ,$value->id)}}"><i class="fas fa-search"></i> </a> | <a href="{{route('reprairCard.edit' ,$value->id)}}"><i class="fas fa-edit"></i></a> </td>
                 </tr>
                 @endforeach
                 </tbody>

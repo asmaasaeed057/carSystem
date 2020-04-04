@@ -211,3 +211,6 @@ $(document).ready(function(){
     <!-- /.content -->
   </div>
 @endsection
+<script>
+
+</script>

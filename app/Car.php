@@ -27,9 +27,9 @@ class Car extends Model
 		return $this->HasOne('App\CarType','id','carType_id');
     }
     
-    public function carCatogray()
+    public function category()
 	{
-		return $this->HasOne('App\CarCatogray','id','car_brand_category_id');
+    return $this->belongsTo('App\CarCatogray','car_brand_category_id','id');
   }
   
 
