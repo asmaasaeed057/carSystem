@@ -421,6 +421,8 @@
                         <ul class="treeview-menu">
                             <li><a href="{{ route('expenseReport')}}"><i class="fa fa-circle-o"></i> Expense Report</a></li>
                             <li><a href="{{ route('expenseTaxReport')}}"><i class="fa fa-circle-o"></i> Expense Tax Report</a></li>
+                            <li><a href="{{ route('ClientReport')}}"><i class="fa fa-circle-o"></i>Client Report</a></li>
+                            <li><a href="{{ route('cardTaxesReport')}}"><i class="fa fa-circle-o"></i> Card Tax Report</a></li>
 
                             
                             <li><a href="{{ url('admin/FilterIncome')}}"><i class="fa fa-circle-o"></i> {{ trans('site.income')}}</a></li>
