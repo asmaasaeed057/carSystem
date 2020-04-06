@@ -423,8 +423,9 @@ class ReprairCardController extends Controller
 
 
         if ($datefrom) {
-
-            $c->whereBetween('created_at', [$datefrom, $dateto])->get();
+            $c->where('created_at', '>=', $datefrom)
+            ->where('created_at', '<=', $dateto)
+            ->get();
         }
         $cards = $c->get();
         return view('admin.repairCard.cardTaxesReport', compact('cards', 'datefrom', 'dateto'));

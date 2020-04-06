@@ -72,6 +72,10 @@ class ReprairCard extends Model
         return ($taxes);
 
     }
-
+    public function getDate(){
+    $date= date("d M Y", strtotime($this->created_at));
+    return $date;
+        
+    }
 
 }
