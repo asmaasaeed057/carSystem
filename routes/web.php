@@ -45,7 +45,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::get('expenseSearch', 'ExpenseReportController@search')->name('expenseSearch');
         Route::get('expenseTaxReport', 'ExpenseTaxReportController@index')->name('expenseTaxReport');
         Route::get('expenseTaxSearch', 'ExpenseTaxReportController@search')->name('expenseTaxSearch');
+        Route::get('car/create/{clientid}', 'CarController@createCar')->name('car.createCar');
+        Route::get('repairCard/create/{cid}', 'ReprairCardController@createRepairCard')->name('repairCard.createRepairCard');
 
+        
         Route::post('get_catagray', 'CarController@get_catagray')->name('get_catagray');
         Route::post('get_car', 'ReprairCardController@getCars')->name('getCars');
         Route::post('getServices', 'ReprairCardController@getServices')->name('getServices');

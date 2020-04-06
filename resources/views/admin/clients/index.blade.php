@@ -70,36 +70,37 @@
                   <th>{{ trans('site.phone') }}</th>
                   <th>{{ trans('site.address') }}</th>
                   <th>{{ trans('site.email') }}</th>
-                  <th>Client Type</th>
-                  <th>{{ trans('site.Actions') }}</th>
+                  <!-- <th>Client Type</th> -->
                   <th>Edit</th>
                   <th>Delete</th>
                   <th>Show</th>
+                  <th>Add Car</th>
+                  <th>Add Repair Card</th>
+
                 </tr>
               </thead>
               <tbody>
 
                 @foreach($clients as $client)
-                <tr style=>
+                <tr>
                   <td>{{$client->fullName}}</td>
                   <td>{{$client->phone}}</td>
                   <td>{{$client->address}}</td>
                   <td>{{$client->email}}</td>
-                  <td>{{$client->client_type}}</td>
-
-
-
+                  <!-- <td>{{$client->client_type}}</td> -->
                   <td><a href="{{route('client.edit' ,$client->id)}}" class="btn btn-info">Edit</a></td>
                   <td>
-
                     <form class="delete" action="{{route('client.destroy' ,$client->id)}}" method="post">
                       @csrf
                       @method('DELETE')
                       <button class="btn btn-danger" type="submit">Delete</button>
-
                     </form>
                   </td>
                   <td><a href="{{route('client.show' ,$client->id)}}" class="btn btn-success">Show</a></td>
+                  <td><a href="{{route('car.createCar' , $client->id)}}" class="btn btn-warning">Add Car</a></td>
+                  <td><a href="{{route('repairCard.createRepairCard' , $client->id)}}" class="btn btn-secondary">Add repair Card</a></td>
+
+                  
                 </tr>
                 @endforeach
               </tbody>
