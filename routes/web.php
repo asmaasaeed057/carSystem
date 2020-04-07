@@ -34,6 +34,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::resource('service', 'ServiceController');
         Route::resource('admin', 'AdminController');
         Route::resource('client', 'ClientController');
+        Route::get('clientSearch', 'ClientController@search')->name('clientSearchIndex');
         Route::resource('car', 'CarController');
         Route::resource('brand', 'CarBrandController');
         Route::resource('brandCategory', 'CarBrandCategoryController');
@@ -48,7 +49,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::get('car/create/{clientid}', 'CarController@createCar')->name('car.createCar');
         Route::get('repairCard/create/{cid}', 'ReprairCardController@createRepairCard')->name('repairCard.createRepairCard');
 
-        
+
         Route::post('get_catagray', 'CarController@get_catagray')->name('get_catagray');
         Route::post('get_car', 'ReprairCardController@getCars')->name('getCars');
         Route::post('getServices', 'ReprairCardController@getServices')->name('getServices');

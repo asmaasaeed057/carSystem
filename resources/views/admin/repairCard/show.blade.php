@@ -73,8 +73,16 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <th scope="row">Client</th>
+                        <th scope="row">Client Name</th>
                         <td>{{$repairCard->client->fullName}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Client Email</th>
+                        <td>{{$repairCard->client->email}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Client Phone</th>
+                        <td>{{$repairCard->client->phone}}</td>
                       </tr>
                       <tr>
                         <th scope="row">Status</th>
@@ -139,7 +147,8 @@
           <td><a class="btn btn-danger denied" href="{{route('denied' ,$repairCard->id)}}"> denied</a></td>
           <td><a class="btn btn-primary approve" href="{{route('approved' ,$repairCard->id)}}"> Approve</a></td>
           <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center">Print</button>
-          <td><a class="btn btn-warning"> Send Mail</a></td>
+          <!-- <td><a class="btn btn-warning"> Send Mail</a></td> -->
+          <td><a href="mailto:{{$repairCard->client->email}}?subject=Repair Card Price" target="_top" class="btn btn-warning">Send Mail</a></td>
 
 
 

@@ -164,7 +164,9 @@
               </div>
             </div>
             <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center">Print</button>
+            <!-- <a href="{{route('sendEmail.mail' ,$client->id)}}" class="btn btn-info">sendEmail</a> -->
 
+            
             <!-- /.box-body -->
           </div>
           <!-- /.box -->

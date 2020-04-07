@@ -51,7 +51,7 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+            <h3 class="box-title">Search Client</h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -59,9 +59,30 @@
             </div>
           </div>
           <!-- /.box-header -->
+      
+          <div class="box-body">
+
+            <form action="{{ route('clientSearchIndex')}}" method="GET">
+
+              <div class="form-group">
+                <label for="client_name">Client Name</label>
+                <input type="text" name="client_name" class="form-control" style="width:500px">
+              </div>
+              <div class="form-group" style="display: block">
+                <label for="client_phone">Client Phone</label>
+                <input type="text" name="client_phone" class="form-control" style="width:500px">
+              </div>
+
+              <input type="submit" class="btn-primary" value="search">
+            </form>
+          </div>
+          </div>
+          <div class="box box-primary">
+
           <div class="box-header">
             <a href="{{route('client.create')}}" style="margin-top: 10px;" class="btn btn-success">Add Client </a>
           </div>
+
           <div class="box-body">
             <table id="example1" class="table table-bordered table-striped">
               <thead>
@@ -100,15 +121,15 @@
                   <td><a href="{{route('car.createCar' , $client->id)}}" class="btn btn-warning">Add Car</a></td>
                   <td><a href="{{route('repairCard.createRepairCard' , $client->id)}}" class="btn btn-secondary">Add repair Card</a></td>
 
-                  
+
                 </tr>
                 @endforeach
               </tbody>
 
             </table>
           </div>
+          </div>
           <!-- /.box-body -->
-        </div>
         <!-- /.box -->
       </div>
       <!-- /.col -->
