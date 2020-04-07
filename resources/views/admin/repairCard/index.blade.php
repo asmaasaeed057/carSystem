@@ -182,11 +182,18 @@
                   <td>{{$value->car->platNo}}</td>    
                   <td>{{$value->status}}</td> 
                   <td>{{$value->created_at}}</td> 
-
-                  <td><a class="btn btn-primary"href="{{route('reprairCard.edit' ,$value->id)}}"><i class="fas fa-search"></i> EDIT</a></td>
                   <td><a class="btn btn-danger"href="{{route('reprairCard.show' ,$value->id)}}"><i class="fas fa-search"></i> SHOW</a></td>
+                @if($value->status =="denied" || $value->status =="accepted")
+                @else
+                  <td><a class="btn btn-primary"href="{{route('reprairCard.edit' ,$value->id)}}"><i class="fas fa-search"></i> EDIT</a></td>
                   <td><a class="btn btn-warning denied"href="{{route('denied' ,$value->id)}}"><i class="fas fa-search"></i> denied</a></td>
                   <td><a class="btn btn-success approve"href="{{route('approved' ,$value->id)}}"><i class="fas fa-search"></i> Approve</a></td>
+                @endif
+                @if($value->status =="accepted")
+
+                  <td><a class="btn btn-primary"href=""><i class="fas fa-search"></i> Add Invoice</a></td>
+                  @endif
+
 
                 </tr>
                 @endforeach
