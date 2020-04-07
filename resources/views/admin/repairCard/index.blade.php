@@ -35,6 +35,11 @@
         if( !confirm('هل انت متاكد ؟') ) 
             event.preventDefault();
     });
+    $(".inv").click(function(event) {
+        if( !confirm('هل انت متاكد من انشاء فاتورة؟') ) 
+            event.preventDefault();
+    });
+
 
 });
 
@@ -191,7 +196,7 @@
                 @endif
                 @if($value->status =="accepted")
 
-                  <td><a class="btn btn-primary invoice"href="{{route('invoice',$value->id)}}"><i class="fas fa-search"></i> Add Invoice</a></td>
+                  <td><a class="inv btn btn-primary" href="{{route('invoice',$value->id)}}"><i class="fas fa-search"></i> Add Invoice</a></td>
                   @endif
 
 

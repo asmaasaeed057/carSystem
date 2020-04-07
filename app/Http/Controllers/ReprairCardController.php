@@ -15,6 +15,8 @@ use DB;
 use App\Service;
 use App\CardStatus;
 use App\CarBrandCategory;
+use App\Invoice;
+use App\OperationOrder;
 
 
 
@@ -509,6 +511,22 @@ class ReprairCardController extends Controller
     }
     public function invoice($id)
     {
+        $card = ReprairCard::find($id);
+
+        $invoice=new Invoice;
+        $invoice->invoice_number=$card->card_number;
+        $invoice->invoice_date=date('Y-m-d H:i:s');
+        $invoice->invoice_total=$card->total_with_taxes;
+        $invoice->repair_card_id=$id;
+        $invoice->save();
+        $operationOrder=new OperationOrder;
+        $operationOrder->operation_order_number=$card->card_number;
+        $operationOrder->operation_order_date=date('Y-m-d H:i:s');
+        $operationOrder->invoice_id=$invoice->invoice_id;
+        $operationOrder->save();
+        return back();
+
+
 
     }
     

@@ -14,6 +14,7 @@ class OperationOrder extends Model
     public function invoice(){
         return $this->belongsTo('App\Invoice' , 'invoice_id');
     }
+    public $timestamps = false;
 
 
 }
