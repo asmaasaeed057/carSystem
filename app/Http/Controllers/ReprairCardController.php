@@ -13,7 +13,7 @@ use App\ReceiptVoucher;
 use DB;
 use App\Service;
 use App\CardStatus;
-
+use App\CarBrandCategory;
 
 
 
@@ -206,9 +206,20 @@ class ReprairCardController extends Controller
     public function index()
     {
         //
+        $clients = Client::get();
+
         $repairCards = ReprairCard::get();
-        
-        return view('admin.repairCard.index',compact('repairCards'));
+        $categories= CarBrandCategory::get();
+        $categoryId="";
+        $date="";
+        $clientId="";
+        $platNo="";
+        $cardNo="";
+        $status="";
+        $datefrom="";
+        $dateto="";
+        return view('admin.repairCard.index',compact('repairCards','clients','categories','categoryId','dateto','datefrom','clientId','platNo','cardNo','status'));
+
     }
 
     /**
@@ -220,9 +231,18 @@ class ReprairCardController extends Controller
     {
         //
         $clients = Client::get();
+        if(ReprairCard::orderBy('id', 'desc')->first())
+        {
+        $number=ReprairCard::orderBy('id', 'desc')->first()->card_number;
+        }
+        else
+        {
+            $number=0;
+        }
+
         $cars = Car::get();
         $services=Service::get();
-        return view('admin.repairCard.create',compact('clients','cars','services'));
+        return view('admin.repairCard.create',compact('clients','cars','services','number'));
 
     }
 
@@ -421,8 +441,8 @@ class ReprairCardController extends Controller
 
 
         if ($datefrom) {
-            $c->where('created_at', '>=', $datefrom)
-            ->where('created_at', '<=', $dateto)
+            $c->whereDate('created_at', '>=', $datefrom)
+            ->whereDate('created_at', '<=', $dateto)
             ->get();
 
         }
@@ -431,7 +451,61 @@ class ReprairCardController extends Controller
 
     }
 
-    
+    public function cardSearch()
+    {
+        $clients = Client::get();
+        $categories= CarBrandCategory::get();
+
+        $clientId = $_GET['client_id'];
+        $datefrom = $_GET['date_from'];
+        $dateto = $_GET['date_to'];
+        $categoryId = $_GET['car_brand_category_id'];
+        $platNo=$_GET['plat_number'];
+        $cardNo=$_GET['card_number'];
+        $status=$_GET['status'];
+        
+        $c = ReprairCard::select("*");
+        if ($categoryId)
+        {
+            $carIds = Car::where('car_brand_category_id', $categoryId)->pluck('id');
+            $c->whereIn('car_id', $carIds);
+        }
+        if ($datefrom) {
+            $c->whereDate('created_at', '>=', $datefrom)
+            ->whereDate('created_at', '<=', $dateto)
+            ->get();
+
+        }
+        if ($clientId)
+        {
+            $c->where('client_id', $clientId);
+        }
+        if ($platNo)
+        {
+            $car = Car::where('platNo', $platNo)->first();
+            if($car)
+            {
+            $c->where('car_id', $car->id);
+            }
+
+        }
+        if($cardNo)
+        {
+            $c->where('card_number', $cardNo);
+
+        }
+        if($status)
+        {
+            $c->where('status', $status);
+
+        }
+        $repairCards = $c->get();
+
+        return view('admin.repairCard.index',compact('repairCards','clients','categories','categoryId','dateto','datefrom','clientId','platNo','cardNo','status'));
+
+
+
+    }
     
     
 }

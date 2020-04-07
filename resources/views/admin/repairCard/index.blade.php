@@ -71,15 +71,101 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+            <form  method="get" action="{{route('cardSearch')}}">
+
+            <div class="row">
+
+            <div class="col-md-6">
+            <div class="form-group">
+                <label>Client</label>
+                <select class="form-control" name="client_id"  id="clients" style="width: 100%;">
+                <option value="">Select</option>
+                @foreach($clients as $value)
+                    <option value="{{$value->id}}" {{($value->id == $clientId) ? 'selected' : '' }}>{{$value->fullName}}</option>
+                @endforeach
+                </select>
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label>Date</label>
+                <br />
+                <input value="{{$datefrom}}" type="date" placeholder="من" value="" size="60" maxlength="120" name="date_from" id="" class="input-medium" />:
+                <input value="{{$dateto}}" type="date" placeholder="من" value="" size="60" maxlength="120" name="date_to" id="" class="input-medium" />
+
+            </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+        <div class="col-md-6">
+        <div class="form-group">
+            <label>Category</label>
+            <select class="form-control" name="car_brand_category_id"  style="width: 100%;">
+            <option value="">Select</option>
+            @foreach($categories as $value)
+                <option value="{{$value->id}}" {{($value->id == $categoryId) ? 'selected' : '' }}>{{$value->name_en}}</option>
+            @endforeach
+            </select>
+        </div>
+        </div>
+        <div class="col-md-6">
+        <div class="form-group">
+            <label>plat Number</label>
+            <input value="{{$platNo}}" type="text" placeholder="Plat Number"  size="60" maxlength="120" name="plat_number" id="" class="form-control" />
+        </div>
+        </div>
+        </div>
+
+        <div class="row">
+
+      <?php $statusAr=array('panding','accepted','finished','underMaintance','denied'); ?>
+
+        <div class="col-md-6">
+        <div class="form-group">
+             <label>Status</label>
+            <select class="form-control" name="status"  style="width: 100%;">
+            <option value="">Select</option>
+            @foreach($statusAr as $value)
+                <option value="{{$value}}" {{($value == $status) ? 'selected' : '' }}>{{$value}}</option>
+            @endforeach
+            </select> 
+        </div>
+        </div>
+        <div class="col-md-6">
+        <div class="form-group">
+            <label>Card Number</label>
+            <input value="{{$cardNo}}" type="text" placeholder="Card Number"  size="60" maxlength="120" name="card_number" id="" class="form-control" />
+        </div>
+        </div>
+        </div>
+
+
+
+        
+            <div class="form-actions">
+
+                <input id="submit" type="submit" name="submit" value="Search" class="btn btn-primary btn-large">
+            </div>
+            </div>
+            </form>
+
+
+
+
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                <th>Client</th>
+                  <th>Card Number</th>
+                  <th>Client</th>
                   <th>Category</th>
                   <th>Category Brand</th>
                   <th>Car Model</th>
                   <th>Car PLat Number</th>
                   <th>Status</th>
+                  <th>Created At</th>
+
                   <th colspan="2">Actions</th>
                 </tr>
                 </thead>
@@ -87,12 +173,16 @@
 
                 @foreach($repairCards as $value)
                 <tr>
-                <td>{{$value->client->fullName}}</td>
+                  <td>{{$value->card_number}}</td>
+
+                  <td>{{$value->client->fullName}}</td>
                   <td>{{$value->car->carCatogray->name_en}}</td> 
                   <td>{{$value->car->carCatogray->brand->name_en}}</td>
                   <td>{{$value->car->model}}</td>   
                   <td>{{$value->car->platNo}}</td>    
                   <td>{{$value->status}}</td> 
+                  <td>{{$value->created_at}}</td> 
+
                   <td><a class="btn btn-primary"href="{{route('reprairCard.edit' ,$value->id)}}"><i class="fas fa-search"></i> EDIT</a></td>
                   <td><a class="btn btn-danger"href="{{route('reprairCard.show' ,$value->id)}}"><i class="fas fa-search"></i> SHOW</a></td>
                   <td><a class="btn btn-warning denied"href="{{route('denied' ,$value->id)}}"><i class="fas fa-search"></i> denied</a></td>

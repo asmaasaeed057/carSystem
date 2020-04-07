@@ -70,7 +70,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::post('money', 'ReprairCardController@money')->name('money');
         Route::get('confirm/{id}', 'AccountController@confirm')->name('confirm');
         Route::resource('box', 'BoxController');
+        Route::get('cardSearch', 'ReprairCardController@cardSearch')->name('cardSearch');
 
+        
         Route::get('/createAdmin', 'admin\DashboardController@createAdmin');
         Route::any('logout', 'admin\AdminLoginController@logout');
         //Reports Routea
