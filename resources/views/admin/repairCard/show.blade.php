@@ -109,6 +109,8 @@
                   <table class="table table-striped table-dark">
                     <thead>
                       <tr>
+                      <th scope="col">Service Type</th>
+
                         <th scope="col">Service</th>
                         <th scope="row">Client Cost</th>
 
@@ -119,6 +121,18 @@
                       @foreach($repairCard->items as $item )
 
                       <tr>
+                        <td>
+                        @if($item->service->service_type =="1")
+                        أجور خدمات اليد )الإصلاحات)
+
+                        @elseif($item->service->service_type =="2") 
+                        أجور الأعمال الخارجية                      
+                        @elseif($item->service->service_type =="3") 
+                        قطع الغيار )مخزن داخلي) 
+                        @elseif($item->service->service_type =="4")  
+                        قطع غيار )مشتريات خارجية)                     
+                        @endif
+                        </td>
                         <td>{{$item->service->service_name}}</td>
                         <td>{{$item->service_client_cost}}</td>
                       </tr>
@@ -126,12 +140,15 @@
                       @endforeach
                       <tr>
                       <tr>
+                        <th></th>
                         <th>Total</th>
                         <td><?php echo $total ?></td>
                       </tr>
                       <tr>
                         <?php $taxes = $repairCard->card_taxes / 100 ?>
                         <?php $totalWithTaxes = $total + ($taxes * $total); ?>
+                        <th></th>
+
                         <th>Total With Taxes</th>
                         <td><?php echo $totalWithTaxes ?></td>
                       </tr>
@@ -143,9 +160,12 @@
               <!-- /.box-body -->
             </div>
           </div>
+          @if($repairCard->status =="denied" || $repairCard->status =="accepted")
+          @else
 
           <td><a class="btn btn-danger denied" href="{{route('denied' ,$repairCard->id)}}"> denied</a></td>
           <td><a class="btn btn-primary approve" href="{{route('approved' ,$repairCard->id)}}"> Approve</a></td>
+          @endif
           <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center">Print</button>
           <!-- <td><a class="btn btn-warning"> Send Mail</a></td> -->
           <td><a href="mailto:{{$repairCard->client->email}}?subject=Repair Card Price" target="_top" class="btn btn-warning">Send Mail</a></td>
