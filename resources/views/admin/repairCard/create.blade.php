@@ -248,79 +248,137 @@
                     </div>
                   </div>
 
-                  <?php $taxes = 5 ?>
 
-                  <input type="text" value={{$taxes}} name="card_taxes" hidden>
+                <?php $taxes=5 ?>
 
-                  <div class="container">
-                    <h2>Items</h2>
-                    <table class="table table-condensed">
-                      <thead>
-                        <tr>
-                          <th>Service Type</th>
-                          <th>Services</th>
-                          <th>Price</th>
-                        </tr>
-                      </thead>
-                      <tbody id='services'>
-                        <tr>
-                          <td>
-                            <select class="form-control" name="service_type[0]" id="service_type_0" onchange="changeService(0)">
-                              <option value="">Select</option>
-
-                              <option value="1">أجور خدمات اليد )الإصلاحات)</option>
-                              <option value="2">أجور الأعمال الخارجية </option>
-                              <option value="3">قطع الغيار )مخزن داخلي) </option>
-                              <option value="4">قطع غيار )مشتريات خارجية) </option>
-
-                            </select>
+                <input  type="text" value={{$taxes}}  name="card_taxes" hidden>
+                <input  type="text" value={{$number+1}}  name="card_number" hidden>
 
 
-                          </td>
-                          <td>
-                            <select name="services[0]" id="services_0" class="form-control select2" onchange="showPrice(0)">
-                              <option value="">Select One</option>
-                            </select>
+<div class="container">
+  <h2>Items</h2>
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Service Type</th>
+        <th>Services</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody id='services'>
+      <tr>
+        <td>
+        <select class="form-control" name="service_type[0]" id="service_type_0" onchange="changeService(0)">
+        <option value="">Select</option>
 
+        <option value="1">أجور خدمات اليد )الإصلاحات)</option>
+        <option value="2">أجور الأعمال الخارجية </option>
+        <option value="3">قطع الغيار )مخزن داخلي) </option>
+        <option value="4">قطع غيار )مشتريات خارجية) </option>
 
-                          </td>
-                          <td>
-                            <input type='text' name="price[0]" id="price_0">
+        </select>
+        
+        
+        </td>
+        <td>
+        <select name="services[0]" id="services_0" class="form-control select2" onchange="showPrice(0)">
+        <option value="">Select One</option>
+        </select>
 
-                          </td>
-                          <td>
-                            <input type="button" class="btn btn-green add" value="+">
+        
+        </td>
+        <td>
+        <input type='text' name="price[0]" id="price_0" >
+        
+        </td>
+        <td>
+        <input type="button" class="btn btn-green add" value="+">
 
-                          </td>
-                        </tr>
-                      </tbody>
-                      <tr>
-                        <td colspan="2"></td>
-                        <td><strong>Total Price</strong></td>
-                        <td>
-                          <input type='text' name="totalPrice" id="total_price">
+        </td>
+      </tr>
+    </tbody>
+    <tr>
+      <td colspan="2"></td>
+      <td><strong>Total Price</strong></td>
+      <td>
+      <input type='text' name="totalPrice" id="total_price">
 
-                        </td>
+      </td>
 
-                      </tr>
+      </tr>
 
-                    </table>
-                  </div>
-
-                  <input type="submit" class="btn btn-info" value="{{__('site.add')}}">
-                </form>
-              </div>
-              <!-- /.box-body -->
-            </div>
-          </div>
-          <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-      </div>
-      <!-- /.col -->
-    </div>
-    <!-- /.row -->
-  </section>
-  <!-- /.content -->
+  </table>
 </div>
-@endsection
+
+                    <div class="container">
+                      <h2>Items</h2>
+                      <table class="table table-condensed">
+                        <thead>
+                          <tr>
+                            <th>Service Type</th>
+                            <th>Services</th>
+                            <th>Price</th>
+                          </tr>
+                        </thead>
+                        <tbody id='services'>
+                          <tr>
+                            <td>
+                              <select class="form-control" name="service_type[0]" id="service_type_0" onchange="changeService(0)">
+                                <option value="">Select</option>
+
+                                <option value="1">أجور خدمات اليد )الإصلاحات)</option>
+                                <option value="2">أجور الأعمال الخارجية </option>
+                                <option value="3">قطع الغيار )مخزن داخلي) </option>
+                                <option value="4">قطع غيار )مشتريات خارجية) </option>
+
+                              </select>
+
+
+                            </td>
+                            <td>
+                              <select name="services[0]" id="services_0" class="form-control select2" onchange="showPrice(0)">
+                                <option value="">Select One</option>
+                              </select>
+
+
+                            </td>
+                            <td>
+                              <input type='text' name="price[0]" id="price_0">
+
+                            </td>
+                            <td>
+                              <input type="button" class="btn btn-green add" value="+">
+
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tr>
+                          <td colspan="2"></td>
+                          <td><strong>Total Price</strong></td>
+                          <td>
+                            <input type='text' name="totalPrice" id="total_price">
+
+                          </td>
+
+                        </tr>
+
+                      </table>
+                    </div>
+
+                    <input type="submit" class="btn btn-info" value="{{__('site.add')}}">
+                  </form>
+                </div>
+                <!-- /.box-body -->
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  @endsection

@@ -14,6 +14,7 @@ class ReprairCard extends Model
         'client_id',
         'car_id' ,
         'card_taxes',
+        'card_number',
 
 		 
     ];
