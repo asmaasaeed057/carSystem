@@ -507,6 +507,10 @@ class ReprairCardController extends Controller
 
 
     }
+    public function invoice($id)
+    {
+
+    }
     
     
 }

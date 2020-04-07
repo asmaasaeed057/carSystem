@@ -191,7 +191,7 @@
                 @endif
                 @if($value->status =="accepted")
 
-                  <td><a class="btn btn-primary"href=""><i class="fas fa-search"></i> Add Invoice</a></td>
+                  <td><a class="btn btn-primary invoice"href="{{route('invoice',$value->id)}}"><i class="fas fa-search"></i> Add Invoice</a></td>
                   @endif
 
 
