@@ -21,7 +21,7 @@ class Car extends Model
 
   public function client()
 {
-		return $this->HasOne('App\Client','id','client_id');
+		return $this->belongsTo('App\Client','client_id');
 }    
 
   public function carType()

@@ -17,7 +17,7 @@ class CarCatogray extends Model
   ];
   public function brand()
 	{
-		return $this->HasOne('App\Company','id','car_brand_id');
+		return $this->belongsTo('App\Company','car_brand_id');
   }
   
 }
