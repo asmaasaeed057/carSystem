@@ -8,7 +8,7 @@ class GroupRole extends Model
 {
 
     protected $table = 'group_role';
-    protected $filla = ['group_id' , 'role_id'];
+    protected $fillable = ['group_id' , 'role_id'];
     protected $primaryKey = 'group_role_id';
 
     public function group(){

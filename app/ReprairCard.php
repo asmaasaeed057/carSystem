@@ -79,4 +79,8 @@ class ReprairCard extends Model
         
     }
 
+    public function invoice(){
+        return $this->hasMany('App\Invoice','id');
+	}
+
 }
