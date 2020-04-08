@@ -17,6 +17,8 @@ use App\CardStatus;
 use App\CarBrandCategory;
 use App\Invoice;
 use App\OperationOrder;
+use App\InvoicePayment;
+
 
 
 
@@ -529,6 +531,64 @@ class ReprairCardController extends Controller
 
 
     }
+    public function invoiceIndex()
+    {
+        $invoices=Invoice::all();
+        return view('admin.invoice.index', compact('invoices'));
+
+    }
+    public function invoiceShow($id)
+    {
+        $invoice=Invoice::find($id);
+        return view('admin.invoice.show', compact('invoice'));
+
+    }
+    public function invoicePayment($id)
+    {
+        $invoice=Invoice::find($id);
+        if(InvoicePayment::orderBy('invoice_payment_id', 'desc')->first())
+        {
+        $number=InvoicePayment::orderBy('invoice_payment_id', 'desc')->first()->invoice_payment_number;
+        }
+        else
+        {
+            $number=0;
+        }
+        $amount=$invoice->repairCard->residual_amount;
+
+        return view('admin.invoice.payment', compact('invoice','id','number','amount'));
+
+    }
+    public function paymentStore(Request $request)
+    {
+    $amount=$request->get('invoice_payment_amount');
+    $invoiceId=$request->get('invoice_id');
+    $date=date('Y-m-d H:i:s');
+    $invoiceNo=$request->get('invoice_payment_number');
+    $residual=$request->get('residual');
+    if($amount<=$residual)
+    {
+    $payment=new InvoicePayment();
+    $payment->invoice_payment_amount=$amount;
+    $payment->invoice_id=$invoiceId;
+    $payment->invoice_payment_date=$date;
+    $payment->invoice_payment_number=$invoiceNo;
+    $payment->save();
+    }
+    else{
+        return back()->with('error','المبلغ المسدد غير صحيح');
+
+
+    }
+    $invoices=Invoice::all();
+    return view('admin.invoice.index', compact('invoices'));
+
+
+
+    
+
+    }
+
     
     
 }

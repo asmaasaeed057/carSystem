@@ -83,8 +83,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::get('FilterClients', 'reportController@FilterClients');
         Route::get('FilterIncome', 'reportController@FilterIncome');
         Route::get('invoice/create/{cardId}', 'ReprairCardController@invoice')->name('invoice');
+<<<<<<< HEAD
         Route::get('operationOrder', 'OperationOrderController@index')->name('operationOrder.index');
         Route::get('operationOrder/{oid}', 'OperationOrderController@show')->name('operationOrder.show');
+=======
+        Route::get('invoice', 'ReprairCardController@invoiceIndex')->name('invoiceIndex');
+        Route::get('invoiceShow/{invId}', 'ReprairCardController@invoiceShow')->name('invoiceShow');
+        Route::get('invoicePayment/{invId}', 'ReprairCardController@invoicePayment')->name('invoicePayment');
+        Route::post('invoicePayment', 'ReprairCardController@paymentStore')->name('payment.store');
+>>>>>>> 94f0f1873a6742c8ee8b8633261e216d61b4e50e
 
+         
     });
 });
