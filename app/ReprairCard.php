@@ -80,7 +80,29 @@ class ReprairCard extends Model
     }
 
     public function invoice(){
-        return $this->hasOne('App\Invoice','id');
-	}
+        return $this->hasOne('App\Invoice','repair_card_id');
+    }
+    public function getResidualAmountAttribute()
+    {
+    $total=$this->total_with_taxes;
+    $payments=$this->invoice->invoicePayment;
+    if(!$payments->isEmpty())
+    {
+
+        $totalAmount=0;
+        foreach($payments as $payment)
+        {
+            $totalAmount+=$payment->invoice_payment_amount;
+        }
+        $residual=$total-$totalAmount;
+
+    }
+    else{
+        $residual=$total;
+
+    }
+    return $residual;
+    }
+
 
 }
