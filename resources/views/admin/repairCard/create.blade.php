@@ -255,7 +255,6 @@
                   <input type="text" value={{$number+1}} name="card_number" hidden>
 
 
-<<<<<<< HEAD
                   <div class="container">
                     <h2>Items</h2>
                     <table class="table table-condensed">
@@ -315,12 +314,6 @@
 
                   <input type="submit" class="btn btn-info" value="{{__('site.add')}}">
                 </form>
-=======
-                    <input type="submit" class="btn btn-info" value="{{__('site.add')}}">
-                  </form>
-                </div>
-                <!-- /.box-body -->
->>>>>>> 94f0f1873a6742c8ee8b8633261e216d61b4e50e
               </div>
               <!-- /.box-body -->
             </div>
