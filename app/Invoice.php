@@ -13,13 +13,13 @@ class Invoice extends Model
     public $timestamps = false;
 
     public function repairCard(){
-        return $this->belongsTo('App\RepairCard' , 'repair_card_id');
+        return $this->belongsTo('App\ReprairCard', 'repair_card_id');
     }
 
 	public function invoicePayment(){
         return $this->hasMany('App\InvoicePayment','invoice_id');
     }
     public function operationOrder(){
-        return $this->hasMany('App\OperationOrder','invoice_id');
+        return $this->hasOne('App\OperationOrder');
 	}
 }

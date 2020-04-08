@@ -12,7 +12,7 @@ class OperationOrder extends Model
     protected $primaryKey = 'operation_order_id';
 
     public function invoice(){
-        return $this->belongsTo('App\Invoice' , 'invoice_id');
+        return $this->belongsTo('App\Invoice', 'invoice_id');
     }
     public $timestamps = false;
 

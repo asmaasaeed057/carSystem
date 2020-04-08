@@ -83,6 +83,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::get('FilterClients', 'reportController@FilterClients');
         Route::get('FilterIncome', 'reportController@FilterIncome');
         Route::get('invoice/create/{cardId}', 'ReprairCardController@invoice')->name('invoice');
+        Route::get('operationOrder', 'OperationOrderController@index')->name('operationOrder.index');
+        Route::get('operationOrder/{oid}', 'OperationOrderController@show')->name('operationOrder.show');
 
     });
 });

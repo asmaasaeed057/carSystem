@@ -80,7 +80,7 @@ class ReprairCard extends Model
     }
 
     public function invoice(){
-        return $this->hasOne('App\Invoice','id');
+        return $this->hasOne('App\Invoice');
 	}
 
 }
