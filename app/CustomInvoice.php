@@ -15,4 +15,36 @@ class CustomInvoice extends Model
 	public function items(){
         return $this->hasMany('App\CustomInvoiceItem','invoice_id');
     }
+
+    public function getTotalAttribute()
+    {
+        $items=$this->items;
+        $total=0;
+        foreach($items as $item){
+            $total+=$item->client_cost;
+        }
+        return ($total);
+    }
+    public function getTotalWithTaxesAttribute()
+    {
+        $items=$this->items;
+        $total=0;
+        foreach($items as $item){
+            $total+=$item->client_cost;
+        }
+        $taxes=($this->invoice_taxes*$total)/100;
+        return ($total+$taxes);
+    }
+
+    public function getTaxesAttribute(){
+        $items=$this->items;
+        $total=0;
+        foreach($items as $item){
+            $total+=$item->client_cost;
+        }
+        $taxes=($this->invoice_taxes*$total)/100;
+        return ($taxes);
+
+    }
+
 }

@@ -21,5 +21,6 @@ class Invoice extends Model
     }
     public function operationOrder(){
         return $this->hasOne('App\OperationOrder');
-	}
+    }
+    
 }

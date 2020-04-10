@@ -78,7 +78,9 @@ class CustomInvoiceController extends Controller
      */
     public function show($id)
     {
-        //
+        $invoice=CustomInvoice::find($id);
+        return view('admin.customInvoice.show', compact('invoice'));
+
     }
 
     /**
@@ -89,7 +91,10 @@ class CustomInvoiceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $invoice=CustomInvoice::find($id);
+        $allServices = Service::all();
+
+        return view('admin.customInvoice.edit', compact('invoice','allServices'));
     }
 
     /**
@@ -101,7 +106,29 @@ class CustomInvoiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $invoice = CustomInvoice::find($id);
+        $invoice->update($request->only(
+            [
+                'client_name'
+            ]
+        ));
+        $invoice->save();
+        $items = $invoice->items;
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $price =   $request->get('price');
+        foreach ($request->get('services') as $id => $service) {
+            $invoiceItem = new CustomInvoiceItem();
+            $invoiceItem->service_id = $service;
+            $carService = Service::find($service);
+            $invoiceItem->invoice_id = $invoice->invoice_id;
+            $invoiceItem->client_cost = $price[$id];
+            $invoiceItem->price_cost = $carService->service_cost;
+            $invoiceItem->save();
+        }
+        return redirect('admin/customInvoice');
+
     }
 
     /**
@@ -112,6 +139,13 @@ class CustomInvoiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $invoice = CustomInvoice::find($id);
+        $items = $invoice->items;
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $invoice->delete();
+        return back();
+
     }
 }

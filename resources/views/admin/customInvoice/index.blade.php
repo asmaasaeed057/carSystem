@@ -28,6 +28,13 @@
             'autoWidth': false
         })
     })
+    $(document).ready(function() {
+    $(".delete").click(function(event) {
+      if (!confirm('هل انت متاكد ؟'))
+        event.preventDefault();
+    });
+  });
+
 </script>
 @endsection
 
@@ -88,7 +95,7 @@
                                         <form class="delete" action="{{route('customInvoice.destroy' ,$invoice->invoice_id)}}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger" type="submit">Delete</button>
+                                        <button class="btn btn-danger delete" type="submit">Delete</button>
 
                                         </form>
                                     </td>
@@ -112,13 +119,4 @@
     </section>
     <!-- /.content -->
 </div>
-
-<script>
-    $(document).ready(function() {
-        $(".delete").click(function(event) {
-            if (!confirm('هل انت متاكد ؟'))
-                event.preventDefault();
-        });
-    });
-</script>
 @endsection
