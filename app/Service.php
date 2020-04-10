@@ -17,6 +17,11 @@ class Service extends Model
     {
         return $this->hasMany('App\ReparCardItem','service_id');
     }
+    public function customItems()
+    {
+        return $this->hasMany('App\CustomInvoiceItem','service_id');
+    }
 
 
+    
 }

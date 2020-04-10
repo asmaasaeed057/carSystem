@@ -195,8 +195,12 @@
                   <td><a class="btn btn-success approve"href="{{route('approved' ,$value->id)}}"><i class="fas fa-search"></i> Approve</a></td>
                 @endif
                 @if($value->status =="accepted")
+                
+                @if($value->invoice)
+                @else
 
                   <td><a class="inv btn btn-primary" href="{{route('invoice',$value->id)}}"><i class="fas fa-search"></i> Add Invoice</a></td>
+                  @endif
                   @endif
 
 

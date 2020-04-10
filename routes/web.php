@@ -89,6 +89,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::get('invoiceShow/{invId}', 'ReprairCardController@invoiceShow')->name('invoiceShow');
         Route::get('invoicePayment/{invId}', 'ReprairCardController@invoicePayment')->name('invoicePayment');
         Route::post('invoicePayment', 'ReprairCardController@paymentStore')->name('payment.store');
+        Route::resource('customInvoice', 'CustomInvoiceController');
 
          
     });

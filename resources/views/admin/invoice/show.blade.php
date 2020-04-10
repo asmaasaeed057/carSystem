@@ -242,6 +242,48 @@
       <!-- /.col -->
     </div>
 
+    <div class="box-body">
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">Invoice Payment</h3>
+
+                <table class="table table-striped table-dark">
+                    <thead>
+                      <tr>
+                      <th scope="col">Number</th>
+
+                        <th scope="col">date</th>
+                        <th scope="row">Amount</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach($invoice->invoicePayment as $payment )
+
+                      <tr>
+                        <td>{{$payment->invoice_payment_number}}</td>
+                        <td>{{$payment->invoice_payment_date}}</td>
+                        <td>{{$payment->invoice_payment_amount}}</td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
+            </div>
+                <!-- /.box-header -->
+        </div>
+              <!-- /.box-body -->
+    </div>
+
+
+
+
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+
  
     <!-- /.row -->
   </section>
