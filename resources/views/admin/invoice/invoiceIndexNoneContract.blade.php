@@ -66,6 +66,7 @@
                                 <tr>
                                     <th>Invoice Number</th>
                                     <th>Client Name</th>
+
                                     <th>Date</th>
                                     <th>Total</th>
                                     <th>Show</th>
@@ -77,8 +78,7 @@
                             <tbody>
 
                                 @foreach($invoices as $invoice)
-                                @if($invoice->repairCard->client->client_type == "contract")
-
+                                @if($invoice->repairCard->client->client_type == "noneContract")
                                 <tr>
                                     <td>{{$invoice->invoice_number}}</td>
                                     <td>{{$invoice->repairCard->client->fullName}}</td>
@@ -87,6 +87,9 @@
                                     <td>{{$invoice->invoice_total}}</td>
                                     <td><a href="{{route('invoiceShow' ,$invoice->invoice_id)}}" class="btn btn-success">Show</a></td>
                                     <td><a href="{{route('invoicePayment' ,$invoice->invoice_id)}}" class="btn btn-primary">Invoice Payment</a></td>
+
+
+
                                 </tr>
                                 @endif
                                 @endforeach

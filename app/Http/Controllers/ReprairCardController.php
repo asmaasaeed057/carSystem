@@ -229,6 +229,12 @@ class ReprairCardController extends Controller
         return view('admin.repairCard.index', compact('repairCards', 'clients', 'categories', 'categoryId', 'dateto', 'datefrom', 'clientId', 'platNo', 'cardNo', 'status'));
     }
 
+    public function invoiceIndexNoneContract(){
+        $invoices = Invoice::all();
+        return view('admin.invoice.invoiceIndexNoneContract', compact('invoices'));
+    }
+    
+
     /**
      * Show the form for creating a new resource.
      *

@@ -198,6 +198,8 @@
                 @endif
                 @if($value->client->client_type == 'noneContract')
                 <td><a class="payment btn btn-primary" href="{{route('invoicePayment',$value->invoice->invoice_id)}}"><i class="fas fa-search"></i>Invoice Payment</a></td>
+                <td><a class="btn btn-primary" href="{{route('noneContractClient.editNoneContractClient' ,$value->id)}}"><i class="fas fa-search"></i> EDIT</a></td>
+
                 @endif
                 @endif
 

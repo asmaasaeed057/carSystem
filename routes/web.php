@@ -49,6 +49,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::get('car/create/{clientid}', 'CarController@createCar')->name('car.createCar');
         Route::get('repairCard/create/{cid}', 'ReprairCardController@createRepairCard')->name('repairCard.createRepairCard');
 
+        Route::get('invoiceContractReport', 'InvoiceContractReportController@index')->name('invoiceContractReport');
+        Route::get('invoiceContractSearch', 'InvoiceContractReportController@search')->name('invoiceContractSearch');
+
+        Route::get('invoiceNoneContractReport', 'InvoiceContractReportController@indexNoneContract')->name('invoiceNoneContractReport');
+        Route::get('invoiceNoneContractSearch', 'InvoiceContractReportController@searchNoneContract')->name('invoiceNoneContractSearch');
 
         Route::post('get_catagray', 'CarController@get_catagray')->name('get_catagray');
         Route::post('get_car', 'ReprairCardController@getCars')->name('getCars');
@@ -87,6 +92,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::get('operationOrder/{oid}', 'OperationOrderController@show')->name('operationOrder.show');
         Route::get('invoice', 'ReprairCardController@invoiceIndex')->name('invoiceIndex');
         Route::get('invoiceShow/{invId}', 'ReprairCardController@invoiceShow')->name('invoiceShow');
+        Route::get('invoiceNoneContract', 'ReprairCardController@invoiceIndexNoneContract')->name('invoiceIndexNoneContract');
+
+        
+        
         Route::get('invoicePayment/{invId}', 'ReprairCardController@invoicePayment')->name('invoicePayment');
         Route::post('invoicePayment', 'ReprairCardController@paymentStore')->name('payment.store');
         Route::resource('customInvoice', 'CustomInvoiceController');

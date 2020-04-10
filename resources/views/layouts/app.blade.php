@@ -353,6 +353,8 @@
                             <li><a href="{{ route('expenseTaxReport')}}"><i class="fa fa-circle-o"></i> Expense Tax Report</a></li>
                             <li><a href="{{ route('ClientReport')}}"><i class="fa fa-circle-o"></i>Client Report</a></li>
                             <li><a href="{{ route('cardTaxesReport')}}"><i class="fa fa-circle-o"></i> Card Tax Report</a></li>
+                            <li><a href="{{ route('invoiceContractReport')}}"><i class="fa fa-circle-o"></i> Invoice Contract Report</a></li>
+                            <li><a href="{{ route('invoiceNoneContractReport')}}"><i class="fa fa-circle-o"></i> Invoice None Contract Report</a></li>
 
                             
                             <li><a href="{{ url('admin/FilterIncome')}}"><i class="fa fa-circle-o"></i> {{ trans('site.income')}}</a></li>
@@ -407,7 +409,20 @@
 
                         </ul>
                     </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-pie-chart"></i>
+                            <span>Invoices</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ route('invoiceIndex')}}"><i class="fa fa-circle-o"></i>show Invoices Contract</a></li>
+                            <li><a href="{{ route('invoiceIndexNoneContract')}}"><i class="fa fa-circle-o"></i> show Invoices None Contract</a></li>
 
+                        </ul>
+                    </li>
                     <!-- <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
