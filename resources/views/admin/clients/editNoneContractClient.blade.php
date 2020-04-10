@@ -245,7 +245,7 @@
                         <label>{{__('site.model')}}</label>
                         <select class="form-control select2" name="model" style="width: 100%;">
                           @for($i=2025;$i>=1980;$i--)
-                          <option value="{{$repairCard->car->model}}" {{$repairCard->car->model == $i ? "selected" : ""}}> {{$i}}</option>
+                          <option value="{{$i}}" {{$repairCard->car->model == $i ? "selected" : ""}}> {{$i}}</option>
                           @endfor
                         </select>
                       </div>

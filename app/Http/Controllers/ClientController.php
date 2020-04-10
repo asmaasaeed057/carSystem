@@ -235,6 +235,8 @@ class ClientController extends Controller
         $client->save();
 
         $car = Car::find($repairCard->car->id);
+        // dd($request);
+
         $car->update($request->only(
             [
                 'model', 'car_structure_number', 'platNo', 'car_color',
