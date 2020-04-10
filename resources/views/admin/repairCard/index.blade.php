@@ -39,7 +39,10 @@
       if (!confirm('هل انت متاكد من انشاء فاتورة؟'))
         event.preventDefault();
     });
-
+    $(".payment").click(function(event) {
+      if (!confirm('هل انت متاكد من سداد الفاتورة؟'))
+        event.preventDefault();
+    });
 
   });
 </script>
@@ -187,29 +190,23 @@
                 <td>{{$value->status}}</td>
                 <td>{{$value->created_at}}</td>
                 <td><a class="btn btn-danger" href="{{route('reprairCard.show' ,$value->id)}}"><i class="fas fa-search"></i> SHOW</a></td>
-                @if($value->status =="denied" || $value->status =="accepted")
-                @else
-                @if($value->client->client_type == "contract")
-                <td><a class="btn btn-primary" href="{{route('reprairCard.edit' ,$value->id)}}"><i class="fas fa-search"></i> EDIT</a></td>
-                @else
-                <td><a class="btn btn-primary" href="{{route('noneContractClient.editNoneContractClient' ,$value->id)}}"><i class="fas fa-search"></i> EDIT</a></td>
+
+
+                @if($value->status == 'accepted')
+                @if(!$value->invoice)
+                <td><a class="inv btn btn-primary" href="{{route('invoice',$value->id)}}"><i class="fas fa-search"></i> Add Invoice</a></td>
                 @endif
-                @if($value->status =="accepted")
-                
-                @if($value->invoice)
-                @elseif($value->client->client_type == 'noneContract')
-                <td><a class="inv btn btn-primary" href="{{route('invoicePayment',$value->invoice->invoice_id)}}"><i class="fas fa-search"></i>Invoice Payment</a></td>
+                @if($value->client->client_type == 'noneContract')
+                <td><a class="payment btn btn-primary" href="{{route('invoicePayment',$value->invoice->invoice_id)}}"><i class="fas fa-search"></i>Invoice Payment</a></td>
+                @endif
+                @endif
 
-                @else
+                @if($value->status == 'panding')
 
-                  <td><a class="inv btn btn-primary" href="{{route('invoice',$value->id)}}"><i class="fas fa-search"></i> Add Invoice</a></td>
-                  @endif
-                  @endif
-
+                <td><a class="btn btn-primary" href="{{route('reprairCard.edit' ,$value->id)}}"><i class="fas fa-search"></i> EDIT</a></td>
                 <td><a class="btn btn-warning denied" href="{{route('denied' ,$value->id)}}"><i class="fas fa-search"></i> denied</a></td>
                 <td><a class="btn btn-success approve" href="{{route('approved' ,$value->id)}}"><i class="fas fa-search"></i> Approve</a></td>
                 @endif
-
 
               </tr>
               @endforeach

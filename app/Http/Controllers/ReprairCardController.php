@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\ReprairCard;
 use App\RepairCardItem;
-use App\CarCatogray;
+use App\CarCategory;
 use App\Account;
 use App\Car;
 use Illuminate\Http\Request;
@@ -389,7 +389,7 @@ class ReprairCardController extends Controller
 
         $output = '<option value="">' . trans("site.options") . '</option>';
         foreach ($data as $row) {
-            $output .= '<option value="' . $row->id . '">' . CarCatogray::find($row->car_brand_category_id)->brand->name_en . "-" . CarCatogray::find($row->car_brand_category_id)->name_en . "-" . $row->model . "-" . $row->platNo . '</option>';
+            $output .= '<option value="' . $row->id . '">' . CarCategory::find($row->car_brand_category_id)->brand->name_en . "-" . CarCategory::find($row->car_brand_category_id)->name_en . "-" . $row->model . "-" . $row->platNo . '</option>';
         }
 
         echo $output;
