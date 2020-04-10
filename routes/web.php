@@ -59,7 +59,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         route::get('clientDetails/{id}', 'ClientController@clientDetails');
         Route::resource('permission', 'AdminGroupController');
         Route::resource('company', 'CompanyController');
-        Route::resource('carCatogray', 'CarCatograyController');
+        Route::resource('carCategory', 'carCategoryController');
         Route::resource('Accounting', 'AccountController');
         Route::resource('carType', 'CarTypeController');
         Route::resource('cost', 'CostController');
@@ -90,6 +90,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::get('invoicePayment/{invId}', 'ReprairCardController@invoicePayment')->name('invoicePayment');
         Route::post('invoicePayment', 'ReprairCardController@paymentStore')->name('payment.store');
 
+        Route::get('noneContractClient/create', 'ClientController@createNoneContractClient')->name('noneContractClient.createNoneContractClient');
+        Route::post('noneContractClient', 'ClientController@storeNoneContractClient')->name('noneContractClient.storeNoneContractClient');
+        Route::get('noneContractClient', 'ClientController@indexNoneContract')->name('noneContractClient.indexNoneContract');
+
+        Route::get('noneContractClient/{cid}/edit', 'ClientController@editNoneContractClient')->name('noneContractClient.editNoneContractClient');
+        Route::put('noneContractClient/{cid}', 'ClientController@updateNoneContractClient')->name('noneContractClient.updateNoneContractClient');
+
+        
          
     });
 });

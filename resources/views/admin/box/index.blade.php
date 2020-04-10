@@ -75,7 +75,7 @@
                <tr>
                 <td>{{$value->id}}</td>
                   <td>{{$value->client->fullName}}</td>    <!-- fromCarTable -->
-                  <td> {{$value->car->carCatogray->name_ar}} </td> <!-- /// -->
+                  <td> {{$value->car->carCategory->name_ar}} </td> <!-- /// -->
                   <td>
                     <a class="btn btn-app" style="background-color: #398439 !important;color: #fff!important;height: auto;padding: 10px" href="{{route('Accounting.edit' ,$value->id)}}"><i class="fas fa-money" style="margin-right: 10px;"></i>pay</a>
                   </td>

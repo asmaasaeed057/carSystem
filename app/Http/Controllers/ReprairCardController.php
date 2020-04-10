@@ -217,17 +217,16 @@ class ReprairCardController extends Controller
         $clients = Client::get();
 
         $repairCards = ReprairCard::get();
-        $categories= CarBrandCategory::get();
-        $categoryId="";
-        $date="";
-        $clientId="";
-        $platNo="";
-        $cardNo="";
-        $status="";
-        $datefrom="";
-        $dateto="";
-        return view('admin.repairCard.index',compact('repairCards','clients','categories','categoryId','dateto','datefrom','clientId','platNo','cardNo','status'));
-
+        $categories = CarBrandCategory::get();
+        $categoryId = "";
+        $date = "";
+        $clientId = "";
+        $platNo = "";
+        $cardNo = "";
+        $status = "";
+        $datefrom = "";
+        $dateto = "";
+        return view('admin.repairCard.index', compact('repairCards', 'clients', 'categories', 'categoryId', 'dateto', 'datefrom', 'clientId', 'platNo', 'cardNo', 'status'));
     }
 
     /**
@@ -238,22 +237,19 @@ class ReprairCardController extends Controller
     public function create()
     {
         //
-        $clientId= '';
+        $clientId = '';
         $clients = Client::get();
-        if(ReprairCard::orderBy('id', 'desc')->first())
-        {
-        $number=ReprairCard::orderBy('id', 'desc')->first()->card_number;
-        }
-        else
-        {
-            $number=0;
+        if (ReprairCard::orderBy('id', 'desc')->first()) {
+            $number = ReprairCard::orderBy('id', 'desc')->first()->card_number;
+        } else {
+            $number = 0;
         }
 
         $cars = Car::get();
         $services = Service::get();
-        return view('admin.repairCard.create', compact('clients', 'cars', 'services','clientId','number'));
+        return view('admin.repairCard.create', compact('clients', 'cars', 'services', 'clientId', 'number'));
     }
-    
+
     public function createRepairCard($clientId)
     {
         // dd($clientId);
@@ -261,9 +257,9 @@ class ReprairCardController extends Controller
         $cars = Car::get();
         $services = Service::get();
         $client = Client::find($clientId);
-        $clientCars = Car::all()->where('client_id' , '=' , $client->id);
-// dd($clientCars);
-        return view('admin.repairCard.create', compact('clients', 'cars', 'services','client', 'clientId' , 'clientCars'));
+        $clientCars = Car::all()->where('client_id', '=', $client->id);
+        // dd($clientCars);
+        return view('admin.repairCard.create', compact('clients', 'cars', 'services', 'client', 'clientId', 'clientCars'));
     }
 
     /**
@@ -344,6 +340,12 @@ class ReprairCardController extends Controller
     public function update(Request $request, $id)
     {
         $card = ReprairCard::find($id);
+        $card->update($request->only(
+            [
+                'checkReprort', 'client_id','car_id'
+            ]
+        ));
+        $card->save();
         $items = $card->items;
         foreach ($items as $item) {
             $item->delete();
@@ -449,8 +451,8 @@ class ReprairCardController extends Controller
 
         if ($datefrom) {
             $c->whereDate('created_at', '>=', $datefrom)
-            ->whereDate('created_at', '<=', $dateto)
-            ->get();
+                ->whereDate('created_at', '<=', $dateto)
+                ->get();
         }
         $cards = $c->get();
         return view('admin.repairCard.cardTaxesReport', compact('cards', 'datefrom', 'dateto'));
@@ -459,136 +461,102 @@ class ReprairCardController extends Controller
     public function cardSearch()
     {
         $clients = Client::get();
-        $categories= CarBrandCategory::get();
+        $categories = CarBrandCategory::get();
 
         $clientId = $_GET['client_id'];
         $datefrom = $_GET['date_from'];
         $dateto = $_GET['date_to'];
         $categoryId = $_GET['car_brand_category_id'];
-        $platNo=$_GET['plat_number'];
-        $cardNo=$_GET['card_number'];
-        $status=$_GET['status'];
-        
+        $platNo = $_GET['plat_number'];
+        $cardNo = $_GET['card_number'];
+        $status = $_GET['status'];
+
         $c = ReprairCard::select("*");
-        if ($categoryId)
-        {
+        if ($categoryId) {
             $carIds = Car::where('car_brand_category_id', $categoryId)->pluck('id');
             $c->whereIn('car_id', $carIds);
         }
         if ($datefrom) {
             $c->whereDate('created_at', '>=', $datefrom)
-            ->whereDate('created_at', '<=', $dateto)
-            ->get();
-
+                ->whereDate('created_at', '<=', $dateto)
+                ->get();
         }
-        if ($clientId)
-        {
+        if ($clientId) {
             $c->where('client_id', $clientId);
         }
-        if ($platNo)
-        {
+        if ($platNo) {
             $car = Car::where('platNo', $platNo)->first();
-            if($car)
-            {
-            $c->where('car_id', $car->id);
+            if ($car) {
+                $c->where('car_id', $car->id);
             }
-
         }
-        if($cardNo)
-        {
+        if ($cardNo) {
             $c->where('card_number', $cardNo);
-
         }
-        if($status)
-        {
+        if ($status) {
             $c->where('status', $status);
-
         }
         $repairCards = $c->get();
 
-        return view('admin.repairCard.index',compact('repairCards','clients','categories','categoryId','dateto','datefrom','clientId','platNo','cardNo','status'));
-
-
-
+        return view('admin.repairCard.index', compact('repairCards', 'clients', 'categories', 'categoryId', 'dateto', 'datefrom', 'clientId', 'platNo', 'cardNo', 'status'));
     }
     public function invoice($id)
     {
         $card = ReprairCard::find($id);
 
-        $invoice=new Invoice;
-        $invoice->invoice_number=$card->card_number;
-        $invoice->invoice_date=date('Y-m-d H:i:s');
-        $invoice->invoice_total=$card->total_with_taxes;
-        $invoice->repair_card_id=$id;
+        $invoice = new Invoice;
+        $invoice->invoice_number = $card->card_number;
+        $invoice->invoice_date = date('Y-m-d H:i:s');
+        $invoice->invoice_total = $card->total_with_taxes;
+        $invoice->repair_card_id = $id;
         $invoice->save();
-        $operationOrder=new OperationOrder;
-        $operationOrder->operation_order_number=$card->card_number;
-        $operationOrder->operation_order_date=date('Y-m-d H:i:s');
-        $operationOrder->invoice_id=$invoice->invoice_id;
+        $operationOrder = new OperationOrder;
+        $operationOrder->operation_order_number = $card->card_number;
+        $operationOrder->operation_order_date = date('Y-m-d H:i:s');
+        $operationOrder->invoice_id = $invoice->invoice_id;
         $operationOrder->save();
         return back();
-
-
-
     }
     public function invoiceIndex()
     {
-        $invoices=Invoice::all();
+        $invoices = Invoice::all();
         return view('admin.invoice.index', compact('invoices'));
-
     }
     public function invoiceShow($id)
     {
-        $invoice=Invoice::find($id);
+        $invoice = Invoice::find($id);
         return view('admin.invoice.show', compact('invoice'));
-
     }
     public function invoicePayment($id)
     {
-        $invoice=Invoice::find($id);
-        if(InvoicePayment::orderBy('invoice_payment_id', 'desc')->first())
-        {
-        $number=InvoicePayment::orderBy('invoice_payment_id', 'desc')->first()->invoice_payment_number;
+        $invoice = Invoice::find($id);
+        if (InvoicePayment::orderBy('invoice_payment_id', 'desc')->first()) {
+            $number = InvoicePayment::orderBy('invoice_payment_id', 'desc')->first()->invoice_payment_number;
+        } else {
+            $number = 0;
         }
-        else
-        {
-            $number=0;
-        }
-        $amount=$invoice->repairCard->residual_amount;
+        $amount = $invoice->repairCard->residual_amount;
 
-        return view('admin.invoice.payment', compact('invoice','id','number','amount'));
-
+        return view('admin.invoice.payment', compact('invoice', 'id', 'number', 'amount'));
     }
     public function paymentStore(Request $request)
     {
-    $amount=$request->get('invoice_payment_amount');
-    $invoiceId=$request->get('invoice_id');
-    $date=date('Y-m-d H:i:s');
-    $invoiceNo=$request->get('invoice_payment_number');
-    $residual=$request->get('residual');
-    if($amount<=$residual)
-    {
-    $payment=new InvoicePayment();
-    $payment->invoice_payment_amount=$amount;
-    $payment->invoice_id=$invoiceId;
-    $payment->invoice_payment_date=$date;
-    $payment->invoice_payment_number=$invoiceNo;
-    $payment->save();
+        $amount = $request->get('invoice_payment_amount');
+        $invoiceId = $request->get('invoice_id');
+        $date = date('Y-m-d H:i:s');
+        $invoiceNo = $request->get('invoice_payment_number');
+        $residual = $request->get('residual');
+        if ($amount <= $residual) {
+            $payment = new InvoicePayment();
+            $payment->invoice_payment_amount = $amount;
+            $payment->invoice_id = $invoiceId;
+            $payment->invoice_payment_date = $date;
+            $payment->invoice_payment_number = $invoiceNo;
+            $payment->save();
+        } else {
+            return back()->with('error', 'المبلغ المسدد غير صحيح');
+        }
+        $invoices = Invoice::all();
+        return view('admin.invoice.index', compact('invoices'));
     }
-    else{
-        return back()->with('error','المبلغ المسدد غير صحيح');
-
-
-    }
-    $invoices=Invoice::all();
-    return view('admin.invoice.index', compact('invoices'));
-
-
-
-    
-
-    }
-
-    
-    
 }

@@ -30,9 +30,9 @@ class ReprairCard extends Model
 		return $this->HasOne('App\Car','id','car_id');
     }
     
-    public function carCatogray()
+    public function carCategory()
 	{
-		return $this->HasOne('App\CarCatogray','id','car_id');
+		return $this->HasOne('App\carCategory','id','car_id');
     }
     
     public function company()

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Client;
 use App\ReprairCard;
-use App\CarCatogray;
+use App\carCategory;
 use App\Account;
 use Illuminate\Http\Request;
 use App\ReceiptVoucher;

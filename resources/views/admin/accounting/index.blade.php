@@ -77,7 +77,7 @@
                <tr>
                   
                   <td>{{$value->client->fullName}}</td> 
-                  <td>{{$value->car->carCatogray->name_ar}}</td> 
+                  <td>{{$value->car->carCategory->name_ar}}</td> 
                   <td>{{$value->car->platNo}}</td>
                   <td></td>
                   <td> {{$value->reprairCard->checkReprort}} </td> <!-- /// -->

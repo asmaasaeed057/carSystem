@@ -13,12 +13,16 @@ use App\Http\Requests\Client\StoreClientRequest;
 use App\Role;
 use App\Custom;
 use App\RepairCardItem;
+use App\Service;
 use Auth;
-use App\Mail\MailNotify;
-
+use App\Invoice;
+use App\OperationOrder;
+use App\InvoicePayment;
+use App\CarBrandCategory;
+use App\CarType;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailable;
-
+use PhpParser\Node\Expr\New_;
 
 class ClientController extends Controller
 {
@@ -122,9 +126,155 @@ class ClientController extends Controller
         ]);
     }
 
+    public function createNoneContractClient()
+    {
+
+        $carCategories = CarBrandCategory::all();
+        $carTypes = CarType::all();
+        if (ReprairCard::orderBy('id', 'desc')->first()) {
+            $number = ReprairCard::orderBy('id', 'desc')->first()->card_number;
+        } else {
+            $number = 0;
+        }
+        return view('admin.clients.createNoneContract', [
+            'carCategories' => $carCategories,
+            'carTypes' => $carTypes,
+            'number' => $number
+        ]);
+    }
+
+    public function storeNoneContractClient(Request $request)
+    {
+
+        $request->validate([
+            'fullName' => 'required ',
+            'phone' => 'required',
+        ]);
+        // Client::create($request->all());
+        $client = new Client();
+        $client->fullName = $request->get('fullName');
+        $client->phone = $request->get('phone');
+        $client->client_type = 'noneContract';
+        $client->save();
+
+
+        $car = new Car();
+        $car->model = $request->get('model');
+        $car->platNo = $request->get('platNo');
+        $car->car_structure_number = $request->get('car_structure_number');
+        $car->client_id = $client->id;
+        $car->carType_id = $request->get('carType_id');
+        $car->car_brand_category_id = $request->get('car_brand_category_id');
+        $car->car_color = $request->get('car_color');
+        $car->save();
+
+        $repairCard = new ReprairCard();
+        $repairCard->checkReprort = $request->get('checkReprort');
+        $repairCard->card_taxes = $request->get('card_taxes');
+        $repairCard->card_number = $request->get('card_number');
+        $repairCard->client_id = $client->id;
+        $repairCard->car_id = $car->id;
+        $repairCard->status = 'accepted';
+        $repairCard->save();
+
+        $price =   $request->get('price');
+        foreach ($request->get('services') as $id => $service) {
+            if ($service) {
+                $repairCardItem = new RepairCardItem();
+                $repairCardItem->service_id = $service;
+                $carService = Service::find($service);
+                $repairCardItem->card_id = $repairCard->id;
+                $repairCardItem->service_client_cost = $price[$id];
+                $repairCardItem->service_cost = $carService->service_cost;
+                $repairCardItem->save();
+            }
+        }
+
+        $invoice = new Invoice;
+        $invoice->invoice_number = $repairCard->card_number;
+        $invoice->invoice_date = date('Y-m-d H:i:s');
+        $invoice->invoice_total = $repairCard->total_with_taxes;
+        $invoice->repair_card_id = $repairCard->id;
+        $invoice->save();
+        $operationOrder = new OperationOrder;
+        $operationOrder->operation_order_number = $repairCard->card_number;
+        $operationOrder->operation_order_date = date('Y-m-d H:i:s');
+        $operationOrder->invoice_id = $invoice->invoice_id;
+        $operationOrder->save();
+
+        session()->flash('success', "Client created successfully");
+        return redirect(route('noneContractClient.indexNoneContract'));
+    }
+
+    public function indexNoneContract()
+    {
+        $clients = Client::all();
+        return view('admin.clients.indexNoneContract', compact('clients'));
+    }
+
+    public function editNoneContractClient($id)
+    {
+        $repairCard = ReprairCard::find($id);
+
+        $carCategories = CarBrandCategory::all();
+        $carTypes = CarType::all();
+        $allServices = Service::all();
+        return view('admin.clients.editNoneContractClient', compact('repairCard', 'carCategories', 'carTypes', 'allServices'));
+    }
+    public function updateNoneContractClient(Request $request, $id)
+    {
+        $repairCard = ReprairCard::find($id);
+      
+
+        $client = Client::find($repairCard->client->id);
+        $client->update($request->only(
+            [
+                'fullName', 'phone'
+            ]
+        ));
+        $client->save();
+
+        $car = Car::find($repairCard->car->id);
+        $car->update($request->only(
+            [
+                'model', 'car_structure_number', 'platNo', 'car_color',
+                'carType_id', 'car_brand_category_id'
+            ]
+        ));
+        $car->client_id = $client->id;
+        $car->save();
+
+        $items = $repairCard->items;
+        foreach ($items as $item) {
+            $item->delete();
+        }
+        $price =   $request->get('price');
+        foreach ($request->get('services') as $id => $service) {
+            $repairCardItem = new RepairCardItem();
+            $repairCardItem->service_id = $service;
+            $carService = Service::find($service);
+            $repairCardItem->card_id = $repairCard->id;
+            $repairCardItem->service_client_cost = $price[$id];
+            $repairCardItem->service_cost = $carService->service_cost;
+            $repairCardItem->save();
+        }
+
+
+        $repairCard->update($request->only(
+            [
+                'checkReprort'
+            ]
+        ));
+        $repairCard->client_id = $client->id;
+        $repairCard->car_id = $car->id;
+        $repairCard->save();
+
+        session()->flash('success', trans('admin.added'));
+        return redirect('admin/reprairCard');
+    }
     // public function mail($id)
     // {
-    
+
     //     $client = Client::find($id);
 
     //     Mail::to($client->email)->send(new SendMailable($client));

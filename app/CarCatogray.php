@@ -4,7 +4,7 @@ namespace App;
 use App\Company;
 use Illuminate\Database\Eloquent\Model;
 
-class CarCatogray extends Model
+class carCategory extends Model
 {
     // 
     protected $table = 'car_brand_category';

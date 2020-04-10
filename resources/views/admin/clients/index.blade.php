@@ -59,7 +59,7 @@
             </div>
           </div>
           <!-- /.box-header -->
-      
+
           <div class="box-body">
 
             <form action="{{ route('clientSearchIndex')}}" method="GET">
@@ -76,8 +76,8 @@
               <input type="submit" class="btn-primary" value="search">
             </form>
           </div>
-          </div>
-          <div class="box box-primary">
+        </div>
+        <div class="box box-primary">
 
           <div class="box-header">
             <a href="{{route('client.create')}}" style="margin-top: 10px;" class="btn btn-success">Add Client </a>
@@ -103,6 +103,7 @@
               <tbody>
 
                 @foreach($clients as $client)
+                @if($client->client_type == 'contract')
                 <tr>
                   <td>{{$client->fullName}}</td>
                   <td>{{$client->phone}}</td>
@@ -123,13 +124,14 @@
 
 
                 </tr>
+                @endif
                 @endforeach
               </tbody>
 
             </table>
           </div>
-          </div>
-          <!-- /.box-body -->
+        </div>
+        <!-- /.box-body -->
         <!-- /.box -->
       </div>
       <!-- /.col -->

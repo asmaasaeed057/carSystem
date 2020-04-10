@@ -96,7 +96,7 @@
                     <th>Client Contact :</th>
                     <td>{{$value->client->phone}}</td>
                     <th>Vehicle Type :</th>
-                    <td>{{$value->car->carCatogray->name_en}}</td>
+                    <td>{{$value->car->carCategory->name_en}}</td>
                     <th>Date :</th>
                     <td>2020-10-02</td>
                   </tr>
