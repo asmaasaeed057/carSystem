@@ -13,11 +13,7 @@
 @endsection
 
 @section('js')
-<style>
-  select {
-    width: 200px;
-  }
-</style>
+
 <script>
   $(function() {
     $('#example1').DataTable()
@@ -159,7 +155,6 @@
   </section>
   <!-- Main content -->
   <section class="content">
-    @include('layouts.error')
 
     <div class="row">
       <div class="col-xs-12">
@@ -176,83 +171,126 @@
           <!-- /.box-header -->
           <div class="box-body">
             <div class="box box-warning">
-              <div class="box-header with-border">
-                <h3 class="box-title">{{ trans('site.addRepairCar') }}</h3>
-              </div>
+
               <!-- /.box-header -->
               <div class="box-body">
-                <form action="{{ route('reprairCard.store')}}" method="POST">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Client Info</h3>
+                </div>
+                <form action="{{ route('noneContractClient.storeNoneContractClient')}}" method="POST">
                   @csrf
                   @method('POST')
 
-                  <div class="row">
-                    @if($clientId)
+                  <!-- text input -->
+                  <div class="box-body">
+
+                    <div class="form-group">
+                      <label>{{ trans('site.clientName') }}</label>
+                      <input type="text" name="fullName" class="form-control" placeholder="{{ trans('site.hintClientName') }}">
+                      @if ($errors->get('fullName'))
+                      <span for="textfield" class="help-block error" style="color:firebrick">
+                        @foreach ($errors->get('fullName') as $fullName)
+                        {{ $fullName }}
+                        @endforeach
+                      </span>
+                      @endif
+                    </div>
+
+                    <div class="form-group">
+                      <label>{{ trans('site.phone') }}</label>
+                      <input type="text" name="phone" class="form-control" placeholder="{{ trans('site.hintPhone') }}">
+                      @if ($errors->get('phone'))
+                      <span for="textfield" class="help-block error" style="color:firebrick">
+                        @foreach ($errors->get('phone') as $phone)
+                        {{ $phone }}
+                        @endforeach
+                      </span>
+                      @endif
+                    </div>
 
 
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Client</label>
-                        <input type='text' class="form-control" value="{{$client->fullName}}" disabled>
-                        <input type='text' value="{{$client->id}}" name="client_id" hidden>
-
-                      </div>
+                    <div class="hidden">
+                      <input size="60" maxlength="120" name="client_type" value="noneContract" id="" type="text" style="height:20px; width: 220px; float: right;" />
+                    </div>
+                  </div>
+                  <!--car ----------------------------------------------------------------------------->
+                  <div class="box-body">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Car Info</h3>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Cars</label>
-                        <select name="car_id" id="cars" class="form-control clientIdselect2" data-dependent="car">
-                          @foreach($clientCars as $car)
-                          <option value="{{$car->id}}">Car Category : {{$car->carCategory->name_en}} -Model : {{$car->model}} -Plate No: {{$car->platNo}}</option>
+                        <label>Brand Category</label>
+                        <select class="form-control select2" name="car_brand_category_id" id="carCat" style="width: 100%;">
+                          <option>{{ __("site.options") }}</option>
+                          @foreach($carCategories as $category)
+                          <option value="{{$category->id}}">{{$category->name_ar}}</option>
                           @endforeach
                         </select>
                       </div>
                     </div>
 
-                    @else
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Client</label>
-                        <select class="form-control" name="client_id" id="clients" style="width: 100%;">
-                          <option value="">Select</option>
-                          @foreach($clients as $value)
-                          <option value="{{$value->id}}">{{$value->fullName}}</option>
+                        <label>Type</label>
+                        <select class="form-control select2" name="carType_id" id="CarType" style="width: 100%;">
+                          @foreach($carTypes as $type)
+                          <option value="{{$type->id}}">{{$type->name_ar}}</option>
                           @endforeach
                         </select>
                       </div>
                     </div>
+
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Cars</label>
-                        <select name="car_id" id="cars" class="form-control clientIdselect2" data-dependent="car">
-                          <option value="">Select One</option>
+                        <label>{{__('site.model')}}</label>
+                        <select class="form-control select2" name="model" style="width: 100%;">
+                          @for($i=2025;$i>=1980;$i--)
+                          <option value="{{$i}}">{{$i}}</option>
+                          @endfor
                         </select>
                       </div>
                     </div>
-                    @endif
 
-
-                    <!-- <div class="col-md-6">
+                    <div class="col-md-6">
                       <div class="form-group">
-                        <label>Cars</label>
-                        <select name="car_id" id="cars" class="form-control clientIdselect2" data-dependent="car">
-                          <option value="">Select One</option>
-                        </select>
+                        <label>Plate number</label>
+                        <input class="form-control " type="text" name="platNo" id="">
                       </div>
-                    </div> -->
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Structure Number</label>
+                        <input class="form-control " type="text" name="car_structure_number" id="">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Color</label>
+                        <input class="form-control " type="text" name="car_color" id="">
+                      </div>
+                    </div>
+                  </div>
+                  <!-- repair card--------------------------------------------------------------------------->
+                  <div class="box-body">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Repair Card Info</h3>
+                    </div>
+
 
                     <div class="col-md-12">
                       <label for="">
-                        <h4>{{ trans('site.addRepairCheck') }}</h4>
+                        <h4>Check Report For Car</h4>
                       </label>
                       <textarea class="form-control" name="checkReprort" id="" cols="30" rows="10"></textarea>
                     </div>
+                    <?php $taxes = 5 ?>
+
+                    <input type="text" value={{$taxes}} name="card_taxes" hidden>
+                    <input type="text" value={{$number+1}} name="card_number" hidden>
                   </div>
 
-
-                  <?php $taxes = 5 ?>
-
-                  <input type="text" value={{$taxes}} name="card_taxes" hidden>
-                  <input type="text" value={{$number+1}} name="card_number" hidden>
+                  <!-- repair card items--------------------------------------------------------------------------->
 
 
                   <div class="container">
@@ -310,9 +348,11 @@
                     </table>
                   </div>
 
-              
 
-                  <input type="submit" class="btn btn-info" value="{{__('site.add')}}">
+                  <!-- repair card items--------------------------------------------------------------------------->
+
+                  <input type="submit" class="btn-primary" value="{{ trans('site.add') }}">
+
                 </form>
               </div>
               <!-- /.box-body -->

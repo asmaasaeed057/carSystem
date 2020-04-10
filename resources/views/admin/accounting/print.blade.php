@@ -69,7 +69,7 @@
                     <th>Client Contact :</th>
                     <td>{{$value->client->phone}}</td>
                     <th>Vehicle Type :</th>
-                    <td>{{$value->car->carCatogray->name_en}}</td>
+                    <td>{{$value->car->carCategory->name_en}}</td>
                     <th>Date :</th>
                     <td>2020-10-02</td>
                   </tr>
@@ -113,7 +113,7 @@
                <tr>
                 <td>{{$value->id}}</td>
                   <td>{{$value->client->fullName}}</td>    <!-- fromCarTable -->
-                  <td> {{$value->car->carCatogray->name_ar}} </td> <!-- /// -->
+                  <td> {{$value->car->carCategory->name_ar}} </td> <!-- /// -->
                   <!-- <td><a href="{{route('Accounting.edit' ,$value->id)}}"><i class="fas fa-print"></i>print</a> <a href="{{route('Accounting.edit' ,$value->id)}}"><i class="fas fa-print"></i>Show</a> </td> -->
                 </tr>
                @endforeach

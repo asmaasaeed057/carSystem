@@ -138,7 +138,7 @@
 
                 @foreach($cards as $value)
                 <tr>
-                  <td>{{$value->car->carCatogray->brand->name_en}}-{{$value->car->model}}-{{$value->car->platNo}}</td> 
+                  <td>{{$value->car->carCategory->brand->name_en}}-{{$value->car->model}}-{{$value->car->platNo}}</td> 
                   <td>{{$value->total}}</td>
                   <td>{{$value->total_with_taxes}}</td>
 

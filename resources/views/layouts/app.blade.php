@@ -308,6 +308,8 @@
                         <ul class="treeview-menu">
                             <li><a href="{{ route('client.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.showClient') }}</a></li>
                             <li><a href="{{ route('client.create')}}"><i class="fa fa-circle-o"></i> {{ trans('site.addClient') }}</a></li>
+                            <!-- <li><a href="{{ route('noneContractClient.indexNoneContract')}}"><i class="fa fa-circle-o"></i> Show None Contract Client</a></li> -->
+                            <li><a href="{{ route('noneContractClient.createNoneContractClient')}}"><i class="fa fa-circle-o"></i>Create None Contract Client</a></li>                            
                         </ul>
                     </li>
                     <li class="treeview">
@@ -509,8 +511,8 @@
                             <!-- <li><span style="color:#fff">{{ trans('site.carCatogry') }}</h2>
                             </li>
                             
-                            <li><a href="{{ route('carCatogray.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.carCatogryList') }}</a></li>
-                            <li><a href="{{ route('carCatogray.create')}}"><i class="fa fa-circle-o"></i> {{ trans('site.addCarCatogry') }}</a></li>
+                            <li><a href="{{ route('carCategory.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.carCatogryList') }}</a></li>
+                            <li><a href="{{ route('carCategory.create')}}"><i class="fa fa-circle-o"></i> {{ trans('site.addCarCatogry') }}</a></li>
                             <li><span style="color:#fff">{{trans('site.company')}}</span></li>
                             <li><a href="{{ route('company.index') }}"><i class="fa fa-circle-o"></i>{{ trans('site.companyList') }}</a></li>
                             <li><a href="{{ route('company.create')}}"><i class="fa fa-circle-o"></i> {{ trans('site.addCompany') }}</a></li>

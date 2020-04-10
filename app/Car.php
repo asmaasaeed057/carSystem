@@ -29,7 +29,7 @@ class Car extends Model
     return $this->belongsTo('App\CarType', 'carType_id');
   }
 
-  public function carCatogray()
+  public function carCategory()
   {
     return $this->belongsTo('App\CarBrandCategory', 'car_brand_category_id');
   }

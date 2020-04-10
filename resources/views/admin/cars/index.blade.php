@@ -80,7 +80,7 @@
 
                 @foreach($cars as $car)
                 <tr style=>
-                  <td>{{$car->carCatogray->name_en}}</td>
+                  <td>{{$car->carCategory->name_en}}</td>
                   <td>{{$car->model}}</td>
                   <td>{{$car->client->fullName}}</td>
                   <td>{{$car->carType->name_en}}</td>

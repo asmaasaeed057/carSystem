@@ -93,11 +93,11 @@
                                                 <td>{{$operationOrder->invoice->repairCard->car->carType->name_en}}</td>
                                             </tr>
                                             @endif
-                                            @if($operationOrder->invoice->repairCard->carCatogray)
+                                            @if($operationOrder->invoice->repairCard->carCategory)
 
                                             <tr>
                                                 <th scope="row">Car Category</th>
-                                                <td>{{$operationOrder->invoice->repairCard->carCatogray->name_en}}</td>
+                                                <td>{{$operationOrder->invoice->repairCard->carCategory->name_en}}</td>
                                             </tr>
                                             @endif
                                         </tbody>
