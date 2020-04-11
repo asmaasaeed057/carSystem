@@ -379,7 +379,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ route('technicalEmployee')}}"><i class="fa fa-circle-o"></i>Add Technical Employee</a></li>
+                            <li><a href="{{route('technicalEmployee.index')}}"><i class="fa fa-circle-o"></i>Add Technical Employee</a></li>
                         </ul>
                     </li>
 
@@ -435,7 +435,7 @@
                         <ul class="treeview-menu">
                             <li><a href="{{ route('invoiceIndex')}}"><i class="fa fa-circle-o"></i>show Invoices Contract</a></li>
                             <li><a href="{{ route('invoiceIndexNoneContract')}}"><i class="fa fa-circle-o"></i> show Invoices None Contract</a></li>
-                            <li><a href="{{ route('customInvoice')}}"><i class="fa fa-circle-o"></i> Custom Invoice</a></li>
+                            <li><a href="{{ route('customInvoice.index')}}"><i class="fa fa-circle-o"></i> Custom Invoice</a></li>
 
 
                         </ul>
