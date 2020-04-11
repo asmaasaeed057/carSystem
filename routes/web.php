@@ -49,11 +49,20 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::get('car/create/{clientid}', 'CarController@createCar')->name('car.createCar');
         Route::get('repairCard/create/{cid}', 'ReprairCardController@createRepairCard')->name('repairCard.createRepairCard');
 
-        Route::get('invoiceContractReport', 'InvoiceContractReportController@index')->name('invoiceContractReport');
-        Route::get('invoiceContractSearch', 'InvoiceContractReportController@search')->name('invoiceContractSearch');
+        //Invoice Report
+        Route::get('invoiceContractReport', 'InvoiceReportController@index')->name('invoiceContractReport');
+        Route::get('invoiceContractSearch', 'InvoiceReportController@search')->name('invoiceContractSearch');
 
-        Route::get('invoiceNoneContractReport', 'InvoiceContractReportController@indexNoneContract')->name('invoiceNoneContractReport');
-        Route::get('invoiceNoneContractSearch', 'InvoiceContractReportController@searchNoneContract')->name('invoiceNoneContractSearch');
+        Route::get('invoiceNoneContractReport', 'InvoiceReportController@indexNoneContract')->name('invoiceNoneContractReport');
+        Route::get('invoiceNoneContractSearch', 'InvoiceReportController@searchNoneContract')->name('invoiceNoneContractSearch');
+
+        //Income Report
+        Route::get('incomeContractReport', 'IncomeReportController@index')->name('incomeContractReport');
+        Route::get('incomeContractSearch', 'IncomeReportController@search')->name('incomeContractSearch');
+
+        Route::get('incomeNoneContractReport', 'IncomeReportController@indexNoneContract')->name('incomeNoneContractReport');
+        Route::get('incomeNoneContractSearch', 'IncomeReportController@searchNoneContract')->name('incomeNoneContractSearch');
+
 
         Route::post('get_catagray', 'CarController@get_catagray')->name('get_catagray');
         Route::post('get_car', 'ReprairCardController@getCars')->name('getCars');
