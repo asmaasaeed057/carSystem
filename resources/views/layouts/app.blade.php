@@ -309,7 +309,7 @@
                             <li><a href="{{ route('client.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.showClient') }}</a></li>
                             <li><a href="{{ route('client.create')}}"><i class="fa fa-circle-o"></i> {{ trans('site.addClient') }}</a></li>
                             <!-- <li><a href="{{ route('noneContractClient.indexNoneContract')}}"><i class="fa fa-circle-o"></i> Show None Contract Client</a></li> -->
-                            <li><a href="{{ route('noneContractClient.createNoneContractClient')}}"><i class="fa fa-circle-o"></i>Create None Contract Client</a></li>                            
+                            <li><a href="{{ route('noneContractClient.createNoneContractClient')}}"><i class="fa fa-circle-o"></i>Create None Contract Client</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -358,7 +358,7 @@
                             <li><a href="{{ route('incomeContractReport')}}"><i class="fa fa-circle-o"></i>Income Contract</a></li>
                             <li><a href="{{ route('incomeNoneContractReport')}}"><i class="fa fa-circle-o"></i>Income None Contract</a></li>
 
-                            
+
                             <!-- <li><a href="{{ url('admin/FilterIncome')}}"><i class="fa fa-circle-o"></i> {{ trans('site.income')}}</a></li> -->
                             <!-- <li><a href="{{ url('admin/FilterIncome')}}"><i class="fa fa-circle-o"></i> {{ trans('site.Expenses')}}</a></li>
                             <li><a href="{{ url('admin/FilterIncome')}}"><i class="fa fa-circle-o"></i> {{ trans('site.isDebit')}}</a></li>
@@ -369,6 +369,19 @@
                         </ul>
                     </li>
 
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-pie-chart"></i>
+                            <span>Technical Employee</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ route('technicalEmployee')}}"><i class="fa fa-circle-o"></i>Add Technical Employee</a></li>
+                        </ul>
+                    </li>
 
                     <li class="treeview">
                         <a href="#">
@@ -422,6 +435,8 @@
                         <ul class="treeview-menu">
                             <li><a href="{{ route('invoiceIndex')}}"><i class="fa fa-circle-o"></i>show Invoices Contract</a></li>
                             <li><a href="{{ route('invoiceIndexNoneContract')}}"><i class="fa fa-circle-o"></i> show Invoices None Contract</a></li>
+                            <li><a href="{{ route('customInvoice')}}"><i class="fa fa-circle-o"></i> Custom Invoice</a></li>
+
 
                         </ul>
                     </li>
