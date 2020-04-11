@@ -15,6 +15,7 @@ class ReprairCard extends Model
         'car_id' ,
         'card_taxes',
         'card_number',
+        'employee_id',
 
 		 
     ];
@@ -104,5 +105,9 @@ class ReprairCard extends Model
     return $residual;
     }
 
-
+    public function employee()
+    {
+        return $this->belongsTo('App\TechnicalEmployee', 'employee_id');
+    }
+    
 }

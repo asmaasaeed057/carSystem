@@ -239,6 +239,17 @@
                         </select>
                       </div>
                     </div> -->
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Employee</label>
+                        <select class="form-control" name="employee_id" id="" style="width: 100%;">
+                          <option value="">Select</option>
+                          @foreach($employee as $emp)
+                          <option value="{{$emp->employee_id}}">{{$emp->employee_name}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                    </div>
 
                     <div class="col-md-12">
                       <label for="">

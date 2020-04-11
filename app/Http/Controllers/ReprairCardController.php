@@ -18,6 +18,7 @@ use App\CarBrandCategory;
 use App\Invoice;
 use App\OperationOrder;
 use App\InvoicePayment;
+use App\TechnicalEmployee;
 
 
 
@@ -118,16 +119,6 @@ class ReprairCardController extends Controller
         $status->save();
 
         return back();
-
-        // $client = Client::find($Card->client_id);
-        // $car = Car::find($Card->car_id);
-        // $account = Account::where("reprairCard_id",$id)->get();
-
-        // $subTotal = Account::where("reprairCard_id",$id)->get()->sum('subTotal');
-        // $tax = Account::where("reprairCard_id",$id)->get()->sum('tax');
-        // // dd($subTotal);
-        // return view('admin.repairCard.approved' , \compact('Card','car','client' ,'account' ,'subTotal' ,'tax'));
-
     }
 
 
@@ -253,7 +244,9 @@ class ReprairCardController extends Controller
 
         $cars = Car::get();
         $services = Service::get();
-        return view('admin.repairCard.create', compact('clients', 'cars', 'services', 'clientId', 'number'));
+        $employee=TechnicalEmployee::get();
+
+        return view('admin.repairCard.create', compact('clients', 'cars', 'services', 'clientId', 'number','employee'));
     }
 
     public function createRepairCard($clientId)
@@ -332,9 +325,10 @@ class ReprairCardController extends Controller
         $cars = Car::where('client_id', $repairCard->client_id)->get();
         $clients = Client::all();
         $allServices = Service::all();
+        $employee=TechnicalEmployee::get();
 
 
-        return view('admin.repairCard.edit', compact('repairCard', 'clients', 'cars', 'allServices'));
+        return view('admin.repairCard.edit', compact('repairCard', 'clients', 'cars', 'allServices','employee'));
     }
     /**
      * Update the specified resource in storage.
@@ -348,7 +342,7 @@ class ReprairCardController extends Controller
         $card = ReprairCard::find($id);
         $card->update($request->only(
             [
-                'checkReprort', 'client_id','car_id'
+                'checkReprort', 'client_id','car_id','employee_id'
             ]
         ));
         $card->save();

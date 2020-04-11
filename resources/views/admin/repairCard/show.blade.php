@@ -92,6 +92,11 @@
                         <th scope="row">Check Report</th>
                         <td>{{$repairCard->checkReprort}}</td>
                       </tr>
+                      <tr>
+                        <th scope="row">Technical Employee</th>
+                        <td>{{$repairCard->employee->employee_name}}</td>
+                      </tr>
+
                     </tbody>
                   </table>
                 </div>
