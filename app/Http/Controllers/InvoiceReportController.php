@@ -14,7 +14,7 @@ use Auth;
 use App\models\Custom;
 use App\ReprairCard;
 
-class InvoiceContractReportController extends Controller
+class InvoiceReportController extends Controller
 {
     // public function callAction($method, $parameters)
     // {

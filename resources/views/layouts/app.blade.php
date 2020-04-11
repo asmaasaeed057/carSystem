@@ -349,19 +349,21 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ route('expenseReport')}}"><i class="fa fa-circle-o"></i> Expense Report</a></li>
-                            <li><a href="{{ route('expenseTaxReport')}}"><i class="fa fa-circle-o"></i> Expense Tax Report</a></li>
-                            <li><a href="{{ route('ClientReport')}}"><i class="fa fa-circle-o"></i>Client Report</a></li>
-                            <li><a href="{{ route('cardTaxesReport')}}"><i class="fa fa-circle-o"></i> Card Tax Report</a></li>
-                            <li><a href="{{ route('invoiceContractReport')}}"><i class="fa fa-circle-o"></i> Invoice Contract Report</a></li>
-                            <li><a href="{{ route('invoiceNoneContractReport')}}"><i class="fa fa-circle-o"></i> Invoice None Contract Report</a></li>
+                            <li><a href="{{ route('expenseReport')}}"><i class="fa fa-circle-o"></i> Expense</a></li>
+                            <li><a href="{{ route('expenseTaxReport')}}"><i class="fa fa-circle-o"></i> Expense Tax</a></li>
+                            <li><a href="{{ route('ClientReport')}}"><i class="fa fa-circle-o"></i>Client</a></li>
+                            <li><a href="{{ route('cardTaxesReport')}}"><i class="fa fa-circle-o"></i> Card Tax</a></li>
+                            <li><a href="{{ route('invoiceContractReport')}}"><i class="fa fa-circle-o"></i>Invoice Contract</a></li>
+                            <li><a href="{{ route('invoiceNoneContractReport')}}"><i class="fa fa-circle-o"></i>Invoice None Contract</a></li>
+                            <li><a href="{{ route('incomeContractReport')}}"><i class="fa fa-circle-o"></i>Income Contract</a></li>
+                            <li><a href="{{ route('incomeNoneContractReport')}}"><i class="fa fa-circle-o"></i>Income None Contract</a></li>
 
                             
-                            <li><a href="{{ url('admin/FilterIncome')}}"><i class="fa fa-circle-o"></i> {{ trans('site.income')}}</a></li>
-                            <li><a href="{{ url('admin/FilterIncome')}}"><i class="fa fa-circle-o"></i> {{ trans('site.Expenses')}}</a></li>
+                            <!-- <li><a href="{{ url('admin/FilterIncome')}}"><i class="fa fa-circle-o"></i> {{ trans('site.income')}}</a></li> -->
+                            <!-- <li><a href="{{ url('admin/FilterIncome')}}"><i class="fa fa-circle-o"></i> {{ trans('site.Expenses')}}</a></li>
                             <li><a href="{{ url('admin/FilterIncome')}}"><i class="fa fa-circle-o"></i> {{ trans('site.isDebit')}}</a></li>
                             <li><a href="{{ url('admin/FilterIncome')}}"><i class="fa fa-circle-o"></i> {{ trans('site.tax')}}</a></li>
-                            <li><a href="{{ url('admin/FilterIncome')}}"><i class="fa fa-circle-o"></i> {{ trans('site.sumary')}}</a></li>
+                            <li><a href="{{ url('admin/FilterIncome')}}"><i class="fa fa-circle-o"></i> {{ trans('site.sumary')}}</a></li> -->
 
 
                         </ul>
