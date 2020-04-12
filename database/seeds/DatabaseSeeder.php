@@ -16,10 +16,11 @@ class DatabaseSeeder extends Seeder
 
 
     // $this->call(ServiceTableSeeder::class);
-    $this->call(CarBrandSeeder::class);
-    // $this->call(CarBrandCategorySeeder::class);
+   // $this->call(CarBrandSeeder::class);
+     //$this->call(CarBrandCategorySeeder::class);
     // $this->call(CarSeeder::class);
 
+   // $this->call(ServiceTableSeeder::class);
 
     }
 }
