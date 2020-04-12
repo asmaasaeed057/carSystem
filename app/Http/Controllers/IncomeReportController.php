@@ -9,27 +9,26 @@ use Illuminate\Http\Request;
 
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-
+use App\Custom;
 use Auth;
-use App\models\Custom;
 use App\ReprairCard;
 
 class IncomeReportController extends Controller
 {
-    // public function callAction($method, $parameters)
-    // {
-    //     $group = Auth::guard('admin')->user()->group;
+    public function callAction($method, $parameters)
+    {
+        $group = Auth::guard('admin')->user()->group;
 
-    //     $actionObject = app('request')->route()->getAction();
-    //     $controller = class_basename($actionObject['controller']);
-    //     list($controller, $action) = explode('@', $controller);
-    //     $valid = Custom::permission($group, $controller, $action);
-    //     if ($valid) {
-    //         return parent::callAction($method, $parameters);
-    //     } else {
-    //         return response()->view('admin.errors.403');
-    //     }
-    // }
+        $actionObject = app('request')->route()->getAction();
+        $controller = class_basename($actionObject['controller']);
+        list($controller, $action) = explode('@', $controller);
+        $valid = Custom::permission($group, $controller, $action);
+        if ($valid) {
+            return parent::callAction($method, $parameters);
+        } else {
+            return response()->view('admin.errors.403');
+        }
+    }
     public function index()
     {
         $incomes = InvoicePayment::all();
@@ -52,8 +51,8 @@ class IncomeReportController extends Controller
         $income_date_to = $_GET['income_date_to'];
 
         $c = InvoicePayment::select("*");
-   
-     
+
+
         if ($income_date_from) {
             $c->whereDate('invoice_payment_date', '>=', $income_date_from)->whereDate('invoice_payment_date', '<=', $income_date_to)->get();
         }
@@ -72,7 +71,7 @@ class IncomeReportController extends Controller
     {
         $incomes = InvoicePayment::all();
 
-  
+
         $income_date_from = '';
         $income_date_to = '';
 
@@ -90,12 +89,12 @@ class IncomeReportController extends Controller
         $income_date_to = $_GET['income_date_to'];
 
         $c = InvoicePayment::select("*");
-     
+
         if ($income_date_from) {
             $c->whereDate('invoice_payment_date', '>=', $income_date_from)->whereDate('invoice_payment_date', '<=', $income_date_to)->get();
         }
 
-  
+
         $incomes = $c->get();
 
         return view('admin.report.incomeNoneContractReport', [

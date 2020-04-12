@@ -227,6 +227,13 @@
                           <option value="{{$category->id}}">{{$category->name_ar}}</option>
                           @endforeach
                         </select>
+                        @if ($errors->get('car_brand_category_id'))
+                        <span for="textfield" class="help-block error" style="color:firebrick">
+                          @foreach ($errors->get('car_brand_category_id') as $car_brand_category_id)
+                          {{ $car_brand_category_id }}
+                          @endforeach
+                        </span>
+                        @endif
                       </div>
                     </div>
 
@@ -238,6 +245,13 @@
                           <option value="{{$type->id}}">{{$type->name_ar}}</option>
                           @endforeach
                         </select>
+                        @if ($errors->get('carType_id'))
+                        <span for="textfield" class="help-block error" style="color:firebrick">
+                          @foreach ($errors->get('carType_id') as $carType_id)
+                          {{ $carType_id }}
+                          @endforeach
+                        </span>
+                        @endif
                       </div>
                     </div>
 
@@ -249,6 +263,13 @@
                           <option value="{{$i}}">{{$i}}</option>
                           @endfor
                         </select>
+                        @if ($errors->get('model'))
+                        <span for="textfield" class="help-block error" style="color:firebrick">
+                          @foreach ($errors->get('model') as $model)
+                          {{ $model }}
+                          @endforeach
+                        </span>
+                        @endif
                       </div>
                     </div>
 
@@ -256,18 +277,57 @@
                       <div class="form-group">
                         <label>Plate number</label>
                         <input class="form-control " type="text" name="platNo" id="">
+                        @if ($errors->get('platNo'))
+                        <span for="textfield" class="help-block error" style="color:firebrick">
+                          @foreach ($errors->get('platNo') as $platNo)
+                          {{ $platNo }}
+                          @endforeach
+                        </span>
+                        @endif
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Structure Number</label>
                         <input class="form-control " type="text" name="car_structure_number" id="">
+                        @if ($errors->get('car_structure_number'))
+                        <span for="textfield" class="help-block error" style="color:firebrick">
+                          @foreach ($errors->get('car_structure_number') as $car_structure_number)
+                          {{ $car_structure_number }}
+                          @endforeach
+                        </span>
+                        @endif
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Color</label>
                         <input class="form-control " type="text" name="car_color" id="">
+                        @if ($errors->get('car_color'))
+                        <span for="textfield" class="help-block error" style="color:firebrick">
+                          @foreach ($errors->get('car_color') as $car_color)
+                          {{ $car_color }}
+                          @endforeach
+                        </span>
+                        @endif
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- TEchnical employee -->
+                  <div class="box-body">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Technical employee Info</h3>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Employee</label>
+                        <select class="form-control" name="employee_id" id="" style="width: 100%;">
+                          <option value="">Select</option>
+                          @foreach($employee as $emp)
+                          <option value="{{$emp->employee_id}}">{{$emp->employee_name}}</option>
+                          @endforeach
+                        </select>
                       </div>
                     </div>
                   </div>
@@ -291,8 +351,6 @@
                   </div>
 
                   <!-- repair card items--------------------------------------------------------------------------->
-
-
                   <div class="container">
                     <h2>Items</h2>
                     <table class="table table-condensed">

@@ -47,7 +47,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::get('expenseTaxReport', 'ExpenseTaxReportController@index')->name('expenseTaxReport');
         Route::get('expenseTaxSearch', 'ExpenseTaxReportController@search')->name('expenseTaxSearch');
         Route::get('car/create/{clientid}', 'CarController@createCar')->name('car.createCar');
-        Route::get('repairCard/create/{cid}', 'ReprairCardController@createRepairCard')->name('repairCard.createRepairCard');
+        Route::get('repairCard/create/{cid}', 'ReprairCardController@createRepairCardFromClient')->name('repairCard.createRepairCard');
 
         //Invoice Report
         Route::get('invoiceContractReport', 'InvoiceReportController@index')->name('invoiceContractReport');
@@ -68,7 +68,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::post('get_car', 'ReprairCardController@getCars')->name('getCars');
         Route::post('getServices', 'ReprairCardController@getServices')->name('getServices');
         Route::post('getPrice', 'ReprairCardController@getPrice')->name('getPrice');
-        Route::get('newitem', 'ReprairCardController@newitem')->name('newitem');
         Route::get('print/{id}', 'AccountController@print')->name('print');
         route::get('clientDetails/{id}', 'ClientController@clientDetails');
         Route::resource('permission', 'AdminGroupController');
@@ -76,7 +75,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::resource('carCategory', 'carCategoryController');
         Route::resource('Accounting', 'AccountController');
         Route::resource('carType', 'CarTypeController');
-        Route::resource('cost', 'CostController');
         Route::resource('reprairCard', 'ReprairCardController');
         Route::get('approved/{id}', 'ReprairCardController@approved')->name('approved');
         Route::get('denied/{id}', 'ReprairCardController@denied')->name('denied');
@@ -87,16 +85,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::post('accept', 'ReprairCardController@accept')->name('accept');
         Route::post('money', 'ReprairCardController@money')->name('money');
         Route::get('confirm/{id}', 'AccountController@confirm')->name('confirm');
-        Route::resource('box', 'BoxController');
         Route::get('cardSearch', 'ReprairCardController@cardSearch')->name('cardSearch');
 
         
         Route::get('/createAdmin', 'admin\DashboardController@createAdmin');
         Route::any('logout', 'admin\AdminLoginController@logout');
         //Reports Routea
-        Route::get('FilterClients', 'reportController@FilterClients');
-        Route::get('FilterIncome', 'reportController@FilterIncome');
-        Route::get('invoice/create/{cardId}', 'ReprairCardController@invoice')->name('invoice');
+        
+        Route::get('invoice/create/{cardId}', 'ReprairCardController@createInvoice')->name('createInvoice');
         Route::get('operationOrder', 'OperationOrderController@index')->name('operationOrder.index');
         Route::get('operationOrder/{oid}', 'OperationOrderController@show')->name('operationOrder.show');
         Route::get('invoice', 'ReprairCardController@invoiceIndex')->name('invoiceIndex');

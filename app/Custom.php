@@ -11,25 +11,27 @@ use App\Role;
 class Custom
 {
 
-    public static function permission($group,$controller,$action)
+    public static function permission($group, $controller, $action)
     {
         $grouproles = $group->roles;
         $roleIds = $grouproles->pluck('role_id');
         $roles = Role::whereIn('role_id', $roleIds)->get();
 
         $controller = strtolower(str_replace("Controller", "", $controller));
+        $ajaxActions = array('getCars', 'getServices', 'getPrice');
 
-        $valid = false;
+        if (in_array($action, $ajaxActions)) {
+            $valid = true;
+            return $valid;
+        } else {
+            $valid = false;
 
-        foreach ($roles as $role)
-        {
-            if ($role->role_controller == $controller && $role->role_action == $action)
-            {
-                $valid = true;
+            foreach ($roles as $role) {
+                if ($role->role_controller == $controller && $role->role_action == $action) {
+                    $valid = true;
+                }
             }
+            return $valid;
         }
-        return $valid;
-        
     }
-
 }

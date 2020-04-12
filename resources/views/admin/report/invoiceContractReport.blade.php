@@ -64,21 +64,21 @@
 
                             <div class="form-group">
                                 <label for="invoice_number">Invoice Number</label>
-                                <input type="text" name="invoice_number" class="form-control" style="width:500px">
+                                <input type="text" name="invoice_number" value="{{$invoice_number}}" class="form-control" style="width:500px">
                             </div>
                             <div class="form-group" style="display: block">
                                 <label for="client_name">Client Name</label>
-                                <input type="text" name="client_name" class="form-control" style="width:500px">
+                                <input type="text" name="client_name" value="{{$client_name}}" class="form-control" style="width:500px">
                             </div>
 
 
                             <div class="form-group">
                                 <label for="date from">From</label>
-                                <input type="date" name="invoice_date_from" class="form-control" style="width:500px">
+                                <input type="date" name="invoice_date_from" value="{{$invoice_date_from}}" class="form-control" style="width:500px">
                             </div>
                             <div class="form-group" style="display: block">
                                 <label for="date to">To</label>
-                                <input type="date" name="invoice_date_to" class="form-control" style="width:500px">
+                                <input type="date" name="invoice_date_to" value="{{$invoice_date_to}}" class="form-control" style="width:500px">
                             </div>
 
                             <input type="submit" class="btn-primary" value="search">

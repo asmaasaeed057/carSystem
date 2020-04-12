@@ -33,13 +33,9 @@ class ReprairCard extends Model
     
     public function carCategory()
 	{
-		return $this->HasOne('App\carCategory','id','car_id');
+		return $this->HasOne('App\CarCategory','id','car_id');
     }
     
-    public function company()
-	{
-		return $this->HasOne('App\Company','id','car_id');
-	}
     public function items()
     {
         return $this->hasMany('App\RepairCardItem','card_id');

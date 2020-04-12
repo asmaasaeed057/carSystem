@@ -23,29 +23,31 @@ use App\CarType;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailable;
 use PhpParser\Node\Expr\New_;
-
+use App\TechnicalEmployee;
 class ClientController extends Controller
 {
 
 
-    // public function callAction($method, $parameters)
-    // {
-    //     $group = Auth::guard('admin')->user()->group;
+    public function callAction($method, $parameters)
+    {
+        $group = Auth::guard('admin')->user()->group;
 
-    //     $actionObject = app('request')->route()->getAction();
-    //     $controller = class_basename($actionObject['controller']);
-    //     list($controller, $action) = explode('@', $controller);
-    //     $valid = Custom::permission($group, $controller, $action);
-    //     if ($valid) {
-    //         return parent::callAction($method, $parameters);
-    //     } else {
-    //         return response()->view('admin.errors.403');
-    //     }
-    // }
+        $actionObject = app('request')->route()->getAction();
+        $controller = class_basename($actionObject['controller']);
+        list($controller, $action) = explode('@', $controller);
+        $valid = Custom::permission($group, $controller, $action);
+        if ($valid) {
+            return parent::callAction($method, $parameters);
+        } else {
+            return response()->view('admin.errors.403');
+        }
+    }
     public function index()
     {
+        $client_name = '';
+        $client_phone = '';
         $clients = Client::all();
-        return view('admin.clients.index', compact('clients'));
+        return view('admin.clients.index', compact('clients','client_name' , 'client_phone'));
     }
 
     public function create()
@@ -101,7 +103,6 @@ class ClientController extends Controller
     }
     public function search()
     {
-        // dd('kkkkk');
         $client_name = $_GET['client_name'];
         $client_phone = $_GET['client_phone'];
 
@@ -116,8 +117,6 @@ class ClientController extends Controller
         }
         $clients = $c->get();
 
-
-        // dd($expenses);
         return view('admin.clients.index', [
             'client_name' => $client_name,
             'client_phone' => $client_phone,
@@ -128,7 +127,6 @@ class ClientController extends Controller
 
     public function createNoneContractClient()
     {
-
         $carCategories = CarBrandCategory::all();
         $carTypes = CarType::all();
         if (ReprairCard::orderBy('id', 'desc')->first()) {
@@ -136,10 +134,13 @@ class ClientController extends Controller
         } else {
             $number = 0;
         }
+        $employee = TechnicalEmployee::get();
+
         return view('admin.clients.createNoneContract', [
             'carCategories' => $carCategories,
             'carTypes' => $carTypes,
-            'number' => $number
+            'number' => $number,
+            'employee' => $employee
         ]);
     }
 
@@ -149,8 +150,14 @@ class ClientController extends Controller
         $request->validate([
             'fullName' => 'required ',
             'phone' => 'required',
+            'platNo' => 'required',
+            'car_structure_number' => 'required',
+            'car_color' => 'required',
+            'model' => 'required',
+            'car_brand_category_id' => 'required',
+            'carType_id' => 'required'
+
         ]);
-        // Client::create($request->all());
         $client = new Client();
         $client->fullName = $request->get('fullName');
         $client->phone = $request->get('phone');
@@ -172,6 +179,7 @@ class ClientController extends Controller
         $repairCard->checkReprort = $request->get('checkReprort');
         $repairCard->card_taxes = $request->get('card_taxes');
         $repairCard->card_number = $request->get('card_number');
+        $repairCard->employee_id = $request->get('employee_id');
         $repairCard->client_id = $client->id;
         $repairCard->car_id = $car->id;
         $repairCard->status = 'accepted';
@@ -203,7 +211,8 @@ class ClientController extends Controller
         $operationOrder->save();
 
         session()->flash('success', "Client created successfully");
-        return redirect(route('noneContractClient.indexNoneContract'));
+        return redirect('admin/reprairCard');
+
     }
 
     public function indexNoneContract()
@@ -219,12 +228,14 @@ class ClientController extends Controller
         $carCategories = CarBrandCategory::all();
         $carTypes = CarType::all();
         $allServices = Service::all();
-        return view('admin.clients.editNoneContractClient', compact('repairCard', 'carCategories', 'carTypes', 'allServices'));
+        $employee = TechnicalEmployee::get();
+
+        return view('admin.clients.editNoneContractClient', compact('repairCard', 'carCategories', 'carTypes', 'allServices','employee'));
     }
     public function updateNoneContractClient(Request $request, $id)
     {
         $repairCard = ReprairCard::find($id);
-      
+
 
         $client = Client::find($repairCard->client->id);
         $client->update($request->only(
@@ -235,8 +246,6 @@ class ClientController extends Controller
         $client->save();
 
         $car = Car::find($repairCard->car->id);
-        // dd($request);
-
         $car->update($request->only(
             [
                 'model', 'car_structure_number', 'platNo', 'car_color',
@@ -260,11 +269,9 @@ class ClientController extends Controller
             $repairCardItem->service_cost = $carService->service_cost;
             $repairCardItem->save();
         }
-
-
         $repairCard->update($request->only(
             [
-                'checkReprort'
+                'checkReprort','employee_id'
             ]
         ));
         $repairCard->client_id = $client->id;
@@ -273,6 +280,28 @@ class ClientController extends Controller
 
         session()->flash('success', trans('admin.added'));
         return redirect('admin/reprairCard');
+    }
+
+    public function getServices(ReprairCard $reprairCard, Request $request)
+    {
+        $value = $request->get('value');
+        $data = DB::table('car_services')
+            ->where('service_type', $value)
+            ->get();
+
+        $output = '<option value="">' . trans("site.options") . '</option>';
+        foreach ($data as $row) {
+            $output .= '<option value="' . $row->service_id . '">' . $row->service_name . "_" . $row->service_number . '</option>';
+        }
+
+        echo $output;
+    }
+    public function getPrice(ReprairCard $reprairCard, Request $request)
+    {
+        $value = $request->get('value');
+        $data = Service::where('service_id', $value)->firstOrFail();
+        $output = $data->service_client_cost;
+        echo $output;
     }
     // public function mail($id)
     // {

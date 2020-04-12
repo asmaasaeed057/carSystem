@@ -35,7 +35,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-    Taxes Card Report    
+      Taxes Card Report
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -101,77 +101,66 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-          <form  method="get" action="{{route('cardTaxesSearch')}}">
+            <form method="get" action="{{route('cardTaxesSearch')}}">
 
-                        <div class="row">
+              <div class="form-group">
+                <label for="date from">From</label>
+                <input type="date" name="card_date_from" value="{{$datefrom}}" class="form-control" style="width:500px">
+              </div>
+              <div class="form-group" style="display: block">
+                <label for="date to">To</label>
+                <input type="date" name="card_date_to" value="{{$dateto}}" class="form-control" style="width:500px">
+              </div>
+            <div class="form-actions">
 
-                        <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Date From</label>
-                            <input value="{{$datefrom}}" type="date" placeholder="من" value="" size="60" maxlength="120" name="card_date_from" id="" class="input-medium" />
-                        </div>
-                        </div>
-                        </div>
-                        <div class="row">
+              <input id="submit" type="submit" name="submit" value="Search" class="btn btn-primary btn-large">
+            </div>
+          </div>
+          </form>
+          @if($cards)
+          <div class="box-body">
 
-                        <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Date To</label>
-                            <input value="{{$dateto}}" type="date" placeholder="الي" value="" size="60" maxlength="120" name="card_date_to" id="" class="input-medium" />
-                        </div>
-                        </div>
-                        </div>
-
-                        <div class="form-actions">
-
-                            <input id="submit" type="submit" name="submit" value="Search" class="btn btn-primary btn-large">
-                        </div>
-                    </div>
-                </form>
-            @if($cards)
-            <div class="box-body">
-
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
+            <table id="example1" class="table table-bordered table-striped">
+              <thead>
                 <tr>
                   <th>Date</th>
                   <th>Taxes</th>
 
                 </tr>
-                </thead>
-                <tbody>
-            <?php $total=0; ?>  
+              </thead>
+              <tbody>
+                <?php $total = 0; ?>
                 @foreach($cards as $value)
                 <tr>
-                  <td>{{$value->created_at}}</td> 
+                  <td>{{$value->created_at}}</td>
                   <td>{{$value->taxes}}</td>
-                <?php $total+=$value->taxes ; ?>
+                  <?php $total += $value->taxes; ?>
                 </tr>
                 @endforeach
                 <tr>
-                <th>Total</th>
-                <td>{{$total}}</td>
+                  <th>Total</th>
+                  <td>{{$total}}</td>
                 </tr>
-                </tbody>
+              </tbody>
 
-              </table>
-              </div>
-        @endif
-
-         
-    
+            </table>
           </div>
-          <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-      </div>
-      <!-- /.col -->
-    </div>
+          @endif
 
- 
-    <!-- /.row -->
-  </section>
-  <!-- /.content -->
+
+
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+
+
+<!-- /.row -->
+</section>
+<!-- /.content -->
 </div>
 
 

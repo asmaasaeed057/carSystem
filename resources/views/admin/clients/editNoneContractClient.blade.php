@@ -286,109 +286,127 @@
                     <input type="text" value={{$repairCard->card_taxes}} name="card_taxes" hidden>
 
                   </div>
-              </div>
 
+                  <div class="box-body">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Technical employee Info</h3>
+                    </div>
+                    <div class="col-md-6">
 
-
-              <div class="container">
-                <h2>Items</h2>
-                <table class="table table-condensed">
-                  <thead>
-                    <tr>
-                      <th>Service Type</th>
-                      <th>Services</th>
-                      <th>Price</th>
-                    </tr>
-                  </thead>
-                  <tbody id='services'>
-                    <?php
-                    $services = array(
-                      "1" => "أجور خدمات اليد )الإصلاحات)",
-                      "2" => "أجور الأعمال الخارجية",
-                      "3" => "قطع الغيار )مخزن داخلي)",
-                      "4" => "قطع غيار )مشتريات خارجية) ",
-                    );
-                    ?>
-                    <?php $total = 0; ?>
-                    <input type="text" value="{{count($repairCard->items)}}" hidden id="totalServices" />
-
-                    @foreach($repairCard->items as $j=> $item )
-
-
-                    <tr>
-                      <td>
-                        <select class="form-control" name="service_type[{{$j}}]" id="service_type_{{$j}}" onchange="changeService({{$j}})">
-                          <option value="">Select</option>
-
-                          @foreach($services as $i=> $service)
-                          <option value="{{ $i }}" {{($i == $item->service->service_type) ? 'selected' : '' }}>
-
-                            {{$service}}</option>
-
+                      <div class="form-group">
+                        <label>Employee</label>
+                        <select class="form-control" name="employee_id" id="" style="width: 100%;">
+                          @foreach($employee as $emp)
+                          <option value="{{ $emp->employee_id }}" {{($emp->employee_id == $repairCard->employee_id) ? 'selected' : '' }}>
+                            {{ $emp->employee_name }}
+                          </option>
                           @endforeach
                         </select>
-
-                      </td>
-
-                      <td>
-
-                        <select name="services[{{$j}}]" id="services_{{$j}}" class="form-control select2" onchange="showPrice({{$j}})">
-
-                          @foreach($allServices as $i=> $allService)
-
-                          <option value="{{ $allService->service_id }}" {{($allService->service_id == $item->service->service_id) ? 'selected' : '' }}>
-
-                            {{$allService->service_name}}</option>
-                          @endforeach
-
-                        </select>
+                      </div>
+                    </div>
+                  </div>
 
 
-                      </td>
-                      <td>
-                        <input type='text' name="price[{{$j}}]" id="price_{{$j}}" value="{{$item->service_client_cost}}">
-                        <?php $total += $item->service_client_cost; ?>
-                      </td>
-                      <td>
-                        <input type="button" class="btn btn-green add" value="+">
-                        @if($j>0)
-                        <input type="button" class="btn btn-danger delete" value="x" onclick="removeItem(this,{{$j}})">
-                        @endif
-                      </td>
-                    </tr>
-                    @endforeach
 
-                  </tbody>
-                  <tfoot>
-                    <tr>
+                  <div class="container">
+                    <h2>Items</h2>
+                    <table class="table table-condensed">
+                      <thead>
+                        <tr>
+                          <th>Service Type</th>
+                          <th>Services</th>
+                          <th>Price</th>
+                        </tr>
+                      </thead>
+                      <tbody id='services'>
+                        <?php
+                        $services = array(
+                          "1" => "أجور خدمات اليد )الإصلاحات)",
+                          "2" => "أجور الأعمال الخارجية",
+                          "3" => "قطع الغيار )مخزن داخلي)",
+                          "4" => "قطع غيار )مشتريات خارجية) ",
+                        );
+                        ?>
+                        <?php $total = 0; ?>
+                        <input type="text" value="{{count($repairCard->items)}}" hidden id="totalServices" />
 
-                      <td colspan="2"></td>
-                      <td><strong>Total Price</strong></td>
-                      <td>
-                        <input type='text' name="totalPrice" id="total_price" value="{{$total}}">
+                        @foreach($repairCard->items as $j=> $item )
 
-                      </td>
 
-                    </tr>
-                  </tfoot>
-                </table>
+                        <tr>
+                          <td>
+                            <select class="form-control" name="service_type[{{$j}}]" id="service_type_{{$j}}" onchange="changeService({{$j}})">
+                              <option value="">Select</option>
+
+                              @foreach($services as $i=> $service)
+                              <option value="{{ $i }}" {{($i == $item->service->service_type) ? 'selected' : '' }}>
+
+                                {{$service}}</option>
+
+                              @endforeach
+                            </select>
+
+                          </td>
+
+                          <td>
+
+                            <select name="services[{{$j}}]" id="services_{{$j}}" class="form-control select2" onchange="showPrice({{$j}})">
+
+                              @foreach($allServices as $i=> $allService)
+
+                              <option value="{{ $allService->service_id }}" {{($allService->service_id == $item->service->service_id) ? 'selected' : '' }}>
+
+                                {{$allService->service_name}}</option>
+                              @endforeach
+
+                            </select>
+
+
+                          </td>
+                          <td>
+                            <input type='text' name="price[{{$j}}]" id="price_{{$j}}" value="{{$item->service_client_cost}}">
+                            <?php $total += $item->service_client_cost; ?>
+                          </td>
+                          <td>
+                            <input type="button" class="btn btn-green add" value="+">
+                            @if($j>0)
+                            <input type="button" class="btn btn-danger delete" value="x" onclick="removeItem(this,{{$j}})">
+                            @endif
+                          </td>
+                        </tr>
+                        @endforeach
+
+                      </tbody>
+                      <tfoot>
+                        <tr>
+
+                          <td colspan="2"></td>
+                          <td><strong>Total Price</strong></td>
+                          <td>
+                            <input type='text' name="totalPrice" id="total_price" value="{{$total}}">
+
+                          </td>
+
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+
+                  <input type="submit" class="btn-primary" value="Update">
+
+                </form>
               </div>
-
-              <input type="submit" class="btn-primary" value="Update">
-
-              </form>
+              <!-- /.box-body -->
             </div>
-            <!-- /.box-body -->
           </div>
+          <!-- /.box-body -->
         </div>
-        <!-- /.box-body -->
+        <!-- /.box -->
       </div>
-      <!-- /.box -->
+      <!-- /.col -->
     </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
-</section>
-<!-- /.content -->
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
 </div>
 @endsection

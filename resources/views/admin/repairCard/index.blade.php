@@ -189,25 +189,25 @@
                 <td>{{$value->car->platNo}}</td>
                 <td>{{$value->status}}</td>
                 <td>{{$value->created_at}}</td>
-                <td><a class="btn btn-danger" href="{{route('reprairCard.show' ,$value->id)}}"><i class="fas fa-search"></i> SHOW</a></td>
+                <td><a class="btn btn-success" href="{{route('reprairCard.show' ,$value->id)}}"> SHOW</a></td>
 
 
                 @if($value->status == 'accepted')
                 @if(!$value->invoice)
-                <td><a class="inv btn btn-primary" href="{{route('invoice',$value->id)}}"><i class="fas fa-search"></i> Add Invoice</a></td>
+                <td><a class="inv btn btn-primary" href="{{route('createInvoice',$value->id)}}"> Add Invoice</a></td>
                 @endif
                 @if($value->client->client_type == 'noneContract')
-                <td><a class="payment btn btn-primary" href="{{route('invoicePayment',$value->invoice->invoice_id)}}"><i class="fas fa-search"></i>Invoice Payment</a></td>
-                <td><a class="btn btn-primary" href="{{route('noneContractClient.editNoneContractClient' ,$value->id)}}"><i class="fas fa-search"></i> EDIT</a></td>
+                <td> <a class="btn btn-warning payment" href="{{route('invoicePayment',$value->invoice->invoice_id)}}"><i class="fas fa-money" style="margin-right: 10px;"></i>pay</a>
+                <td><a class="btn btn-primary" href="{{route('noneContractClient.editNoneContractClient' ,$value->id)}}"> EDIT</a></td>
 
                 @endif
                 @endif
 
                 @if($value->status == 'panding')
 
-                <td><a class="btn btn-primary" href="{{route('reprairCard.edit' ,$value->id)}}"><i class="fas fa-search"></i> EDIT</a></td>
-                <td><a class="btn btn-warning denied" href="{{route('denied' ,$value->id)}}"><i class="fas fa-search"></i> denied</a></td>
-                <td><a class="btn btn-success approve" href="{{route('approved' ,$value->id)}}"><i class="fas fa-search"></i> Approve</a></td>
+                <td><a class="btn btn-primary" href="{{route('reprairCard.edit' ,$value->id)}}"> EDIT</a></td>
+                <td><a class="btn btn-danger denied" href="{{route('denied' ,$value->id)}}"> denied</a></td>
+                <td><a class="btn btn-success approve" href="{{route('approved' ,$value->id)}}"> Approve</a></td>
                 @endif
 
               </tr>

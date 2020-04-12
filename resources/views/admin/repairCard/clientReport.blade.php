@@ -35,7 +35,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-    Client Report    
+      Client Report
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -101,68 +101,68 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-          <form  method="get" action="{{route('clientSearch')}}">
+            <form method="get" action="{{route('clientSearch')}}">
 
-                        <div class="row">
+              <div class="row">
 
-                        <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Client</label>
-                            <select class="form-control" name="client_id"  id="clients" style="width: 100%;">
-                            <option value="">Select</option>
-                            @foreach($clients as $value)
-                                <option value="{{$value->id}}"{{($value->id == $clientId) ? 'selected' : '' }}>{{$value->fullName}}</option>
-                            @endforeach
-                            </select>
-                        </div>
-                        </div>
-                        </div>
-                        <div class="form-actions">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Client</label>
+                    <select class="form-control" name="client_id" id="clients" style="width: 100%;">
+                      <option value="">Select</option>
+                      @foreach($clients as $value)
+                      <option value="{{$value->id}}" {{($value->id == $clientId) ? 'selected' : '' }}>{{$value->fullName}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-actions">
 
-                            <input id="submit" type="submit" name="submit" value="Search" class="btn btn-primary btn-large">
-                        </div>
-                    </div>
-                </form>
-            @if($cards)
-            <div class="box-body">
+                <input id="submit" type="submit" name="submit" value="Search" class="btn btn-primary btn-large">
+              </div>
+          </div>
+          </form>
+          @if($cards)
+          <div class="box-body">
 
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
+            <table id="example1" class="table table-bordered table-striped">
+              <thead>
                 <tr>
                   <th>Car</th>
                   <th>Total</th>
                   <th>Total With Taxes</th>
                 </tr>
-                </thead>
-                <tbody>
+              </thead>
+              <tbody>
 
                 @foreach($cards as $value)
                 <tr>
-                  <td>{{$value->car->carCategory->brand->name_en}}-{{$value->car->model}}-{{$value->car->platNo}}</td> 
+                  <td>{{$value->car->carCategory->brand->name_en}}-{{$value->car->model}}-{{$value->car->platNo}}</td>
                   <td>{{$value->total}}</td>
                   <td>{{$value->total_with_taxes}}</td>
 
                 </tr>
                 @endforeach
-                </tbody>
+              </tbody>
 
-              </table>
-              </div>
-        @endif
-         
-    
+            </table>
           </div>
-          <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-      </div>
-      <!-- /.col -->
-    </div>
+          @endif
 
- 
-    <!-- /.row -->
-  </section>
-  <!-- /.content -->
+
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+
+
+<!-- /.row -->
+</section>
+<!-- /.content -->
 </div>
 
 

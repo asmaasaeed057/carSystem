@@ -27,6 +27,14 @@
     })
   })
 </script>
+<script>
+  $(document).ready(function() {
+    $(".delete").click(function(event) {
+      if (!confirm('هل انت متاكد ؟'))
+        event.preventDefault();
+    });
+  });
+</script>
 @endsection
 
 @section('content')
@@ -91,10 +99,10 @@
                   <td><a href="{{route('expense.edit' ,$expense->expense_id)}}" class="btn btn-info">Edit</a></td>
                   <td>
 
-                    <form class="delete" action="{{route('expense.destroy' ,$expense->expense_id)}}" method="post">
+                    <form action="{{route('expense.destroy' ,$expense->expense_id)}}" method="post">
                       @csrf
                       @method('DELETE')
-                      <button class="btn btn-danger" type="submit">Delete</button>
+                      <button class="btn btn-danger delete" type="submit">Delete</button>
 
                     </form>
                   </td>

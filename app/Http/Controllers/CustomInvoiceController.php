@@ -6,11 +6,27 @@ use Illuminate\Http\Request;
 use App\Service;
 use App\CustomInvoice;
 use App\CustomInvoiceItem;
-
+use App\Custom;
+use Auth;
 
 
 class CustomInvoiceController extends Controller
 {
+
+    public function callAction($method, $parameters)
+    {
+        $group = Auth::guard('admin')->user()->group;
+
+        $actionObject = app('request')->route()->getAction();
+        $controller = class_basename($actionObject['controller']);
+        list($controller, $action) = explode('@', $controller);
+        $valid = Custom::permission($group, $controller, $action);
+        if ($valid) {
+            return parent::callAction($method, $parameters);
+        } else {
+            return response()->view('admin.errors.403');
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,9 +34,8 @@ class CustomInvoiceController extends Controller
      */
     public function index()
     {
-        $invoices=CustomInvoice::all();
+        $invoices = CustomInvoice::all();
         return view('admin.customInvoice.index', compact('invoices'));
-
     }
 
     /**
@@ -30,18 +45,14 @@ class CustomInvoiceController extends Controller
      */
     public function create()
     {
-        if(CustomInvoice::orderBy('invoice_id', 'desc')->first())
-        {
-        $number=CustomInvoice::orderBy('invoice_id', 'desc')->first()->invoice_number;
-        }
-        else
-        {
-            $number=0;
+        if (CustomInvoice::orderBy('invoice_id', 'desc')->first()) {
+            $number = CustomInvoice::orderBy('invoice_id', 'desc')->first()->invoice_number;
+        } else {
+            $number = 0;
         }
 
         $services = Service::get();
-        return view('admin.customInvoice.create', compact('services','number'));
-
+        return view('admin.customInvoice.create', compact('services', 'number'));
     }
 
     /**
@@ -55,7 +66,7 @@ class CustomInvoiceController extends Controller
         $invoice = CustomInvoice::create($request->all());
         $price =   $request->get('price');
         foreach ($request->get('services') as $id => $service) {
-        if ($service) {
+            if ($service) {
                 $InvoiceItem = new CustomInvoiceItem();
                 $InvoiceItem->service_id = $service;
                 $carService = Service::find($service);
@@ -65,9 +76,8 @@ class CustomInvoiceController extends Controller
                 $InvoiceItem->save();
             }
         }
-        $invoices=CustomInvoice::all();
+        $invoices = CustomInvoice::all();
         return view('admin.customInvoice.index', compact('invoices'));
-    
     }
 
     /**
@@ -78,9 +88,8 @@ class CustomInvoiceController extends Controller
      */
     public function show($id)
     {
-        $invoice=CustomInvoice::find($id);
+        $invoice = CustomInvoice::find($id);
         return view('admin.customInvoice.show', compact('invoice'));
-
     }
 
     /**
@@ -91,10 +100,10 @@ class CustomInvoiceController extends Controller
      */
     public function edit($id)
     {
-        $invoice=CustomInvoice::find($id);
+        $invoice = CustomInvoice::find($id);
         $allServices = Service::all();
 
-        return view('admin.customInvoice.edit', compact('invoice','allServices'));
+        return view('admin.customInvoice.edit', compact('invoice', 'allServices'));
     }
 
     /**
@@ -128,7 +137,6 @@ class CustomInvoiceController extends Controller
             $invoiceItem->save();
         }
         return redirect('admin/customInvoice');
-
     }
 
     /**
@@ -146,6 +154,5 @@ class CustomInvoiceController extends Controller
         }
         $invoice->delete();
         return back();
-
     }
 }

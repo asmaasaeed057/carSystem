@@ -9,24 +9,23 @@ use App\Group;
 use App\Role;
 use Illuminate\Support\Facades\DB;
 use App\GroupRole;
-use Illuminate\Support\Facades\Auth;
+use App\Custom;
+use Auth;
 
 class GroupController extends Controller
 {
     // public function callAction($method, $parameters)
     // {
-    //     $group = Auth::user()->group;
+    //     $group = Auth::guard('admin')->user()->group;
+
     //     $actionObject = app('request')->route()->getAction();
     //     $controller = class_basename($actionObject['controller']);
-    //     list($controller, $action)= explode('@', $controller);
+    //     list($controller, $action) = explode('@', $controller);
     //     $valid = Custom::permission($group, $controller, $action);
-    //     if ($valid)
-    //     {
+    //     if ($valid) {
     //         return parent::callAction($method, $parameters);
-    //     }
-    //     else
-    //     {
-    //         return response()->view('backend::errors.404');
+    //     } else {
+    //         return response()->view('admin.errors.403');
     //     }
     // }
     /**
@@ -49,7 +48,7 @@ class GroupController extends Controller
     public function create()
     {
         $roles = DB::table('roles')
-                        ->get()->groupBy('role_controller_label');
+            ->get()->groupBy('role_controller_label');
         return view('admin/group.create', [
             'roles' => $roles
         ]);
@@ -66,13 +65,11 @@ class GroupController extends Controller
             'group_name' => 'required',
         ]);
         $group = Group::create([
-                    'group_name' => $request['group_name'],
+            'group_name' => $request['group_name'],
         ]);
-        if ($request->get('role_id'))
-        {
+        if ($request->get('role_id')) {
 
-            foreach ($request->get('role_id') as $i => $id)
-            {
+            foreach ($request->get('role_id') as $i => $id) {
                 $groupRole = new GroupRole();
                 $groupRole->role_id = $id;
                 $groupRole->group_id = $group->group_id;
@@ -80,7 +77,7 @@ class GroupController extends Controller
             }
         }
 
-//        Group::create($request->all());
+        //        Group::create($request->all());
 
         return redirect(route('group.index'));
     }
@@ -94,7 +91,7 @@ class GroupController extends Controller
     public function edit($id)
     {
         $roles = DB::table('roles')
-                        ->get()->groupBy('role_controller_label');
+            ->get()->groupBy('role_controller_label');
 
         $group = Group::find($id);
         $groupRoles = $group->roles;
@@ -117,20 +114,16 @@ class GroupController extends Controller
 
         $group = Group::find($id);
         $groupRoles = $group->roles;
-        if ($groupRoles)
-        {
-            foreach ($groupRoles as $groupRole)
-            {
+        if ($groupRoles) {
+            foreach ($groupRoles as $groupRole) {
                 $groupRole->delete();
             }
         }
         $group->update([
             'group_name' => $request['group_name'],
         ]);
-        if ($request->get('role_id'))
-        {
-            foreach ($request->get('role_id') as $i => $id)
-            {
+        if ($request->get('role_id')) {
+            foreach ($request->get('role_id') as $i => $id) {
 
                 $groupRole = new GroupRole();
                 $groupRole->role_id = $id;
@@ -157,5 +150,4 @@ class GroupController extends Controller
 
         return redirect()->route('group.index');
     }
-
 }

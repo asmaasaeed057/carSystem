@@ -18,19 +18,7 @@
     width: 200px;
   }
 </style>
-<script>
-  $(function() {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging': true,
-      'lengthChange': false,
-      'searching': false,
-      'ordering': true,
-      'info': true,
-      'autoWidth': false
-    })
-  })
-</script>
+
 <script>
   var j = 1;
   $(document).ready(function() {
@@ -132,6 +120,7 @@
         $('#price_' + count).val(result);
         for (var p = 0; p <= count; p++) {
           var price = $('#price_' + p).val();
+          // alert(price);
           total += Number(price);
 
         }

@@ -27,6 +27,14 @@
     })
   })
 </script>
+<script>
+    $(document).ready(function() {
+    $(".delete").click(function(event) {
+      if (!confirm('هل انت متاكد ؟'))
+        event.preventDefault();
+    });
+  });
+</script>
 @endsection
 
 @section('content')
@@ -66,11 +74,11 @@
 
               <div class="form-group">
                 <label for="client_name">Client Name</label>
-                <input type="text" name="client_name" class="form-control" style="width:500px">
+                <input type="text" name="client_name" value="{{$client_name}}" class="form-control" style="width:500px">
               </div>
               <div class="form-group" style="display: block">
                 <label for="client_phone">Client Phone</label>
-                <input type="text" name="client_phone" class="form-control" style="width:500px">
+                <input type="text" name="client_phone" value="{{$client_phone}}" class="form-control" style="width:500px">
               </div>
 
               <input type="submit" class="btn-primary" value="search">
@@ -112,10 +120,10 @@
                   <!-- <td>{{$client->client_type}}</td> -->
                   <td><a href="{{route('client.edit' ,$client->id)}}" class="btn btn-info">Edit</a></td>
                   <td>
-                    <form class="delete" action="{{route('client.destroy' ,$client->id)}}" method="post">
+                    <form action="{{route('client.destroy' ,$client->id)}}" method="post">
                       @csrf
                       @method('DELETE')
-                      <button class="btn btn-danger" type="submit">Delete</button>
+                      <button class="btn btn-danger delete" type="submit">Delete</button>
                     </form>
                   </td>
                   <td><a href="{{route('client.show' ,$client->id)}}" class="btn btn-success">Show</a></td>

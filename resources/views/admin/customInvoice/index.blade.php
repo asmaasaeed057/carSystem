@@ -29,12 +29,11 @@
         })
     })
     $(document).ready(function() {
-    $(".delete").click(function(event) {
-      if (!confirm('هل انت متاكد ؟'))
-        event.preventDefault();
+        $(".delete").click(function(event) {
+            if (!confirm('هل انت متاكد ؟'))
+                event.preventDefault();
+        });
     });
-  });
-
 </script>
 @endsection
 
@@ -60,12 +59,16 @@
 
                 <div class="box box-primary">
                     <div class="box-header">
+
                         <h3 class="box-title">Custom Invoice</h3>
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                             </button>
                             <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                         </div>
+                    </div>
+                    <div class="box-header">
+                        <a href="{{route('customInvoice.create')}}" style="margin-top: 10px;" class="btn btn-success">Add Custom Invoice </a>
                     </div>
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -93,20 +96,20 @@
                                     <td><a href="{{route('customInvoice.edit' ,$invoice->invoice_id)}}" class="btn btn-success">Edit</a></td>
                                     <td>
                                         <form class="delete" action="{{route('customInvoice.destroy' ,$invoice->invoice_id)}}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger delete" type="submit">Delete</button>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger delete" type="submit">Delete</button>
 
                                         </form>
                                     </td>
 
 
-                           
+
                                 </tr>
                                 @endforeach
                             </tbody>
 
-   
+
                         </table>
                     </div>
                     <!-- /.box-body -->

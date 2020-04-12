@@ -11,13 +11,6 @@ use Auth;
 
 class CarTypeController extends Controller
 {
-    /*     public function __construct()
-    {
-        $this->middleware('permission:car_types_show', ['only' => 'index','show']);
-        $this->middleware('permission:car_types_edit', ['only' => 'edit','update']);
-        $this->middleware('permission:car_types_add', ['only' => 'store' ,'create']);
-        $this->middleware('permission:car_types_delete', ['only' => 'multi_delete','distroy']);
-    } */
 
     public function callAction($method, $parameters)
     {

@@ -29,6 +29,14 @@
         })
     })
 </script>
+<script>
+    $(document).ready(function() {
+        $(".delete").click(function(event) {
+            if (!confirm('هل انت متاكد ؟'))
+                event.preventDefault();
+        });
+    });
+</script>
 @endsection
 
 @section('content')
@@ -107,21 +115,21 @@
                                     <td><a href="{{route('service.edit' ,$service->service_id)}}" class="btn btn-info">Edit</a></td>
                                     <td>
 
-                                        <form class="delete" action="{{route('service.destroy' ,$service->service_id)}}" method="post">
+                                        <form action="{{route('service.destroy' ,$service->service_id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-danger" type="submit">Delete</button>
+                                            <button class="btn btn-danger delete" type="submit">Delete</button>
 
                                         </form>
                                     </td>
                                     <td><a href="{{route('service.show' ,$service->service_id)}}" class="btn btn-success">Show</a></td>
 
-                           
+
                                 </tr>
                                 @endforeach
                             </tbody>
 
-   
+
                         </table>
                     </div>
                     <!-- /.box-body -->

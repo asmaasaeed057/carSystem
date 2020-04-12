@@ -4,32 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\Invoice;
-
 use Illuminate\Http\Request;
-
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-
+use App\Custom;
 use Auth;
-use App\models\Custom;
 use App\ReprairCard;
 
 class InvoiceReportController extends Controller
 {
-    // public function callAction($method, $parameters)
-    // {
-    //     $group = Auth::guard('admin')->user()->group;
+    public function callAction($method, $parameters)
+    {
+        $group = Auth::guard('admin')->user()->group;
 
-    //     $actionObject = app('request')->route()->getAction();
-    //     $controller = class_basename($actionObject['controller']);
-    //     list($controller, $action) = explode('@', $controller);
-    //     $valid = Custom::permission($group, $controller, $action);
-    //     if ($valid) {
-    //         return parent::callAction($method, $parameters);
-    //     } else {
-    //         return response()->view('admin.errors.403');
-    //     }
-    // }
+        $actionObject = app('request')->route()->getAction();
+        $controller = class_basename($actionObject['controller']);
+        list($controller, $action) = explode('@', $controller);
+        $valid = Custom::permission($group, $controller, $action);
+        if ($valid) {
+            return parent::callAction($method, $parameters);
+        } else {
+            return response()->view('admin.errors.403');
+        }
+    }
     public function index()
     {
         $invoices = Invoice::all();
@@ -60,7 +57,7 @@ class InvoiceReportController extends Controller
         if ($invoice_number) {
             $c->where('invoice_number', $invoice_number)->get();
         }
-     
+
         if ($invoice_date_from) {
             $c->whereDate('invoice_date', '>=', $invoice_date_from)->whereDate('invoice_date', '<=', $invoice_date_to)->get();
         }
@@ -70,12 +67,11 @@ class InvoiceReportController extends Controller
             $client = Client::where('fullName', $client_name)->first();
             $clientId = $client->id;
 
-            $repairCard = ReprairCard::where('client_id',$clientId)->first();
+            $repairCard = ReprairCard::where('client_id', $clientId)->first();
 
-            if($repairCard){
+            if ($repairCard) {
                 $cardId =  $repairCard->id;
-            }
-            else{
+            } else {
                 $cardId = '';
             }
 
@@ -123,7 +119,7 @@ class InvoiceReportController extends Controller
         if ($invoice_number) {
             $c->where('invoice_number', $invoice_number)->get();
         }
-     
+
         if ($invoice_date_from) {
             $c->whereDate('invoice_date', '>=', $invoice_date_from)->whereDate('invoice_date', '<=', $invoice_date_to)->get();
         }
@@ -133,12 +129,11 @@ class InvoiceReportController extends Controller
             $client = Client::where('fullName', $client_name)->first();
             $clientId = $client->id;
 
-            $repairCard = ReprairCard::where('client_id',$clientId)->first();
+            $repairCard = ReprairCard::where('client_id', $clientId)->first();
 
-            if($repairCard){
+            if ($repairCard) {
                 $cardId =  $repairCard->id;
-            }
-            else{
+            } else {
                 $cardId = '';
             }
 

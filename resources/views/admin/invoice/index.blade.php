@@ -86,7 +86,8 @@
                                     <td>{{$invoice->invoice_date}}</td>
                                     <td>{{$invoice->invoice_total}}</td>
                                     <td><a href="{{route('invoiceShow' ,$invoice->invoice_id)}}" class="btn btn-success">Show</a></td>
-                                    <td><a href="{{route('invoicePayment' ,$invoice->invoice_id)}}" class="btn btn-primary">Invoice Payment</a></td>
+                                    <td> <a class="btn btn-warning" href="{{route('invoicePayment' ,$invoice->invoice_id)}}"><i class="fas fa-money" style="margin-right: 10px;"></i>pay</a>
+                                    </td>
                                 </tr>
                                 @endif
                                 @endforeach
