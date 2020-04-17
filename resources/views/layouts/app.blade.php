@@ -29,9 +29,9 @@
     <link rel="stylesheet" href="{{ asset('FrontEnd') }}/bower_components/select2/dist/css/select2.min.css">
 
     <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script> -->
     <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
+           folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{ asset('FrontEnd') }}/dist/css/skins_rtl/_all-skins.min.css">
     <!-- Morris chart -->
     <link rel="stylesheet" href="{{ asset('FrontEnd') }}/bower_components/morris.js/morris.css">
@@ -47,9 +47,9 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
 
     @if (session()->has('lang') == "ar")
 
@@ -72,7 +72,7 @@
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>A</b>LT</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Admin</b>LTE</span>
+                <span class="logo-lg"><b>El Wrsha</b></span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -83,127 +83,127 @@
 
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                        <!-- Messages: style can be found in dropdown.less-->
-                        <li class="dropdown messages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-envelope-o"></i>
-                                <span class="label label-success">4</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 4 messages</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li>
-                                            <!-- start message -->
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="{{ asset('FrontEnd') }}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>
-                                                    Support Team
-                                                    <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                        <!-- end message -->
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="{{ asset('FrontEnd') }}/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>
-                                                    AdminLTE Design Team
-                                                    <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="{{ asset('FrontEnd') }}/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>
-                                                    Developers
-                                                    <small><i class="fa fa-clock-o"></i> Today</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="{{ asset('FrontEnd') }}/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>
-                                                    Sales Department
-                                                    <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="{{ asset('FrontEnd') }}/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>
-                                                    Reviewers
-                                                    <small><i class="fa fa-clock-o"></i> 2 days</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">See All Messages</a></li>
-                            </ul>
-                        </li>
-                        <!-- Notifications: style can be found in dropdown.less -->
-                        <li class="dropdown notifications-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-bell-o"></i>
-                                <span class="label label-warning">10</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 10 notifications</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                                                page and may cause design problems
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-users text-red"></i> 5 new members joined
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-user text-red"></i> You changed your username
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">View all</a></li>
-                            </ul>
-                        </li>
-                        <!-- Tasks: style can be found in dropdown.less -->
+                        <!--                         Messages: style can be found in dropdown.less
+                                                    <li class="dropdown messages-menu">
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="fa fa-envelope-o"></i>
+                                                            <span class="label label-success">4</span>
+                                                        </a>
+                                                        <ul class="dropdown-menu">
+                                                            <li class="header">You have 4 messages</li>
+                                                            <li>
+                                                                 inner menu: contains the actual data 
+                                                                <ul class="menu">
+                                                                    <li>
+                                                                         start message 
+                                                                        <a href="#">
+                                                                            <div class="pull-left">
+                                                                                <img src="{{ asset('FrontEnd') }}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                                                            </div>
+                                                                            <h4>
+                                                                                Support Team
+                                                                                <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                                                            </h4>
+                                                                            <p>Why not buy a new awesome theme?</p>
+                                                                        </a>
+                                                                    </li>
+                                                                     end message 
+                                                                    <li>
+                                                                        <a href="#">
+                                                                            <div class="pull-left">
+                                                                                <img src="{{ asset('FrontEnd') }}/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                                                                            </div>
+                                                                            <h4>
+                                                                                AdminLTE Design Team
+                                                                                <small><i class="fa fa-clock-o"></i> 2 hours</small>
+                                                                            </h4>
+                                                                            <p>Why not buy a new awesome theme?</p>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">
+                                                                            <div class="pull-left">
+                                                                                <img src="{{ asset('FrontEnd') }}/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                                                                            </div>
+                                                                            <h4>
+                                                                                Developers
+                                                                                <small><i class="fa fa-clock-o"></i> Today</small>
+                                                                            </h4>
+                                                                            <p>Why not buy a new awesome theme?</p>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">
+                                                                            <div class="pull-left">
+                                                                                <img src="{{ asset('FrontEnd') }}/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                                                                            </div>
+                                                                            <h4>
+                                                                                Sales Department
+                                                                                <small><i class="fa fa-clock-o"></i> Yesterday</small>
+                                                                            </h4>
+                                                                            <p>Why not buy a new awesome theme?</p>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">
+                                                                            <div class="pull-left">
+                                                                                <img src="{{ asset('FrontEnd') }}/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                                                                            </div>
+                                                                            <h4>
+                                                                                Reviewers
+                                                                                <small><i class="fa fa-clock-o"></i> 2 days</small>
+                                                                            </h4>
+                                                                            <p>Why not buy a new awesome theme?</p>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="footer"><a href="#">See All Messages</a></li>
+                                                        </ul>
+                                                    </li>
+                                                     Notifications: style can be found in dropdown.less 
+                                                    <li class="dropdown notifications-menu">
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="fa fa-bell-o"></i>
+                                                            <span class="label label-warning">10</span>
+                                                        </a>
+                                                        <ul class="dropdown-menu">
+                                                            <li class="header">You have 10 notifications</li>
+                                                            <li>
+                                                                 inner menu: contains the actual data 
+                                                                <ul class="menu">
+                                                                    <li>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
+                                                                            page and may cause design problems
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-users text-red"></i> 5 new members joined
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">
+                                                                            <i class="fa fa-user text-red"></i> You changed your username
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="footer"><a href="#">View all</a></li>
+                                                        </ul>
+                                                    </li>
+                                                     Tasks: style can be found in dropdown.less -->
                         <li class="dropdown tasks-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-flag-o"></i>
@@ -216,50 +216,19 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="{{ asset('FrontEnd') }}/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                                <img src="{{ asset('FrontEnd') }}/dist/img/avatar5.png" class="user-image" alt="User Image">
                                 <span class="hidden-xs">{{ auth('admin')->user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu">
-                                <!-- User image -->
-                                <li class="user-header">
-                                    <img src="{{ asset('FrontEnd') }}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                                    <p>
-                                        Alexander Pierce - Web Developer
-                                        <small>Member since Nov. 2012</small>
-                                    </p>
-                                </li>
-                                <!-- Menu Body -->
-                                <li class="user-body">
-
-                                    <div class="row">
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Followers</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Sales</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Friends</a>
-                                        </div>
-                                    </div>
-                                    <!-- /.row -->
-                                </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a href="{{ url('admin\logout') }}" class="btn btn-default btn-flat">Sign out</a>
-                                    </div>
+                                <li>
+                                    <a href="{{ url('admin\logout') }}" class="btn btn-default btn-flat">Sign out</a>
                                 </li>
                             </ul>
                         </li>
-                        <!-- Control Sidebar Toggle Button -->
-                        <li>
-                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                        </li>
+                        <!--                             Control Sidebar Toggle Button 
+                                                        <li>
+                                                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                                                        </li>-->
                     </ul>
                 </div>
             </nav>
@@ -271,7 +240,7 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="{{ asset('FrontEnd') }}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="{{ asset('FrontEnd') }}/dist/img/avatar5.png" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
                         <p>{{ auth('admin')->user()->name }}</p>
@@ -297,47 +266,150 @@
                             <i class="fa fa-dashboard"></i> <span>{{ trans('site.Dashboard')}}</span>
                         </a>
                     </li>
+
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
-                            <span>{{ trans('site.Client')}}</span>
+                            <span>Contract Clients</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
+
                         <ul class="treeview-menu">
-                            <li><a href="{{ route('client.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.showClient') }}</a></li>
-                            <li><a href="{{ route('client.create')}}"><i class="fa fa-circle-o"></i> {{ trans('site.addClient') }}</a></li>
-                            <!-- <li><a href="{{ route('noneContractClient.indexNoneContract')}}"><i class="fa fa-circle-o"></i> Show None Contract Client</a></li> -->
-                            <li><a href="{{ route('noneContractClient.createNoneContractClient')}}"><i class="fa fa-circle-o"></i>Create None Contract Client</a></li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-list"></i>
+                                    <span>Clients</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ route('client.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.showClient') }}</a></li>
+                                    <li><a href="{{ route('client.create')}}"><i class="fa fa-circle-o"></i> {{ trans('site.addClient') }}</a></li>
+                                    <li><a href="{{ route('car.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.carList') }}</a></li>
+                                    <!-- <li><a href="{{ route('noneContractClient.indexNoneContract')}}"><i class="fa fa-circle-o"></i> Show None Contract Client</a></li> -->
+                                    <li><a href="{{ route('noneContractClient.createNoneContractClient')}}"><i class="fa fa-circle-o"></i>Create None Contract Client</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-list"></i>
+                                    <span>{{ trans('site.RepairCard')}}</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ route('reprairCard.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.repairCarList')}} </a></li>
+                                    <li><a href="{{ route('reprairCard.create')}}"><i class="fa fa-circle-o"></i>{{ trans('site.addRepairCar')}} </a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-list"></i>
+                                    <span>Invoices</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ route('invoiceIndex')}}"><i class="fa fa-circle-o"></i>show Invoices Contract</a></li>
+                                    <li><a href="{{ route('invoiceIndexNoneContract')}}"><i class="fa fa-circle-o"></i> show Invoices None Contract</a></li>
+                                    <li><a href="{{ route('customInvoice.index')}}"><i class="fa fa-circle-o"></i> Custom Invoice</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-list"></i>
+                                    <span>Operation Orders</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ route('operationOrder.index') }}"><i class="fa fa-circle-o"></i> Operation Orders</a></li>
+
+                                </ul>
+                            </li>
                         </ul>
                     </li>
+
+
+
+                    <!-- <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>Car Brand</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{ route('brand.index')}}"><i class="fa fa-circle-o"></i>Car Brands</a></li>
+                                <li><a href="{{ route('brand.create')}}"><i class="fa fa-circle-o"></i>Add Car Brand</a></li>
+                            </ul>
+                        </li> -->
+
+
+                    <!-- <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>{{ trans('site.car')}}</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{ route('car.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.carList') }}</a></li>
+                                <li><a href="{{ route('car.create')}}"><i class="fa fa-circle-o"></i> {{ trans('site.addCar') }}</a></li>
+                            </ul>
+                        </li> -->
+
+                    <!-- <li class="treeview">
+    
+                            <a href="#">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>Car Type</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{ route('carType.index')}}"><i class="fa fa-circle-o"></i>Car Types</a></li>
+                                <li><a href="{{ route('carType.create')}}"><i class="fa fa-circle-o"></i>Add Car Type</a></li>
+                            </ul>
+                        </li> -->
+
+
+                    <!-- <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>{{ trans('site.permissions')}}</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{ route('permission.index') }}"><i class="fa fa-circle-o"></i> {{ trans('site.permissionslist')}}</a></li>
+                                <li><a href="{{ route('permission.create') }}"><i class="fa fa-circle-o"></i> {{ trans('site.add')}}</a></li>
+                            </ul>
+                        </li> -->
+
+
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
-                            <span>Cars</span>
+                            <span>Expenses</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ route('car.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.carList') }}</a></li>
+                            <li><a href="{{ route('expense.index')}}"><i class="fa fa-circle-o"></i>show expenses</a></li>
+                            <li><a href="{{ route('expense.create')}}"><i class="fa fa-circle-o"></i> add expense</a></li>
 
-
-                            <!-- <li><a href="{{ route('brandCategory.create')}}"><i class="fa fa-circle-o"></i>Add Car Brand Category</a></li> -->
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-pie-chart"></i>
-                            <span>{{ trans('site.RepairCard')}}</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ route('reprairCard.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.repairCarList')}} </a></li>
-                            <li><a href="{{ route('reprairCard.create')}}"><i class="fa fa-circle-o"></i>{{ trans('site.addRepairCar')}} </a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -370,147 +442,9 @@
                     </li>
 
 
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-pie-chart"></i>
-                            <span>Technical Employee</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{route('technicalEmployee.index')}}"><i class="fa fa-circle-o"></i>Add Technical Employee</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-pie-chart"></i>
-                            <span>Service</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ route('service.index')}}"><i class="fa fa-circle-o"></i>Services</a></li>
-                            <li><a href="{{ route('service.create')}}"><i class="fa fa-circle-o"></i>Add Service</a></li>
-                        </ul>
-                    </li>
-                    <!-- <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-pie-chart"></i>
-                            <span>Car Brand</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ route('brand.index')}}"><i class="fa fa-circle-o"></i>Car Brands</a></li>
-                            <li><a href="{{ route('brand.create')}}"><i class="fa fa-circle-o"></i>Add Car Brand</a></li>
-                        </ul>
-                    </li> -->
-
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-pie-chart"></i>
-                            <span>Expenses</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ route('expense.index')}}"><i class="fa fa-circle-o"></i>show expenses</a></li>
-                            <li><a href="{{ route('expense.create')}}"><i class="fa fa-circle-o"></i> add expense</a></li>
-
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-pie-chart"></i>
-                            <span>Invoices</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ route('invoiceIndex')}}"><i class="fa fa-circle-o"></i>show Invoices Contract</a></li>
-                            <li><a href="{{ route('invoiceIndexNoneContract')}}"><i class="fa fa-circle-o"></i> show Invoices None Contract</a></li>
-                            <li><a href="{{ route('customInvoice.index')}}"><i class="fa fa-circle-o"></i> Custom Invoice</a></li>
-
-
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-pie-chart"></i>
-                            <span>Operation Orders</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ route('operationOrder.index') }}"><i class="fa fa-circle-o"></i> Operation Orders</a></li>
-                        </ul>
-                    </li>
-                    <!-- <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-pie-chart"></i>
-                            <span>{{ trans('site.car')}}</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ route('car.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.carList') }}</a></li>
-                            <li><a href="{{ route('car.create')}}"><i class="fa fa-circle-o"></i> {{ trans('site.addCar') }}</a></li>
-                        </ul>
-                    </li> -->
-
-                    <!-- <li class="treeview">
-
-                        <a href="#">
-                            <i class="fa fa-pie-chart"></i>
-                            <span>Car Type</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ route('carType.index')}}"><i class="fa fa-circle-o"></i>Car Types</a></li>
-                            <li><a href="{{ route('carType.create')}}"><i class="fa fa-circle-o"></i>Add Car Type</a></li>
-                        </ul>
-                    </li> -->
-
-
-                    <!-- <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-pie-chart"></i>
-                            <span>{{ trans('site.permissions')}}</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ route('permission.index') }}"><i class="fa fa-circle-o"></i> {{ trans('site.permissionslist')}}</a></li>
-                            <li><a href="{{ route('permission.create') }}"><i class="fa fa-circle-o"></i> {{ trans('site.add')}}</a></li>
-                        </ul>
-                    </li> -->
 
 
 
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-pie-chart"></i>
-                            <span>Permissions</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ route('group.index') }}"><i class="fa fa-circle-o"></i> Groups</a></li>
-                            <li><a href="{{ route('account.index') }}"><i class="fa fa-circle-o"></i> Accounts</a></li>
-                        </ul>
-                    </li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
@@ -525,8 +459,21 @@
                             <li><a href="{{ route('brand.index')}}"><i class="fa fa-circle-o"></i>Car Brands</a></li>
                             <li><a href="{{ route('brandCategory.index')}}"><i class="fa fa-circle-o"></i>Car Brand Categories</a></li>
                             <li><a href="{{ route('carType.index')}}"><i class="fa fa-circle-o"></i>Car Types</a></li>
-
-
+                            <li><a href="{{route('technicalEmployee.index')}}"><i class="fa fa-circle-o"></i>Technical Employee</a></li>
+                            <li><a href="{{ route('service.index')}}"><i class="fa fa-circle-o"></i>Services</a></li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-pie-chart"></i>
+                                    <span>Permissions</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ route('group.index') }}"><i class="fa fa-circle-o"></i> Groups</a></li>
+                                    <li><a href="{{ route('account.index') }}"><i class="fa fa-circle-o"></i> Accounts</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
 
@@ -764,7 +711,7 @@
         </aside>
         <!-- /.control-sidebar -->
         <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
+           immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>
     </div>
     <!-- ./wrapper -->
