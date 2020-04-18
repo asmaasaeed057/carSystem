@@ -128,6 +128,7 @@
         var originalContents = document.body.innerHTML;
 
         document.body.innerHTML = printContents;
+        $('table table-bordered table-striped').hide();
 
         window.print();
 

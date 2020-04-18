@@ -61,10 +61,9 @@
                         </div>
                     </div>
                     <!-- /.box-header -->
-
                     <div class="box-body">
 
-                        <form action="{{ route('operationOrder.operationSearchIndex')}}" method="GET">
+                        <form action="{{ route('operationOrder.operationSearchNoneContractIndex')}}" method="GET">
                             <div class="form-group" style="display: block">
                                 <label for="operation_order_number">Operation Order Number</label>
                                 <input type="text" name="operation_order_number" value="{{$operation_order_number}}" class="form-control" style="width:500px">
@@ -84,7 +83,7 @@
                             </div>
 
                             <div class="form-group" style="display: block">
-                                <label for="technical_name">Technical Employee</label>
+                                <label for="technical_name">Technical Employee </label>
                                 <input type="text" name="technical_name" value="{{$technical_name}}" class="form-control" style="width:500px">
                             </div>
                             <input type="submit" class="btn-primary" value="search">
@@ -105,15 +104,16 @@
 
                                 @foreach($operationOrders as $order)
                                 @if($order->invoice)
-                                @if($order->invoice->repairCard->client->client_type == "contract")
+                                @if($order->invoice->repairCard->client->client_type == "noneContract")
+
                                 <tr>
                                     <td>{{$order->operation_order_date}}</td>
                                     <td>{{$order->operation_order_number}}</td>
+
                                     <td><a href="{{route('operationOrder.show' ,$order->operation_order_id)}}" class="btn btn-success">Show</a></td>
                                 </tr>
                                 @endif
                                 @endif
-
                                 @endforeach
                             </tbody>
 

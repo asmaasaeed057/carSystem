@@ -95,6 +95,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::get('invoice/create/{cardId}', 'ReprairCardController@createInvoice')->name('createInvoice');
         Route::get('operationOrder', 'OperationOrderController@index')->name('operationOrder.index');
         Route::get('operationOrder/{oid}', 'OperationOrderController@show')->name('operationOrder.show');
+        Route::get('operationOrderNoneContract', 'OperationOrderController@indexNoneContract')->name('operationOrder.indexNoneContract');
+        Route::get('operationOrderSearch', 'OperationOrderController@operationSearchIndex')->name('operationOrder.operationSearchIndex');
+        Route::get('operationSearchNoneContractIndex', 'OperationOrderController@operationSearchNoneContractIndex')->name('operationOrder.operationSearchNoneContractIndex');
+
+        
+        
         Route::get('invoice', 'ReprairCardController@invoiceIndex')->name('invoiceIndex');
         Route::get('invoiceShow/{invId}', 'ReprairCardController@invoiceShow')->name('invoiceShow');
         Route::get('invoiceNoneContract', 'ReprairCardController@invoiceIndexNoneContract')->name('invoiceIndexNoneContract');

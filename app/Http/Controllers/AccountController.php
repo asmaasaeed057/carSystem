@@ -47,13 +47,15 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
+        // dd('ssssss');
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8'],
+            'name' => ['required'],
+            'email' => ['required'],
+            'password' => ['required'],
         ]);
         if ($request->input('password') == $request->input('password_confirmation'))
         {
+            // dd($request);
             $account = Admin::create([
                         'group_id' => $request['group_id'],
                         'password' => Hash::make($request['group_id']),

@@ -87,7 +87,8 @@
               <tbody>
 
                 @foreach($cars as $car)
-                <tr style=>
+                @if($car->client->client_type == "contract")
+                <tr>
                   <td>{{$car->carCategory->name_en}}</td>
                   <td>{{$car->model}}</td>
                   <td>{{$car->client->fullName}}</td>
@@ -107,6 +108,7 @@
                   <!-- <td><a href="{{route('car.show' ,$car->id)}}" class="btn btn-success">Show</a></td> -->
 
                 </tr>
+                @endif
                 @endforeach
               </tbody>
 

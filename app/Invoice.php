@@ -20,7 +20,7 @@ class Invoice extends Model
         return $this->hasMany('App\InvoicePayment','invoice_id');
     }
     public function operationOrder(){
-        return $this->hasOne('App\OperationOrder');
+        return $this->hasOne('App\OperationOrder','invoice_id');
     }
     
 }
