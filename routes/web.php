@@ -36,6 +36,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::resource('client', 'ClientController');
         Route::get('clientSearch', 'ClientController@search')->name('clientSearchIndex');
         Route::resource('car', 'CarController');
+        Route::get('carSearch', 'CarController@carSearch')->name('car.carSearch');
+
         Route::resource('brand', 'CarBrandController');
         Route::resource('brandCategory', 'CarBrandCategoryController');
         Route::resource('carType', 'CarTypeController');
@@ -78,7 +80,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::resource('reprairCard', 'ReprairCardController');
         Route::get('approved/{id}', 'ReprairCardController@approved')->name('approved');
         Route::get('denied/{id}', 'ReprairCardController@denied')->name('denied');
-        Route::get('ClientReport','ReprairCardController@ClientReport')->name('ClientReport');
+        Route::get('ClientReport', 'ReprairCardController@ClientReport')->name('ClientReport');
         Route::get('ClientSearch', 'ReprairCardController@clientSearch')->name('clientSearch');
         Route::get('cardTaxesReport', 'ReprairCardController@cardTaxesReport')->name('cardTaxesReport');
         Route::get('cardTaxesSearch', 'ReprairCardController@cardTaxesSearch')->name('cardTaxesSearch');
@@ -87,11 +89,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::get('confirm/{id}', 'AccountController@confirm')->name('confirm');
         Route::get('cardSearch', 'ReprairCardController@cardSearch')->name('cardSearch');
 
-        
+
         Route::get('/createAdmin', 'admin\DashboardController@createAdmin');
         Route::any('logout', 'admin\AdminLoginController@logout');
         //Reports Routea
-        
+
         Route::get('invoice/create/{cardId}', 'ReprairCardController@createInvoice')->name('createInvoice');
         Route::get('operationOrder', 'OperationOrderController@index')->name('operationOrder.index');
         Route::get('operationOrder/{oid}', 'OperationOrderController@show')->name('operationOrder.show');
@@ -99,14 +101,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::get('operationOrderSearch', 'OperationOrderController@operationSearchIndex')->name('operationOrder.operationSearchIndex');
         Route::get('operationSearchNoneContractIndex', 'OperationOrderController@operationSearchNoneContractIndex')->name('operationOrder.operationSearchNoneContractIndex');
 
-        
-        
+
+
         Route::get('invoice', 'ReprairCardController@invoiceIndex')->name('invoiceIndex');
         Route::get('invoiceShow/{invId}', 'ReprairCardController@invoiceShow')->name('invoiceShow');
         Route::get('invoiceNoneContract', 'ReprairCardController@invoiceIndexNoneContract')->name('invoiceIndexNoneContract');
 
-        
-        
+
+
         Route::get('invoicePayment/{invId}', 'ReprairCardController@invoicePayment')->name('invoicePayment');
         Route::post('invoicePayment', 'ReprairCardController@paymentStore')->name('payment.store');
         Route::resource('customInvoice', 'CustomInvoiceController');
@@ -118,8 +120,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::get('noneContractClient/{cid}/edit', 'ClientController@editNoneContractClient')->name('noneContractClient.editNoneContractClient');
         Route::put('noneContractClient/{cid}', 'ClientController@updateNoneContractClient')->name('noneContractClient.updateNoneContractClient');
         Route::resource('technicalEmployee', 'TechnicalEmployeeController');
-
-        
-         
     });
 });

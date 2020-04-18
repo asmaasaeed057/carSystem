@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 18, 2020 at 07:37 PM
+-- Generation Time: Apr 18, 2020 at 07:57 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.15
 
@@ -162,7 +162,8 @@ INSERT INTO `group_role` (`group_role_id`, `group_id`, `role_id`, `created_at`, 
 (322, 1, 130, NULL, NULL),
 (323, 1, 131, NULL, NULL),
 (324, 1, 132, NULL, NULL),
-(325, 1, 133, NULL, NULL);
+(325, 1, 133, NULL, NULL),
+(326, 1, 134, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -184,7 +185,7 @@ ALTER TABLE `group_role`
 -- AUTO_INCREMENT for table `group_role`
 --
 ALTER TABLE `group_role`
-  MODIFY `group_role_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=326;
+  MODIFY `group_role_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=327;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

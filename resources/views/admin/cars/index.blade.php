@@ -65,10 +65,24 @@
             </div>
           </div>
           <!-- /.box-header -->
-          <div class="box-header">
-            <a href="{{route('car.create')}}" style="margin-top: 10px;" class="btn btn-success">Add Car</a>
-          </div>
           <div class="box-body">
+
+            <form action="{{ route('car.carSearch')}}" method="GET">
+
+              <div class="form-group">
+                <label for="client_name">Client Name</label>
+                <input type="text" name="client_name" value="{{$client_name}}" class="form-control" style="width:500px">
+              </div>
+              <input type="submit" class="btn-primary" value="search">
+            </form>
+          </div>
+
+          <br></br>
+
+          <div class="box box-primary">
+            <div class="box-header">
+              <a href="{{route('car.create')}}" style="margin-top: 10px;" class="btn btn-success">Add Car</a>
+            </div>
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>

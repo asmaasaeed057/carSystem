@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 18, 2020 at 07:37 PM
+-- Generation Time: Apr 18, 2020 at 07:57 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.15
 
@@ -164,7 +164,8 @@ INSERT INTO `roles` (`role_id`, `role_controller`, `role_action`, `role_label`, 
 (130, 'invoicereport', 'searchNoneContract', 'search invoice none contract Report', 'report', NULL, NULL),
 (131, 'operationorder', 'indexNoneContract', 'operation Order none contract', 'operation Order', NULL, NULL),
 (132, 'operationorder', 'operationSearchIndex', 'search operation Order contract', 'operation Order', NULL, NULL),
-(133, 'operationorder', 'operationSearchNoneContractIndex', 'search operation Order none contract', 'operation Order', NULL, NULL);
+(133, 'operationorder', 'operationSearchNoneContractIndex', 'search operation Order none contract', 'operation Order', NULL, NULL),
+(134, 'car', 'carSearch', 'search with client name', 'car', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -184,7 +185,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `role_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+  MODIFY `role_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
