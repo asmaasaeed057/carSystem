@@ -128,8 +128,11 @@
         var originalContents = document.body.innerHTML;
 
         document.body.innerHTML = printContents;
-        $('table table-bordered table-striped').hide();
-
+        $('.dataTables_length').hide();
+        $('.dataTables_filter').hide();
+        $('.pagination').hide();
+        $('.dataTables_info').hide();
+        $('.main-footer').hide();
         window.print();
 
         document.body.innerHTML = originalContents;

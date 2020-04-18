@@ -26,17 +26,17 @@
       'autoWidth': false
     })
   })
+
   function printDiv(divName) {
-        var printContents = document.getElementById(divName).innerHTML;
-        var originalContents = document.body.innerHTML;
+    var printContents = document.getElementById(divName).innerHTML;
+    var originalContents = document.body.innerHTML;
 
-        document.body.innerHTML = printContents;
+    document.body.innerHTML = printContents;
+    window.print();
 
-        window.print();
+    document.body.innerHTML = originalContents;
 
-        document.body.innerHTML = originalContents;
-
-    }
+  }
 </script>
 
 </script>
@@ -48,7 +48,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-    Invoice Details    
+      Invoice Details
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -103,16 +103,17 @@
     <div class="row">
       <div class="col-xs-12">
 
-        <div class="box box-primary" id="printMe">
-          <div class="box-header">
-            <h3 class="box-title"></h3>
-            <div class="box-tools pull-right">
-              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            </div>
+        <div class="box-header">
+          <h3 class="box-title"></h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
           </div>
-          <!-- /.box-header -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box box-primary" id="printMe">
+
           <div class="box-body">
 
             <h3 class="box-title">Invoice</h3>
@@ -121,99 +122,100 @@
             <table class="table table-bordered" id="example1">
               <tbody>
                 <tr>
-                    <th scope="row">Invoice Number</th>
-                    <td>{{$invoice->invoice_number}}</td>
+                  <th scope="row">Invoice Number</th>
+                  <td>{{$invoice->invoice_number}}</td>
                 </tr>
                 <tr>
-                    <th scope="row">Client Name</th>
-                    <td>{{$invoice->client_name}}</td>
+                  <th scope="row">Client Name</th>
+                  <td>{{$invoice->client_name}}</td>
                 </tr>
 
 
                 </tr>
-                  <th scope="row">Invoice Date</th>
-                  <td>{{$invoice->invoice_date}}</td>
+                <th scope="row">Invoice Date</th>
+                <td>{{$invoice->invoice_date}}</td>
                 </tr>
-                 <tr>
-                    <th scope="row">Invoice Total</th>
-                    <td>{{$invoice->total_with_taxes}}</td>
+                <tr>
+                  <th scope="row">Invoice Total</th>
+                  <td>{{$invoice->total_with_taxes}}</td>
                 </tr>
 
               </tbody>
             </table>
-         
+
             <br>
 
           </div>
-          
-          <div class="box-body">
-              <div class="box">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Items</h3>
 
-                  <table class="table table-striped table-dark">
-                    <thead>
-                      <tr>
+          <div class="box-body">
+            <div class="box">
+              <div class="box-header with-border">
+                <h3 class="box-title">Items</h3>
+
+                <table class="table table-striped table-dark">
+                  <thead>
+                    <tr>
                       <th scope="col">Service Type</th>
 
-                        <th scope="col">Service</th>
-                        <th scope="row">Client Cost</th>
+                      <th scope="col">Service</th>
+                      <th scope="row">Client Cost</th>
 
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php $total = 0; ?>
-                      @foreach($invoice->items as $item )
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php $total = 0; ?>
+                    @foreach($invoice->items as $item )
 
-                      <tr>
-                        <td>
+                    <tr>
+                      <td>
                         @if($item->service->service_type =="1")
                         أجور خدمات اليد )الإصلاحات)
 
-                        @elseif($item->service->service_type =="2") 
-                        أجور الأعمال الخارجية                      
-                        @elseif($item->service->service_type =="3") 
-                        قطع الغيار )مخزن داخلي) 
-                        @elseif($item->service->service_type =="4")  
-                        قطع غيار )مشتريات خارجية)                     
+                        @elseif($item->service->service_type =="2")
+                        أجور الأعمال الخارجية
+                        @elseif($item->service->service_type =="3")
+                        قطع الغيار )مخزن داخلي)
+                        @elseif($item->service->service_type =="4")
+                        قطع غيار )مشتريات خارجية)
                         @endif
-                        </td>
-                        <td>{{$item->service->service_name}}</td>
-                        <td>{{$item->client_cost}}</td>
-                        </tr>
+                      </td>
+                      <td>{{$item->service->service_name}}</td>
+                      <td>{{$item->client_cost}}</td>
+                    </tr>
 
-                     @endforeach
-                      <tr>
+                    @endforeach
+                    <tr>
                       <td></td>
                       <th>Total</th>
                       <td>{{$invoice->total}}</td>
-                      
-                      </tr>
-                      <tr>
+
+                    </tr>
+                    <tr>
                       <td></td>
                       <th>Total With Taxes</th>
                       <td>{{$invoice->total_with_taxes}}</td>
-                      
-                      </tr>
 
-                    </tbody>
-                  </table>
-                </div>
-                <!-- /.box-header -->
+                    </tr>
+
+                  </tbody>
+                </table>
               </div>
-              <!-- /.box-body -->
+              <!-- /.box-header -->
             </div>
+            <!-- /.box-body -->
+          </div>
 
-                <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center">Print</button>
 
           <!-- /.box-body -->
         </div>
+        <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center">Print</button>
+
         <!-- /.box -->
       </div>
       <!-- /.col -->
     </div>
 
- 
+
     <!-- /.row -->
   </section>
   <!-- /.content -->

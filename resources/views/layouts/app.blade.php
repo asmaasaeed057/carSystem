@@ -508,6 +508,7 @@
                             <li><a href="{{ route('carType.index')}}"><i class="fa fa-circle-o"></i>Car Types</a></li>
                             <li><a href="{{route('technicalEmployee.index')}}"><i class="fa fa-circle-o"></i>Technical Employee</a></li>
                             <li><a href="{{ route('service.index')}}"><i class="fa fa-circle-o"></i>Services</a></li>
+                            <li><a href="{{ route('companyDetails.index')}}"><i class="fa fa-circle-o"></i>Company Info</a></li>
                             <li class="treeview">
                                 <a href="#">
                                     <i class="fa fa-pie-chart"></i>
@@ -524,7 +525,7 @@
                         </ul>
                     </li>
 
-
+<!-- 
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
@@ -537,9 +538,9 @@
                             <li><a href="{{ route('Accounting.index')}}"><i class="fa fa-circle-o"></i> {{ trans('site.invoiceList') }}</a></li>
                             <li><a href="{{ route('Accounting.create')}}"><i class="fa fa-circle-o"></i> {{ trans('site.addInvoiceList') }}</a></li>
                         </ul>
-                    </li>
+                    </li> -->
 
-                    <li class="treeview">
+                    <!-- <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
                             <span>{{ trans('site.Administration')}}</span>
@@ -551,7 +552,7 @@
                             <li><a href="{{ route('admin.index') }}"><i class="fa fa-circle-o"></i> {{ trans('site.Administration')}}</a></li>
                             <li><a href="{{ route('admin.create') }}"><i class="fa fa-circle-o"></i> {{ trans('site.add')}}</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                 </ul>
             </section>
             <!-- /.sidebar -->
