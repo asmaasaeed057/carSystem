@@ -30,7 +30,9 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href=""><b>Admin</b>LTE</a>
+  <?php $company=App\CompanyDetails::all()->first(); ?>
+  <img src = "{{asset('/company_images')}}/{{ $company->company_logo }}" width="50" height="50">
+    <a ><b>{{ $company->company_name }}</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

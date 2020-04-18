@@ -52,36 +52,26 @@ class ClientSeeder extends Seeder
             array(
                 'fullName' => 'amira',
                 'phone' => '01658544496',
-                'address'=>'mahrmbieh',
-                'email'=>'amira@gmail.com',
                 'client_type'=>'noneContract',
             ),
             array(
                 'fullName' => 'islam',
                 'phone' => '01236858444',
-                'address'=>'agami',
-                'email'=>'islam@gmail.com',
                 'client_type'=>'noneContract',
             ),
             array(
                 'fullName' => 'sherouk',
                 'phone' => '01656565654',
-                'address'=>'smoha',
-                'email'=>'sherouk@gmail.com',
                 'client_type'=>'noneContract',
             ),
             array(
                 'fullName' => 'sara',
                 'phone' => '0126868644',
-                'address'=>'smoha',
-                'email'=>'sara@gmail.com',
                 'client_type'=>'noneContract',
             ),
             array(
                 'fullName' => 'youstina',
                 'phone' => '01656565654',
-                'address'=>'victoria',
-                'email'=>'youstina@gmail.com',
                 'client_type'=>'noneContract',
             ),
 

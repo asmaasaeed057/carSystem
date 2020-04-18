@@ -58,6 +58,20 @@
             </div>
           </div>
           <div id='printMe'>
+          <div id="company" class='container' hidden>
+
+        <a><b>Address:</b></a>{{ $company->company_address }}
+
+          <div align="center">
+
+          <img src = "{{asset('/company_images')}}/{{ $company->company_logo }}" width="50" height="50">
+          <a ><b>{{ $company->company_name }}</b></a>
+          </div>
+
+        <a ><b>phones:</b></a>{{ $company->company_phone }}
+
+
+          </div>
             <!-- /.box-header -->
             <div class="box-body">
               <div class="box">
@@ -191,6 +205,7 @@
 </div>
 <script>
   function printDiv(divName) {
+    $('#company').show();
     var printContents = document.getElementById(divName).innerHTML;
     var originalContents = document.body.innerHTML;
 

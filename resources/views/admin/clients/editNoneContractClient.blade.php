@@ -141,8 +141,11 @@
         var total = 0;
         $('#price_' + count).val(result);
         for (var p = 0; p <= count; p++) {
+          if ($('#price_' + p).val()){
+
           var price = $('#price_' + p).val();
           total += Number(price);
+          }
 
         }
         $('#total_price').val(total);

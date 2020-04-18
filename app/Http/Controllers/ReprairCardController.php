@@ -20,6 +20,8 @@ use App\InvoicePayment;
 use App\TechnicalEmployee;
 use App\Custom;
 use Auth;
+use App\CompanyDetails;
+
 
 
 
@@ -175,7 +177,9 @@ class ReprairCardController extends Controller
     public function show(ReprairCard $reprairC, $id)
     {
         $repairCard = ReprairCard::find($id);
-        return view('admin.repairCard.show', compact('repairCard'));
+        $company=CompanyDetails::all()->first();
+
+        return view('admin.repairCard.show', compact('repairCard','company'));
     }
 
     /**
