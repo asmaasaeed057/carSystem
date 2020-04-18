@@ -30,9 +30,10 @@ class CarController extends Controller
     }
     public function index()
     {
-        //
+        $client_name = '';
+
         $cars = Car::all();
-        return view('admin.cars.index', compact('cars'));
+        return view('admin.cars.index', compact('cars','client_name'));
     }
 
     /**
@@ -93,7 +94,6 @@ class CarController extends Controller
      */
     public function edit($id)
     {
-        //
         $car = Car::find($id);
 
         $carCategories = CarBrandCategory::all();
@@ -136,22 +136,32 @@ class CarController extends Controller
 
         return redirect()->route('car.index');
     }
-
-    function get_catagray(Request $request)
+    public function carSearch()
     {
-        // // dd($request->all());
-        // $select = $request->get('select');
-        // $value = $request->get('value');
-        // $dependent = $request->get('dependent');
-        // $data = CarBrandCategory::where("company_id" , $value)->get();
+        $client_name = $_GET['client_name'];
 
-        // $output = '<option value="">'.trans("site.options").'</option>';
-        // // dd($data);
-        // foreach($data as $row)
-        // {
-        // $output .= '<option value="'.$row->id.'">'.$row->name_ar.'</option>';
-        // }
+        $c = Car::select("*");
 
-        // echo $output;
+
+        if ($client_name) {
+            $client = Client::where('fullName','=',$client_name)->first();
+            if($client){
+                $clientId = $client->id;
+
+            }
+            else{
+                $clientId = '';
+
+            }
+            $c->where('client_id', '=', $clientId)->get();
+        }
+      
+        $cars = $c->get();
+
+        return view('admin.cars.index', [
+            'client_name' => $client_name,
+            'cars' => $cars
+
+        ]);
     }
 }

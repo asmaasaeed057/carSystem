@@ -8,6 +8,8 @@
 @section('script')
 <!-- DataTables -->
 <script src="https://kit.fontawesome.com/c099210540.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <script src="{{ asset('FrontEnd') }}/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="{{ asset('FrontEnd') }}/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 @endsection
@@ -45,12 +47,13 @@
     <!-- Main content -->
     <section class="content">
         @include('layouts.error')
+
         <div class="row">
             <div class="col-xs-12">
 
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">Invoice Report None Contract Client</h3>
+                        <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                             </button>
@@ -60,67 +63,65 @@
                     <!-- /.box-header -->
                     <div class="box-body">
 
-                        <form action="{{ route('invoiceNoneContractSearch')}}" method="GET">
-
-                            <div class="form-group">
-                                <label for="invoice_number">Invoice Number</label>
-                                <input type="text" name="invoice_number" value="{{$invoice_number}}" class="form-control" style="width:500px">
-                            </div>
+                        <form action="{{ route('operationOrder.operationSearchNoneContractIndex')}}" method="GET">
                             <div class="form-group" style="display: block">
+                                <label for="operation_order_number">Operation Order Number</label>
+                                <input type="text" name="operation_order_number" value="{{$operation_order_number}}" class="form-control" style="width:500px">
+                            </div>
+                            <div class="form-group">
                                 <label for="client_name">Client Name</label>
                                 <input type="text" name="client_name" value="{{$client_name}}" class="form-control" style="width:500px">
                             </div>
-
-
                             <div class="form-group">
-                                <label for="date from">From</label>
-                                <input type="date" name="invoice_date_from" value="{{$invoice_date_from}}" class="form-control" style="width:500px">
-                            </div>
-                            <div class="form-group" style="display: block">
-                                <label for="date to">To</label>
-                                <input type="date" name="invoice_date_to" value="{{$invoice_date_to}}" class="form-control" style="width:500px">
+                                <label>Car</label>
+                                <select class="form-control" name="car_id" id="clients" style="width: 32%;">
+                                    <option value="">Select</option>
+                                    @foreach($cars as $value)
+                                    <option value="{{$value->id}}" {{($value->id == $car_id) ? 'selected' : '' }}>{{$value->model}} - {{$value->car_color}} - {{$value->carType->name_en}} - {{$value->carCategory->name_en}} - {{$value->carCategory->brand->name_en}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
+                            <div class="form-group" style="display: block">
+                                <label for="technical_name">Technical Employee </label>
+                                <input type="text" name="technical_name" value="{{$technical_name}}" class="form-control" style="width:500px">
+                            </div>
                             <input type="submit" class="btn-primary" value="search">
                         </form>
                     </div>
-                    <hr>
                     <div class="box-body">
-                        <div id='printMe'>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Operation Order Date</th>
+                                    <th>Operation Order Number</th>
 
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Invoice Number</th>
-                                        <th>Client Name</th>
+                                    <th>Show</th>
 
-                                        <th>Invoice Date</th>
-                                        <th>Invoice Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                @foreach($operationOrders as $order)
+                                @if($order->invoice)
+                                @if($order->invoice->repairCard->client->client_type == "noneContract")
 
-                                    @foreach($invoices as $invoice)
-                                    @if($invoice->repairCard->client->client_type == "noneContract")
-                                    <tr>
-                                        <td>{{$invoice->invoice_number}}</td>
-                                        <td>{{$invoice->repairCard->client->fullName}}</td>
-                                        <td>{{$invoice->invoice_date}}</td>
-                                        <td>{{$invoice->invoice_total}}</td>
-                                    </tr>
-                                    @endif
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                <tr>
+                                    <td>{{$order->operation_order_date}}</td>
+                                    <td>{{$order->operation_order_number}}</td>
 
+                                    <td><a href="{{route('operationOrder.show' ,$order->operation_order_id)}}" class="btn btn-success">Show</a></td>
+                                </tr>
+                                @endif
+                                @endif
+                                @endforeach
+                            </tbody>
+
+
+                        </table>
                     </div>
-
                     <!-- /.box-body -->
                 </div>
-                <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center">Print</button>
-
                 <!-- /.box -->
             </div>
             <!-- /.col -->
@@ -131,20 +132,11 @@
 </div>
 
 <script>
-    function printDiv(divName) {
-        var printContents = document.getElementById(divName).innerHTML;
-        var originalContents = document.body.innerHTML;
-
-        document.body.innerHTML = printContents;
-        $('.dataTables_length').hide();
-        $('.dataTables_filter').hide();
-        $('.pagination').hide();
-        $('.dataTables_info').hide();
-        $('.main-footer').hide();
-        window.print();
-
-        document.body.innerHTML = originalContents;
-
-    }
+    $(document).ready(function() {
+        $(".delete").click(function(event) {
+            if (!confirm('هل انت متاكد ؟'))
+                event.preventDefault();
+        });
+    });
 </script>
 @endsection

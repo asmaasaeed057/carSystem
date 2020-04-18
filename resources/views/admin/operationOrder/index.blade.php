@@ -63,12 +63,40 @@
                     <!-- /.box-header -->
 
                     <div class="box-body">
+
+                        <form action="{{ route('operationOrder.operationSearchIndex')}}" method="GET">
+                            <div class="form-group" style="display: block">
+                                <label for="operation_order_number">Operation Order Number</label>
+                                <input type="text" name="operation_order_number" value="{{$operation_order_number}}" class="form-control" style="width:500px">
+                            </div>
+                            <div class="form-group">
+                                <label for="client_name">Client Name</label>
+                                <input type="text" name="client_name" value="{{$client_name}}" class="form-control" style="width:500px">
+                            </div>
+                            <div class="form-group">
+                                <label>Car</label>
+                                <select class="form-control" name="car_id" id="clients" style="width: 32%;">
+                                    <option value="">Select</option>
+                                    @foreach($cars as $value)
+                                    <option value="{{$value->id}}" {{($value->id == $car_id) ? 'selected' : '' }}>{{$value->model}} - {{$value->car_color}} - {{$value->carType->name_en}} - {{$value->carCategory->name_en}} - {{$value->carCategory->brand->name_en}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group" style="display: block">
+                                <label for="technical_name">Technical Employee</label>
+                                <input type="text" name="technical_name" value="{{$technical_name}}" class="form-control" style="width:500px">
+                            </div>
+                            <input type="submit" class="btn-primary" value="search">
+                        </form>
+                    </div>
+                    <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>Operation Order Date</th>
                                     <th>Operation Order Number</th>
-                                
+
                                     <th>Show</th>
 
                                 </tr>
@@ -76,17 +104,16 @@
                             <tbody>
 
                                 @foreach($operationOrders as $order)
+                                @if($order->invoice)
+                                @if($order->invoice->repairCard->client->client_type == "contract")
                                 <tr>
                                     <td>{{$order->operation_order_date}}</td>
                                     <td>{{$order->operation_order_number}}</td>
-                                
-                              
-
-               
                                     <td><a href="{{route('operationOrder.show' ,$order->operation_order_id)}}" class="btn btn-success">Show</a></td>
-
-
                                 </tr>
+                                @endif
+                                @endif
+
                                 @endforeach
                             </tbody>
 

@@ -127,7 +127,11 @@
         var originalContents = document.body.innerHTML;
 
         document.body.innerHTML = printContents;
-
+        $('.dataTables_length').hide();
+        $('.dataTables_filter').hide();
+        $('.pagination').hide();
+        $('.dataTables_info').hide();
+        $('.main-footer').hide();
         window.print();
 
         document.body.innerHTML = originalContents;

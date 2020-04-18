@@ -211,7 +211,8 @@ class ClientController extends Controller
         $operationOrder->save();
 
         session()->flash('success', "Client created successfully");
-        return redirect('admin/reprairCard');
+        return redirect(route('invoiceIndexNoneContract'));
+
 
     }
 

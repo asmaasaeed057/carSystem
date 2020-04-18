@@ -289,8 +289,6 @@
                                     <li><a href="{{ route('client.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.showClient') }}</a></li>
                                     <li><a href="{{ route('client.create')}}"><i class="fa fa-circle-o"></i> {{ trans('site.addClient') }}</a></li>
                                     <li><a href="{{ route('car.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.carList') }}</a></li>
-                                    <!-- <li><a href="{{ route('noneContractClient.indexNoneContract')}}"><i class="fa fa-circle-o"></i> Show None Contract Client</a></li> -->
-                                    <li><a href="{{ route('noneContractClient.createNoneContractClient')}}"><i class="fa fa-circle-o"></i>Create None Contract Client</a></li>
                                 </ul>
                             </li>
                             <li class="treeview">
@@ -315,9 +313,8 @@
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li><a href="{{ route('invoiceIndex')}}"><i class="fa fa-circle-o"></i>show Invoices Contract</a></li>
-                                    <li><a href="{{ route('invoiceIndexNoneContract')}}"><i class="fa fa-circle-o"></i> show Invoices None Contract</a></li>
-                                    <li><a href="{{ route('customInvoice.index')}}"><i class="fa fa-circle-o"></i> Custom Invoice</a></li>
+                                    <li><a href="{{ route('invoiceIndex')}}"><i class="fa fa-circle-o"></i>show Invoices</a></li>
+                                    <li><a href="{{ route('customInvoice.index')}}"><i class="fa fa-circle-o"></i>Custom Invoice</a></li>
                                 </ul>
                             </li>
                             <li class="treeview">
@@ -337,7 +334,57 @@
                     </li>
 
 
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-pie-chart"></i>
+                            <span>None Contract Clients</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
 
+                        <ul class="treeview-menu">
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-list"></i>
+                                    <span>Create Invoice</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ route('noneContractClient.createNoneContractClient')}}"><i class="fa fa-circle-o"></i>Create Invoice</a></li>
+                                </ul>
+                            </li>
+                          
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-list"></i>
+                                    <span>Invoices</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ route('invoiceIndexNoneContract')}}"><i class="fa fa-circle-o"></i> show Invoices</a></li>
+                                    <li><a href="{{ route('customInvoice.index')}}"><i class="fa fa-circle-o"></i> Custom Invoice</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-list"></i>
+                                    <span>Operation Orders</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ route('operationOrder.indexNoneContract') }}"><i class="fa fa-circle-o"></i> Operation Orders</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
                     <!-- <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-pie-chart"></i>
@@ -461,6 +508,7 @@
                             <li><a href="{{ route('carType.index')}}"><i class="fa fa-circle-o"></i>Car Types</a></li>
                             <li><a href="{{route('technicalEmployee.index')}}"><i class="fa fa-circle-o"></i>Technical Employee</a></li>
                             <li><a href="{{ route('service.index')}}"><i class="fa fa-circle-o"></i>Services</a></li>
+                            <li><a href="{{ route('companyDetails.index')}}"><i class="fa fa-circle-o"></i>Company Info</a></li>
                             <li class="treeview">
                                 <a href="#">
                                     <i class="fa fa-pie-chart"></i>
@@ -477,7 +525,7 @@
                         </ul>
                     </li>
 
-
+<!-- 
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
@@ -490,9 +538,9 @@
                             <li><a href="{{ route('Accounting.index')}}"><i class="fa fa-circle-o"></i> {{ trans('site.invoiceList') }}</a></li>
                             <li><a href="{{ route('Accounting.create')}}"><i class="fa fa-circle-o"></i> {{ trans('site.addInvoiceList') }}</a></li>
                         </ul>
-                    </li>
+                    </li> -->
 
-                    <li class="treeview">
+                    <!-- <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
                             <span>{{ trans('site.Administration')}}</span>
@@ -504,7 +552,7 @@
                             <li><a href="{{ route('admin.index') }}"><i class="fa fa-circle-o"></i> {{ trans('site.Administration')}}</a></li>
                             <li><a href="{{ route('admin.create') }}"><i class="fa fa-circle-o"></i> {{ trans('site.add')}}</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                 </ul>
             </section>
             <!-- /.sidebar -->

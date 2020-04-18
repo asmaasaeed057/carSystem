@@ -64,11 +64,11 @@
 
                             <div class="form-group">
                                 <label for="date from">From</label>
-                                <input type="date" name="expense_date_from" value= "{{$expense_date_from}}" class="form-control" style="width:500px">
+                                <input type="date" name="expense_date_from" value="{{$expense_date_from}}" class="form-control" style="width:500px">
                             </div>
                             <div class="form-group" style="display: block">
                                 <label for="date to">To</label>
-                                <input type="date" name="expense_date_to" value= "{{$expense_date_to}}" class="form-control" style="width:500px">
+                                <input type="date" name="expense_date_to" value="{{$expense_date_to}}" class="form-control" style="width:500px">
                             </div>
 
                             <input type="submit" class="btn-primary" value="search">
@@ -126,7 +126,11 @@
         var originalContents = document.body.innerHTML;
 
         document.body.innerHTML = printContents;
-
+        $('.dataTables_length').hide();
+        $('.dataTables_filter').hide();
+        $('.pagination').hide();
+        $('.dataTables_info').hide();
+        $('.main-footer').hide();
         window.print();
 
         document.body.innerHTML = originalContents;
