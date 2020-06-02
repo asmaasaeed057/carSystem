@@ -121,5 +121,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::put('noneContractClient/{cid}', 'ClientController@updateNoneContractClient')->name('noneContractClient.updateNoneContractClient');
         Route::resource('technicalEmployee', 'TechnicalEmployeeController');
         Route::resource('companyDetails', 'CompanyDetailsController');
+        Route::resource('cardTaxes', 'CardTaxesController');
+
     });
 });

@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailable;
 use PhpParser\Node\Expr\New_;
 use App\TechnicalEmployee;
+use App\CardTaxes;
+
 class ClientController extends Controller
 {
 
@@ -135,12 +137,16 @@ class ClientController extends Controller
             $number = 0;
         }
         $employee = TechnicalEmployee::get();
+        $taxes=CardTaxes::orderBy('taxes_id', 'desc')->first()->taxes_value;
+
 
         return view('admin.clients.createNoneContract', [
             'carCategories' => $carCategories,
             'carTypes' => $carTypes,
             'number' => $number,
-            'employee' => $employee
+            'employee' => $employee,
+            'taxes' => $taxes
+
         ]);
     }
 
@@ -183,6 +189,8 @@ class ClientController extends Controller
         $repairCard->client_id = $client->id;
         $repairCard->car_id = $car->id;
         $repairCard->status = 'accepted';
+        $repairCard->card_discount = $request->get('card_discount');
+
         $repairCard->save();
 
         $price =   $request->get('price');
@@ -272,7 +280,7 @@ class ClientController extends Controller
         }
         $repairCard->update($request->only(
             [
-                'checkReprort','employee_id'
+                'checkReprort','employee_id','card_discount'
             ]
         ));
         $repairCard->client_id = $client->id;

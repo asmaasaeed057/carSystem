@@ -158,18 +158,27 @@
                       <?php $total += $item->service_client_cost ?>
                       @endforeach
                       <tr>
-                      <tr>
                         <th></th>
                         <th>Total</th>
                         <td><?php echo $total ?></td>
                       </tr>
                       <tr>
-                        <?php $taxes = $repairCard->card_taxes / 100 ?>
-                        <?php $totalWithTaxes = $total + ($taxes * $total); ?>
+                        <th></th>
+                        <th>Discount</th>
+                        <td>{{$repairCard->card_discount}}</td>
+                      </tr>
+                      <tr>
+                        <th></th>
+                        <th>Taxes</th>
+                        <td>{{$repairCard->taxes}}</td>
+                      </tr>
+
+
+                      <tr>
                         <th></th>
 
                         <th>Total With Taxes</th>
-                        <td><?php echo $totalWithTaxes ?></td>
+                        <td>{{$repairCard->total_with_taxes}}</td>
                       </tr>
                     </tbody>
                   </table>

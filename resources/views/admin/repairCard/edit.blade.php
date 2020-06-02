@@ -58,6 +58,13 @@
     var total = $('#total_price').val();
     var price = $('#price_' + count).val();
     var total2 = Number(total) - Number(price);
+    var discount = Number($('#discount').val());
+    var totalWithDiscount=total2-discount;
+    var taxes = Number($('#taxes').val());
+    var totalTaxes=(taxes*totalWithDiscount)/100;
+    var totalWithTaxes=Number(totalTaxes)+totalWithDiscount;
+    $('#totalPriceWithTaxes').val(totalWithTaxes);
+
     $('#total_price').val(total2);
     if (confirm("هل أنت متأكد؟")) {
       $(e).parent().parent().remove();
@@ -112,6 +119,19 @@
 
     })
   }
+  function cardDiscount()
+  {
+    var discount = Number($('#discount').val());
+    var totalWithoutDiscount=Number($('#total_price').val());
+    var totalWithDiscount=totalWithoutDiscount-discount;
+    var taxes = Number($('#taxes').val());
+    var totalTaxes=(taxes*totalWithDiscount)/100;
+    var totalWithTaxes=Number(totalTaxes)+totalWithDiscount;
+
+    $('#totalPriceWithTaxes').val(totalWithTaxes);
+
+  }
+
 
   function showPrice(count) {
     var total = 0;
@@ -136,6 +156,15 @@
 
         }
         $('#total_price').val(total);
+        var discount = Number($('#discount').val());
+        var totalWithDiscount=total-discount;
+        var taxes = Number($('#taxes').val());
+        var totalTaxes=(taxes*totalWithDiscount)/100;
+        var totalWithTaxes=Number(totalTaxes)+totalWithDiscount;
+
+
+        $('#totalPriceWithTaxes').val(totalWithTaxes);
+
       }
 
     })
@@ -235,7 +264,7 @@
                     </div>
                   </div>
 
-                  <input type="text" value={{$repairCard->card_taxes}} name="card_taxes" hidden>
+                  <input type="text" id="taxes" value={{$repairCard->card_taxes}} name="card_taxes" hidden>
 
 
                   <div class="container">
@@ -309,7 +338,15 @@
                       </tbody>
                       <tfoot>
                         <tr>
+                        <td colspan="2"></td>
+                        <td><strong>Discount</strong></td>
+                        <td>
+                        <input type="number" name="card_discount" id="discount" onkeyup="cardDiscount()" value="{{$repairCard->card_discount}}">
 
+                        </td>
+                        </tr>
+
+                      <tr hidden>
                           <td colspan="2"></td>
                           <td><strong>Total Price</strong></td>
                           <td>
@@ -318,6 +355,22 @@
                           </td>
 
                         </tr>
+                        <tr>
+                        <td colspan="2"></td>
+                        <td><strong>Total Price with taxes</strong></td>
+                        <?php $discount=$repairCard->card_discount ?>
+                        <?php $totalWithDiscount=$total-$discount ?>
+                        <?php $taxes = $repairCard->card_taxes / 100 ?>
+                        <?php $totalWithTaxes = $totalWithDiscount + ($taxes * $totalWithDiscount); ?>
+
+
+                        <td>
+                        <input type='text' name="totalPriceWithTaxes" id="totalPriceWithTaxes"  value="{{$totalWithTaxes}}" disabled>
+
+                        </td>
+
+                      </tr>
+
                       </tfoot>
                     </table>
                   </div>

@@ -52,6 +52,13 @@
     var total = $('#total_price').val();
     var price = $('#price_' + count).val();
     var total2 = Number(total) - Number(price);
+    var discount = Number($('#discount').val());
+    var totalWithDiscount=total2-discount;
+    var taxes = Number($('#taxes').val());
+    var totalTaxes=(taxes*totalWithDiscount)/100;
+    var totalWithTaxes=Number(totalTaxes)+totalWithDiscount;
+    $('#totalPriceWithTaxes').val(totalWithTaxes);
+
     $('#total_price').val(total2);
     if (confirm("هل أنت متأكد؟")) {
       $(e).parent().parent().remove();
@@ -103,10 +110,23 @@
 
     })
   }
+  function cardDiscount()
+  {
+    var discount = Number($('#discount').val());
+    var totalWithoutDiscount=Number($('#total_price').val());
+    var totalWithDiscount=totalWithoutDiscount-discount;
+    var taxes = Number($('#taxes').val());
+    var totalTaxes=(taxes*totalWithDiscount)/100;
+    var totalWithTaxes=Number(totalTaxes)+totalWithDiscount;
+
+    $('#totalPriceWithTaxes').val(totalWithTaxes);
+
+  }
 
   function showPrice(count) {
     var total = 0;
     var value = $('#services_' + count).val();
+
     var _token = $('input[name="_token"]').val();
     $.ajax({
       method: "POST",
@@ -127,6 +147,17 @@
         }
         }
         $('#total_price').val(total);
+        var discount = Number($('#discount').val());
+        var totalWithDiscount=total-discount;
+        var taxes = Number($('#taxes').val());
+        var totalTaxes=(taxes*totalWithDiscount)/100;
+        var totalWithTaxes=Number(totalTaxes)+totalWithDiscount;
+
+
+        $('#totalPriceWithTaxes').val(totalWithTaxes);
+
+
+
       }
 
     })
@@ -251,9 +282,9 @@
                   </div>
 
 
-                  <?php $taxes = 5 ?>
+                  <?php //$taxes = 5 ?>
+                  <input type="text" value="{{$taxes}}" name="card_taxes" id="taxes" hidden>
 
-                  <input type="text" value={{$taxes}} name="card_taxes" hidden>
                   <input type="text" value={{$number+1}} name="card_number" hidden>
 
 
@@ -273,10 +304,10 @@
                             <select class="form-control" name="service_type[0]" id="service_type_0" onchange="changeService(0)">
                               <option value="">Select</option>
 
-                              <option value="1">أجور خدمات اليد )الإصلاحات)</option>
+                              <option value="1">أجور خدمات اليد -الإصلاحات</option>
                               <option value="2">أجور الأعمال الخارجية </option>
-                              <option value="3">قطع الغيار )مخزن داخلي) </option>
-                              <option value="4">قطع غيار )مشتريات خارجية) </option>
+                              <option value="3">قطع الغيار- مخزن داخلي </option>
+                              <option value="4">قطع غيار- مشتريات خارجية </option>
 
                             </select>
 
@@ -301,13 +332,34 @@
                       </tbody>
                       <tr>
                         <td colspan="2"></td>
-                        <td><strong>Total Price</strong></td>
+                        <td><strong>Discount</strong></td>
+                        <td>
+                        <input type="number" name="card_discount" id="discount" onkeyup="cardDiscount()" value="0">
+
+                        </td>
+
+                      </tr>
+
+                      <tr hidden>
+                        <td colspan="2"></td>
+                        <td><strong>Total Price </strong></td>
                         <td>
                           <input type='text' name="totalPrice" id="total_price">
 
                         </td>
 
                       </tr>
+                      <tr>
+                        <td colspan="2"></td>
+                        <td><strong>Total Price with taxes</strong></td>
+
+                        <td>
+                        <input type='text' name="totalPriceWithTaxes" id="totalPriceWithTaxes" disabled>
+
+                        </td>
+
+                      </tr>
+
 
                     </table>
                   </div>
