@@ -226,6 +226,18 @@
                     </tr>
                   </tbody>
                 </table>
+
+                <div>
+
+                  <td>
+                    <?php
+                    echo $payments->sum('invoice_payment_amount');
+
+                    ?></td>
+                    
+                  <td><?php echo $totalWithTaxes - $payments->sum('invoice_payment_amount');
+                      ?></td>
+                </div>
               </div>
               <!-- /.box-header -->
             </div>

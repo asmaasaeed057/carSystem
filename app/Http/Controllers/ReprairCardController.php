@@ -359,7 +359,9 @@ class ReprairCardController extends Controller
     public function invoiceShow($id)
     {
         $invoice = Invoice::find($id);
-        return view('admin.invoice.show', compact('invoice'));
+        $payments=  InvoicePayment::where('invoice_id','=',$id)->get();
+
+        return view('admin.invoice.show', compact('invoice','payments'));
     }
     public function invoicePayment($id)
     {
