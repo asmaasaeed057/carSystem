@@ -16,6 +16,7 @@ class ReprairCard extends Model
         'card_taxes',
         'card_number',
         'employee_id',
+        'card_discount',
 
 		 
     ];
@@ -42,31 +43,38 @@ class ReprairCard extends Model
     }
     public function getTotalAttribute()
     {
+        $discount=$this->card_discount;
         $items=$this->items;
         $total=0;
         foreach($items as $item){
             $total+=$item->service_client_cost;
         }
-        return ($total);
+        return ($total-$discount);
     }
     public function getTotalWithTaxesAttribute()
     {
+        $discount=$this->card_discount;
         $items=$this->items;
         $total=0;
         foreach($items as $item){
             $total+=$item->service_client_cost;
         }
-        $taxes=($this->card_taxes*$total)/100;
-        return ($total+$taxes);
+        $totalWithDiscount=$total-$discount;
+        $taxes=($this->card_taxes*$totalWithDiscount)/100;
+        return ($totalWithDiscount+$taxes);
     }
 
     public function getTaxesAttribute(){
+        $discount=$this->card_discount;
+
         $items=$this->items;
         $total=0;
         foreach($items as $item){
             $total+=$item->service_client_cost;
         }
-        $taxes=($this->card_taxes*$total)/100;
+        $totalWithDiscount=$total-$discount;
+
+        $taxes=($this->card_taxes*$totalWithDiscount)/100;
         return ($taxes);
 
     }

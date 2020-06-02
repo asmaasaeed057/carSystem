@@ -509,6 +509,8 @@
                             <li><a href="{{route('technicalEmployee.index')}}"><i class="fa fa-circle-o"></i>Technical Employee</a></li>
                             <li><a href="{{ route('service.index')}}"><i class="fa fa-circle-o"></i>Services</a></li>
                             <li><a href="{{ route('companyDetails.index')}}"><i class="fa fa-circle-o"></i>Company Info</a></li>
+                            <li><a href="{{ route('cardTaxes.index')}}"><i class="fa fa-circle-o"></i>Card Taxes</a></li>
+
                             <li class="treeview">
                                 <a href="#">
                                     <i class="fa fa-pie-chart"></i>

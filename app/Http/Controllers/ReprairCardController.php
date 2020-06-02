@@ -21,6 +21,8 @@ use App\TechnicalEmployee;
 use App\Custom;
 use Auth;
 use App\CompanyDetails;
+use App\CardTaxes;
+
 
 
 
@@ -113,8 +115,8 @@ class ReprairCardController extends Controller
         $cars = Car::get();
         $services = Service::get();
         $employee = TechnicalEmployee::get();
-
-        return view('admin.repairCard.create', compact('clients', 'cars', 'services', 'clientId', 'number', 'employee'));
+        $taxes=CardTaxes::orderBy('taxes_id', 'desc')->first()->taxes_value;
+        return view('admin.repairCard.create', compact('clients', 'cars', 'services', 'clientId', 'number', 'employee','taxes'));
     }
 
     /**
@@ -216,7 +218,7 @@ class ReprairCardController extends Controller
         $card = ReprairCard::find($id);
         $card->update($request->only(
             [
-                'checkReprort', 'client_id', 'car_id', 'employee_id'
+                'checkReprort', 'client_id', 'car_id', 'employee_id','card_discount'
             ]
         ));
         $card->save();

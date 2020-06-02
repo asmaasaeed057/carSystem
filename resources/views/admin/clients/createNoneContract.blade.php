@@ -60,6 +60,12 @@
     var total = $('#total_price').val();
     var price = $('#price_' + count).val();
     var total2 = Number(total) - Number(price);
+    var discount = Number($('#discount').val());
+    var totalWithDiscount=total2-discount;
+    var taxes = Number($('#taxes').val());
+    var totalTaxes=(taxes*totalWithDiscount)/100;
+    var totalWithTaxes=Number(totalTaxes)+totalWithDiscount;
+    $('#totalPriceWithTaxes').val(totalWithTaxes);
     $('#total_price').val(total2);
     if (confirm("هل أنت متأكد؟")) {
       $(e).parent().parent().remove();
@@ -111,6 +117,19 @@
 
     })
   }
+  function cardDiscount()
+  {
+    var discount = Number($('#discount').val());
+    var totalWithoutDiscount=Number($('#total_price').val());
+    var totalWithDiscount=totalWithoutDiscount-discount;
+    var taxes = Number($('#taxes').val());
+    var totalTaxes=(taxes*totalWithDiscount)/100;
+    var totalWithTaxes=Number(totalTaxes)+totalWithDiscount;
+
+    $('#totalPriceWithTaxes').val(totalWithTaxes);
+
+  }
+
 
   function showPrice(count) {
     var total = 0;
@@ -135,6 +154,15 @@
 
         }
         $('#total_price').val(total);
+        var discount = Number($('#discount').val());
+        var totalWithDiscount=total-discount;
+        var taxes = Number($('#taxes').val());
+        var totalTaxes=(taxes*totalWithDiscount)/100;
+        var totalWithTaxes=Number(totalTaxes)+totalWithDiscount;
+
+
+        $('#totalPriceWithTaxes').val(totalWithTaxes);
+
       }
 
     })
@@ -347,9 +375,8 @@
                       </label>
                       <textarea class="form-control" name="checkReprort" id="" cols="30" rows="10"></textarea>
                     </div>
-                    <?php $taxes = 5 ?>
 
-                    <input type="text" value={{$taxes}} name="card_taxes" hidden>
+                  <input type="text" value="{{$taxes}}" name="card_taxes" id="taxes" hidden>
                     <input type="text" value={{$number+1}} name="card_number" hidden>
                   </div>
 
@@ -396,7 +423,7 @@
                           </td>
                         </tr>
                       </tbody>
-                      <tr>
+                      <tr hidden>
                         <td colspan="2"></td>
                         <td><strong>Total Price</strong></td>
                         <td>
@@ -405,6 +432,28 @@
                         </td>
 
                       </tr>
+                      <tr>
+                        <td colspan="2"></td>
+                        <td><strong>Discount</strong></td>
+                        <td>
+                        <input type="number" name="card_discount" id="discount" onkeyup="cardDiscount()" value="0">
+
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td colspan="2"></td>
+                        <td><strong>Total Price with taxes</strong></td>
+
+                        <td>
+                        <input type='text' name="totalPriceWithTaxes" id="totalPriceWithTaxes" disabled>
+
+                        </td>
+
+                      </tr>
+
+
+
 
                     </table>
                   </div>
