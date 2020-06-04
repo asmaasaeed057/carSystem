@@ -69,9 +69,12 @@
             <form action="{{ route('cardTaxes.update' ,$taxes->taxes_id)}}" method="POST">
               @csrf
               @method('PUT')
-              <div class="form-group">
-                    <label>Value</label>
+              <div class="form-group row">
+              <div class="col-xs-3">
+
+                    <label>Discount Value %</label>
                     <input type="number" value="{{$taxes->taxes_value}}" name="taxes_value" class="form-control" placeholder="Value" required>
+                  </div>
                   </div>
                 <input type="submit" class="btn-primary" value="Update">
 

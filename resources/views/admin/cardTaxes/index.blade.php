@@ -85,7 +85,7 @@
 
                 @foreach($taxes as $tax)
                 <tr>
-                  <td>{{$tax->taxes_value}}</td>
+                  <td>{{$tax->taxes_value}}%</td>
                   <td><a href="{{route('cardTaxes.edit' ,$tax->taxes_id)}}" class="btn btn-info">Edit</a></td>
 
 
