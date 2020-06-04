@@ -90,6 +90,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php $totalPayment=0; ?>
 
                                     @foreach($incomes as $income)
                                     @if($income->invoice->repairCard->client->client_type == "contract")
@@ -101,9 +102,18 @@
 
                                         <td>{{$income->invoice->invoice_number}}</td>
                                     </tr>
+                                    <?php $totalPayment += $income->invoice_payment_amount; ?>
+
                                     @endif
                                     @endforeach
                                 </tbody>
+                                <tr>
+                                    <th></th>
+                                    <th>Total</th>
+                                    <th>{{$totalPayment}}</th>
+                                    <th></th>
+                                </tr>
+
                             </table>
                         </div>
 

@@ -90,6 +90,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php $totalBill=0; ?>
+                                <?php $totalPrice=0; ?>
+                                <?php $totalTax=0; ?>
 
                                     @foreach($expenses as $expense)
                                     <tr>
@@ -100,7 +103,21 @@
                                         <td>{{$expense->expense_date}}</td>
                                         <td>{{$expense->expense_notes}}</td>
                                     </tr>
+                                    <?php $totalBill += $expense->expense_bill; ?>
+                                    <?php $totalPrice += $expense->expense_price; ?>
+                                    <?php $totalTax += $expense->expense_tax; ?>
+
+
                                     @endforeach
+                                    <tr>
+                                    <th>Total</th>
+                                    <th>{{$totalBill}}</th>
+                                    <th>{{$totalPrice}}</th>
+                                    <th>{{$totalTax}}</th>
+                                    <th></th>
+                                    <th></th>
+
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

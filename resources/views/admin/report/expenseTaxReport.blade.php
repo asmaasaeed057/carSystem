@@ -91,6 +91,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php $totalBill=0; ?>
+                                <?php $totalPrice=0; ?>
 
                                     @foreach($expenses as $expense)
                                     <tr>
@@ -102,16 +104,19 @@
                                         <td>{{$expense->expense_tax}}</td>
 
                                     </tr>
+                                    <?php $totalBill += $expense->expense_bill; ?>
+                                    <?php $totalPrice += $expense->expense_price; ?>
+
                                     @endforeach
                                 </tbody>
 
                                 <tr>
-                                    <td colspan="4"></td>
-                                    <td><strong>Total Tax</strong></td>
-                                    <td>
-                                        <input type='text' value="{{$totalTax}}" disabled>
-
-                                    </td>
+                                    <th>Total</strong></th>
+                                    <td></td>
+                                    <th>{{$totalBill}}</th>
+                                    <th>{{$totalPrice}}</th>
+                                    <th></th>
+                                    <th>{{$totalTax}}</th>
 
                                 </tr>
                             </table>

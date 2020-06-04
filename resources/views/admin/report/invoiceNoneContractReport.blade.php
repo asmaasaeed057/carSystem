@@ -100,6 +100,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php $total=0; ?>
 
                                     @foreach($invoices as $invoice)
                                     @if($invoice->repairCard->client->client_type == "noneContract")
@@ -109,9 +110,18 @@
                                         <td>{{$invoice->invoice_date}}</td>
                                         <td>{{$invoice->invoice_total}}</td>
                                     </tr>
+                                    <?php $total += $invoice->invoice_total; ?>
+
                                     @endif
                                     @endforeach
                                 </tbody>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Total</th>
+                                    <th>{{$total}}</th>
+                                </tr>
+
                             </table>
                         </div>
 

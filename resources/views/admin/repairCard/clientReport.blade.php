@@ -135,6 +135,9 @@
                 </tr>
               </thead>
               <tbody>
+              <?php $total=0; ?>
+              <?php $totalWithTaxes=0; ?>
+
 
                 @foreach($cards as $value)
                 <tr>
@@ -143,7 +146,16 @@
                   <td>{{$value->total_with_taxes}}</td>
 
                 </tr>
+                <?php $total += $value->total; ?>
+                <?php $totalWithTaxes += $value->total_with_taxes; ?>
+
                 @endforeach
+                <tr>
+                <th>Total</th>
+                <th>{{$total}}</th>
+                <th>{{$totalWithTaxes}}</th>
+
+                </tr>
               </tbody>
 
             </table>
