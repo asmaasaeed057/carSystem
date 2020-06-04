@@ -65,10 +65,14 @@ class InvoiceReportController extends Controller
         if ($client_name) {
 
             $client = Client::where('fullName', $client_name)->first();
+            if($client){
             $clientId = $client->id;
 
             $repairCard = ReprairCard::where('client_id', $clientId)->first();
-
+            }
+            else{
+                $repairCard ='';
+            }
             if ($repairCard) {
                 $cardId =  $repairCard->id;
             } else {
@@ -127,10 +131,14 @@ class InvoiceReportController extends Controller
         if ($client_name) {
 
             $client = Client::where('fullName', $client_name)->first();
+            if($client){
             $clientId = $client->id;
 
             $repairCard = ReprairCard::where('client_id', $clientId)->first();
-
+            }
+            else{
+                $repairCard ='';
+            }
             if ($repairCard) {
                 $cardId =  $repairCard->id;
             } else {

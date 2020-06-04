@@ -187,7 +187,7 @@
 
                                                 <th scope="col">Service Name</th>
                                                 <th scope="row">Service Number</th>
-                                                <th scope="row">Working Hours Cost</th>
+                                                <th scope="row">Working Hours</th>
 
 
                                             </tr>

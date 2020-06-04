@@ -36,6 +36,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::resource('client', 'ClientController');
         Route::get('clientSearch', 'ClientController@search')->name('clientSearchIndex');
         Route::resource('car', 'CarController');
+        Route::resource('note', 'BillNoteController');
+
         Route::get('carSearch', 'CarController@carSearch')->name('car.carSearch');
 
         Route::resource('brand', 'CarBrandController');
@@ -50,6 +52,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::get('expenseTaxSearch', 'ExpenseTaxReportController@search')->name('expenseTaxSearch');
         Route::get('car/create/{clientid}', 'CarController@createCar')->name('car.createCar');
         Route::get('repairCard/create/{cid}', 'ReprairCardController@createRepairCardFromClient')->name('repairCard.createRepairCard');
+        Route::get('addServiceItem/{sid}', 'ReprairCardController@addServiceItem')->name('repairCard.addServiceItem');
+        Route::post('storeServiceItem/{cardid}', 'ReprairCardController@storeServiceItem')->name('repairCard.storeServiceItem');
 
         //Invoice Report
         Route::get('invoiceContractReport', 'InvoiceReportController@index')->name('invoiceContractReport');
@@ -70,6 +74,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::post('get_car', 'ReprairCardController@getCars')->name('getCars');
         Route::post('getServices', 'ReprairCardController@getServices')->name('getServices');
         Route::post('getPrice', 'ReprairCardController@getPrice')->name('getPrice');
+
         Route::get('print/{id}', 'AccountController@print')->name('print');
         route::get('clientDetails/{id}', 'ClientController@clientDetails');
         Route::resource('permission', 'AdminGroupController');
@@ -95,6 +100,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         //Reports Routea
 
         Route::get('invoice/create/{cardId}', 'ReprairCardController@createInvoice')->name('createInvoice');
+        Route::get('receipt/{Id}', 'ReprairCardController@receiptInvoicePayment')->name('receiptInvoicePayment');
+
         Route::get('operationOrder', 'OperationOrderController@index')->name('operationOrder.index');
         Route::get('operationOrder/{oid}', 'OperationOrderController@show')->name('operationOrder.show');
         Route::get('operationOrderNoneContract', 'OperationOrderController@indexNoneContract')->name('operationOrder.indexNoneContract');
