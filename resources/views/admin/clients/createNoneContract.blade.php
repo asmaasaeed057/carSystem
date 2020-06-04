@@ -407,7 +407,7 @@
 
                           </td>
                           <td>
-                            <select name="services[0]" id="services_0" class="form-control select2" onchange="showPrice(0)">
+                            <select name="services[0]" id="services_0" class="form-control" onchange="showPrice(0)">
                               <option value="">Select One</option>
                             </select>
 

@@ -382,7 +382,7 @@
 
                           <td>
 
-                            <select name="services[{{$j}}]" id="services_{{$j}}" class="form-control select2" onchange="showPrice({{$j}})">
+                            <select name="services[{{$j}}]" id="services_{{$j}}" class="form-control" onchange="showPrice({{$j}})">
 
                               @foreach($allServices as $i=> $allService)
 

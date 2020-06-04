@@ -356,7 +356,7 @@
                                     <li><a href="{{ route('noneContractClient.createNoneContractClient')}}"><i class="fa fa-circle-o"></i>Create Invoice</a></li>
                                 </ul>
                             </li>
-                          
+
                             <li class="treeview">
                                 <a href="#">
                                     <i class="fa fa-list"></i>
@@ -526,9 +526,10 @@
                                 </ul>
                             </li>
                         </ul>
+
                     </li>
 
-<!-- 
+                    <!-- 
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
@@ -824,6 +825,20 @@
         $(document).ready(function() {
             $('.select2').select2();
         });
+    </script>
+
+
+    <script>
+        var url = window.location;
+
+        // for sidebar menu but not for treeview submenu
+        $('ul.sidebar-menu a').filter(function() {
+            return this.href == url;
+        }).parent().siblings().removeClass('active').end().addClass('active');
+        // for treeview which is like a submenu
+        $('ul.treeview-menu a').filter(function() {
+            return this.href == url;
+        }).parentsUntil(".sidebar-menu > .treeview-menu").siblings().removeClass('active menu-open').end().addClass('active menu-open');
     </script>
     @yield('script')
 
