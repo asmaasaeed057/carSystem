@@ -4,23 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\CardTaxes;
-
+use App\Custom;
+use Auth;
 class CardTaxesController extends Controller
 {
-    // public function callAction($method, $parameters)
-    // {
-    //     $group = Auth::guard('admin')->user()->group;
+    public function callAction($method, $parameters)
+    {
+        $group = Auth::guard('admin')->user()->group;
 
-    //     $actionObject = app('request')->route()->getAction();
-    //     $controller = class_basename($actionObject['controller']);
-    //     list($controller, $action) = explode('@', $controller);
-    //     $valid = Custom::permission($group, $controller, $action);
-    //     if ($valid) {
-    //         return parent::callAction($method, $parameters);
-    //     } else {
-    //         return response()->view('admin.errors.403');
-    //     }
-    // }
+        $actionObject = app('request')->route()->getAction();
+        $controller = class_basename($actionObject['controller']);
+        list($controller, $action) = explode('@', $controller);
+        $valid = Custom::permission($group, $controller, $action);
+        if ($valid) {
+            return parent::callAction($method, $parameters);
+        } else {
+            return response()->view('admin.errors.403');
+        }
+    }
 
     /**
      * Display a listing of the resource.

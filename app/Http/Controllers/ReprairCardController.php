@@ -7,6 +7,7 @@ use App\ReprairCard;
 use App\RepairCardItem;
 use App\CarCategory;
 use App\Account;
+use App\BillNote;
 use App\Car;
 use Illuminate\Http\Request;
 use App\Box;
@@ -115,9 +116,56 @@ class ReprairCardController extends Controller
         $cars = Car::get();
         $services = Service::get();
         $employee = TechnicalEmployee::get();
-        $taxes=CardTaxes::orderBy('taxes_id', 'desc')->first()->taxes_value;
-        return view('admin.repairCard.create', compact('clients', 'cars', 'services', 'clientId', 'number', 'employee','taxes'));
+        $taxes = CardTaxes::orderBy('taxes_id', 'desc')->first()->taxes_value;
+        return view('admin.repairCard.create', compact('clients', 'cars', 'services', 'clientId', 'number', 'employee', 'taxes'));
     }
+
+    public function addServiceItem($id)
+    {
+        // dd($id);
+
+        $repairCard = ReprairCard::find($id);
+        $taxes = CardTaxes::orderBy('taxes_id', 'desc')->first()->taxes_value;
+        if (ReprairCard::orderBy('id', 'desc')->first()) {
+            $number = ReprairCard::orderBy('id', 'desc')->first()->card_number;
+        } else {
+            $number = 0;
+        }
+        $invoice = Invoice::find($repairCard->invoice->invoice_id);
+        // dd($invoicePayment);
+        return view('admin.invoice.addService', compact('taxes', 'number', 'repairCard', 'invoice'));
+    }
+
+    public function storeServiceItem(Request $request, $cardid)
+    {
+
+
+
+
+
+        $price =   $request->get('price');
+        foreach ($request->get('services') as $id => $service) {
+            if ($service) {
+                $repairCardItem = new RepairCardItem();
+                $repairCardItem->service_id = $service;
+                $carService = Service::find($service);
+                $repairCardItem->card_id = $cardid;
+                $repairCardItem->service_client_cost = $price[$id];
+                $repairCardItem->service_cost = $carService->service_cost;
+                $repairCardItem->save();
+
+
+                $repairCard = ReprairCard::find($cardid);
+
+                $invoice = Invoice::find($repairCard->invoice->invoice_id);
+                $invoice->invoice_total =  $repairCard->total_with_taxes;
+                $invoice->save();
+                return redirect()->route('invoiceShow', ['id' => $invoice->invoice_id]);
+            }
+        }
+    }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -179,9 +227,9 @@ class ReprairCardController extends Controller
     public function show(ReprairCard $reprairC, $id)
     {
         $repairCard = ReprairCard::find($id);
-        $company=CompanyDetails::all()->first();
+        $company = CompanyDetails::all()->first();
 
-        return view('admin.repairCard.show', compact('repairCard','company'));
+        return view('admin.repairCard.show', compact('repairCard', 'company'));
     }
 
     /**
@@ -218,7 +266,7 @@ class ReprairCardController extends Controller
         $card = ReprairCard::find($id);
         $card->update($request->only(
             [
-                'checkReprort', 'client_id', 'car_id', 'employee_id','card_discount'
+                'checkReprort', 'client_id', 'car_id', 'employee_id', 'card_discount'
             ]
         ));
         $card->save();
@@ -344,6 +392,7 @@ class ReprairCardController extends Controller
         $invoice->invoice_number = $card->card_number;
         $invoice->invoice_date = date('Y-m-d H:i:s');
         $invoice->invoice_total = $card->total_with_taxes;
+        // dd($invoice->invoice_total);
         $invoice->repair_card_id = $id;
         $invoice->save();
         $operationOrder = new OperationOrder;
@@ -353,6 +402,20 @@ class ReprairCardController extends Controller
         $operationOrder->save();
         return back();
     }
+
+    public function receiptInvoicePayment($id)
+    {
+        $invoicePayment = InvoicePayment::find($id);
+        $company = CompanyDetails::all()->first();
+        $invoiceId = $invoicePayment->invoice_id;
+        $invoice = Invoice::find($invoiceId);
+        $repairCard = ReprairCard::find($invoice->repairCard->id);
+
+        // dd($invoicePayment);
+        return view('admin.invoice.printInvoicePayment', compact('invoicePayment', 'company', 'repairCard', 'invoice'));
+    }
+
+
     public function invoiceIndex()
     {
         $invoices = Invoice::all();
@@ -361,9 +424,12 @@ class ReprairCardController extends Controller
     public function invoiceShow($id)
     {
         $invoice = Invoice::find($id);
-        $payments=  InvoicePayment::where('invoice_id','=',$id)->get();
+        $payments =  InvoicePayment::where('invoice_id', '=', $id)->get();
 
-        return view('admin.invoice.show', compact('invoice','payments'));
+        $company = CompanyDetails::all()->first();
+        $repairCard = ReprairCard::find($invoice->repairCard->id);
+        $billNotes = BillNote::find(1);
+        return view('admin.invoice.show', compact('invoice', 'payments', 'company', 'repairCard', 'billNotes'));
     }
     public function invoicePayment($id)
     {
@@ -398,10 +464,8 @@ class ReprairCardController extends Controller
         $invoices = Invoice::all();
         if ($invoice->repairCard->client->client_type == "contract") {
             return view('admin.invoice.index', compact('invoices'));
-
         } else {
             return view('admin.invoice.invoiceIndexNoneContract', compact('invoices'));
-
         }
     }
 

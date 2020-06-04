@@ -67,6 +67,8 @@
                                     <th>Invoice Number</th>
                                     <th>Client Name</th>
                                     <th>Date</th>
+                                    <th>Paid</th>
+                                    <th>Remain</th>
                                     <th>Total</th>
                                     <th>Show</th>
                                     <th>Invoice Payment</th>
@@ -84,6 +86,9 @@
                                     <td>{{$invoice->repairCard->client->fullName}}</td>
 
                                     <td>{{$invoice->invoice_date}}</td>
+                                    <td>{{$invoice->paid}}</td>
+                                    <td>{{$invoice->remain}}</td>
+
                                     <td>{{$invoice->invoice_total}}</td>
                                     <td><a href="{{route('invoiceShow' ,$invoice->invoice_id)}}" class="btn btn-success">Show</a></td>
                                     <td> <a class="btn btn-warning" href="{{route('invoicePayment' ,$invoice->invoice_id)}}"><i class="fas fa-money" style="margin-right: 10px;"></i>pay</a>

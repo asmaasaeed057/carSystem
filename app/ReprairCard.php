@@ -64,6 +64,7 @@ class ReprairCard extends Model
         return ($totalWithDiscount+$taxes);
     }
 
+    
     public function getTaxesAttribute(){
         $discount=$this->card_discount;
 

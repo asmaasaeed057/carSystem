@@ -22,5 +22,34 @@ class Invoice extends Model
     public function operationOrder(){
         return $this->hasOne('App\OperationOrder','invoice_id');
     }
+
+    public function getPaidAttribute()
+    {
+
+        $payment = $this->invoicePayment;
+        $totalPayment = $payment->sum('invoice_payment_amount');
+
+        return $totalPayment;
+    }
+
+
+    public function getRemainAttribute()
+    {
+        // $discount=$this->card_discount;
+        // $items=$this->items;
+        // $total=0;
+        // foreach($items as $item){
+        //     $total+=$item->service_client_cost;
+        // }
+        // $totalWithDiscount=$total-$discount;
+        // $taxes=($this->card_taxes*$totalWithDiscount)/100;
+        // return ($totalWithDiscount+$taxes);
+
+
+        $totalWithTaxes = $this->repairCard->total_with_taxes;
+
+        $remain = $totalWithTaxes - $this->paid ;
+        return $remain;
+    }
     
 }
