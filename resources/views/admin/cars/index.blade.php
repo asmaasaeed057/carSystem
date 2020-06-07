@@ -42,10 +42,13 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
+  <h1>
+  {{ trans('site.carList') }}
+  </h1>
 
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">{{ trans('site.carList') }}</li>
+      <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
   <!-- Main content -->
@@ -57,7 +60,7 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <h3 class="box-title">{{ trans('site.carList') }}</h3>
+            <h3 class="box-title"></h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -70,10 +73,10 @@
             <form action="{{ route('car.carSearch')}}" method="GET">
 
               <div class="form-group">
-                <label for="client_name">Client Name</label>
+                <label for="client_name">{{ trans('site.clientName') }}</label>
                 <input type="text" name="client_name" value="{{$client_name}}" class="form-control" style="width:500px">
               </div>
-              <input type="submit" class="btn-primary" value="search">
+              <input type="submit" class="btn btn-primary" value="{{ trans('site.Search') }}">
             </form>
           </div>
 
@@ -81,20 +84,20 @@
 
           <div class="box box-primary">
             <div class="box-header">
-              <a href="{{route('car.create')}}" style="margin-top: 10px;" class="btn btn-success">Add Car</a>
+              <a href="{{route('car.create')}}" style="margin-top: 10px;" class="btn btn-success"><i class="fa fa-plus" style="margin-right: 10px;" ></i>{{ trans('site.add') }}</a>
             </div>
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>Category</th>
-                  <th>Model</th>
-                  <th>Owner</th>
-                  <th>Type</th>
-                  <th>Structure Number</th>
-                  <th>Plate Number</th>
-                  <th>Color</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
+                  <th>{{ trans('site.BrandCategory') }}</th>
+                  <th>{{ trans('site.model') }}</th>
+                  <th>{{ trans('site.Owner') }}</th>
+                  <th>{{ trans('site.CarType') }}</th>
+                  <th>{{ trans('site.StructureNumber') }}</th>
+                  <th>{{ trans('site.PlateNumber') }}</th>
+                  <th>{{ trans('site.Color') }}</th>
+                  <th>{{ trans('site.Edit') }}</th>
+                  <th>{{ trans('site.Delete') }}</th>
                   <!-- <th>Show</th> -->
                 </tr>
               </thead>
@@ -110,12 +113,12 @@
                   <td>{{$car->car_structure_number}}</td>
                   <td>{{$car->platNo}}</td>
                   <td>{{$car->car_color}}</td>
-                  <td><a href="{{route('car.edit' ,$car->id)}}" class="btn btn-info">Edit</a></td>
+                  <td><a href="{{route('car.edit' ,$car->id)}}" class="btn btn-info"><i class="fa fa-edit" style="margin-right: 10px;" ></i>{{ trans('site.Edit') }}</a></td>
                   <td>
                     <form action="{{route('car.destroy' ,$car->id)}}" method="post">
                       @csrf
                       @method('DELETE')
-                      <button class="btn btn-danger delete" type="submit">Delete</button>
+                      <button class="btn btn-danger delete" type="submit"><i class="fa fa-trash-o" style="margin-right: 10px;" ></i>{{ trans('site.Delete') }}</button>
 
                     </form>
                   </td>

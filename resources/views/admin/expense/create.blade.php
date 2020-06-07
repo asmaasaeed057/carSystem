@@ -35,10 +35,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      {{ trans('site.Dashboard') }}
+      {{ trans('site.CreateExpenses') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -50,7 +50,7 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+            <h3 class="box-title"></h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -59,10 +59,10 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <div class="box box-warning">
-              <div class="box-header with-border">
-                <h3 class="box-title">Create Expense</h3>
-              </div>
+            <!-- <div class="box box-warning"> -->
+              <!-- <div class="box-header with-border">
+                <h3 class="box-title"></h3>
+              </div> -->
               <!-- /.box-header -->
               <div class="box-body">
                 <form action="{{ route('expense.store')}}" method="POST">
@@ -71,8 +71,8 @@
 
                   <!-- text input -->
                   <div class="form-group">
-                    <label>Expense Name</label>
-                    <input type="text" name="expense_name" class="form-control" placeholder="expense name">
+                    <label>{{ trans('site.Name') }} </label>
+                    <input type="text" name="expense_name" class="form-control" placeholder="{{ trans('site.Name') }}">
                     @if ($errors->get('expense_name'))
                     <span for="textfield" class="help-block error" style="color:firebrick">
                       @foreach ($errors->get('expense_name') as $expense_name)
@@ -83,8 +83,8 @@
                   </div>
 
                   <div class="form-group">
-                    <label>Expense Bill</label>
-                    <input type="text" name="expense_bill" class="form-control" placeholder="expense bill">
+                    <label>{{ trans('site.Bill') }}</label>
+                    <input type="text" name="expense_bill" class="form-control" placeholder="{{ trans('site.Bill') }}">
                     @if ($errors->get('expense_bill'))
                     <span for="textfield" class="help-block error" style="color:firebrick">
                       @foreach ($errors->get('expense_bill') as $expense_bill)
@@ -96,8 +96,8 @@
 
                   <!-- textarea -->
                   <div class="form-group">
-                    <label>Expense Price</label>
-                    <input type="text" name="expense_price" class="form-control" placeholder="expense price">
+                    <label>{{ trans('site.Price') }}</label>
+                    <input type="text" name="expense_price" class="form-control" placeholder="{{ trans('site.Price') }}">
                     @if ($errors->get('expense_price'))
                     <span for="textfield" class="help-block error" style="color:firebrick">
                       @foreach ($errors->get('expense_price') as $expense_price)
@@ -108,8 +108,8 @@
                   </div>
 
                   <div class="form-group">
-                    <label>EXpense Tax</label>
-                    <input type="text" name="expense_tax" class="form-control" placeholder="expense tax">
+                    <label>{{ trans('site.Taxes') }}</label>
+                    <input type="text" name="expense_tax" class="form-control" placeholder="{{ trans('site.Taxes') }}">
                     @if ($errors->get('expense_tax'))
                     <span for="textfield" class="help-block error" style="color:firebrick">
                       @foreach ($errors->get('expense_tax') as $expense_tax)
@@ -120,7 +120,7 @@
                   </div>
 
                   <div class="form-group">
-                    <label>EXpense Notes</label>
+                    <label>{{ trans('site.Notes') }}</label>
                     <textarea class="form-control" name="expense_notes" id="" cols="30" rows="10"></textarea>
                     @if ($errors->get('expense_notes'))
                     <span for="textfield" class="help-block error" style="color:firebrick">
@@ -131,8 +131,8 @@
                     @endif
                   </div>
                   <div class="form-group">
-                    <label>EXpense date</label>
-                    <input type="date" name="expense_date" class="form-control" placeholder="expense date">
+                    <label>{{ trans('site.Date') }}</label>
+                    <input type="date" name="expense_date" class="form-control" placeholder="{{ trans('site.Date') }}">
                     @if ($errors->get('expense_date'))
                     <span for="textfield" class="help-block error" style="color:firebrick">
                       @foreach ($errors->get('expense_date') as $expense_date)
@@ -141,12 +141,12 @@
                     </span>
                     @endif
                   </div>
-                  <input type="submit" class="btn-primary" value="{{ trans('site.add') }}">
+                  <input type="submit" class="btn btn-primary" value="{{ trans('site.add') }}">
 
                 </form>
               </div>
               <!-- /.box-body -->
-            </div>
+            <!-- </div> -->
           </div>
           <!-- /.box-body -->
         </div>

@@ -35,10 +35,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      {{ trans('site.Dashboard') }}
+      {{ trans('site.EditCarCategory') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.Dashboard') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -51,7 +51,7 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+            <h3 class="box-title"></h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -60,10 +60,10 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <div class="box box-warning">
-              <div class="box-header with-border">
-                <h3 class="box-title">{{ trans('site.addCompany') }}</h3>
-              </div>
+            <!-- <div class="box box-warning"> -->
+              <!-- <div class="box-header with-border">
+                <h3 class="box-title"></h3>
+              </div> -->
               <!-- /.box-header -->
               <div class="box-body">
                 <form action="{{ route('brandCategory.update' ,$brandCategory->id)}}" method="POST">
@@ -74,12 +74,12 @@
                   <div class="form-group">
 
 
-                    <label>Brand Category Name (Arabic)</label>
-                    <input type="text" name="name_ar" class="form-control" placeholder="Brand Category Name (Arabic)" value="{{$brandCategory->name_ar}}">
+                    <label>{{ trans('site.NameAr') }}</label>
+                    <input type="text" name="name_ar" class="form-control" placeholder="{{ trans('site.NameAr') }}" value="{{$brandCategory->name_ar}}">
                   </div>
                   <div class="form-group">
-                    <label>Brand Category Name (English)</label>
-                    <input type="text" name="name_en" class="form-control" placeholder="Brand Category Name (English)" value="{{$brandCategory->name_en}}">
+                    <label>{{ trans('site.NameAr') }}</label>
+                    <input type="text" name="name_en" class="form-control" placeholder="{{ trans('site.NameEn') }}" value="{{$brandCategory->name_en}}">
                   </div>
                   <label>{{ trans('site.company') }}</label>
 
@@ -95,13 +95,13 @@
                   </select>
                   <br><br>
                   <!-- companies dropdown end -->
-                  <input type="submit" class="btn btn-info" value="{{ trans('site.update') }}">
+                  <input type="submit" class="btn btn-info" value="{{ trans('site.Edit') }}">
 
 
                 </form>
               </div>
               <!-- /.box-body -->
-            </div>
+            <!-- </div> -->
           </div>
           <!-- /.box-body -->
         </div>

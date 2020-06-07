@@ -79,7 +79,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      {{ trans('site.Dashboard') }}
+      {{ trans('site.addCar') }}
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -95,7 +95,7 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+            <h3 class="box-title"></h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -106,7 +106,7 @@
           <div class="box-body">
             <div class="box box-warning">
               <div class="box-header with-border">
-                <h3 class="box-title">{{ trans('site.createClient') }}</h3>
+                <h3 class="box-title"></h3>
               </div>
               <!-- /.box-header -->
               <div class="box-body">
@@ -117,7 +117,7 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>{{__('site.clientName')}}</label>
+                        <label>{{ trans('site.clientName') }}</label>
                         <select class="form-control select2" name="client_id" style="width: 100%;">
                           <option value="{{$client->id}}" selected >{{$client->fullName}}</option>
                         </select>
@@ -127,7 +127,7 @@
                     <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>{{__('site.clientName')}}</label>
+                        <label>{{ trans('site.clientName') }}</label>
                         <select class="form-control select2" name="client_id" style="width: 100%;">
                           @foreach($clients as $client)
                           <option value="{{$client->id}}">{{$client->fullName}}</option>
@@ -141,7 +141,7 @@
 
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Brand Category</label>
+                        <label>{{ trans('site.BrandCategory') }}</label>
                         <select class="form-control select2" name="car_brand_category_id" id="carCat" style="width: 100%;">
                           <option>{{ __("site.options") }}</option>
                           @foreach($carCategories as $category)
@@ -153,7 +153,7 @@
 
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Type</label>
+                        <label>{{ trans('site.CarType') }}</label>
                         <select class="form-control select2" name="carType_id" id="CarType" style="width: 100%;">
                           @foreach($carTypes as $type)
                           <option value="{{$type->id}}">{{$type->name_ar}}</option>
@@ -164,7 +164,7 @@
 
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>{{__('site.model')}}</label>
+                        <label>{{ trans('site.model') }}</label>
                         <select class="form-control select2" name="model" style="width: 100%;">
                           @for($i=2025;$i>=1980;$i--)
                           <option value="{{$i}}">{{$i}}</option>
@@ -175,20 +175,20 @@
 
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Plate number</label>
+                        <label>{{ trans('site.PlateNumber') }}</label>
                         <input class="form-control " type="text" name="platNo" id="">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Structure Number</label>
+                        <label>{{ trans('site.StructureNumber') }}</label>
                         <input class="form-control " type="text" name="car_structure_number" id="">
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                       <div class="form-group">
-                        <label>Color</label>
-                        <input class="form-control " type="text" name="car_color" id="">
+                        <label>{{ trans('site.Color') }}</label>
+                        <input class="form-control " type="text" name="car_color" id="" style="width:48%">
                       </div>
                     </div>
 

@@ -138,11 +138,6 @@ class ReprairCardController extends Controller
 
     public function storeServiceItem(Request $request, $cardid)
     {
-
-
-
-
-
         $price =   $request->get('price');
         foreach ($request->get('services') as $id => $service) {
             if ($service) {
@@ -207,6 +202,7 @@ class ReprairCardController extends Controller
         $services = Service::get();
         $client = Client::find($clientId);
         $employee = TechnicalEmployee::get();
+        $taxes = CardTaxes::orderBy('taxes_id', 'desc')->first()->taxes_value;
         $clientCars = Car::all()->where('client_id', '=', $client->id);
         if (ReprairCard::orderBy('id', 'desc')->first()) {
             $number = ReprairCard::orderBy('id', 'desc')->first()->card_number;
@@ -214,7 +210,7 @@ class ReprairCardController extends Controller
             $number = 0;
         }
 
-        return view('admin.repairCard.create', compact('clients', 'cars', 'services', 'client', 'clientId', 'clientCars', 'employee', 'number'));
+        return view('admin.repairCard.create', compact('clients', 'cars', 'services', 'client', 'clientId', 'clientCars', 'employee', 'number','taxes'));
     }
 
 
@@ -445,6 +441,10 @@ class ReprairCardController extends Controller
     }
     public function paymentStore(Request $request)
     {
+        $request->validate([
+            'invoice_payment_amount' => 'required ',  
+        ]);
+
         $amount = $request->get('invoice_payment_amount');
         $invoiceId = $request->get('invoice_id');
         $invoice = Invoice::find($invoiceId);

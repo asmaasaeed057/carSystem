@@ -44,8 +44,8 @@
 
     var tr =
       '<tr>' +
-      '<td><select class="form-control" name="service_type[' + i + ']" id="service_type_' + i + '" onchange="changeService(' + i + ')"><option value="">Select</option><option value="1">أجور خدمات اليد )الإصلاحات)</option><option value="2">أجور الأعمال الخارجية </option><option value="3">قطع الغيار )مخزن داخلي) </option><option value="4">قطع غيار )مشتريات خارجية) </option></select></td>' +
-      '<td><select onchange="showPrice(' + i + ')" name="services[' + i + ']" id="services_' + i + '" class="form-control select2"><option value="">Select One</option></select></td>' +
+      '<td><select class="form-control" name="service_type[' + i + ']" id="service_type_' + i + '" onchange="changeService(' + i + ')"><option value=""><?php echo trans('site.options') ?></option><option value="1">أجور خدمات اليد )الإصلاحات)</option><option value="2">أجور الأعمال الخارجية </option><option value="3">قطع الغيار )مخزن داخلي) </option><option value="4">قطع غيار )مشتريات خارجية) </option></select></td>' +
+      '<td><select onchange="showPrice(' + i + ')" name="services[' + i + ']" id="services_' + i + '" class="form-control select2"><option value=""><?php echo trans('site.options') ?></option></select></td>' +
       '<td><div class="form-group"><input type="text" name="price[' + i + ']" id="price_' + i + '"></td>' +
       '<td><input type="button" class="btn btn-green add" value="+" onclick="addRow()"><input type="button" class="btn btn-danger delete" value="x" onclick="removeItem(this,' + i + ')"></td>' +
       '</tr>'
@@ -59,10 +59,10 @@
     var price = $('#price_' + count).val();
     var total2 = Number(total) - Number(price);
     var discount = Number($('#discount').val());
-    var totalWithDiscount=total2-discount;
+    var totalWithDiscount = total2 - discount;
     var taxes = Number($('#taxes').val());
-    var totalTaxes=(taxes*totalWithDiscount)/100;
-    var totalWithTaxes=Number(totalTaxes)+totalWithDiscount;
+    var totalTaxes = (taxes * totalWithDiscount) / 100;
+    var totalWithTaxes = Number(totalTaxes) + totalWithDiscount;
     $('#totalPriceWithTaxes').val(totalWithTaxes);
 
     $('#total_price').val(total2);
@@ -119,14 +119,14 @@
 
     })
   }
-  function cardDiscount()
-  {
+
+  function cardDiscount() {
     var discount = Number($('#discount').val());
-    var totalWithoutDiscount=Number($('#total_price').val());
-    var totalWithDiscount=totalWithoutDiscount-discount;
+    var totalWithoutDiscount = Number($('#total_price').val());
+    var totalWithDiscount = totalWithoutDiscount - discount;
     var taxes = Number($('#taxes').val());
-    var totalTaxes=(taxes*totalWithDiscount)/100;
-    var totalWithTaxes=Number(totalTaxes)+totalWithDiscount;
+    var totalTaxes = (taxes * totalWithDiscount) / 100;
+    var totalWithTaxes = Number(totalTaxes) + totalWithDiscount;
 
     $('#totalPriceWithTaxes').val(totalWithTaxes);
 
@@ -148,19 +148,19 @@
         var total = 0;
         $('#price_' + count).val(result);
         for (var p = 0; p <= count; p++) {
-          if ($('#price_' + p).val()){
+          if ($('#price_' + p).val()) {
 
-          var price = $('#price_' + p).val();
-          total += Number(price);
+            var price = $('#price_' + p).val();
+            total += Number(price);
           }
 
         }
         $('#total_price').val(total);
         var discount = Number($('#discount').val());
-        var totalWithDiscount=total-discount;
+        var totalWithDiscount = total - discount;
         var taxes = Number($('#taxes').val());
-        var totalTaxes=(taxes*totalWithDiscount)/100;
-        var totalWithTaxes=Number(totalTaxes)+totalWithDiscount;
+        var totalTaxes = (taxes * totalWithDiscount) / 100;
+        var totalWithTaxes = Number(totalTaxes) + totalWithDiscount;
 
 
         $('#totalPriceWithTaxes').val(totalWithTaxes);
@@ -179,10 +179,9 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      {{ trans('site.Dashboard') }}
-    </h1>
+      {{ trans('site.editRepairCardNo') }} : {{$repairCard->card_number}} </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -195,7 +194,7 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+            <!-- <h3 class="box-title"> </h3> -->
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -204,183 +203,183 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <div class="box box-warning">
-              <div class="box-header with-border">
-                <h3 class="box-title">تعديل</h3>
-              </div>
-              <!-- /.box-header -->
-              <div class="box-body">
-                <form action="{{ route('reprairCard.update' ,$repairCard->id)}}" method="POST">
-                  @csrf
-                  @method('PUT')
-                  <div class="row">
+            <!-- <div class="box box-warning"> -->
+            <div class="box-header with-border">
+              <!-- <h3 class="box-title">{{trans('site.edit')}}</h3> -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <form action="{{ route('reprairCard.update' ,$repairCard->id)}}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="row">
 
-                    <div class="col-md-6">
-                      <div class="form-group">
+                  <div class="col-md-6">
+                    <div class="form-group">
 
-                        <label>Client</label>
-                        <select class="form-control" name="client_id" id="clients" style="width: 100%;">
-                          @foreach($clients as $client)
-                          <option value="{{ $client->id }}" {{($client->id == $repairCard->client_id) ? 'selected' : '' }}>
-                            {{ $client->fullName }}
-                          </option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Cars</label>
-                        <select name="car_id" id="cars" class="form-control select2" data-dependent="car">
-                          @foreach($cars as $car)
-                          <option value="{{ $car->id }}" {{($car->id == $repairCard->car_id) ? 'selected' : '' }}>
-
-                            {{$car->carCategory->name_en}}-{{ $car->model }}-{{$car->platNo}}
-                          </option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="form-group">
-
-                        <label>Employee</label>
-                        <select class="form-control" name="employee_id" id="" style="width: 100%;">
-                          @foreach($employee as $emp)
-                          <option value="{{ $emp->employee_id }}" {{($emp->employee_id == $repairCard->employee_id) ? 'selected' : '' }}>
-                            {{ $emp->employee_name }}
-                          </option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="col-md-12">
-                      <label for="">
-                        <h4>{{ trans('site.addRepairCheck') }}</h4>
-                      </label>
-                      <textarea class="form-control" name="checkReprort" id="" cols="30" rows="10">{{$repairCard->checkReprort}}</textarea>
+                      <label>{{trans('site.clientName')}}</label>
+                      <select class="form-control" name="client_id" id="clients" style="width: 100%;">
+                        @foreach($clients as $client)
+                        <option value="{{ $client->id }}" {{($client->id == $repairCard->client_id) ? 'selected' : '' }}>
+                          {{ $client->fullName }}
+                        </option>
+                        @endforeach
+                      </select>
                     </div>
                   </div>
 
-                  <input type="text" id="taxes" value={{$repairCard->card_taxes}} name="card_taxes" hidden>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>{{trans('site.car')}}</label>
+                      <select name="car_id" id="cars" class="form-control select2" data-dependent="car">
+                        @foreach($cars as $car)
+                        <option value="{{ $car->id }}" {{($car->id == $repairCard->car_id) ? 'selected' : '' }}>
 
-
-                  <div class="container">
-                    <h2>Items</h2>
-                    <table class="table table-condensed">
-                      <thead>
-                        <tr>
-                          <th>Service Type</th>
-                          <th>Services</th>
-                          <th>Price</th>
-                        </tr>
-                      </thead>
-                      <tbody id='services'>
-                        <?php
-                        $services = array(
-                          "1" => "أجور خدمات اليد )الإصلاحات)",
-                          "2" => "أجور الأعمال الخارجية",
-                          "3" => "قطع الغيار )مخزن داخلي)",
-                          "4" => "قطع غيار )مشتريات خارجية) ",
-                        );
-                        ?>
-                        <?php $total = 0; ?>
-                        <input type="text" value="{{count($repairCard->items)}}" hidden id="totalServices" />
-
-                        @foreach($repairCard->items as $j=> $item )
-
-
-                        <tr>
-                          <td>
-                            <select class="form-control" name="service_type[{{$j}}]" id="service_type_{{$j}}" onchange="changeService({{$j}})">
-                              <option value="">Select</option>
-
-                              @foreach($services as $i=> $service)
-                              <option value="{{ $i }}" {{($i == $item->service->service_type) ? 'selected' : '' }}>
-
-                                {{$service}}</option>
-
-                              @endforeach
-                            </select>
-
-                          </td>
-
-                          <td>
-
-                            <select name="services[{{$j}}]" id="services_{{$j}}" class="form-control" onchange="showPrice({{$j}})">
-
-                              @foreach($allServices as $i=> $allService)
-
-                              <option value="{{ $allService->service_id }}" {{($allService->service_id == $item->service->service_id) ? 'selected' : '' }}>
-
-                                {{$allService->service_name}}</option>
-                              @endforeach
-
-                            </select>
-
-
-                          </td>
-                          <td>
-                            <input type='text' name="price[{{$j}}]" id="price_{{$j}}" value="{{$item->service_client_cost}}">
-                            <?php $total += $item->service_client_cost; ?>
-                          </td>
-                          <td>
-                            <input type="button" class="btn btn-green add" value="+">
-                            @if($j>0)
-                            <input type="button" class="btn btn-danger delete" value="x" onclick="removeItem(this,{{$j}})">
-                            @endif
-                          </td>
-                        </tr>
+                          {{$car->carCategory->name_en}}-{{ $car->model }}-{{$car->platNo}}
+                        </option>
                         @endforeach
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
 
-                      </tbody>
-                      <tfoot>
-                        <tr>
-                        <td colspan="2"></td>
-                        <td><strong>Discount</strong></td>
+                      <label>{{trans('site.technicalEmployee')}}</label>
+                      <select class="form-control" name="employee_id" id="" style="width: 100%;">
+                        @foreach($employee as $emp)
+                        <option value="{{ $emp->employee_id }}" {{($emp->employee_id == $repairCard->employee_id) ? 'selected' : '' }}>
+                          {{ $emp->employee_name }}
+                        </option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <label for="">
+                      <h4>{{ trans('site.addRepairCheck') }}</h4>
+                    </label>
+                    <textarea class="form-control" name="checkReprort" id="" cols="30" rows="10">{{$repairCard->checkReprort}}</textarea>
+                  </div>
+                </div>
+
+                <input type="text" id="taxes" value={{$repairCard->card_taxes}} name="card_taxes" hidden>
+
+
+                <div class="container">
+                  <h2>{{trans('site.services')}}</h2>
+                  <table class="table table-condensed">
+                    <thead>
+                      <tr>
+                        <th>{{trans('site.serviceType')}}</th>
+                        <th>{{trans('site.service')}}</th>
+                        <th>{{trans('site.price')}}</th>
+                      </tr>
+                    </thead>
+                    <tbody id='services'>
+                      <?php
+                      $services = array(
+                        "1" => "أجور خدمات اليد - الإصلاحات",
+                        "2" => "أجور الأعمال الخارجية",
+                        "3" => "قطع الغيار- مخزن داخلي",
+                        "4" => "قطع غيار - مشتريات خارجية ",
+                      );
+                      ?>
+                      <?php $total = 0; ?>
+                      <input type="text" value="{{count($repairCard->items)}}" hidden id="totalServices" />
+
+                      @foreach($repairCard->items as $j=> $item )
+
+
+                      <tr>
                         <td>
-                        <input type="number" name="card_discount" id="discount" onkeyup="cardDiscount()" value="{{$repairCard->card_discount}}">
+                          <select class="form-control" name="service_type[{{$j}}]" id="service_type_{{$j}}" onchange="changeService({{$j}})">
+                            <option value="">{{trans('site.options')}}</option>
+
+                            @foreach($services as $i=> $service)
+                            <option value="{{ $i }}" {{($i == $item->service->service_type) ? 'selected' : '' }}>
+
+                              {{$service}}</option>
+
+                            @endforeach
+                          </select>
 
                         </td>
-                        </tr>
+
+                        <td>
+
+                          <select name="services[{{$j}}]" id="services_{{$j}}" class="form-control" onchange="showPrice({{$j}})">
+
+                            @foreach($allServices as $i=> $allService)
+
+                            <option value="{{ $allService->service_id }}" {{($allService->service_id == $item->service->service_id) ? 'selected' : '' }}>
+
+                              {{$allService->service_name}}</option>
+                            @endforeach
+
+                          </select>
+
+
+                        </td>
+                        <td>
+                          <input type='text' name="price[{{$j}}]" id="price_{{$j}}" value="{{$item->service_client_cost}}">
+                          <?php $total += $item->service_client_cost; ?>
+                        </td>
+                        <td>
+                          <input type="button" class="btn btn-green add" value="+">
+                          @if($j>0)
+                          <input type="button" class="btn btn-danger delete" value="x" onclick="removeItem(this,{{$j}})">
+                          @endif
+                        </td>
+                      </tr>
+                      @endforeach
+
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td colspan="2"></td>
+                        <td><strong>{{trans('site.discount')}}</strong></td>
+                        <td>
+                          <input type="number" name="card_discount" id="discount" onkeyup="cardDiscount()" value="{{$repairCard->card_discount}}">
+
+                        </td>
+                      </tr>
 
                       <tr hidden>
-                          <td colspan="2"></td>
-                          <td><strong>Total Price</strong></td>
-                          <td>
-                            <input type='text' name="totalPrice" id="total_price" value="{{$total}}">
-
-                          </td>
-
-                        </tr>
-                        <tr>
                         <td colspan="2"></td>
-                        <td><strong>Total Price with taxes</strong></td>
-                        <?php $discount=$repairCard->card_discount ?>
-                        <?php $totalWithDiscount=$total-$discount ?>
+                        <td><strong>Total Price</strong></td>
+                        <td>
+                          <input type='text' name="totalPrice" id="total_price" value="{{$total}}">
+
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td colspan="2"></td>
+                        <td><strong>{{trans('site.totalWithTaxes')}}</strong></td>
+                        <?php $discount = $repairCard->card_discount ?>
+                        <?php $totalWithDiscount = $total - $discount ?>
                         <?php $taxes = $repairCard->card_taxes / 100 ?>
                         <?php $totalWithTaxes = $totalWithDiscount + ($taxes * $totalWithDiscount); ?>
 
 
                         <td>
-                        <input type='text' name="totalPriceWithTaxes" id="totalPriceWithTaxes"  value="{{$totalWithTaxes}}" disabled>
+                          <input type='text' name="totalPriceWithTaxes" id="totalPriceWithTaxes" value="{{$totalWithTaxes}}" disabled>
 
                         </td>
 
                       </tr>
 
-                      </tfoot>
-                    </table>
-                  </div>
+                    </tfoot>
+                  </table>
+                </div>
 
-                  <input type="submit" class="btn btn-info" value="update">
+                <input type="submit" class="btn btn-info" value="{{trans('site.update')}}">
 
-                </form>
-              </div>
-              <!-- /.box-body -->
+              </form>
             </div>
+            <!-- /.box-body -->
+            <!-- </div> -->
           </div>
           <!-- /.box-body -->
         </div>

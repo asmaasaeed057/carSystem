@@ -35,6 +35,7 @@
     window.print();
 
     document.body.innerHTML = originalContents;
+    window.location.reload();
 
   }
 </script>
@@ -48,10 +49,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Invoice Details
+      {{ trans('site.InvoiceDetails') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -60,7 +61,7 @@
     @include('layouts.error')
     <style>
       th {
-        width: 40%;
+        width: 15%;
       }
 
       /* Style the tab */
@@ -116,27 +117,27 @@
 
           <div class="box-body">
 
-            <h3 class="box-title">Invoice</h3>
+            <h3 class="box-title">{{ trans('site.Invoice') }}</h3>
 
             <!--  -->
             <table class="table table-bordered" id="example1">
               <tbody>
                 <tr>
-                  <th scope="row">Invoice Number</th>
+                  <th scope="row">{{ trans('site.InvoiceNumber') }}</th>
                   <td>{{$invoice->invoice_number}}</td>
                 </tr>
                 <tr>
-                  <th scope="row">Client Name</th>
+                  <th scope="row">{{ trans('site.clientName') }}</th>
                   <td>{{$invoice->client_name}}</td>
                 </tr>
 
 
                 </tr>
-                <th scope="row">Invoice Date</th>
+                <th scope="row">{{ trans('site.Date') }}</th>
                 <td>{{$invoice->invoice_date}}</td>
                 </tr>
                 <tr>
-                  <th scope="row">Invoice Total</th>
+                  <th scope="row">{{ trans('site.Total') }}</th>
                   <td>{{$invoice->total_with_taxes}}</td>
                 </tr>
 
@@ -150,15 +151,15 @@
           <div class="box-body">
             <div class="box">
               <div class="box-header with-border">
-                <h3 class="box-title">Items</h3>
+                <h3 class="box-title">{{ trans('site.Items') }}</h3>
 
                 <table class="table table-striped table-dark">
                   <thead>
                     <tr>
-                      <th scope="col">Service Type</th>
+                      <th>{{ trans('site.ServiceType') }}</th>
 
-                      <th scope="col">Service</th>
-                      <th scope="row">Client Cost</th>
+                      <th>{{ trans('site.Services') }}</th>
+                      <th>{{ trans('site.price') }}</th>
 
                     </tr>
                   </thead>
@@ -169,14 +170,14 @@
                     <tr>
                       <td>
                         @if($item->service->service_type =="1")
-                        أجور خدمات اليد )الإصلاحات)
+                        أجور خدمات اليد -الإصلاحات
 
                         @elseif($item->service->service_type =="2")
                         أجور الأعمال الخارجية
                         @elseif($item->service->service_type =="3")
-                        قطع الغيار )مخزن داخلي)
+                        قطع الغيار -مخزن داخلي
                         @elseif($item->service->service_type =="4")
-                        قطع غيار )مشتريات خارجية)
+                        قطع غيار -مشتريات خارجية
                         @endif
                       </td>
                       <td>{{$item->service->service_name}}</td>
@@ -184,18 +185,25 @@
                     </tr>
 
                     @endforeach
-                    <tr>
-                      <td></td>
-                      <th>Total</th>
-                      <td>{{$invoice->total}}</td>
 
+
+                    <tr>
+                      <th></th>
+                      <th>{{ trans('site.Total') }}</th>
+                      <td><?php echo $invoice->total ?></td>
                     </tr>
                     <tr>
-                      <td></td>
-                      <th>Total With Taxes</th>
-                      <td>{{$invoice->total_with_taxes}}</td>
-
+                      <th></th>
+                      <th>{{ trans('site.Discount') }}</th>
+                      <td><?php echo $invoice->invoice_discount ?></td>
                     </tr>
+                    <tr>
+                    <tr>
+                      <th></th>
+                      <th>{{ trans('site.TotalPriceWithTaxes') }}</th>
+                      <td><?php echo $invoice->total_with_taxes ?></td>
+                    </tr>
+
 
                   </tbody>
                 </table>
@@ -208,8 +216,10 @@
 
           <!-- /.box-body -->
         </div>
-        <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center">Print</button>
-
+        <div class="col text-center">
+          <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center"><i class="fa fa-print" style="margin-right: 10px;"></i>
+            {{ trans('site.Print') }}</button>
+        </div>
         <!-- /.box -->
       </div>
       <!-- /.col -->

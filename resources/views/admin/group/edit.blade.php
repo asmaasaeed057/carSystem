@@ -35,10 +35,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            {{ trans('site.Dashboard') }}
+            {{ trans('site.EditGroupPermissions') }}
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
             <li class="active">{{ trans('site.Dashboard') }}</li>
         </ol>
     </section>
@@ -51,7 +51,7 @@
 
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+                        <h3 class="box-title"></h3>
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                             </button>
@@ -60,10 +60,10 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <div class="box box-warning">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">{{ trans('site.createClient') }}</h3>
-                            </div>
+                        <!-- <div class="box box-warning"> -->
+                            <!-- <div class="box-header with-border">
+                                <h3 class="box-title"></h3>
+                            </div> -->
                             <!-- /.box-header -->
                             <div class="box-body">
                                 <form action="{{ route('group.update' ,$group->group_id)}}" method="POST">
@@ -72,13 +72,13 @@
 
                                     <!-- text input -->
                                     <div class="from-group">
-                                        <label>Group Name</label>
+                                        <label>{{ trans('site.Name') }}</label>
                                         <div class="controls">
-                                            <input name="group_name" id="" value="{{$group->group_name}}" type="text"/>
+                                            <input name="group_name" id="" value="{{$group->group_name}}" type="text" />
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label>Permissions </label>
+                                        <label> {{ trans('site.permissions') }}</label>
                                         <div class="controls">
                                             @foreach($roles as $controller=> $role)
                                             <h5>{{$controller}}</h5>
@@ -100,7 +100,7 @@
                                         </div>
                                     </div>
 
-                                    <input type="submit" class="btn-primary" value="Update">
+                                    <input type="submit" class="btn btn-primary" value="{{ trans('site.Edit') }}">
 
                                 </form>
                             </div>
@@ -115,7 +115,7 @@
 
 
                             <!-- /.box-body -->
-                        </div>
+                        <!-- </div> -->
                     </div>
                     <!-- /.box-body -->
                 </div>

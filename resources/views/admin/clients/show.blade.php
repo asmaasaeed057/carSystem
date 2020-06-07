@@ -34,11 +34,11 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <!-- <h1> -->
-    <!-- {{ trans('site.showClient') }} -->
-    <!-- </h1> -->
+    <h1>
+      {{ trans('site.showContractClient') }}
+    </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -100,79 +100,79 @@
             </div>
           </div>
           <!-- /.box-header -->
-          <div>
-            <div id='printMe'>
+          <!-- <div> -->
+          <div id='printMe'>
 
+            <div class="box-header">
+              <h3>{{ trans('site.clientInfo') }}</h3>
+              <div class="box-body">
+                <!--  -->
+                <table class="table table-bordered" id="example1">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <h4>{{ trans('site.clientName') }}</h4>
+                        <p>{{$client->fullName}}</p>
+                      </td>
+
+                      <td>
+                        <h4>{{ trans('site.phone') }}</h4>
+                        <p>{{$client->phone}}</p>
+                      </td>
+                      <td>
+                        <h4>{{ trans('site.address') }}</h4>
+                        <p>{{$client->address}}</p>
+                      </td>
+                      <td>
+                        <h4>{{ trans('site.email') }}</h4>
+                        <p>{{$client->email}}</p>
+                      </td>
+
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+              <hr>
               <div class="box-header">
-                <h3>Client Info</h3>
-                <div class="box-body">
-                  <!--  -->
-                  <table class="table table-bordered" id="example1">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <h4>{{ trans('site.clientName') }}</h4>
-                          <p>{{$client->fullName}}</p>
-                        </td>
+                <h3>{{ trans('site.repairCards') }}</h3>
+              </div>
+              <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                    <tr scope="col">
+                      <th>{{ trans('site.car') }}</th>
+                      <th>{{ trans('site.cardStatus') }}</th>
+                      <th>{{ trans('site.checkReport') }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
 
-                        <td>
-                          <h4>{{ trans('site.phone') }}</h4>
-                          <p>{{$client->phone}}</p>
-                        </td>
-                        <td>
-                          <h4>{{ trans('site.address') }}</h4>
-                          <p>{{$client->address}}</p>
-                        </td>
-                        <td>
-                          <h4>{{ trans('site.email') }}</h4>
-                          <p>{{$client->email}}</p>
-                        </td>
+                    @foreach($repairCards as $card)
+                    <tr scope="row">
+                      <td>Model:{{$card->car->model}} - Plate No: {{$card->car->platNo}} - Color: {{$card->car->car_color}} - Type: {{$card->car->carType->name_en}}</td>
+                      <td>{{$card->status}}</td>
+                      <td>{{$card->checkReprort}}</td>
+                    </tr>
+                    @endforeach
+                  </tbody>
 
-                      </tr>
-                    </tbody>
-                  </table>
-
-                </div>
-                <hr>
-                <div class="box-header">
-                  <h3>Repair Cards</h3>
-                </div>
-                <div class="box-body">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>Car</th>
-                        <th>Card Status</th>
-                        <th>Check Reprort</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-
-                      @foreach($repairCards as $card)
-                      <tr>
-                        <td>Model:{{$card->car->model}} - Plate No: {{$card->car->platNo}} - Color: {{$card->car->car_color}} - Type: {{$card->car->carType->name_en}}</td>
-                        <td>{{$card->status}}</td>
-                        <td>{{$card->checkReprort}}</td>
-                        <td></td>
-                      </tr>
-                      @endforeach
-                    </tbody>
-
-                  </table>
-                </div>
+                </table>
               </div>
             </div>
-            <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center">Print</button>
-
-            
-            <!-- /.box-body -->
           </div>
-          <!-- /.box -->
+          <div class="col text-center">
+
+            <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center;"><i class="fa fa-print" style="margin-right: 10px;" ></i>{{ trans('site.print') }}</button>
+          </div>
+
+          <!-- /.box-body -->
         </div>
-        <!-- /.col -->
+        <!-- /.box -->
       </div>
-      <!-- /.row -->
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
   </section>
   <!-- /.content -->
 </div>
@@ -186,6 +186,7 @@
     window.print();
 
     document.body.innerHTML = originalContents;
+    window.location.reload();
 
   }
 </script>

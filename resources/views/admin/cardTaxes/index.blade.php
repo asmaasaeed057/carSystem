@@ -32,7 +32,6 @@
         event.preventDefault();
     });
   });
-
 </script>
 @endsection
 
@@ -42,10 +41,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      {{ trans('site.Dashboard') }}
+      {{ trans('site.TaxValue') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -58,7 +57,7 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <h3 class="box-title">Card Taxes</h3>
+            <h3 class="box-title"></h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -69,39 +68,39 @@
 
           <div class="box-body">
 
-        <div class="box box-primary">
+            <!-- <div class="box box-primary"> -->
 
 
-          <div class="box-body">
-            <table id="example1" class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Taxes Value</th>
-                  <th>Edit</th>
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>{{ trans('site.TaxValue') }}</th>
+                    <th>{{ trans('site.Edit') }}</th>
 
-                </tr>
-              </thead>
-              <tbody>
+                  </tr>
+                </thead>
+                <tbody>
 
-                @foreach($taxes as $tax)
-                <tr>
-                  <td>{{$tax->taxes_value}}%</td>
-                  <td><a href="{{route('cardTaxes.edit' ,$tax->taxes_id)}}" class="btn btn-info">Edit</a></td>
+                  @foreach($taxes as $tax)
+                  <tr>
+                    <td>{{$tax->taxes_value}}%</td>
+                    <td><a href="{{route('cardTaxes.edit' ,$tax->taxes_id)}}" class="btn btn-info"><i class="fa fa-edit" style="margin-right: 10px;" ></i>{{ trans('site.Edit') }}</a></td>
 
 
-                </tr>
-                @endforeach
-              </tbody>
+                  </tr>
+                  @endforeach
+                </tbody>
 
-            </table>
+              </table>
+              <!-- </div> -->
+            </div>
+            <!-- /.box-body -->
+            <!-- /.box -->
           </div>
+          <!-- /.col -->
         </div>
-        <!-- /.box-body -->
-        <!-- /.box -->
-      </div>
-      <!-- /.col -->
-    </div>
-    <!-- /.row -->
+        <!-- /.row -->
   </section>
   <!-- /.content -->
 </div>

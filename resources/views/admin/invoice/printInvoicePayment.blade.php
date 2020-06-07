@@ -27,6 +27,8 @@
     })
   })
 </script>
+
+
 @endsection
 
 @section('content')
@@ -35,15 +37,15 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Receipt Details
+      {{ trans('site.receiptDetails') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
   <!-- Main content -->
-  <section class="content">
+  <section class="content" id="hidden_div">
     @include('layouts.error')
     <style>
       th {
@@ -95,7 +97,7 @@
     <div id='printReceipt'>
       <div id="company" class='container'>
 
-        <a><b>Address:</b></a>{{ $company->company_address }}
+        <a><b>{{ trans('site.address') }}:</b></a>{{ $company->company_address }}
 
         <div align="center">
 
@@ -103,41 +105,40 @@
           <a><b>{{ $company->company_name }}</b></a>
         </div>
 
-        <a><b>phones:</b></a>{{ $company->company_phone }}
+        <a><b>{{ trans('site.companyPhone') }}:</b></a>{{ $company->company_phone }}
       </div>
       <!-- /.box-header -->
       <div class="box-body">
         <div class="box">
           <div class="box-header with-border">
-            <h3 class="box-title">Repair Card</h3>
+            <h3 class="box-title">{{ trans('site.repairCardInfo') }}</h3>
 
             <table class="table table-striped table-dark">
-
               <tbody>
                 <tr scope="row">
-                  <th>Client Name</th>
+                  <th>{{ trans('site.clientName') }}</th>
                   <td>{{$repairCard->client->fullName}}</td>
-                  <th>Client Email</th>
+                  <th>{{ trans('site.email') }}</th>
                   <td>{{$repairCard->client->email}}</td>
                 </tr>
 
                 <tr scope="row">
-                  <th>Client Phone</th>
+                  <th>{{ trans('site.phone') }}</th>
                   <td>{{$repairCard->client->phone}}</td>
-                  <th>Status</th>
+                  <th>{{ trans('site.cardStatus') }}</th>
                   <td>{{$repairCard->status}}</td>
                 </tr>
 
 
                 <tr scope="row">
-                  <th>Car</th>
+                  <th>{{ trans('site.model') }}</th>
                   <td>{{$repairCard->car->model}}</td>
-                  <th>Technical Employee</th>
+                  <th>{{ trans('site.technicalEmployee') }}</th>
                   <td>{{$repairCard->employee->employee_name}}</td>
                 </tr>
-                <tr scope="row">
-                  <th>Check Report</th>
-                  <td>{{$repairCard->checkReprort}}</td>
+                <tr>
+                  <th colspan="1">{{ trans('site.checkReport') }}</th>
+                  <td colspan="3">{{$repairCard->checkReprort}}</td>
                 </tr>
               </tbody>
             </table>
@@ -158,9 +159,9 @@
 
               <tbody>
                 <tr>
-                  <th>Paid</th>
+                  <th>{{ trans('site.Paid') }}</th>
                   <td>{{$invoicePayment->invoice_payment_amount}}</td>
-                  <th>Date</th>
+                  <th>{{ trans('site.paymentDate') }}</th>
                   <td>{{$invoicePayment->invoice_payment_date}}</td>
 
                 </tr>
@@ -174,10 +175,10 @@
 
               <tbody>
                 <tr>
-                  <th>Remain</th>
-
+                  <th>{{ trans('site.Remain') }}</th>
                   <td>{{$invoice->remain}}</td>
-
+                  <th></th>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
@@ -188,15 +189,17 @@
 
               <tbody>
                 <tr>
-                  <th>client Name</th>
+                  <th>{{ trans('site.clientName') }}</th>
 
                   <td>{{$invoice->repairCard->client->fullName}}</td>
-                  <th>Technical Employee</th>
+                  <th>{{ trans('site.technicalEmployee') }}</th>
                   <td>{{$repairCard->employee->employee_name}}</td>
 
                 </tr>
               </tbody>
             </table>
+            <!-- <button class="btn bg-navy margin" onclick="printDiv('printReceipt')" style="margin-left:550px;">Print</button> -->
+
           </div><!-- box-footer -->
         </div><!-- /.box -->
 
@@ -205,7 +208,6 @@
     </div>
 
 
-    <button class="btn bg-navy margin" onclick="printDiv('printReceipt')" style="margin-left:550px;">Print</button>
 
     <!-- /.box-body -->
 </div>
@@ -221,17 +223,30 @@
 </div>
 
 <script>
-  function printDiv(divName) {
+  //   var printContents = document.getElementById(divName).innerHTML;
+  //   var originalContents = document.body.innerHTML;
 
-    var printContents = document.getElementById(divName).innerHTML;
+  //   document.body.innerHTML = printContents;
+
+  //   window.print();
+
+  //   document.body.innerHTML = originalContents;
+
+  // }
+
+
+
+  document.addEventListener('DOMContentLoaded', (event) => {
+    var printContents = document.getElementById("printReceipt").innerHTML;
     var originalContents = document.body.innerHTML;
 
     document.body.innerHTML = printContents;
 
     window.print();
+    printContents.document.getElementById('hidden_div').style.display = 'block'
 
     document.body.innerHTML = originalContents;
 
-  }
+  })
 </script>
 @endsection

@@ -54,10 +54,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      {{ trans('site.Dashboard') }}
+      {{ trans('site.cardList') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -69,7 +69,7 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+            <!-- <h3 class="box-title">{{ trans('site.Dashboard') }}</h3> -->
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -84,9 +84,9 @@
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Client</label>
+                    <label>{{ trans('site.clientName') }}</label>
                     <select class="form-control" name="client_id" id="clients" style="width: 100%;">
-                      <option value="">Select</option>
+                      <option value="">{{ trans('site.options') }}</option>
                       @foreach($clients as $value)
                       <option value="{{$value->id}}" {{($value->id == $clientId) ? 'selected' : '' }}>{{$value->fullName}}</option>
                       @endforeach
@@ -95,7 +95,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Date</label>
+                    <label>{{ trans('site.date') }}</label>
                     <br />
                     <input value="{{$datefrom}}" type="date" placeholder="من" value="" size="60" maxlength="120" name="date_from" id="" class="input-medium" />:
                     <input value="{{$dateto}}" type="date" placeholder="من" value="" size="60" maxlength="120" name="date_to" id="" class="input-medium" />
@@ -108,9 +108,9 @@
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Category</label>
+                    <label>{{ trans('site.CarsCategory') }}</label>
                     <select class="form-control" name="car_brand_category_id" style="width: 100%;">
-                      <option value="">Select</option>
+                      <option value="">{{ trans('site.options') }}</option>
                       @foreach($categories as $value)
                       <option value="{{$value->id}}" {{($value->id == $categoryId) ? 'selected' : '' }}>{{$value->name_en}}</option>
                       @endforeach
@@ -119,8 +119,8 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>plat Number</label>
-                    <input value="{{$platNo}}" type="text" placeholder="Plat Number" size="60" maxlength="120" name="plat_number" id="" class="form-control" />
+                    <label>{{ trans('site.plate') }}</label>
+                    <input value="{{$platNo}}" type="text" placeholder="{{ trans('site.plate') }}" size="60" maxlength="120" name="plat_number" id="" class="form-control" />
                   </div>
                 </div>
               </div>
@@ -131,9 +131,9 @@
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Status</label>
+                    <label>{{ trans('site.cardStatus') }}</label>
                     <select class="form-control" name="status" style="width: 100%;">
-                      <option value="">Select</option>
+                      <option value="">{{ trans('site.options') }}</option>
                       @foreach($statusAr as $value)
                       <option value="{{$value}}" {{($value == $status) ? 'selected' : '' }}>{{$value}}</option>
                       @endforeach
@@ -142,8 +142,8 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Card Number</label>
-                    <input value="{{$cardNo}}" type="text" placeholder="Card Number" size="60" maxlength="120" name="card_number" id="" class="form-control" />
+                    <label>{{ trans('site.cardNo') }}</label>
+                    <input value="{{$cardNo}}" type="text" placeholder="{{ trans('site.cardNo') }}" size="60" maxlength="120" name="card_number" id="" class="form-control" />
                   </div>
                 </div>
               </div>
@@ -153,7 +153,7 @@
 
               <div class="form-actions">
 
-                <input id="submit" type="submit" name="submit" value="Search" class="btn btn-primary btn-large">
+                <input id="submit" type="submit" name="submit" value="{{ trans('site.search') }}" class="btn btn-primary btn-large">
               </div>
           </div>
           </form>
@@ -164,16 +164,16 @@
           <table id="example1" class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th>Card Number</th>
-                <th>Client</th>
-                <th>Category</th>
-                <th>Category Brand</th>
-                <th>Car Model</th>
-                <th>Car PLat Number</th>
-                <th>Status</th>
-                <th>Created At</th>
+                <th>{{ trans('site.cardNo') }}</th>
+                <th>{{ trans('site.clientName') }}</th>
+                <th>{{ trans('site.CarsCategory') }}</th>
+                <th>{{ trans('site.CarsBrandCategory') }}</th>
+                <th>{{ trans('site.model') }}</th>
+                <th>{{ trans('site.plate') }}</th>
+                <th>{{ trans('site.cardStatus') }}</th>
+                <th>{{ trans('site.cardDate') }}</th>
 
-                <th colspan="2">Actions</th>
+                <th colspan="2"></th>
               </tr>
             </thead>
             <tbody>
@@ -189,25 +189,25 @@
                 <td>{{$value->car->platNo}}</td>
                 <td>{{$value->status}}</td>
                 <td>{{$value->created_at}}</td>
-                <td><a class="btn btn-success" href="{{route('reprairCard.show' ,$value->id)}}"> SHOW</a></td>
+                <td><a class="btn btn-success" href="{{route('reprairCard.show' ,$value->id)}}"> <i class="fa fa-search" style="margin-right: 10px;" ></i>{{ trans('site.show') }}</a></td>
 
 
                 @if($value->status == 'accepted')
                 @if(!$value->invoice)
-                <td><a class="inv btn btn-primary" href="{{route('createInvoice',$value->id)}}"> Add Invoice</a></td>
+                <td><a class="inv btn btn-primary" href="{{route('createInvoice',$value->id)}}"> <i class="fa fa-plus" style="margin-right: 10px;" ></i>{{ trans('site.addInvoice') }}</a></td>
                 @endif
                 @if($value->client->client_type == 'noneContract')
-                <td> <a class="btn btn-warning payment" href="{{route('invoicePayment',$value->invoice->invoice_id)}}"><i class="fas fa-money" style="margin-right: 10px;"></i>pay</a>
-                <td><a class="btn btn-primary" href="{{route('noneContractClient.editNoneContractClient' ,$value->id)}}"> EDIT</a></td>
+                <td> <a class="btn btn-warning payment" href="{{route('invoicePayment',$value->invoice->invoice_id)}}"><i class="fas fa-money" style="margin-right: 10px;"></i>{{ trans('site.pay') }}</a>
+                <td><a class="btn btn-primary" href="{{route('noneContractClient.editNoneContractClient' ,$value->id)}}"><i class="fa fa-edit" style="margin-right: 10px;" ></i> {{ trans('site.edit') }}</a></td>
 
                 @endif
                 @endif
 
                 @if($value->status == 'panding')
 
-                <td><a class="btn btn-primary" href="{{route('reprairCard.edit' ,$value->id)}}"> EDIT</a></td>
-                <td><a class="btn btn-danger denied" href="{{route('denied' ,$value->id)}}"> denied</a></td>
-                <td><a class="btn btn-success approve" href="{{route('approved' ,$value->id)}}"> Approve</a></td>
+                <td><a class="btn btn-primary" href="{{route('reprairCard.edit' ,$value->id)}}"> <i class="fa fa-edit" style="margin-right: 10px;" ></i>{{ trans('site.edit') }}</a></td>
+                <td><a class="btn btn-danger denied" href="{{route('denied' ,$value->id)}}"> <i class="fa fa-trash-o" style="margin-right: 10px;" ></i>{{ trans('site.denied') }}</a></td>
+                <td><a class="btn btn-success approve" href="{{route('approved' ,$value->id)}}"><i class="fa fa-check" style="margin-right: 10px;" ></i> {{ trans('site.approved') }}</a></td>
                 @endif
 
               </tr>
@@ -226,4 +226,4 @@
 </section>
 <!-- /.content -->
 </div>
-@endsection
+@endsection 

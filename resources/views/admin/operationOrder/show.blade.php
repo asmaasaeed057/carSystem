@@ -41,7 +41,19 @@
 @endsection
 
 @section('content')
+
+
 <div class="content-wrapper">
+
+    <section class="content-header">
+        <h1>
+            {{ trans('site.operOrderNo') }} : {{$operationOrder->operation_order_number}}
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
+            <li class="active">{{ trans('site.Dashboard') }}</li>
+        </ol>
+    </section>
     <section class="content">
         @include('layouts.error')
 
@@ -50,7 +62,7 @@
 
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+                        <!-- <h3 class="box-title">{{ trans('site.operOrderNo') }}</h3> -->
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                             </button>
@@ -64,7 +76,7 @@
                         <div class="box-body">
                             <div class="box">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Car Info</h3>
+                                    <h3 class="box-title">{{ trans('site.carInfo') }}</h3>
                                     <br></br>
                                     <table class="table table-striped table-dark">
                                         <thead>
@@ -72,31 +84,31 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th scope="row">Car Model</th>
+                                                <th scope="row">{{ trans('site.model') }}</th>
                                                 <td>{{$operationOrder->invoice->repairCard->car->model}}</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">Plate Number</th>
+                                                <th scope="row">{{ trans('site.plate') }}</th>
                                                 <td>{{$operationOrder->invoice->repairCard->car->platNo}}</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">Structure Number</th>
+                                                <th scope="row">{{ trans('site.carStructureNumber') }}</th>
                                                 <td>{{$operationOrder->invoice->repairCard->car->car_structure_number}}</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">Color</th>
+                                                <th scope="row">{{ trans('site.carColor') }}</th>
                                                 <td>{{$operationOrder->invoice->repairCard->car->car_color}}</td>
                                             </tr>
                                             @if($operationOrder->invoice->repairCard->car->carType)
                                             <tr>
-                                                <th scope="row">Car Type</th>
+                                                <th scope="row">{{ trans('site.carType') }}</th>
                                                 <td>{{$operationOrder->invoice->repairCard->car->carType->name_en}}</td>
                                             </tr>
                                             @endif
                                             @if($operationOrder->invoice->repairCard->carCategory)
 
                                             <tr>
-                                                <th scope="row">Car Category</th>
+                                                <th scope="row">{{ trans('site.carCategory') }}</th>
                                                 <td>{{$operationOrder->invoice->repairCard->carCategory->name_en}}</td>
                                             </tr>
                                             @endif
@@ -112,7 +124,7 @@
                         <div class="box-body">
                             <div class="box">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Client Info</h3>
+                                    <h3 class="box-title">{{ trans('site.clientInfo') }}</h3>
                                     <br></br>
                                     <table class="table table-striped table-dark">
                                         <thead>
@@ -121,19 +133,19 @@
                                         <tbody>
 
                                             <tr>
-                                                <th scope="row">Client Name</th>
+                                                <th scope="row">{{ trans('site.clientName') }}</th>
                                                 <td>{{$operationOrder->invoice->repairCard->client->fullName}}</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">Client Email</th>
+                                                <th scope="row">{{ trans('site.email') }}</th>
                                                 <td>{{$operationOrder->invoice->repairCard->client->email}}</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">Client Phone</th>
+                                                <th scope="row">{{ trans('site.phone') }}</th>
                                                 <td>{{$operationOrder->invoice->repairCard->client->phone}}</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">Client Address</th>
+                                                <th scope="row">{{ trans('site.address') }}</th>
                                                 <td>{{$operationOrder->invoice->repairCard->client->address}}</td>
                                             </tr>
 
@@ -149,22 +161,22 @@
                         <div class="box-body">
                             <div class="box">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Repair Card Info</h3> <br></br>
+                                    <h3 class="box-title">{{ trans('site.repairCardInfo') }}</h3> <br></br>
                                     <table class="table table-striped table-dark">
                                         <thead>
 
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th scope="row">Card Number</th>
+                                                <th scope="row">{{ trans('site.cardNo') }}</th>
                                                 <td>{{$operationOrder->invoice->repairCard->card_number}}</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">Card Status</th>
+                                                <th scope="row">{{ trans('site.cardStatus') }}</th>
                                                 <td>{{$operationOrder->invoice->repairCard->status}}</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">Check Report</th>
+                                                <th scope="row">{{ trans('site.checkReport') }}</th>
                                                 <td>{{$operationOrder->invoice->repairCard->checkReprort}}</td>
                                             </tr>
                                         </tbody>
@@ -178,16 +190,16 @@
                         <div class="box-body">
                             <div class="box">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Repair Items and Service</h3>
+                                    <h3 class="box-title">{{ trans('site.services') }}</h3>
 
                                     <table class="table table-striped table-dark">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Service Type</th>
+                                                <th scope="col">{{ trans('site.serviceType') }}</th>
 
-                                                <th scope="col">Service Name</th>
-                                                <th scope="row">Service Number</th>
-                                                <th scope="row">Working Hours</th>
+                                                <th scope="col">{{ trans('site.service') }}</th>
+                                                <th scope="row">{{ trans('site.serviceNumber') }}</th>
+                                                <th scope="row">{{ trans('site.workingHours') }}</th>
 
 
                                             </tr>
@@ -224,10 +236,11 @@
                             <!-- /.box-body -->
                         </div>
                     </div>
-                    <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center">Print</button>
+                    <div class="col text-center">
+                        <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center">{{ trans('site.print') }}</button>
 
 
-
+                    </div>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -249,6 +262,7 @@
         window.print();
 
         document.body.innerHTML = originalContents;
+        window.location.reload();
 
     }
 </script>

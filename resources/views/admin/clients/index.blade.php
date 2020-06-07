@@ -43,10 +43,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      {{ trans('site.Dashboard') }}
+      {{ trans('site.clientList') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -59,7 +59,6 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <h3 class="box-title">Search Client</h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -73,22 +72,22 @@
             <form action="{{ route('clientSearchIndex')}}" method="GET">
 
               <div class="form-group">
-                <label for="client_name">Client Name</label>
+                <label for="client_name">{{ trans('site.clientName') }}</label>
                 <input type="text" name="client_name" value="{{$client_name}}" class="form-control" style="width:500px">
               </div>
               <div class="form-group" style="display: block">
-                <label for="client_phone">Client Phone</label>
+                <label for="client_phone">{{ trans('site.phone') }}</label>
                 <input type="text" name="client_phone" value="{{$client_phone}}" class="form-control" style="width:500px">
               </div>
 
-              <input type="submit" class="btn-primary" value="search">
+              <input type="submit" class="btn btn-primary" value="{{ trans('site.search') }}">
             </form>
           </div>
         </div>
         <div class="box box-primary">
 
           <div class="box-header">
-            <a href="{{route('client.create')}}" style="margin-top: 10px;" class="btn btn-success">Add Client </a>
+            <a href="{{route('client.create')}}" style="margin-top: 10px;" class="btn btn-success"><i class="fa fa-plus" style="margin-right: 10px;" ></i>{{ trans('site.addClient') }} </a>
           </div>
 
           <div class="box-body">
@@ -100,11 +99,11 @@
                   <th>{{ trans('site.address') }}</th>
                   <th>{{ trans('site.email') }}</th>
                   <!-- <th>Client Type</th> -->
-                  <th>Edit</th>
-                  <th>Delete</th>
-                  <th>Show</th>
-                  <th>Add Car</th>
-                  <th>Add Repair Card</th>
+                  <th>{{ trans('site.edit') }}</th>
+                  <th>{{ trans('site.delete') }}</th>
+                  <th>{{ trans('site.show') }}</th>
+                  <th>{{ trans('site.addCar') }}</th>
+                  <th>{{ trans('site.addRepairCar') }}</th>
 
                 </tr>
               </thead>
@@ -118,17 +117,17 @@
                   <td>{{$client->address}}</td>
                   <td>{{$client->email}}</td>
                   <!-- <td>{{$client->client_type}}</td> -->
-                  <td><a href="{{route('client.edit' ,$client->id)}}" class="btn btn-info">Edit</a></td>
+                  <td><a href="{{route('client.edit' ,$client->id)}}" class="btn btn-info"><i class="fa fa-edit" style="margin-right: 10px;" ></i>{{trans('site.edit')}}</a></td>
                   <td>
                     <form action="{{route('client.destroy' ,$client->id)}}" method="post">
                       @csrf
                       @method('DELETE')
-                      <button class="btn btn-danger delete" type="submit">Delete</button>
+                      <button class="btn btn-danger delete" type="submit"><i class="fa fa-trash-o" style="margin-right: 10px;" ></i>{{trans('site.delete')}}</button>
                     </form>
                   </td>
-                  <td><a href="{{route('client.show' ,$client->id)}}" class="btn btn-success">Show</a></td>
-                  <td><a href="{{route('car.createCar' , $client->id)}}" class="btn btn-warning">Add Car</a></td>
-                  <td><a href="{{route('repairCard.createRepairCard' , $client->id)}}" class="btn btn-secondary">Add repair Card</a></td>
+                  <td><a href="{{route('client.show' ,$client->id)}}" class="btn btn-success"><i class="fa fa-search" style="margin-right: 10px;" ></i>{{ trans('site.show') }}</a></td>
+                  <td><a href="{{route('car.createCar' , $client->id)}}" class="btn btn-warning"><i class="fa fa-plus" style="margin-right: 10px;" ></i>{{trans('site.addCar')}}</a></td>
+                  <td><a href="{{route('repairCard.createRepairCard' , $client->id)}}" class="btn btn-secondary"><i class="fa fa-plus" style="margin-right: 10px;" ></i>{{trans('site.addRepairCar')}}</a></td>
 
 
                 </tr>

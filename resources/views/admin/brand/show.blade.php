@@ -35,10 +35,11 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      {{ trans('site.showClient') }}
+
+      {{ trans('site.BrandDetails') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -111,12 +112,12 @@
 
 
                   <td>
-                    <h4>Car Brand Name EN</h4>
+                    <h4>{{ trans('site.NameEn') }}</h4>
                     <p>{{$brand->name_en}}</p>
                   </td>
 
                   <td>
-                    <h4>Car Brand Name AR</h4>
+                    <h4>{{ trans('site.NameAr') }}</h4>
                     <p>{{$brand->name_ar}}</p>
                   </td>
                  

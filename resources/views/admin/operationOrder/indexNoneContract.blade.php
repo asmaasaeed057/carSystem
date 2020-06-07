@@ -37,10 +37,9 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            {{ trans('site.Dashboard') }}
-        </h1>
+            {{ trans('site.operationOrderList') }} </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Ho{{ trans('site.home') }}me</a></li>
             <li class="active">{{ trans('site.Dashboard') }}</li>
         </ol>
     </section>
@@ -53,7 +52,7 @@
 
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+                        <!-- <h3 class="box-title">{{ trans('site.Dashboard') }}</h3> -->
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                             </button>
@@ -65,17 +64,17 @@
 
                         <form action="{{ route('operationOrder.operationSearchNoneContractIndex')}}" method="GET">
                             <div class="form-group" style="display: block">
-                                <label for="operation_order_number">Operation Order Number</label>
+                                <label for="operation_order_number">{{ trans('site.operOrderNumber') }}</label>
                                 <input type="text" name="operation_order_number" value="{{$operation_order_number}}" class="form-control" style="width:500px">
                             </div>
                             <div class="form-group">
-                                <label for="client_name">Client Name</label>
+                                <label for="client_name">{{ trans('site.clientName') }}</label>
                                 <input type="text" name="client_name" value="{{$client_name}}" class="form-control" style="width:500px">
                             </div>
                             <div class="form-group">
-                                <label>Car</label>
+                                <label>{{ trans('site.car') }}</label>
                                 <select class="form-control" name="car_id" id="clients" style="width: 32%;">
-                                    <option value="">Select</option>
+                                    <option value="">{{ trans('site.options') }}</option>
                                     @foreach($cars as $value)
                                     <option value="{{$value->id}}" {{($value->id == $car_id) ? 'selected' : '' }}>{{$value->model}} - {{$value->car_color}} - {{$value->carType->name_en}} - {{$value->carCategory->name_en}} - {{$value->carCategory->brand->name_en}}</option>
                                     @endforeach
@@ -83,20 +82,20 @@
                             </div>
 
                             <div class="form-group" style="display: block">
-                                <label for="technical_name">Technical Employee </label>
+                                <label for="technical_name">{{ trans('site.technicalEmployee') }} </label>
                                 <input type="text" name="technical_name" value="{{$technical_name}}" class="form-control" style="width:500px">
                             </div>
-                            <input type="submit" class="btn-primary" value="search">
+                            <input type="submit" class="btn btn-primary" value="{{ trans('site.search') }}">
                         </form>
                     </div>
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Operation Order Date</th>
-                                    <th>Operation Order Number</th>
+                                    <th>{{ trans('site.operOrderDate') }}</th>
+                                    <th>{{ trans('site.operOrderNumber') }}</th>
 
-                                    <th>Show</th>
+                                    <th>{{ trans('site.show') }}</th>
 
                                 </tr>
                             </thead>
@@ -110,7 +109,7 @@
                                     <td>{{$order->operation_order_date}}</td>
                                     <td>{{$order->operation_order_number}}</td>
 
-                                    <td><a href="{{route('operationOrder.show' ,$order->operation_order_id)}}" class="btn btn-success">Show</a></td>
+                                    <td><a href="{{route('operationOrder.show' ,$order->operation_order_id)}}" class="btn btn-success"><i class="fa fa-search" style="margin-right: 10px;" ></i>{{ trans('site.show') }}</a></td>
                                 </tr>
                                 @endif
                                 @endif

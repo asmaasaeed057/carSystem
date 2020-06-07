@@ -42,10 +42,13 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
+  <h1>
+      {{ trans('site.BillNotes') }}
+    </h1>
 
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">{{ trans('site.carList') }}</li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
+      <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
   <!-- Main content -->
@@ -57,7 +60,7 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <h3 class="box-title">Bill Notes</h3>
+            <h3 class="box-title"></h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -69,14 +72,14 @@
 
         
 
-          <div class="box box-primary">
+          <!-- <div class="box box-primary"> -->
           
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>Bill Notes EN</th>
-                  <th>Bill Notes AR </th>
-                  <th>Edit </th>
+                  <th>{{ trans('site.BillNotesEn') }}</th>
+                  <th>{{ trans('site.BillNotesAr') }} </th>
+                  <th>{{ trans('site.Edit') }} </th>
 
                 </tr>
               </thead>
@@ -87,14 +90,14 @@
                 
                   <td>{{$note->bill_note_desc_en}}</td>
                   <td>{{$note->bill_note_desc_ar}}</td>
-                  <td><a href="{{route('note.edit' ,$note->bill_note_id)}}" class="btn btn-info">Edit</a></td>
+                  <td><a href="{{route('note.edit' ,$note->bill_note_id)}}" class="btn btn-info"><i class="fa fa-edit" style="margin-right: 10px;" ></i>{{ trans('site.Edit') }}</a></td>
               
              
                 @endforeach
               </tbody>
 
             </table>
-          </div>
+          <!-- </div> -->
           <!-- /.box-body -->
         </div>
         <!-- /.box -->

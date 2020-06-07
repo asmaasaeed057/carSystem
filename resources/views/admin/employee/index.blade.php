@@ -32,7 +32,6 @@
         event.preventDefault();
     });
   });
-
 </script>
 @endsection
 
@@ -42,10 +41,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      {{ trans('site.Dashboard') }}
+      {{ trans('site.TechnicalEmployeeInfo') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -58,7 +57,7 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <h3 class="box-title">Technical Employee</h3>
+            <h3 class="box-title"></h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -69,52 +68,52 @@
 
           <div class="box-body">
 
-        <div class="box box-primary">
+            <!-- <div class="box box-primary"> -->
 
-          <div class="box-header">
-            <a href="{{route('technicalEmployee.create')}}" style="margin-top: 10px;" class="btn btn-success">Add Employee </a>
+              <div class="box-header">
+                <a href="{{route('technicalEmployee.create')}}" style="margin-top: 10px;" class="btn btn-success"><i class="fa fa-plus" style="margin-right: 10px;" ></i>{{ trans('site.add') }} </a>
+              </div>
+
+              <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>{{ trans('site.Name') }}</th>
+                      <th>{{ trans('site.Phone') }}</th>
+                      <th>{{ trans('site.Edit') }}</th>
+                      <th>{{ trans('site.Delete') }}</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    @foreach($employee as $emp)
+                    <tr>
+                      <td>{{$emp->employee_name}}</td>
+                      <td>{{$emp->employee_phone}}</td>
+                      <td><a href="{{route('technicalEmployee.edit' ,$emp->employee_id)}}" class="btn btn-info"><i class="fa fa-edit" style="margin-right: 10px;" ></i>{{ trans('site.Edit') }}</a></td>
+                      <td>
+                        <form action="{{route('technicalEmployee.destroy' ,$emp->employee_id)}}" method="post">
+                          @csrf
+                          @method('DELETE')
+                          <button class="btn btn-danger delete" type="submit"><i class="fa fa-trash-o" style="margin-right: 10px;" ></i>{{ trans('site.Delete') }}</button>
+                        </form>
+                      </td>
+
+
+                    </tr>
+                    @endforeach
+                  </tbody>
+
+                </table>
+              </div>
+            <!-- </div> -->
+            <!-- /.box-body -->
+            <!-- /.box -->
           </div>
-
-          <div class="box-body">
-            <table id="example1" class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Phone</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
-
-                </tr>
-              </thead>
-              <tbody>
-
-                @foreach($employee as $emp)
-                <tr>
-                  <td>{{$emp->employee_name}}</td>
-                  <td>{{$emp->employee_phone}}</td>
-                  <td><a href="{{route('technicalEmployee.edit' ,$emp->employee_id)}}" class="btn btn-info">Edit</a></td>
-                  <td>
-                    <form  action="{{route('technicalEmployee.destroy' ,$emp->employee_id)}}" method="post">
-                      @csrf
-                      @method('DELETE')
-                      <button class="btn btn-danger delete" type="submit">Delete</button>
-                    </form>
-                  </td>
-
-
-                </tr>
-                @endforeach
-              </tbody>
-
-            </table>
-          </div>
+          <!-- /.col -->
         </div>
-        <!-- /.box-body -->
-        <!-- /.box -->
-      </div>
-      <!-- /.col -->
-    </div>
-    <!-- /.row -->
+        <!-- /.row -->
   </section>
   <!-- /.content -->
 </div>

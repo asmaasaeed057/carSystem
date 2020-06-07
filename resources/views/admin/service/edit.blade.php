@@ -35,10 +35,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            {{ trans('site.Dashboard') }}
+            {{ trans('site.EditService') }}
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
             <li class="active">{{ trans('site.Dashboard') }}</li>
         </ol>
     </section>
@@ -51,7 +51,7 @@
 
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+                        <h3 class="box-title"></h3>
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                             </button>
@@ -60,10 +60,10 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <div class="box box-warning">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Update Service</h3>
-                            </div>
+                        <!-- <div class="box box-warning"> -->
+                            <!-- <div class="box-header with-border">
+                                <h3 class="box-title"></h3>
+                            </div> -->
                             <!-- /.box-header -->
                             <div class="box-body">
                                 <form action="{{ route('service.update' ,$service->service_id)}}" method="POST">
@@ -71,20 +71,20 @@
                                     @method('PUT')
                                     <!-- text input -->
                                     <div class="form-group">
-                                        <label>Service Name</label>
-                                        <input type="text" name="service_name" class="form-control" placeholder="Service Name" value="{{$service->service_name}}">
+                                        <label>{{ trans('site.ServiceName') }}</label>
+                                        <input type="text" name="service_name" class="form-control" placeholder="{{ trans('site.ServiceName') }}" value="{{$service->service_name}}">
                                     </div>
                                     <div class="form-group">
-                                        <label>Service Number</label>
-                                        <input type="text" name="service_number" class="form-control" placeholder="Service Number" value="{{$service->service_number}}">
+                                        <label>{{ trans('site.ServiceNumber') }}</label>
+                                        <input type="text" name="service_number" class="form-control" placeholder="{{ trans('site.ServiceNumber') }}" value="{{$service->service_number}}">
                                     </div>
-                                   
+
 
                                     <div class="form-group">
-                                        <label>Service Type</label>
+                                        <label>{{ trans('site.ServiceType') }}</label>
 
                                         <select class="form-control" name="service_type">
-                                            <option value="">اختار</option>
+                                            <option value="">{{ trans('site.Select') }}</option>
                                             <option value="1" {{($service->service_type == 1) ? 'selected' : '' }}>أجور خدمات اليد )الإصلاحات)</option>
                                             <option value="2" {{($service->service_type == 2) ? 'selected' : '' }}>أجور الأعمال الخارجية </option>
                                             <option value="3" {{($service->service_type == 3) ? 'selected' : '' }}>قطع الغيار )مخزن داخلي) </option>
@@ -93,23 +93,23 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label>Service Cost</label>
-                                        <input type="text" name="service_cost" class="form-control" placeholder="Service Cost" value="{{$service->service_cost}}">
+                                        <label>{{ trans('site.ServiceCost') }}</label>
+                                        <input type="text" name="service_cost" class="form-control" placeholder="{{ trans('site.ServiceCost') }}" value="{{$service->service_cost}}">
                                     </div>
                                     <div class="form-group">
-                                        <label>Service Client Cost</label>
-                                        <input type="text" name="service_client_cost" class="form-control" placeholder="Service Client Cost" value="{{$service->service_client_cost}}">
+                                        <label>{{ trans('site.ServiceClientCost') }}</label>
+                                        <input type="text" name="service_client_cost" class="form-control" placeholder="{{ trans('site.ServiceClientCost') }}" value="{{$service->service_client_cost}}">
                                     </div>
                                     <div class="form-group">
-                                        <label>Service Working Hours</label>
-                                        <input type="text" name="service_working_hours" class="form-control" placeholder="Service Working Hours" value="{{$service->service_working_hours}}">
+                                        <label>{{ trans('site.ServiceWorkingHours') }}</label>
+                                        <input type="text" name="service_working_hours" class="form-control" placeholder="{{ trans('site.ServiceWorkingHours') }}" value="{{$service->service_working_hours}}">
                                     </div>
-                                    <input type="submit" class="btn-primary" value="Update">
+                                    <input type="submit" class="btn btn-primary" value="{{ trans('site.Edit') }}">
 
                                 </form>
                             </div>
                             <!-- /.box-body -->
-                        </div>
+                        <!-- </div> -->
                     </div>
                     <!-- /.box-body -->
                 </div>

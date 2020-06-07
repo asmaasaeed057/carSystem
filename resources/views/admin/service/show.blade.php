@@ -35,10 +35,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      {{ trans('site.showClient') }}
+      {{ trans('site.ShowService') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -111,28 +111,28 @@
 
 
                   <td>
-                    <h4>Service Name</h4>
+                    <h4>{{ trans('site.ServiceName') }}</h4>
                     <p>{{$service->service_name}}</p>
                   </td>
 
                   <td>
-                    <h4>Service Number</h4>
+                    <h4>{{ trans('site.ServiceNumber') }}</h4>
                     <p>{{$service->service_number}}</p>
                   </td>
                   <td>
-                    <h4>Service Type</h4>
+                    <h4>{{ trans('site.ServiceType') }}</h4>
                     <p>{{$service->service_type}}</p>
                   </td>
                   <td>
-                    <h4>Service Cost</h4>
+                    <h4>{{ trans('site.ServiceCost') }}</h4>
                     <p>{{$service->service_cost}}</p>
                   </td>
                   <td>
-                    <h4>Service Client Cost</h4>
+                    <h4>{{ trans('site.ServiceClientCost') }}</h4>
                     <p>{{$service->service_client_cost}}</p>
                   </td>
                   <td>
-                    <h4>Service Working Hours</h4>
+                    <h4>{{ trans('site.ServiceWorkingHours') }}</h4>
                     <p>{{$service->service_working_hours}}</p>
                   </td>
 

@@ -35,10 +35,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            {{ trans('site.Dashboard') }}
+            {{ trans('site.InvoiceReportContractClient') }}
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
             <li class="active">{{ trans('site.Dashboard') }}</li>
         </ol>
     </section>
@@ -50,7 +50,7 @@
 
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">Invoice Report Contract Client</h3>
+                        <h3 class="box-title"></h3>
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                             </button>
@@ -63,25 +63,25 @@
                         <form action="{{ route('invoiceContractSearch')}}" method="GET">
 
                             <div class="form-group">
-                                <label for="invoice_number">Invoice Number</label>
+                                <label for="invoice_number">{{ trans('site.InvoiceNumber') }}</label>
                                 <input type="text" name="invoice_number" value="{{$invoice_number}}" class="form-control" style="width:500px">
                             </div>
                             <div class="form-group" style="display: block">
-                                <label for="client_name">Client Name</label>
+                                <label for="client_name">{{ trans('site.clientName') }}</label>
                                 <input type="text" name="client_name" value="{{$client_name}}" class="form-control" style="width:500px">
                             </div>
 
 
                             <div class="form-group">
-                                <label for="date from">From</label>
+                                <label for="date from">{{ trans('site.From') }}</label>
                                 <input type="date" name="invoice_date_from" value="{{$invoice_date_from}}" class="form-control" style="width:500px">
                             </div>
                             <div class="form-group" style="display: block">
-                                <label for="date to">To</label>
+                                <label for="date to">{{ trans('site.To') }}</label>
                                 <input type="date" name="invoice_date_to" value="{{$invoice_date_to}}" class="form-control" style="width:500px">
                             </div>
 
-                            <input type="submit" class="btn-primary" value="search">
+                            <input type="submit" class="btn btn-primary" value="{{ trans('site.Search') }}">
                         </form>
                     </div>
                     <hr>
@@ -91,16 +91,16 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Invoice Number</th>
-                                        <th>Client Name</th>
+                                        <th>{{ trans('site.InvoiceNumber') }}</th>
+                                        <th>{{ trans('site.clientName') }}</th>
 
-                                        <th>Invoice Date</th>
-                                        <th>Invoice Total</th>
+                                        <th>{{ trans('site.Date') }}</th>
+                                        <th>{{ trans('site.Total') }}</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php $total=0; ?>
+                                    <?php $total = 0; ?>
 
                                     @foreach($invoices as $invoice)
                                     @if($invoice->repairCard->client->client_type == "contract")
@@ -118,7 +118,7 @@
                                 <tr>
                                     <th></th>
                                     <th></th>
-                                    <th>Total</th>
+                                    <th>{{ trans('site.Total') }}</th>
                                     <th>{{$total}}</th>
                                 </tr>
 
@@ -130,8 +130,10 @@
 
                     <!-- /.box-body -->
                 </div>
-                <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center">Print</button>
+                <div class="col text-center">
 
+                    <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center"> <i class="fa fa-print" style="margin-right: 10px;"></i>{{ trans('site.Print') }}</button>
+                </div>
                 <!-- /.box -->
             </div>
             <!-- /.col -->

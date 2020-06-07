@@ -46,8 +46,8 @@
 
     var tr =
       '<tr>' +
-      '<td><select class="form-control" name="service_type[' + i + ']" id="service_type_' + i + '" onchange="changeService(' + i + ')"><option value=""><?php echo trans('site.options')  ?></option><option value="1">أجور خدمات اليد )الإصلاحات)</option><option value="2">أجور الأعمال الخارجية </option><option value="3">قطع الغيار )مخزن داخلي) </option><option value="4">قطع غيار )مشتريات خارجية) </option></select></td>' +
-      '<td><select onchange="showPrice(' + i + ')" name="services[' + i + ']" id="services_' + i + '" class="form-control select2"><option value=""><?php echo trans('site.options')  ?></option></select></td>' +
+      '<td><select class="form-control" name="service_type[' + i + ']" id="service_type_' + i + '" onchange="changeService(' + i + ')"><option value="">Select</option><option value="1">أجور خدمات اليد )الإصلاحات)</option><option value="2">أجور الأعمال الخارجية </option><option value="3">قطع الغيار )مخزن داخلي) </option><option value="4">قطع غيار )مشتريات خارجية) </option></select></td>' +
+      '<td><select onchange="showPrice(' + i + ')" name="services[' + i + ']" id="services_' + i + '" class="form-control select2"><option value="">Select One</option></select></td>' +
       '<td><div class="form-group"><input type="text" name="price[' + i + ']" id="price_' + i + '"></td>' +
       '<td><input type="button" class="btn btn-green add" value="+" onclick="addRow()"><input type="button" class="btn btn-danger delete" value="x" onclick="removeItem(this,' + i + ')"></td>' +
       '</tr>'
@@ -177,10 +177,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-{{ trans('site.Invoices') }}
+      {{ trans('site.Dashboard') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -192,7 +192,7 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <!-- <h3 class="box-title">{{ trans('site.Dashboard') }}</h3> -->
+            <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -200,13 +200,13 @@
             </div>
           </div>
           <!-- /.box-header -->
-          <!-- <div class="box-body">
-            <div class="box box-warning"> -->
+          <div class="box-body">
+            <div class="box box-warning">
 
               <!-- /.box-header -->
               <div class="box-body">
                 <div class="box-header with-border">
-                  <h3 class="box-title">{{ trans('site.CreateInvoice') }}</h3>
+                  <h3 class="box-title">Client Info</h3>
                 </div>
                 <form action="{{ route('noneContractClient.storeNoneContractClient')}}" method="POST">
                   @csrf
@@ -234,7 +234,7 @@
                       <span for="textfield" class="help-block error" style="color:firebrick">
                         @foreach ($errors->get('phone') as $phone)
                         {{ $phone }}
-                        Select     @endforeach
+                        @endforeach
                       </span>
                       @endif
                     </div>
@@ -247,11 +247,11 @@
                   <!--car ----------------------------------------------------------------------------->
                   <div class="box-body">
                     <div class="box-header with-border">
-                      <h3 class="box-title">{{ trans('site.CarInfo') }}</h3>
+                      <h3 class="box-title">Car Info</h3>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>{{ trans('site.BrandCategory') }}</label>
+                        <label>Brand Category</label>
                         <select class="form-control select2" name="car_brand_category_id" id="carCat" style="width: 100%;">
                           <option>{{ __("site.options") }}</option>
                           @foreach($carCategories as $category)
@@ -270,7 +270,7 @@
 
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>{{ trans('site.CarType') }}</label>
+                        <label>Type</label>
                         <select class="form-control select2" name="carType_id" id="CarType" style="width: 100%;">
                           @foreach($carTypes as $type)
                           <option value="{{$type->id}}">{{$type->name_ar}}</option>
@@ -306,7 +306,7 @@
 
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>{{ trans('site.PlateNumber') }}</label>
+                        <label>Plate number</label>
                         <input class="form-control " type="text" name="platNo" id="">
                         @if ($errors->get('platNo'))
                         <span for="textfield" class="help-block error" style="color:firebrick">
@@ -319,7 +319,7 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>{{ trans('site.StructureNumber') }}</label>
+                        <label>Structure Number</label>
                         <input class="form-control " type="text" name="car_structure_number" id="">
                         @if ($errors->get('car_structure_number'))
                         <span for="textfield" class="help-block error" style="color:firebrick">
@@ -332,7 +332,7 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>{{ trans('site.Color') }}</label>
+                        <label>Color</label>
                         <input class="form-control " type="text" name="car_color" id="">
                         @if ($errors->get('car_color'))
                         <span for="textfield" class="help-block error" style="color:firebrick">
@@ -348,13 +348,13 @@
                   <!-- TEchnical employee -->
                   <div class="box-body">
                     <div class="box-header with-border">
-                      <h3 class="box-title">{{ trans('site.TechnicalEmployeeInfo') }}</h3>
+                      <h3 class="box-title">Technical employee Info</h3>
                     </div>
-                    <div class="">
-                      <div class="form-group ">
-                        <label>{{ trans('site.Employee') }}</label>
-                        <select class="form-control " name="employee_id" id="" style="width: 48%;">
-                          <option value="">{{ trans('site.Select') }}</option>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Employee</label>
+                        <select class="form-control" name="employee_id" id="" style="width: 100%;">
+                          <option value="">Select</option>
                           @foreach($employee as $emp)
                           <option value="{{$emp->employee_id}}">{{$emp->employee_name}}</option>
                           @endforeach
@@ -365,13 +365,13 @@
                   <!-- repair card--------------------------------------------------------------------------->
                   <div class="box-body">
                     <div class="box-header with-border">
-                      <h3 class="box-title">{{ trans('site.RepairCardInfo') }}</h3>
+                      <h3 class="box-title">Repair Card Info</h3>
                     </div>
 
 
                     <div class="col-md-12">
                       <label for="">
-                        <h4>{{ trans('site.CheckReportForCar') }}</h4>
+                        <h4>Check Report For Car</h4>
                       </label>
                       <textarea class="form-control" name="checkReprort" id="" cols="30" rows="10"></textarea>
                     </div>
@@ -382,25 +382,25 @@
 
                   <!-- repair card items--------------------------------------------------------------------------->
                   <div class="container">
-                    <h2>{{ trans('site.services') }}</h2>
+                    <h2>Items</h2>
                     <table class="table table-condensed">
                       <thead>
                         <tr>
-                          <th>{{ trans('site.ServiceType') }}</th>
-                          <th>{{ trans('site.Services') }}</th>
-                          <th>{{ trans('site.Price') }}</th>
+                          <th>Service Type</th>
+                          <th>Services</th>
+                          <th>Price</th>
                         </tr>
                       </thead>
                       <tbody id='services'>
                         <tr>
                           <td>
                             <select class="form-control" name="service_type[0]" id="service_type_0" onchange="changeService(0)">
-                              <option value="">{{ trans('site.Select') }}</option>
+                              <option value="">Select</option>
 
-                              <option value="1">أجور خدمات اليد )الإصلاحات)</option>
+                              <option value="1">أجور خدمات اليد -الإصلاحات</option>
                               <option value="2">أجور الأعمال الخارجية </option>
-                              <option value="3">قطع الغيار )مخزن داخلي) </option>
-                              <option value="4">قطع غيار )مشتريات خارجية) </option>
+                              <option value="3">قطع الغيار- مخزن داخلي </option>
+                              <option value="4">قطع غيار- مشتريات خارجية </option>
 
                             </select>
 
@@ -408,7 +408,7 @@
                           </td>
                           <td>
                             <select name="services[0]" id="services_0" class="form-control" onchange="showPrice(0)">
-                              <option value="">{{ trans('site.SelectOne') }}</option>
+                              <option value="">Select One</option>
                             </select>
 
 
@@ -434,7 +434,7 @@
                       </tr>
                       <tr>
                         <td colspan="2"></td>
-                        <td><strong>{{ trans('site.Discount') }}</strong></td>
+                        <td><strong>Discount</strong></td>
                         <td>
                         <input type="number" name="card_discount" id="discount" onkeyup="cardDiscount()" value="0">
 
@@ -443,7 +443,7 @@
                       </tr>
                       <tr>
                         <td colspan="2"></td>
-                        <td><strong>{{ trans('site.TotalPriceWithTaxes') }}</strong></td>
+                        <td><strong>Total Price with taxes</strong></td>
 
                         <td>
                         <input type='text' name="totalPriceWithTaxes" id="totalPriceWithTaxes" disabled>
@@ -461,7 +461,7 @@
 
                   <!-- repair card items--------------------------------------------------------------------------->
 
-                  <input type="submit" class="btn btn-primary" value="{{ trans('site.add') }}">
+                  <input type="submit" class="btn-primary" value="{{ trans('site.add') }}">
 
                 </form>
               </div>
@@ -471,9 +471,9 @@
           <!-- /.box-body -->
         </div>
         <!-- /.box -->
-      <!-- </div> -->
+      </div>
       <!-- /.col -->
-    <!-- </div> -->
+    </div>
     <!-- /.row -->
   </section>
   <!-- /.content -->

@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Dashboard</title>
+    <?php $company = App\CompanyDetails::find(1); ?>
+    <title>{{$company->company_name}}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -13,6 +14,8 @@
     <link rel="stylesheet" href="{{ asset('FrontEnd') }}/bower_components/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('FrontEnd') }}/bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="{{ asset('FrontEnd') }}/dist/css/table.css">
+
     @yield('style')
 
     <!-- Theme style -->
@@ -261,7 +264,7 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header"></li>
-                    <li class="active treeview">
+                    <li>
                         <a href="{{route('dashboard')}}">
                             <i class="fa fa-dashboard"></i> <span>{{ trans('site.Dashboard')}}</span>
                         </a>
@@ -270,7 +273,7 @@
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
-                            <span>{{ trans('site.contractClients')}}</span>
+                            <span>Contract Clients</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
@@ -280,13 +283,13 @@
                             <li class="treeview">
                                 <a href="#">
                                     <i class="fa fa-list"></i>
-                                    <span>{{ trans('site.contractClients')}}</span>
+                                    <span>Clients</span>
                                     <span class="pull-right-container">
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li><a href="{{ route('client.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.clientList') }}</a></li>
+                                    <li><a href="{{ route('client.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.showClient') }}</a></li>
                                     <li><a href="{{ route('client.create')}}"><i class="fa fa-circle-o"></i> {{ trans('site.addClient') }}</a></li>
                                     <li><a href="{{ route('car.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.carList') }}</a></li>
                                 </ul>
@@ -307,26 +310,26 @@
                             <li class="treeview">
                                 <a href="#">
                                     <i class="fa fa-list"></i>
-                                    <span>{{ trans('site.InvoiceList')}}</span>
+                                    <span>Invoices</span>
                                     <span class="pull-right-container">
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li><a href="{{ route('invoiceIndex')}}"><i class="fa fa-circle-o"></i>{{ trans('site.InvoiceList')}}</a></li>
-                                    <li><a href="{{ route('customInvoice.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.CustomInvoice')}}</a></li>
+                                    <li><a href="{{ route('invoiceIndex')}}"><i class="fa fa-circle-o"></i>show Invoices</a></li>
+                                    <li><a href="{{ route('customInvoice.index')}}"><i class="fa fa-circle-o"></i>Custom Invoice</a></li>
                                 </ul>
                             </li>
                             <li class="treeview">
                                 <a href="#">
                                     <i class="fa fa-list"></i>
-                                    <span>{{ trans('site.operationOrderList')}}</span>
+                                    <span>Operation Orders</span>
                                     <span class="pull-right-container">
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li><a href="{{ route('operationOrder.index') }}"><i class="fa fa-circle-o"></i> {{ trans('site.operationOrderList')}}</a></li>
+                                    <li><a href="{{ route('operationOrder.index') }}"><i class="fa fa-circle-o"></i> Operation Orders</a></li>
 
                                 </ul>
                             </li>
@@ -337,7 +340,7 @@
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
-                            <span>{{ trans('site.NoneContractClients')}}</span>
+                            <span>None Contract Clients</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
@@ -347,39 +350,39 @@
                             <li class="treeview">
                                 <a href="#">
                                     <i class="fa fa-list"></i>
-                                    <span>{{ trans('site.CreateInvoice')}}</span>
+                                    <span>Create Invoice</span>
                                     <span class="pull-right-container">
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li><a href="{{ route('noneContractClient.createNoneContractClient')}}"><i class="fa fa-circle-o"></i>{{ trans('site.CreateInvoice')}}</a></li>
+                                    <li><a href="{{ route('noneContractClient.createNoneContractClient')}}"><i class="fa fa-circle-o"></i>Create Invoice</a></li>
                                 </ul>
                             </li>
 
                             <li class="treeview">
                                 <a href="#">
                                     <i class="fa fa-list"></i>
-                                    <span>{{ trans('site.InvoiceList')}}</span>
+                                    <span>Invoices</span>
                                     <span class="pull-right-container">
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li><a href="{{ route('invoiceIndexNoneContract')}}"><i class="fa fa-circle-o"></i>{{ trans('site.InvoiceList')}}</a></li>
-                                    <li><a href="{{ route('customInvoice.index')}}"><i class="fa fa-circle-o"></i> {{ trans('site.CustomInvoice')}}</a></li>
+                                    <li><a href="{{ route('invoiceIndexNoneContract')}}"><i class="fa fa-circle-o"></i> show Invoices</a></li>
+                                    <li><a href="{{ route('customInvoice.index')}}"><i class="fa fa-circle-o"></i> Custom Invoice</a></li>
                                 </ul>
                             </li>
                             <li class="treeview">
                                 <a href="#">
                                     <i class="fa fa-list"></i>
-                                    <span>{{ trans('site.operationOrderList')}}</span>
+                                    <span>Operation Orders</span>
                                     <span class="pull-right-container">
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li><a href="{{ route('operationOrder.indexNoneContract') }}"><i class="fa fa-circle-o"></i> {{ trans('site.operationOrderList')}}</a></li>
+                                    <li><a href="{{ route('operationOrder.indexNoneContract') }}"><i class="fa fa-circle-o"></i> Operation Orders</a></li>
 
                                 </ul>
                             </li>
@@ -448,14 +451,14 @@
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
-                            <span>{{ trans('site.Expenses') }}</span>
+                            <span>Expenses</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ route('expense.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.Expenses') }}</a></li>
-                            <li><a href="{{ route('expense.create')}}"><i class="fa fa-circle-o"></i> {{ trans('site.CreateExpenses') }}</a></li>
+                            <li><a href="{{ route('expense.index')}}"><i class="fa fa-circle-o"></i>show expenses</a></li>
+                            <li><a href="{{ route('expense.create')}}"><i class="fa fa-circle-o"></i> add expense</a></li>
 
                         </ul>
                     </li>
@@ -468,14 +471,14 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ route('expenseReport')}}"><i class="fa fa-circle-o"></i> {{ trans('site.Expense')}}</a></li>
-                            <li><a href="{{ route('expenseTaxReport')}}"><i class="fa fa-circle-o"></i>{{ trans('site.ExpenseTax')}}</a></li>
-                            <li><a href="{{ route('ClientReport')}}"><i class="fa fa-circle-o"></i>{{ trans('site.Client')}}</a></li>
-                            <li><a href="{{ route('cardTaxesReport')}}"><i class="fa fa-circle-o"></i> {{ trans('site.TaxesCard')}}</a></li>
-                            <li><a href="{{ route('invoiceContractReport')}}"><i class="fa fa-circle-o"></i>{{ trans('site.InvoiceContractClient')}}</a></li>
-                            <li><a href="{{ route('invoiceNoneContractReport')}}"><i class="fa fa-circle-o"></i>{{ trans('site.InvoiceNoneContractClient')}}</a></li>
-                            <li><a href="{{ route('incomeContractReport')}}"><i class="fa fa-circle-o"></i>{{ trans('site.IncomeContractClient')}}</a></li>
-                            <li><a href="{{ route('incomeNoneContractReport')}}"><i class="fa fa-circle-o"></i>{{ trans('site.IncomeNonContractClient')}}</a></li>
+                            <li><a href="{{ route('expenseReport')}}"><i class="fa fa-circle-o"></i> Expense</a></li>
+                            <li><a href="{{ route('expenseTaxReport')}}"><i class="fa fa-circle-o"></i> Expense Tax</a></li>
+                            <li><a href="{{ route('ClientReport')}}"><i class="fa fa-circle-o"></i>Client</a></li>
+                            <li><a href="{{ route('cardTaxesReport')}}"><i class="fa fa-circle-o"></i> Card Tax</a></li>
+                            <li><a href="{{ route('invoiceContractReport')}}"><i class="fa fa-circle-o"></i>Invoice Contract</a></li>
+                            <li><a href="{{ route('invoiceNoneContractReport')}}"><i class="fa fa-circle-o"></i>Invoice None Contract</a></li>
+                            <li><a href="{{ route('incomeContractReport')}}"><i class="fa fa-circle-o"></i>Income Contract</a></li>
+                            <li><a href="{{ route('incomeNoneContractReport')}}"><i class="fa fa-circle-o"></i>Income None Contract</a></li>
 
 
                             <!-- <li><a href="{{ url('admin/FilterIncome')}}"><i class="fa fa-circle-o"></i> {{ trans('site.income')}}</a></li> -->
@@ -503,26 +506,26 @@
                         <ul class="treeview-menu">
 
 
-                            <li><a href="{{ route('brand.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.BrandCategory')}}</a></li>
-                            <li><a href="{{ route('brandCategory.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.carCatogryList')}}</a></li>
-                            <li><a href="{{ route('carType.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.CarType')}}</a></li>
-                            <li><a href="{{route('technicalEmployee.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.TechnicalEmployeeInfo')}}</a></li>
-                            <li><a href="{{ route('service.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.Services')}}</a></li>
-                            <li><a href="{{ route('companyDetails.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.CompanyInfo')}}</a></li>
-                            <li><a href="{{ route('cardTaxes.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.TaxValue')}}</a></li>
-                            <li><a href="{{ route('note.index')}}"><i class="fa fa-circle-o"></i>{{ trans('site.BillNotes')}}</a></li>
+                            <li><a href="{{ route('brand.index')}}"><i class="fa fa-circle-o"></i>Car Brands</a></li>
+                            <li><a href="{{ route('brandCategory.index')}}"><i class="fa fa-circle-o"></i>Car Brand Categories</a></li>
+                            <li><a href="{{ route('carType.index')}}"><i class="fa fa-circle-o"></i>Car Types</a></li>
+                            <li><a href="{{route('technicalEmployee.index')}}"><i class="fa fa-circle-o"></i>Technical Employee</a></li>
+                            <li><a href="{{ route('service.index')}}"><i class="fa fa-circle-o"></i>Services</a></li>
+                            <li><a href="{{ route('companyDetails.index')}}"><i class="fa fa-circle-o"></i>Company Info</a></li>
+                            <li><a href="{{ route('cardTaxes.index')}}"><i class="fa fa-circle-o"></i>Card Taxes</a></li>
+                            <li><a href="{{ route('note.index')}}"><i class="fa fa-circle-o"></i>Bill Notes</a></li>
 
                             <li class="treeview">
                                 <a href="#">
                                     <i class="fa fa-pie-chart"></i>
-                                    <span>{{ trans('site.permissions')}}</span>
+                                    <span>Permissions</span>
                                     <span class="pull-right-container">
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li><a href="{{ route('group.index') }}"><i class="fa fa-circle-o"></i> {{ trans('site.Groups')}}</a></li>
-                                    <li><a href="{{ route('account.index') }}"><i class="fa fa-circle-o"></i> {{ trans('site.accounts')}}</a></li>
+                                    <li><a href="{{ route('group.index') }}"><i class="fa fa-circle-o"></i> Groups</a></li>
+                                    <li><a href="{{ route('account.index') }}"><i class="fa fa-circle-o"></i> Accounts</a></li>
                                 </ul>
                             </li>
                         </ul>

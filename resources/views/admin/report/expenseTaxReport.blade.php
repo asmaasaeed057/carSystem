@@ -35,10 +35,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            {{ trans('site.Dashboard') }}
+            {{ trans('site.ExpenseTaxReport') }}
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
             <li class="active">{{ trans('site.Dashboard') }}</li>
         </ol>
     </section>
@@ -50,7 +50,7 @@
 
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+                        <h3 class="box-title"></h3>
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                             </button>
@@ -63,15 +63,15 @@
                         <form action="{{ route('expenseTaxSearch')}}" method="GET">
 
                             <div class="form-group">
-                                <label for="date from">From</label>
-                                <input type="date" name="expense_date_from" value= "{{$expense_date_from}}"class="form-control" style="width:500px">
+                                <label for="date from">{{ trans('site.From') }}</label>
+                                <input type="date" name="expense_date_from" value="{{$expense_date_from}}" class="form-control" style="width:500px">
                             </div>
                             <div class="form-group" style="display: block">
-                                <label for="date to">To</label>
-                                <input type="date" name="expense_date_to" value= "{{$expense_date_to}}" class="form-control" style="width:500px">
+                                <label for="date to">{{ trans('site.To') }}</label>
+                                <input type="date" name="expense_date_to" value="{{$expense_date_to}}" class="form-control" style="width:500px">
                             </div>
 
-                            <input type="submit" class="btn-primary" value="search">
+                            <input type="submit" class="btn btn-primary fa-search" value="{{ trans('site.Search') }}">
                         </form>
                     </div>
                     <hr>
@@ -81,18 +81,20 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Expense Name</th>
-                                        <th>Expense Date</th>
-                                        <th>Expense Bill</th>
-                                        <th>Expense Price</th>
-                                        <th>Expense Notes</th>
-                                        <th>Expense Tax</th>
+                                        <th>{{ trans('site.Name') }}</th>
+                                        <th>{{ trans('site.Date') }} </th>
+                                        <th>{{ trans('site.Bill') }} </th>
+                                        <th>{{ trans('site.Price') }} </th>
+                                        <th style="text-align: center">{{ trans('site.Notes') }} </th>
+                                        <th>{{ trans('site.Taxes') }} </th>
+
+
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php $totalBill=0; ?>
-                                <?php $totalPrice=0; ?>
+                                    <?php $totalBill = 0; ?>
+                                    <?php $totalPrice = 0; ?>
 
                                     @foreach($expenses as $expense)
                                     <tr>
@@ -111,7 +113,7 @@
                                 </tbody>
 
                                 <tr>
-                                    <th>Total</strong></th>
+                                    <th>{{ trans('site.Total') }}</strong></th>
                                     <td></td>
                                     <th>{{$totalBill}}</th>
                                     <th>{{$totalPrice}}</th>
@@ -126,8 +128,10 @@
 
                     <!-- /.box-body -->
                 </div>
-                <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center">Print</button>
+                <div class="col text-center">
 
+                    <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center"><i class="fa fa-print" style="margin-right: 10px;" ></i>{{ trans('site.Print') }}</button>
+                </div>
                 <!-- /.box -->
             </div>
             <!-- /.col -->

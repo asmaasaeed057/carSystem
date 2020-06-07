@@ -35,10 +35,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      {{ trans('site.Dashboard') }}
+      {{ trans('site.carCatogryList') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.Dashboard') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -51,7 +51,7 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <h3 class="box-title">{{ trans('site.carCatogryList') }}</h3>
+            <h3 class="box-title"></h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -60,18 +60,18 @@
           </div>
           <!-- /.box-header -->
           <div class="box-header">
-            <a href="{{route('brandCategory.create')}}" style="margin-top: 10px;" class="btn btn-success">Add Brand Category </a>
+            <a href="{{route('brandCategory.create')}}" style="margin-top: 10px;" class="btn btn-success"><i class="fa fa-plus" style="margin-right: 10px;" ></i>{{ trans('site.add') }} </a>
           </div>
           <div class="box-body">
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>Brand Category Name (English)</th>
-                  <th>Brand Category Name (Arabic)</th>
-                  <th>Car Brand</th>
+                  <th>{{ trans('site.NameAr') }}</th>
+                  <th>{{ trans('site.NameEn') }}</th>
+                  <th>{{ trans('site.BrandCategory') }}</th>
 
-                  <th>Edit</th>
-                  <th>Delete</th>
+                  <th>{{ trans('site.Edit') }}</th>
+                  <th>{{ trans('site.Delete') }}</th>
                   <!-- <th>Show</th> -->
                 </tr>
               </thead>
@@ -83,13 +83,13 @@
                   <td>{{$category->name_en}}</td>
                   <td>{{$category->brand->name_en}}</td>
 
-                  <td><a href="{{route('brandCategory.edit' ,$category->id)}}" class="btn btn-info">Edit</a></td>
+                  <td><a href="{{route('brandCategory.edit' ,$category->id)}}" class="btn btn-info"><i class="fa fa-edit" style="margin-right: 10px;" ></i>{{ trans('site.Edit') }}</a></td>
                   <td>
 
                     <form class="delete" action="{{route('brandCategory.destroy' ,$category->id)}}" method="post">
                       @csrf
                       @method('DELETE')
-                      <button class="btn btn-danger" type="submit">Delete</button>
+                      <button class="btn btn-danger" type="submit"><i class="fa fa-trash-o" style="margin-right: 10px;" ></i>{{ trans('site.Delete') }}</button>
 
                     </form>
                   </td>

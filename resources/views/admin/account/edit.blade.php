@@ -35,10 +35,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            {{ trans('site.Dashboard') }}
+            {{ trans('site.editAccount') }}
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
             <li class="active">{{ trans('site.Dashboard') }}</li>
         </ol>
     </section>
@@ -51,7 +51,7 @@
 
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+                        <!-- <h3 class="box-title">{{ trans('site.Dashboard') }}</h3> -->
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                             </button>
@@ -60,58 +60,58 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <div class="box box-warning">
-                            <div class="box-header with-border">
+                        <!-- <div class="box box-warning"> -->
+                        <!-- <div class="box-header with-border">
                                 <h3 class="box-title">{{ trans('site.createClient') }}</h3>
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <form action="{{ route('admin.update' ,$user->id)}}" method="POST">
-                                    @csrf
-                                    @method('PUT')
+                            </div> -->
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <form action="{{ route('admin.update' ,$user->id)}}" method="POST">
+                                @csrf
+                                @method('PUT')
 
-                                    <div class="form-group">
-                                        <label>المجموعه</label>
-                                        <div class="controls">
-                                            <select class="" name="group_id">
-                                                @foreach($groups as $group)
-                                                <option value="{{ $group->group_id }}" {{($group->group_id == $user->group_id) ? 'selected' : '' }}>
-                                                    {{ $group->group_name }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-
-                                    </div>
-                                    <!-- text input -->
-                                    <div class="form-group">
-                                        <label>User Name</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Name" value="{{$user->name}}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Email</label>
-                                        <input type="text" name="email" class="form-control" placeholder="Email" value="{{$user->email}}">
+                                <div class="form-group">
+                                    <label>{{ trans('site.group') }}</label>
+                                    <div class="controls">
+                                        <select class="" name="group_id">
+                                            @foreach($groups as $group)
+                                            <option value="{{ $group->group_id }}" {{($group->group_id == $user->group_id) ? 'selected' : '' }}>
+                                                {{ $group->group_name }}
+                                            </option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
-
-                                    <input type="submit" class="btn-primary" value="Update">
-
-                                </form>
-                            </div>
-
-
-
-
-
-
-
+                                </div>
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label>{{ trans('site.name') }}</label>
+                                    <input type="text" name="name" class="form-control" placeholder="Name" value="{{$user->name}}">
+                                </div>
+                                <div class="form-group">
+                                    <label>{{ trans('site.email') }}</label>
+                                    <input type="text" name="email" class="form-control" placeholder="Email" value="{{$user->email}}">
+                                </div>
 
 
+                                <input type="submit" class="btn btn-primary" value="{{ trans('site.update') }}">
 
-
-
-                            <!-- /.box-body -->
+                            </form>
                         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                        <!-- /.box-body -->
+                        <!-- </div> -->
                     </div>
                     <!-- /.box-body -->
                 </div>

@@ -35,10 +35,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            {{ trans('site.Dashboard') }}
+            {{ trans('site.addAccount') }}
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
             <li class="active">{{ trans('site.Dashboard') }}</li>
         </ol>
     </section>
@@ -50,7 +50,7 @@
 
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+                        <!-- <h3 class="box-title">{{ trans('site.Dashboard') }}</h3> -->
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                             </button>
@@ -59,10 +59,10 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <div class="box box-warning">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Create Account</h3>
-                            </div>
+                        <!-- <div class="box box-warning"> -->
+                            <!-- <div class="box-header with-border">
+                                <h3 class="box-title">{{ trans('site.addAccount') }}</h3>
+                            </div> -->
                             <!-- /.box-header -->
                             <div class="box-body">
                                 <form action="{{ route('account.store')}}" method="POST">
@@ -71,11 +71,11 @@
 
                                     <!-- text input -->
                                     <div class="form-group">
-                                        <label>Group </label>
+                                        <label>{{ trans('site.group') }} </label>
                                         <div class="controls">
 
                                             <select class="" name="group_id" required="required">
-                                                <option value="">choose</option>
+                                                <option value="">{{ trans('site.options') }}</option>
                                                 @foreach($groups as $group)
                                                 <option value="{{$group->group_id }}">{{$group->group_name }}</option>
                                                 @endforeach
@@ -84,37 +84,37 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label> Name</label>
+                                        <label> {{ trans('site.name') }}</label>
                                         <input type="text" name="name" class="form-control" placeholder="Name">
 
                                     </div>
                                     <div class="form-group">
 
-                                        <label>Email</label>
+                                        <label>{{ trans('site.email') }}</label>
                                         <input type="text" name="email" class="form-control" placeholder="Email">
 
                                     </div>
                                     <div class="form-group">
 
-                                        <label>Password</label>
+                                        <label>{{ trans('site.password') }}</label>
                                         <input type="text" name="password" class="form-control" placeholder="password">
 
                                     </div>
                                     <div class="form-group">
 
-                                        <label>Password Confirmation</label>
+                                        <label>{{ trans('site.passwordConf') }}</label>
                                         <input type="text" name="password_confirmation" class="form-control">
 
                                     </div>
 
 
 
-                                    <input type="submit" class="btn-primary" value="{{ trans('site.add') }}">
+                                    <input type="submit" class="btn btn-primary" value="{{ trans('site.add') }}">
 
                                 </form>
                             </div>
                             <!-- /.box-body -->
-                        </div>
+                        <!-- </div> -->
                     </div>
                     <!-- /.box-body -->
                 </div>

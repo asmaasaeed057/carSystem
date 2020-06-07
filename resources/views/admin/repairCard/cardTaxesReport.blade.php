@@ -35,10 +35,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Taxes Card Report
+      {{ trans('site.TaxesCardReport') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -104,16 +104,16 @@
             <form method="get" action="{{route('cardTaxesSearch')}}">
 
               <div class="form-group">
-                <label for="date from">From</label>
+                <label for="date from">{{ trans('site.From') }}</label>
                 <input type="date" name="card_date_from" value="{{$datefrom}}" class="form-control" style="width:500px">
               </div>
               <div class="form-group" style="display: block">
-                <label for="date to">To</label>
+                <label for="date to">{{ trans('site.To') }}</label>
                 <input type="date" name="card_date_to" value="{{$dateto}}" class="form-control" style="width:500px">
               </div>
             <div class="form-actions">
 
-              <input id="submit" type="submit" name="submit" value="Search" class="btn btn-primary btn-large">
+              <input id="submit" type="submit" name="submit" value="{{ trans('site.Search') }}" class="btn btn-primary btn-large">
             </div>
           </div>
           </form>
@@ -123,8 +123,8 @@
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>Date</th>
-                  <th>Taxes</th>
+                  <th>{{ trans('site.Date') }}</th>
+                  <th>{{ trans('site.Taxes') }}</th>
 
                 </tr>
               </thead>
@@ -138,7 +138,7 @@
                 </tr>
                 @endforeach
                 <tr>
-                  <th>Total</th>
+                  <th>{{ trans('site.Total') }}</th>
                   <td>{{$total}}</td>
                 </tr>
               </tbody>

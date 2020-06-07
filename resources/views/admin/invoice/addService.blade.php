@@ -38,8 +38,8 @@
 
         var tr =
             '<tr>' +
-            '<td><select class="form-control" name="service_type[' + i + ']" id="service_type_' + i + '" onchange="changeService(' + i + ')"><option value="">Select</option><option value="1">أجور خدمات اليد )الإصلاحات)</option><option value="2">أجور الأعمال الخارجية </option><option value="3">قطع الغيار )مخزن داخلي) </option><option value="4">قطع غيار )مشتريات خارجية) </option></select></td>' +
-            '<td><select onchange="showPrice(' + i + ')" name="services[' + i + ']" id="services_' + i + '" class="form-control select2"><option value="">Select One</option></select></td>' +
+            '<td><select class="form-control" name="service_type[' + i + ']" id="service_type_' + i + '" onchange="changeService(' + i + ')"><option value=""><?php echo trans('site.options') ?></option><option value="1">أجور خدمات اليد )الإصلاحات)</option><option value="2">أجور الأعمال الخارجية </option><option value="3">قطع الغيار )مخزن داخلي) </option><option value="4">قطع غيار )مشتريات خارجية) </option></select></td>' +
+            '<td><select onchange="showPrice(' + i + ')" name="services[' + i + ']" id="services_' + i + '" class="form-control select2"><option value=""><?php echo trans('site.options') ?></option></select></td>' +
             '<td><div class="form-group"><input type="text" name="price[' + i + ']" id="price_' + i + '"></td>' +
             '<td><input type="button" class="btn btn-green add" value="+" onclick="addRow()"><input type="button" class="btn btn-danger delete" value="x" onclick="removeItem(this,' + i + ')"></td>' +
             '</tr>'
@@ -174,10 +174,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            {{ trans('site.Dashboard') }}
+            {{ trans('site.AddServices') }}
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
             <li class="active">{{ trans('site.Dashboard') }}</li>
         </ol>
     </section>
@@ -193,15 +193,15 @@
                     <div class="box-body">
                         <div class="box">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Items</h3>
+                                <h3 class="box-title">{{ trans('site.services') }}</h3>
 
                                 <table class="table table-striped table-dark">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Service Type</th>
+                                            <th scope="col">{{ trans('site.serviceType') }}</th>
 
-                                            <th scope="col">Service</th>
-                                            <th scope="row">Client Cost</th>
+                                            <th scope="col">{{ trans('site.service') }}</th>
+                                            <th scope="row">{{ trans('site.price') }}</th>
 
                                         </tr>
                                     </thead>
@@ -212,14 +212,14 @@
                                         <tr>
                                             <td>
                                                 @if($item->service->service_type =="1")
-                                                أجور خدمات اليد )الإصلاحات)
+                                                أجور خدمات اليد -الإصلاحات
 
                                                 @elseif($item->service->service_type =="2")
                                                 أجور الأعمال الخارجية
                                                 @elseif($item->service->service_type =="3")
-                                                قطع الغيار )مخزن داخلي)
+                                                قطع الغيار -مخزن داخلي
                                                 @elseif($item->service->service_type =="4")
-                                                قطع غيار )مشتريات خارجية)
+                                                قطع غيار -مشتريات خارجية
                                                 @endif
                                             </td>
                                             <td>{{$item->service->service_name}}</td>
@@ -230,12 +230,12 @@
                                         <tr>
                                         <tr>
                                             <th></th>
-                                            <th>Total</th>
+                                            <th>{{ trans('site.totalCost') }}</th>
                                             <td><?php echo $total ?></td>
                                         </tr>
                                         <tr>
                                             <th></th>
-                                            <th>Discount</th>
+                                            <th>{{ trans('site.discount') }}</th>
                                             <td><?php echo $invoice->repairCard->card_discount ?></td>
                                         </tr>
                                         <tr>
@@ -245,7 +245,7 @@
                                             <?php $totalWithTaxes = $invoice->repairCard->total_with_taxes; ?>
                                             <th></th>
 
-                                            <th>Total With Taxes</th>
+                                            <th>{{ trans('site.totalWithTaxes') }}</th>
                                             <td><?php echo $totalWithTaxes ?></td>
                                         </tr>
                                     </tbody>
@@ -256,11 +256,11 @@
 
                                     <form class="form-inline" action="">
                                         <div class="form-group">
-                                            <label for="paid">Paid:</label>
+                                            <label for="paid">{{ trans('site.Paid') }}:</label>
                                             <input type="text" class="form-control" value="{{$invoice->paid}}" id="paid" disabled>
                                         </div>
                                         <div class="form-group">
-                                            <label for="remain">Remain:</label>
+                                            <label for="remain">{{ trans('site.Remain') }}:</label>
                                             <input type="text" class="form-control" value="{{$invoice->remain}}" id="remain" disabled>
                                         </div>
 
@@ -283,7 +283,7 @@
                     <div class="box-body">
                         <div class="box box-warning">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Add New Service</h3>
+                                <h3 class="box-title">{{ trans('site.AddServices') }}</h3>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
@@ -304,16 +304,16 @@
                                             <table class="table table-condensed">
                                                 <thead>
                                                     <tr>
-                                                        <th>Service Type</th>
-                                                        <th>Services</th>
-                                                        <th>Price</th>
+                                                        <th>{{ trans('site.serviceType') }}</th>
+                                                        <th>{{ trans('site.service') }}</th>
+                                                        <th>{{ trans('site.price') }}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id='services'>
                                                     <tr>
                                                         <td>
                                                             <select class="form-control" name="service_type[0]" id="service_type_0" onchange="changeService(0)">
-                                                                <option value="">Select</option>
+                                                                <option value="">{{ trans('site.options') }}</option>
 
                                                                 <option value="1">أجور خدمات اليد -الإصلاحات</option>
                                                                 <option value="2">أجور الأعمال الخارجية </option>
@@ -326,7 +326,7 @@
                                                         </td>
                                                         <td>
                                                             <select name="services[0]" id="services_0" class="form-control" onchange="showPrice(0)">
-                                                                <option value="">Select One</option>
+                                                                <option value="">{{ trans('site.options') }}</option>
                                                             </select>
 
 
@@ -362,7 +362,7 @@
                                                 </tr> -->
                                                 <tr>
                                                     <td colspan="2"></td>
-                                                    <td><strong>Total Price</strong></td>
+                                                    <td><strong>{{ trans('site.total') }}</strong></td>
 
                                                     <td>
                                                         <input type='text' name="totalPrice" id="total_price" disabled>

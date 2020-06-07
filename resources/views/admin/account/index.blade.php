@@ -35,10 +35,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            {{ trans('site.Dashboard') }}
+            {{ trans('site.accounts') }}
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
             <li class="active">{{ trans('site.Dashboard') }}</li>
         </ol>
     </section>
@@ -51,7 +51,7 @@
 
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+                        <!-- <h3 class="box-title">{{ trans('site.Dashboard') }}</h3> -->
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                             </button>
@@ -60,17 +60,17 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-header">
-                        <a href="{{route('account.create')}}" style="margin-top: 10px;" class="btn btn-success">Add Account </a>
+                        <a href="{{route('account.create')}}" style="margin-top: 10px;" class="btn btn-success"><i class="fa fa-plus" style="margin-right: 10px;" ></i>{{ trans('site.addAccount') }} </a>
                     </div>
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Group</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <th>{{ trans('site.group') }}</th>
+                                    <th>{{ trans('site.name') }}</th>
+                                    <th>{{ trans('site.email') }}</th>
+                                    <th>{{ trans('site.edit') }}</th>
+                                    <th>{{ trans('site.delete') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -86,12 +86,12 @@
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
 
-                                    <td><a href="{{route('account.edit',$user->id)}}" class="btn btn-info">Edit</a></td>
+                                    <td><a href="{{route('account.edit',$user->id)}}" class="btn btn-info"><i class="fa fa-edit" style="margin-right: 10px;" ></i>{{ trans('site.edit') }}</a></td>
                                     <td>
                                         <form id="delete" action="{{route('account.destroy',$user->id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-danger" type="submit">Delete</button>
+                                            <button class="btn btn-danger" type="submit"><i class="fa fa-trash-o" style="margin-right: 10px;" ></i>{{ trans('site.delete') }}</button>
                                         </form>
                                     </td>
 

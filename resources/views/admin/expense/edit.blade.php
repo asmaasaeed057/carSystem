@@ -35,10 +35,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      {{ trans('site.Dashboard') }}
+      {{ trans('site.EditExpenses') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -51,7 +51,7 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+            <h3 class="box-title"></h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -60,10 +60,10 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <div class="box box-warning">
-              <div class="box-header with-border">
-                <h3 class="box-title">create Expense</h3>
-              </div>
+            <!-- <div class="box box-warning"> -->
+              <!-- <div class="box-header with-border">
+                <h3 class="box-title"></h3>
+              </div> -->
               <!-- /.box-header -->
               <div class="box-body">
                 <form action="{{ route('expense.update' ,$expense->expense_id)}}" method="POST">
@@ -71,36 +71,36 @@
                   @method('PUT')
                   <!-- text input -->
                   <div class="form-group">
-                    <label>Expense Name</label>
+                    <label>{{ trans('site.Name') }}</label>
                     <input type="text" name="expense_name" class="form-control" value="{{$expense->expense_name}}">
                   </div>
                   <div class="form-group">
-                    <label>EXpense Bill</label>
+                    <label>{{ trans('site.Bill') }}</label>
                     <input type="text" name="expense_bill" class="form-control"value="{{$expense->expense_bill}}">
                   </div>
                   <div class="form-group">
-                    <label>EXpense Price</label>
+                    <label>{{ trans('site.Price') }}</label>
                     <input type="text" name="expense_price" class="form-control" value="{{$expense->expense_price}}">
                   </div>
                   <div class="form-group">
-                    <label>EXpense Tax</label>
+                    <label>{{ trans('site.Taxes') }}</label>
                     <input type="text" name="expense_tax" class="form-control" value="{{$expense->expense_tax}}">
                   </div>
                   <div class="form-group">
-                    <label>EXpense date</label>
+                    <label>{{ trans('site.Date') }}</label>
                     <input name="expense_date" class="form-control" value="{{$expense->expense_date}}">
                   </div>
                   <!-- textarea -->
                   <div class="form-group">
-                    <label>EXpense Notes</label>
+                    <label>{{ trans('site.Notes') }}</label>
                     <textarea class="form-control" name="expense_notes" id="" cols="30" rows="10">{{$expense->expense_notes}}</textarea>
                   </div>
-                  <input type="submit" class="btn-primary" value="Update">
+                  <input type="submit" class="btn btn-primary" value="{{ trans('site.Edit') }}">
 
                 </form>
               </div>
               <!-- /.box-body -->
-            </div>
+            <!-- </div> -->
           </div>
           <!-- /.box-body -->
         </div>

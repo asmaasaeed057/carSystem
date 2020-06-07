@@ -49,8 +49,8 @@
 
     var tr =
       '<tr>' +
-      '<td><select class="form-control" name="service_type[' + i + ']" id="service_type_' + i + '" onchange="changeService(' + i + ')"><option value="">Select</option><option value="1">أجور خدمات اليد )الإصلاحات)</option><option value="2">أجور الأعمال الخارجية </option><option value="3">قطع الغيار )مخزن داخلي) </option><option value="4">قطع غيار )مشتريات خارجية) </option></select></td>' +
-      '<td><select onchange="showPrice(' + i + ')" name="services[' + i + ']" id="services_' + i + '" class="form-control select2"><option value="">Select One</option></select></td>' +
+      '<td><select class="form-control" name="service_type[' + i + ']" id="service_type_' + i + '" onchange="changeService(' + i + ')"><option value=""><?php echo trans('site.options')  ?></option><option value="1">أجور خدمات اليد )الإصلاحات)</option><option value="2">أجور الأعمال الخارجية </option><option value="3">قطع الغيار )مخزن داخلي) </option><option value="4">قطع غيار )مشتريات خارجية) </option></select></td>' +
+      '<td><select onchange="showPrice(' + i + ')" name="services[' + i + ']" id="services_' + i + '" class="form-control"><option value=""><?php echo trans('site.options')  ?></option></select></td>' +
       '<td><div class="form-group"><input type="text" name="price[' + i + ']" id="price_' + i + '"></td>' +
       '<td><input type="button" class="btn btn-green add" value="+" onclick="addRow()"><input type="button" class="btn btn-danger delete" value="x" onclick="removeItem(this,' + i + ')"></td>' +
       '</tr>'
@@ -63,6 +63,13 @@
     var total = $('#total_price').val();
     var price = $('#price_' + count).val();
     var total2 = Number(total) - Number(price);
+    var discount = Number($('#discount').val());
+    var totalWithDiscount=total2-discount;
+    var taxes = Number($('#taxes').val());
+    var totalTaxes=(taxes*totalWithDiscount)/100;
+    var totalWithTaxes=Number(totalTaxes)+totalWithDiscount;
+    $('#totalPriceWithTaxes').val(totalWithTaxes);
+
     $('#total_price').val(total2);
     if (confirm("هل أنت متأكد؟")) {
       $(e).parent().parent().remove();
@@ -89,6 +96,18 @@
 
     })
   }
+  function cardDiscount()
+  {
+    var discount = Number($('#discount').val());
+    var totalWithoutDiscount=Number($('#total_price').val());
+    var totalWithDiscount=totalWithoutDiscount-discount;
+    var taxes = Number($('#taxes').val());
+    var totalTaxes=(taxes*totalWithDiscount)/100;
+    var totalWithTaxes=Number(totalTaxes)+totalWithDiscount;
+
+    $('#totalPriceWithTaxes').val(totalWithTaxes);
+
+  }
 
   function showPrice(count) {
     var total = 0;
@@ -110,6 +129,14 @@
 
         }
         $('#total_price').val(total);
+        var discount = Number($('#discount').val());
+        var totalWithDiscount=total-discount;
+        var taxes = Number($('#taxes').val());
+        var totalTaxes=(taxes*totalWithDiscount)/100;
+        var totalWithTaxes=Number(totalTaxes)+totalWithDiscount;
+
+
+        $('#totalPriceWithTaxes').val(totalWithTaxes);
       }
 
     })
@@ -124,10 +151,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      {{ trans('site.Dashboard') }}
+    {{ trans('site.CreateCustomInvoice') }}    
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -138,9 +165,7 @@
     <div class="row">
       <div class="col-xs-12">
 
-        <div class="box box-primary">
-          <div class="box-header">
-            <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+            <h3 class="box-title"></h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -149,10 +174,10 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <div class="box box-warning">
-              <div class="box-header with-border">
-                <h3 class="box-title">{{ trans('site.addRepairCar') }}</h3>
-              </div>
+            <div class="box ">
+              <!-- <div class="box-header with-border">
+                <h3 class="box-title"></h3>
+              </div> -->
               <!-- /.box-header -->
               <div class="box-body">
                 <form action="{{ route('customInvoice.store')}}" method="POST">
@@ -163,49 +188,50 @@
 
                     <div class="col-md-12">
                       <label for="">
-                        <h4>Client Name</h4>
+                        <h4>{{ trans('site.clientName') }}</h4>
                       </label>
                       <input type="text" class="form-control" name="client_name" required="required"/>
                     </div>
                   </div>
 
 
-                  <?php $taxes = 5 ?>
+                  <?php //$taxes = 5 ?>
                   
                   <input type="date" value="{{ date('Y-m-d') }}" name="invoice_date" hidden>
 
-                  <input type="text" value={{$taxes}} name="invoice_taxes" hidden>
+                  <input type="text" value="{{$taxes}}" name="invoice_taxes" id="taxes" hidden>
+
                   <input type="text" value={{$number+1}} name="invoice_number" hidden>
 
 
                   <div class="container">
-                    <h2>Items</h2>
+                    <h2>{{ trans('site.services') }}</h2>
                     <table class="table table-condensed">
                       <thead>
                         <tr>
-                          <th>Service Type</th>
-                          <th>Services</th>
-                          <th>Price</th>
+                          <th>{{ trans('site.ServiceType') }}</th>
+                          <th>{{ trans('site.Services') }}</th>
+                          <th>{{ trans('site.Price') }}</th>
                         </tr>
                       </thead>
                       <tbody id='services'>
                         <tr>
                           <td>
                             <select class="form-control" name="service_type[0]" id="service_type_0" onchange="changeService(0)">
-                              <option value="">Select</option>
+                              <option value="">{{ trans('site.Select') }}</option>
 
-                              <option value="1">أجور خدمات اليد )الإصلاحات)</option>
+                              <option value="1">أجور خدمات اليد- الإصلاحات</option>
                               <option value="2">أجور الأعمال الخارجية </option>
-                              <option value="3">قطع الغيار )مخزن داخلي) </option>
-                              <option value="4">قطع غيار )مشتريات خارجية) </option>
+                              <option value="3">قطع الغيار -مخزن داخلي </option>
+                              <option value="4">قطع غيار- مشتريات خارجية </option>
 
                             </select>
 
 
                           </td>
                           <td>
-                            <select name="services[0]" id="services_0" class="form-control select2" onchange="showPrice(0)">
-                              <option value="">Select One</option>
+                            <select name="services[0]" id="services_0" class="form-control" onchange="showPrice(0)">
+                              <option value="">{{ trans('site.Select') }}</option>
                             </select>
 
 
@@ -222,13 +248,48 @@
                       </tbody>
                       <tr>
                         <td colspan="2"></td>
-                        <td><strong>Total Price</strong></td>
+                        <td><strong>{{ trans('site.Discount') }}</strong></td>
+                        <td>
+                        <input type="number" name="invoice_discount" id="discount" onkeyup="cardDiscount()" value="0">
+
+                        </td>
+
+                      </tr>
+
+                      <tr hidden>
+                        <td colspan="2"></td>
+                        <td><strong>Total Price </strong></td>
                         <td>
                           <input type='text' name="totalPrice" id="total_price">
 
                         </td>
 
                       </tr>
+                      <tr>
+                        <td colspan="2"></td>
+                        <td><strong>{{ trans('site.TotalPriceWithTaxes') }}</strong></td>
+
+                        <td>
+                        <input type='text' name="totalPriceWithTaxes" id="totalPriceWithTaxes" disabled>
+
+                        </td>
+
+                      </tr>
+
+
+
+
+
+
+                      <!-- <tr>
+                        <td colspan="2"></td>
+                        <td><strong>{{ trans('site.TotalPrice') }}</strong></td>
+                        <td>
+                          <input type='text' name="totalPrice" id="total_price">
+
+                        </td>
+
+                      </tr> -->
 
                     </table>
                   </div>

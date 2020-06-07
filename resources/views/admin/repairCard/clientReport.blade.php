@@ -35,10 +35,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Client Report
+      {{ trans('site.ClientReport') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -46,9 +46,9 @@
   <section class="content">
     @include('layouts.error')
     <style>
-      th {
+      /* th {
         width: 40%;
-      }
+      } */
 
       /* Style the tab */
       .tab {
@@ -105,11 +105,11 @@
 
               <div class="row">
 
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-group">
-                    <label>Client</label>
-                    <select class="form-control" name="client_id" id="clients" style="width: 100%;">
-                      <option value="">Select</option>
+                    <label>{{ trans('site.clientName') }}</label>
+                    <select class="form-control" name="client_id" id="clients" style="width: 48%;">
+                      <option value="">{{ trans('site.Select') }}</option>
                       @foreach($clients as $value)
                       <option value="{{$value->id}}" {{($value->id == $clientId) ? 'selected' : '' }}>{{$value->fullName}}</option>
                       @endforeach
@@ -119,7 +119,7 @@
               </div>
               <div class="form-actions">
 
-                <input id="submit" type="submit" name="submit" value="Search" class="btn btn-primary btn-large">
+                <input id="submit" type="submit" name="submit" value="{{ trans('site.search') }}" class="btn btn-primary btn-large">
               </div>
           </div>
           </form>
@@ -129,9 +129,9 @@
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>Car</th>
-                  <th>Total</th>
-                  <th>Total With Taxes</th>
+                  <th>{{ trans('site.model') }}</th>
+                  <th>{{ trans('site.Total') }}</th>
+                  <th>{{ trans('site.TotalPriceWithTaxes') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -151,7 +151,7 @@
 
                 @endforeach
                 <tr>
-                <th>Total</th>
+                <th>{{ trans('site.Total') }}</th>
                 <th>{{$total}}</th>
                 <th>{{$totalWithTaxes}}</th>
 

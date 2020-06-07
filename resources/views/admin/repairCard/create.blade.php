@@ -38,8 +38,8 @@
 
     var tr =
       '<tr>' +
-      '<td><select class="form-control" name="service_type[' + i + ']" id="service_type_' + i + '" onchange="changeService(' + i + ')"><option value="">Select</option><option value="1">أجور خدمات اليد )الإصلاحات)</option><option value="2">أجور الأعمال الخارجية </option><option value="3">قطع الغيار )مخزن داخلي) </option><option value="4">قطع غيار )مشتريات خارجية) </option></select></td>' +
-      '<td><select onchange="showPrice(' + i + ')" name="services[' + i + ']" id="services_' + i + '" class="form-control select2"><option value="">Select One</option></select></td>' +
+      '<td><select class="form-control" name="service_type[' + i + ']" id="service_type_' + i + '" onchange="changeService(' + i + ')"><option value=""><?php echo trans('site.options')  ?></option><option value="1">أجور خدمات اليد )الإصلاحات)</option><option value="2">أجور الأعمال الخارجية </option><option value="3">قطع الغيار )مخزن داخلي) </option><option value="4">قطع غيار )مشتريات خارجية) </option></select></td>' +
+      '<td><select onchange="showPrice(' + i + ')" name="services[' + i + ']" id="services_' + i + '" class="form-control select2"><option value=""><?php echo trans('site.options')  ?></option></select></td>' +
       '<td><div class="form-group"><input type="text" name="price[' + i + ']" id="price_' + i + '"></td>' +
       '<td><input type="button" class="btn btn-green add" value="+" onclick="addRow()"><input type="button" class="btn btn-danger delete" value="x" onclick="removeItem(this,' + i + ')"></td>' +
       '</tr>'
@@ -172,10 +172,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      {{ trans('site.Dashboard') }}
+      {{ trans('site.addRepairCar') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -188,7 +188,7 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+            <!-- <h3 class="box-title">{{ trans('site.Dashboard') }}</h3> -->
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -197,9 +197,9 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <div class="box box-warning">
+            <!-- <div class="box box-warning"> -->
               <div class="box-header with-border">
-                <h3 class="box-title">{{ trans('site.addRepairCar') }}</h3>
+                <!-- <h3 class="box-title">{{ trans('site.addRepairCar') }}</h3> -->
               </div>
               <!-- /.box-header -->
               <div class="box-body">
@@ -213,7 +213,7 @@
 
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Client</label>
+                        <label>{{ trans('site.clientName') }}</label>
                         <input type='text' class="form-control" value="{{$client->fullName}}" disabled>
                         <input type='text' value="{{$client->id}}" name="client_id" hidden>
 
@@ -221,7 +221,7 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Cars</label>
+                        <label>{{ trans('site.car') }}</label>
                         <select name="car_id" id="cars" class="form-control clientIdselect2" data-dependent="car">
                           @foreach($clientCars as $car)
                           <option value="{{$car->id}}">Car Category : {{$car->carCategory->name_en}} -Model : {{$car->model}} -Plate No: {{$car->platNo}}</option>
@@ -233,9 +233,9 @@
                     @else
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Client</label>
+                        <label>{{ trans('site.clientName') }}</label>
                         <select class="form-control" name="client_id" id="clients" style="width: 100%;">
-                          <option value="">Select</option>
+                          <option value="">{{ trans('site.options') }}</option>
                           @foreach($clients as $value)
                           <option value="{{$value->id}}">{{$value->fullName}}</option>
                           @endforeach
@@ -244,9 +244,9 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Cars</label>
+                        <label>{{ trans('site.car') }}</label>
                         <select name="car_id" id="cars" class="form-control clientIdselect2" data-dependent="car">
-                          <option value="">Select One</option>
+                          <option value="">{{ trans('site.options') }}</option>
                         </select>
                       </div>
                     </div>
@@ -261,11 +261,11 @@
                         </select>
                       </div>
                     </div> -->
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                       <div class="form-group">
-                        <label>Employee</label>
-                        <select class="form-control" name="employee_id" id="" style="width: 100%;">
-                          <option value="">Select</option>
+                        <label>{{ trans('site.technicalEmployee') }}</label>
+                        <select class="form-control" name="employee_id" id="" style="width: 48%;">
+                          <option value="">{{ trans('site.options') }}</option>
                           @foreach($employee as $emp)
                           <option value="{{$emp->employee_id}}">{{$emp->employee_name}}</option>
                           @endforeach
@@ -289,20 +289,22 @@
 
 
                   <div class="container">
-                    <h2>Items</h2>
+                    <h2>{{ trans('site.services') }}</h2>
                     <table class="table table-condensed">
                       <thead>
                         <tr>
-                          <th>Service Type</th>
-                          <th>Services</th>
-                          <th>Price</th>
+                          <th>{{ trans('site.serviceType') }}</th>
+                          <th>{{ trans('site.service') }}</th>
+                          <th>{{ trans('site.price') }}</th>
+                          <th>{{ trans('site.totalCost') }}</th>
+
                         </tr>
                       </thead>
                       <tbody id='services'>
                         <tr>
                           <td>
                             <select class="form-control" name="service_type[0]" id="service_type_0" onchange="changeService(0)">
-                              <option value="">Select</option>
+                              <option value="">{{ trans('site.options') }}</option>
 
                               <option value="1">أجور خدمات اليد -الإصلاحات</option>
                               <option value="2">أجور الأعمال الخارجية </option>
@@ -315,7 +317,7 @@
                           </td>
                           <td>
                             <select name="services[0]" id="services_0" class="form-control" onchange="showPrice(0)">
-                              <option value="">Select One</option>
+                              <option value="">{{ trans('site.options') }}</option>
                             </select>
 
 
@@ -332,7 +334,7 @@
                       </tbody>
                       <tr>
                         <td colspan="2"></td>
-                        <td><strong>Discount</strong></td>
+                        <td><strong>{{ trans('site.discount') }}</strong></td>
                         <td>
                         <input type="number" name="card_discount" id="discount" onkeyup="cardDiscount()" value="0">
 
@@ -351,7 +353,7 @@
                       </tr>
                       <tr>
                         <td colspan="2"></td>
-                        <td><strong>Total Price with taxes</strong></td>
+                        <td><strong>{{ trans('site.totalWithTaxes') }}</strong></td>
 
                         <td>
                         <input type='text' name="totalPriceWithTaxes" id="totalPriceWithTaxes" disabled>
@@ -370,7 +372,7 @@
                 </form>
               </div>
               <!-- /.box-body -->
-            </div>
+            <!-- </div> -->
           </div>
           <!-- /.box-body -->
         </div>

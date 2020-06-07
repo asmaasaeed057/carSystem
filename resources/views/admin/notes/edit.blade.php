@@ -39,10 +39,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      {{ trans('site.Dashboard') }}
+      {{ trans('site.EditBillNotes') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -55,7 +55,7 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+            <h3 class="box-title"></h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -64,10 +64,10 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <div class="box box-warning">
-              <div class="box-header with-border">
-                <h3 class="box-title">Update Client</h3>
-              </div>
+            <!-- <div class="box box-warning"> -->
+              <!-- <div class="box-header with-border">
+                <h3 class="box-title"></h3>
+              </div> -->
               <!-- /.box-header -->
               <div class="box-body">
                 <form action="{{ route('note.update',$note->bill_note_id)}}" method="POST">
@@ -78,7 +78,7 @@
                
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label>Bill Notes EN</label>
+                        <label>{{ trans('site.BillNotesEn') }}</label>
                         <textarea class="form-control" name="bill_note_desc_en" id="" cols="30" rows="10">{{$note->bill_note_desc_en}}</textarea>
 
                       </div>
@@ -86,7 +86,7 @@
                  
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label>Bill Notes AR</label>
+                        <label>{{ trans('site.BillNotesAr') }}</label>
                         <textarea class="form-control" name="bill_note_desc_ar" id="" cols="30" rows="10">{{$note->bill_note_desc_ar}}</textarea>
                       </div>
                     </div>
@@ -96,9 +96,9 @@
               </div>
 
 
-              <input type="submit" class="btn  btn-info " value="Update">
+              <input type="submit" class="btn  btn-info " value="{{ trans('site.Edit') }}">
               </form>
-            </div>
+            <!-- </div> -->
             <!-- /.box-body -->
           </div>
         </div>

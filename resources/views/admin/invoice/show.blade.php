@@ -35,10 +35,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Invoice Details
+      {{ trans('site.invoiceDetails') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -102,23 +102,24 @@
           <!-- /.box-header -->
           <div class="box-body">
 
-            <h3 class="box-title">Invoice</h3>
+            <h3 class="box-title"> {{ trans('site.invoiceNo') }}: {{$invoice->invoice_number}}
+            </h3>
 
             <!--  -->
             <table class="table table-bordered" id="example1">
               <tbody>
                 <tr>
-                  <th scope="row">Invoice Number</th>
+                  <th scope="row">{{ trans('site.InvoiceNumber') }}</th>
                   <td>{{$invoice->invoice_number}}</td>
                 </tr>
 
 
                 </tr>
-                <th scope="row">Invoice Date</th>
+                <th scope="row">{{ trans('site.invoiceDate') }}</th>
                 <td>{{$invoice->invoice_date}}</td>
                 </tr>
                 <tr>
-                  <th scope="row">Invoice Total</th>
+                  <th scope="row">{{ trans('site.totalCost') }}</th>
                   <td>{{$invoice->invoice_total}}</td>
                 </tr>
 
@@ -133,35 +134,35 @@
             <div class="box">
               <div class="box-header with-border">
 
-                <h3 class="box-title">Repair Card</h3>
+                <h3 class="box-title">{{ trans('site.repairCardInfo') }}</h3>
 
                 <!--  -->
                 <table class="table table-striped table-dark">
                   <thead>
                     <tr>
-                      <th scope="col">Car</th>
+                      <th scope="col">{{ trans('site.model') }}</th>
                       <td>{{$invoice->repairCard->car->model}}</td>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row">Client Name</th>
+                      <th scope="row">{{ trans('site.clientName') }}</th>
                       <td>{{$invoice->repairCard->client->fullName}}</td>
                     </tr>
                     <tr>
-                      <th scope="row">Client Email</th>
+                      <th scope="row">{{ trans('site.email') }}</th>
                       <td>{{$invoice->repairCard->client->email}}</td>
                     </tr>
                     <tr>
-                      <th scope="row">Client Phone</th>
+                      <th scope="row">{{ trans('site.phone') }}</th>
                       <td>{{$invoice->repairCard->client->phone}}</td>
                     </tr>
                     <tr>
-                      <th scope="row">Status</th>
+                      <th scope="row">{{ trans('site.cardStatus') }}</th>
                       <td>{{$invoice->repairCard->status}}</td>
                     </tr>
                     <tr>
-                      <th scope="row">Check Report</th>
+                      <th colspan="">{{ trans('site.checkReport') }}</th>
                       <td>{{$invoice->repairCard->checkReprort}}</td>
                     </tr>
                   </tbody>
@@ -176,15 +177,15 @@
           <div class="box-body">
             <div class="box">
               <div class="box-header with-border">
-                <h3 class="box-title">Items</h3>
+                <h3 class="box-title">{{ trans('site.services') }}</h3>
 
                 <table class="table table-striped table-dark">
                   <thead>
                     <tr>
-                      <th scope="col">Service Type</th>
+                      <th scope="col">{{ trans('site.serviceType') }}</th>
 
-                      <th scope="col">Service</th>
-                      <th scope="row">Client Cost</th>
+                      <th scope="col">{{ trans('site.service') }}</th>
+                      <th scope="row">{{ trans('site.price') }}</th>
 
                     </tr>
                   </thead>
@@ -195,14 +196,14 @@
                     <tr>
                       <td>
                         @if($item->service->service_type =="1")
-                        أجور خدمات اليد )الإصلاحات)
+                        أجور خدمات اليد - الإصلاحات
 
                         @elseif($item->service->service_type =="2")
                         أجور الأعمال الخارجية
                         @elseif($item->service->service_type =="3")
-                        قطع الغيار )مخزن داخلي)
+                        قطع الغيار - مخزن داخلي
                         @elseif($item->service->service_type =="4")
-                        قطع غيار )مشتريات خارجية)
+                        قطع غيار- مشتريات خارجية
                         @endif
                       </td>
                       <td>{{$item->service->service_name}}</td>
@@ -213,12 +214,12 @@
                     <tr>
                     <tr>
                       <th></th>
-                      <th>Total</th>
+                      <th>{{ trans('site.totalCost') }}</th>
                       <td><?php echo $total ?></td>
                     </tr>
                     <tr>
                       <th></th>
-                      <th>Discount</th>
+                      <th>{{ trans('site.discount') }}</th>
                       <td><?php echo $invoice->repairCard->card_discount ?></td>
                     </tr>
                     <tr>
@@ -228,28 +229,26 @@
                       <?php $totalWithTaxes = $invoice->repairCard->total_with_taxes; ?>
                       <th></th>
 
-                      <th>Total With Taxes</th>
+                      <th>{{ trans('site.totalWithTaxes') }}</th>
                       <td><?php echo $totalWithTaxes ?></td>
                     </tr>
                   </tbody>
                 </table>
 
-                <div>
+                <div>print
 
 
                   <form class="form-inline" action="">
                     <div class="form-group">
-                      <label for="paid">Paid:</label>
+                      <label for="paid">{{ trans('site.Paid') }}:</label>
                       <input type="text" class="form-control" value="{{$invoice->paid}}" id="paid" disabled>
                     </div>
                     <div class="form-group">
-                      <label for="remain">Remain:</label>
+                      <label for="remain">{{ trans('site.Remain') }}:</label>
                       <input type="text" class="form-control" value="{{$invoice->remain}}" id="remain" disabled>
                     </div>
-                    <button class="btn bg-navy margin" onclick="printDiv('printBill')" style="margin-left:200px;">Print Bill</button>
-                    <!-- <button class="btn bg-navy margin" onclick="printDiv('printBill')" style="float:left;margin-left:600px;" >Add Service</button> -->
-                    <!-- <td><a class="btn btn-primary" href="{{route('approved' ,$repairCard->id)}}">Add Service</a></td> -->
-                    <td><a class="btn btn-primary" href="{{route('repairCard.addServiceItem' ,$repairCard->id)}}">Add Service</a></td>
+                    <button class="btn bg-navy margin" onclick="printDiv('printBill')" style="margin-left:200px;"><i class="fa fa-print" style="margin-right: 10px;" ></i>{{ trans('site.PrintBill') }}</button>
+                    <td><a class="btn btn-primary" href="{{route('repairCard.addServiceItem' ,$repairCard->id)}}"><i class="fa fa-plus" style="margin-right: 10px;" ></i>{{ trans('site.AddServices') }}</a></td>
 
                   </form>
 
@@ -275,14 +274,14 @@
     <div class="box-body">
       <div class="box">
         <div class="box-header with-border">
-          <h3 class="box-title">Invoice Payment</h3>
+          <h3 class="box-title">{{ trans('site.InvoicePayment') }}</h3>
 
           <table class="table table-striped table-dark">
             <thead>
               <tr>
-                <th scope="col">Number</th>
-                <th scope="col">date</th>
-                <th scope="row">Amount</th>
+                <th scope="col">{{ trans('site.receiptNumber') }}</th>
+                <th scope="col">{{ trans('site.paymentDate') }}</th>
+                <th scope="row">{{ trans('site.Paid') }}</th>
                 <th></th>
               </tr>
             </thead>
@@ -292,7 +291,7 @@
                 <td>{{$payment->invoice_payment_number}}</td>
                 <td>{{$payment->invoice_payment_date}}</td>
                 <td>{{$payment->invoice_payment_amount}}</td>
-                <td><a class="btn bg-navy margin" href="{{route('receiptInvoicePayment' ,$payment->invoice_payment_id)}}"> Print Receipt</a></td>
+                <td><a class="btn bg-navy margin" target="_blank" href="{{route('receiptInvoicePayment' ,$payment->invoice_payment_id)}}"><i class="fa fa-print" style="margin-right: 10px;" ></i>{{ trans('site.PrintReceipt') }}</a></td>
               </tr>
               @endforeach
 
@@ -313,7 +312,7 @@
     <div id='printBill' hidden>
       <div id="company" class='container'>
 
-        <a><b>Address:</b></a>{{ $company->company_address }}
+        <a><b>{{ trans('site.address') }}:</b></a>{{ $company->company_address }}
 
         <div align="center">
 
@@ -321,41 +320,43 @@
           <a><b>{{ $company->company_name }}</b></a>
         </div>
 
-        <a><b>phones:</b></a>{{ $company->company_phone }}
+        <a><b>{{ trans('site.companyPhone') }}:</b></a>{{ $company->company_phone }}
+
+        <h2 style="text-align: center">{{ trans('site.invoiceNo') }}: {{$invoice->invoice_number}}</h2>
       </div>
       <!-- /.box-header -->
       <div class="box-body">
         <div class="box">
           <div class="box-header with-border">
-            <h3 class="box-title">Repair Card</h3>
+            <h3 class="box-title">{{ trans('site.repairCardInfo') }}</h3>
 
             <table class="table table-striped table-dark">
 
               <tbody>
                 <tr scope="row">
-                  <th>Client Name</th>
+                  <th>{{ trans('site.clientName') }}</th>
                   <td>{{$repairCard->client->fullName}}</td>
-                  <th>Client Email</th>
+                  <th>{{ trans('site.email') }}</th>
                   <td>{{$repairCard->client->email}}</td>
                 </tr>
 
                 <tr scope="row">
-                  <th>Client Phone</th>
+                  <th>{{ trans('site.phone') }}</th>
                   <td>{{$repairCard->client->phone}}</td>
-                  <th>Status</th>
+                  <th>{{ trans('site.cardStatus') }}</th>
                   <td>{{$repairCard->status}}</td>
                 </tr>
 
 
                 <tr scope="row">
-                  <th>Car</th>
+                  <th>{{ trans('site.model') }}</th>
                   <td>{{$repairCard->car->model}}</td>
-                  <th>Technical Employee</th>
+                  <th>{{ trans('site.technicalEmployee') }}</th>
                   <td>{{$repairCard->employee->employee_name}}</td>
                 </tr>
                 <tr>
-                  <th scope="row">Check Report</th>
-                  <td>{{$repairCard->checkReprort}}</td>
+                  <th colspan="1">{{ trans('site.checkReport') }}</th>
+                  <td colspan="3">{{$repairCard->checkReprort}}</td>
                 </tr>
               </tbody>
             </table>
@@ -369,15 +370,14 @@
       <div class="box-body">
         <div class="box">
           <div class="box-header with-border">
-            <h3 class="box-title">Items</h3>
+            <h3 class="box-title">{{ trans('site.services') }}</h3>
 
             <table class="table table-striped table-dark">
               <thead>
                 <tr>
-                  <th scope="col">Service Type</th>
-
-                  <th scope="col">Service</th>
-                  <th scope="row">Client Cost</th>
+                  <th scope="col">{{ trans('site.serviceType') }}</th>
+                  <th scope="col">{{ trans('site.service') }}</th>
+                  <th scope="row">{{ trans('site.price') }}</th>
 
                 </tr>
               </thead>
@@ -405,17 +405,17 @@
                 @endforeach
                 <tr>
                   <th></th>
-                  <th>Total</th>
+                  <th>{{ trans('site.totalCost') }}</th>
                   <td><?php echo $total ?></td>
                 </tr>
                 <tr>
                   <th></th>
-                  <th>Discount</th>
+                  <th>{{ trans('site.discount') }}</th>
                   <td>{{$repairCard->card_discount}}</td>
                 </tr>
                 <tr>
                   <th></th>
-                  <th>Taxes</th>
+                  <th>{{ trans('site.taxes') }}</th>
                   <td>{{$repairCard->taxes}}</td>
                 </tr>
 
@@ -423,7 +423,7 @@
                 <tr>
                   <th></th>
 
-                  <th>Total With Taxes</th>
+                  <th>{{ trans('site.totalWithTaxes') }}</th>
                   <td>{{$repairCard->total_with_taxes}}</td>
                 </tr>
               </tbody>
@@ -437,13 +437,13 @@
       <div class="box-body">
         <div class="box">
           <div class="box-header with-border">
-            <h3 class="box-title">Notes :</h3>
+            <h3 class="box-title">{{ trans('site.Notes') }} :</h3>
 
             <p>{{$billNotes->bill_note_desc_en}}</p>
 
           </div><!-- /.box-header -->
           <div class="box-body">
-            Signature
+          {{ trans('site.Signature') }}:
           </div><!-- /.box-body -->
           <div class="box-footer">
             <table class="table table-striped table-dark">
@@ -454,10 +454,9 @@
               </thead>
               <tbody>
                 <tr>
-                  <th>client Name</th>
-
+                  <th>{{ trans('site.clientName') }}</th>
                   <td>{{$invoice->repairCard->client->fullName}}</td>
-                  <th>Technical Employee</th>
+                  <th>{{ trans('site.technicalEmployee') }}</th>
                   <td>{{$repairCard->employee->employee_name}}</td>
 
                 </tr>
@@ -501,6 +500,7 @@
     window.print();
 
     document.body.innerHTML = originalContents;
+    window.location.reload();
 
   }
 </script>

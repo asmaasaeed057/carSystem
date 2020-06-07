@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
 
@@ -29,7 +29,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
     Route::post('password/reset/{token}', 'DashboardController@reset_password_change');
     // in auth
     Route::group(['middleware' => 'admin:admin'], function () {
-        Route::get('/home', 'admin\DashboardController@home');
+        Route::get('/home', 'admin\DashboardController@home')->name('dashboard');
         // Route::get('/Client', 'admin\DashboardController@Client');
         Route::resource('service', 'ServiceController');
         Route::resource('admin', 'AdminController');
@@ -129,6 +129,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Lang'], function () {
         Route::resource('technicalEmployee', 'TechnicalEmployeeController');
         Route::resource('companyDetails', 'CompanyDetailsController');
         Route::resource('cardTaxes', 'CardTaxesController');
-
     });
 });

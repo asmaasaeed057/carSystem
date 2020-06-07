@@ -45,10 +45,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            {{ trans('site.Dashboard') }}
+            {{ trans('site.Services') }}
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
             <li class="active">{{ trans('site.Dashboard') }}</li>
         </ol>
     </section>
@@ -61,7 +61,7 @@
 
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+                        <h3 class="box-title"></h3>
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                             </button>
@@ -70,21 +70,21 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-header">
-                        <a href="{{route('service.create')}}" style="margin-top: 10px;" class="btn btn-success">Add Service </a>
+                        <a href="{{route('service.create')}}" style="margin-top: 10px;" class="btn btn-success"><i class="fa fa-plus" style="margin-right: 10px;" ></i>{{ trans('site.add') }} </a>
                     </div>
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Service Name</th>
-                                    <th>Service Number</th>
-                                    <th>Service Type</th>
-                                    <th>Service Cost</th>
-                                    <th>Service Client Cost</th>
-                                    <th>Service Working Hours</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
-                                    <th>Show</th>
+                                    <th>{{ trans('site.ServiceName') }}</th>
+                                    <th>{{ trans('site.ServiceNumber') }}</th>
+                                    <th>{{ trans('site.ServiceType') }}</th>
+                                    <th>{{ trans('site.ServiceCost') }}</th>
+                                    <th>{{ trans('site.ServiceClientCost') }}</th>
+                                    <th>{{ trans('site.ServiceWorkingHours') }}</th>
+                                    <th>{{ trans('site.Edit') }}</th>
+                                    <th>{{ trans('site.Delete') }}</th>
+                                    <th>{{ trans('site.Show') }}</th>
 
                                 </tr>
                             </thead>
@@ -95,15 +95,15 @@
                                     <td>{{$service->service_name}}</td>
                                     <td>{{$service->service_number}}</td>
                                     @if($service->service_type == 1)
-                                    <td>أجور خدمات اليد )الإصلاحات)</td>
+                                    <td>أجور خدمات اليد -الإصلاحات</td>
                                     @elseif($service->service_type == 2)
                                     <td>أجور الأعمال الخارجية</td>
 
                                     @elseif($service->service_type == 3)
-                                    <td>قطع الغيار )مخزن داخلي)</td>
+                                    <td>قطع الغيار -مخزن داخلي</td>
 
                                     @else
-                                    <td> قطع غيار )مشتريات خارجية)</td>
+                                    <td> قطع غيار -مشتريات خارجية</td>
 
                                     @endif
 
@@ -112,17 +112,17 @@
                                     <td>{{$service->service_client_cost}}</td>
                                     <td>{{$service->service_working_hours}}</td>
 
-                                    <td><a href="{{route('service.edit' ,$service->service_id)}}" class="btn btn-info">Edit</a></td>
+                                    <td><a href="{{route('service.edit' ,$service->service_id)}}" class="btn btn-info"><i class="fa fa-edit" style="margin-right: 10px;" ></i>{{ trans('site.Edit') }}</a></td>
                                     <td>
 
                                         <form action="{{route('service.destroy' ,$service->service_id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-danger delete" type="submit">Delete</button>
+                                            <button class="btn btn-danger delete" type="submit"><i class="fa fa-trash-o" style="margin-right: 10px;" ></i>{{ trans('site.Delete') }}</button>
 
                                         </form>
                                     </td>
-                                    <td><a href="{{route('service.show' ,$service->service_id)}}" class="btn btn-success">Show</a></td>
+                                    <td><a href="{{route('service.show' ,$service->service_id)}}" class="btn btn-success"><i class="fa fa-search" style="margin-right: 10px;" ></i>{{ trans('site.Show') }}</a></td>
 
 
                                 </tr>

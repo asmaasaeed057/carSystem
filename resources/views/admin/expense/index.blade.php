@@ -43,7 +43,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      {{ trans('site.Dashboard') }}
+      {{ trans('site.Expenses') }}
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -59,7 +59,7 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+            <h3 class="box-title"></h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -68,20 +68,20 @@
           </div>
           <!-- /.box-header -->
           <div class="box-header">
-            <a href="{{route('expense.create')}}" style="margin-top: 10px;" class="btn btn-success">Add Expense </a>
+            <a href="{{route('expense.create')}}" style="margin-top: 10px;" class="btn btn-success"><i class="fa fa-plus" style="margin-right: 10px;" ></i>{{ trans('site.add') }} </a>
           </div>
           <div class="box-body">
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>Expense Name</th>
-                  <th>Expense Bill</th>
-                  <th>Expense Price</th>
-                  <th>Expense Tax</th>
-                  <th>Expense Date</th>
-                  <th>Expense Notes</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
+                  <th>{{ trans('site.Name') }}</th>
+                  <th>{{ trans('site.Bill') }}</th>
+                  <th>{{ trans('site.Price') }}</th>
+                  <th>{{ trans('site.Taxes') }}</th>
+                  <th>{{ trans('site.Date') }}</th>
+                  <th>{{ trans('site.Notes') }}</th>
+                  <th>{{ trans('site.Edit') }}</th>
+                  <th>{{ trans('site.Delete') }}</th>
 
                 </tr>
               </thead>
@@ -96,13 +96,13 @@
                   <td>{{$expense->expense_date}}</td>
                   <td>{{$expense->expense_notes}}</td>
 
-                  <td><a href="{{route('expense.edit' ,$expense->expense_id)}}" class="btn btn-info">Edit</a></td>
+                  <td><a href="{{route('expense.edit' ,$expense->expense_id)}}" class="btn btn-info"><i class="fa fa-edit" style="margin-right: 10px;" ></i>{{ trans('site.Edit') }}</a></td>
                   <td>
 
                     <form action="{{route('expense.destroy' ,$expense->expense_id)}}" method="post">
                       @csrf
                       @method('DELETE')
-                      <button class="btn btn-danger delete" type="submit">Delete</button>
+                      <button class="btn btn-danger delete" type="submit"><i class="fa fa-trash-o" style="margin-right: 10px;" ></i>{{ trans('site.Delete') }}</button>
 
                     </form>
                   </td>

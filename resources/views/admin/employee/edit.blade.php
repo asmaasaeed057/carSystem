@@ -15,83 +15,83 @@
 @section('js')
 
 <script>
-  $(function () {
+  $(function() {
     $('#example1').DataTable()
     $('#example2').DataTable({
-      'paging'      : true,
+      'paging': true,
       'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
+      'searching': false,
+      'ordering': true,
+      'info': true,
+      'autoWidth': false
     })
   })
 </script>
 @endsection
 
 @section('content')
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        {{ trans('site.Dashboard') }}
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">{{ trans('site.Dashboard') }}</li>
-      </ol>
-    </section>
-    <!-- Main content -->
-    <section class="content">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      {{ trans('site.EditTechnicalEmployee') }}
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
+      <li class="active">{{ trans('site.Dashboard') }}</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <section class="content">
     @include('layouts.error')
 
-      <div class="row">
-        <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
 
-          <div class="box box-primary">
-            <div class="box-header">
-              <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
+        <div class="box box-primary">
+          <div class="box-header">
+            <h3 class="box-title"></h3>
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-            <div class="box box-warning">
-            <div class="box-header with-border">
-              <h3 class="box-title">Update Technical Employee</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-            <form action="{{ route('technicalEmployee.update' ,$employee->employee_id)}}" method="POST">
-              @csrf
-              @method('PUT')
-              <div class="form-group">
-                    <label>Name</label>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <!-- <div class="box box-warning"> -->
+              <!-- <div class="box-header with-border">
+                <h3 class="box-title"></h3>
+              </div> -->
+              <!-- /.box-header -->
+              <div class="box-body">
+                <form action="{{ route('technicalEmployee.update' ,$employee->employee_id)}}" method="POST">
+                  @csrf
+                  @method('PUT')
+                  <div class="form-group">
+                    <label>{{ trans('site.Name') }}</label>
                     <input type="text" value="{{$employee->employee_name}}" name="employee_name" class="form-control" placeholder="Name" required>
                   </div>
                   <div class="form-group">
-                    <label>Phone</label>
+                    <label>{{ trans('site.Phone') }}</label>
                     <input type="text" value="{{$employee->employee_phone}}" name="employee_phone" class="form-control" placeholder="Phone" required>
                   </div>
-                <input type="submit" class="btn-primary" value="Update">
+                  <input type="submit" class="btn btn-primary" value="{{ trans('site.Edit') }}">
 
-              </form>
-            </div>
-            <!-- /.box-body -->
+                </form>
+              </div>
+              <!-- /.box-body -->
+            <!-- </div> -->
           </div>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
+          <!-- /.box-body -->
         </div>
-        <!-- /.col -->
+        <!-- /.box -->
       </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-  </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
 @endsection

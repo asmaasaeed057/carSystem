@@ -35,10 +35,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            {{ trans('site.Dashboard') }}
+            {{ trans('site.IncomeReportContractClient') }}
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
             <li class="active">{{ trans('site.Dashboard') }}</li>
         </ol>
     </section>
@@ -50,7 +50,7 @@
 
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">Income Report Contract Client</h3>
+                        <h3 class="box-title"></h3>
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                             </button>
@@ -62,17 +62,17 @@
 
                         <form action="{{ route('incomeContractSearch')}}" method="GET">
 
-        
+
                             <div class="form-group">
-                                <label for="date from">From</label>
+                                <label for="date from">{{ trans('site.From') }}</label>
                                 <input type="date" name="income_date_from" value="{{$income_date_from}}" class="form-control" style="width:500px">
                             </div>
                             <div class="form-group" style="display: block">
-                                <label for="date to">To</label>
+                                <label for="date to">{{ trans('site.To') }}</label>
                                 <input type="date" name="income_date_to" value="{{$income_date_to}}" class="form-control" style="width:500px">
                             </div>
 
-                            <input type="submit" class="btn-primary" value="search">
+                            <input type="submit" class="btn btn-primary" value="{{ trans('site.Search') }}">
                         </form>
                     </div>
                     <hr>
@@ -82,15 +82,15 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Payment Number</th>
-                                        <th>Payment Date</th>
-                                        <th>Payment Amount</th>
-                                        <th>Invoice Number</th>
+                                        <th>{{ trans('site.Number') }}</th>
+                                        <th> {{ trans('site.Date') }}</th>
+                                        <th>{{ trans('site.PaymentAmount') }}</th>
+                                        <th>{{ trans('site.InvoiceNumber') }}</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php $totalPayment=0; ?>
+                                    <?php $totalPayment = 0; ?>
 
                                     @foreach($incomes as $income)
                                     @if($income->invoice->repairCard->client->client_type == "contract")
@@ -109,7 +109,7 @@
                                 </tbody>
                                 <tr>
                                     <th></th>
-                                    <th>Total</th>
+                                    <th> {{ trans('site.Total') }}</th>
                                     <th>{{$totalPayment}}</th>
                                     <th></th>
                                 </tr>
@@ -121,7 +121,10 @@
 
                     <!-- /.box-body -->
                 </div>
-                <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center">Print</button>
+                <div class="col text-center">
+
+                    <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center"> <i class="fa fa-print" style="margin-right: 10px;" ></i>{{ trans('site.Print') }}</button>
+                </div>
 
                 <!-- /.box -->
             </div>

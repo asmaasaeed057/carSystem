@@ -37,10 +37,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            {{ trans('site.Dashboard') }}
+            {{ trans('site.InvoiceList') }}
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
             <li class="active">{{ trans('site.Dashboard') }}</li>
         </ol>
     </section>
@@ -53,7 +53,7 @@
 
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+                        <!-- <h3 class="box-title">{{ trans('site.Dashboard') }}</h3> -->
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                             </button>
@@ -64,14 +64,14 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Invoice Number</th>
-                                    <th>Client Name</th>
-                                    <th>Date</th>
-                                    <th>Paid</th>
-                                    <th>Remain</th>
-                                    <th>Total</th>
-                                    <th>Show</th>
-                                    <th>Invoice Payment</th>
+                                    <th>{{ trans('site.InvoiceNumber') }}</th>
+                                    <th>{{ trans('site.clientName') }}</th>
+                                    <th>{{ trans('site.invoiceDate') }}</th>
+                                    <th>{{ trans('site.Paid') }}</th>
+                                    <th>{{ trans('site.Remain') }}</th>
+                                    <th>{{ trans('site.totalCost') }}</th>
+                                    <th>{{ trans('site.show') }}</th>
+                                    <th></th>
 
 
                                 </tr>
@@ -90,8 +90,8 @@
                                     <td>{{$invoice->remain}}</td>
 
                                     <td>{{$invoice->invoice_total}}</td>
-                                    <td><a href="{{route('invoiceShow' ,$invoice->invoice_id)}}" class="btn btn-success">Show</a></td>
-                                    <td> <a class="btn btn-warning" href="{{route('invoicePayment' ,$invoice->invoice_id)}}"><i class="fas fa-money" style="margin-right: 10px;"></i>pay</a>
+                                    <td><a href="{{route('invoiceShow' ,$invoice->invoice_id)}}" class="btn btn-success"><i class="fa fa-search" style="margin-right: 10px;" ></i>{{ trans('site.show') }}</a></td>
+                                    <td> <a class="btn btn-warning" href="{{route('invoicePayment' ,$invoice->invoice_id)}}"><i class="fas fa-money" style="margin-right: 10px;"></i>{{ trans('site.pay') }}</a>
                                     </td>
                                 </tr>
                                 @endif

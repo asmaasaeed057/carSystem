@@ -35,10 +35,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            {{ trans('site.Dashboard') }}
+            {{ trans('site.CreateService') }}
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
             <li class="active">{{ trans('site.Dashboard') }}</li>
         </ol>
     </section>
@@ -50,7 +50,7 @@
 
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+                        <h3 class="box-title"></h3>
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                             </button>
@@ -59,10 +59,10 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <div class="box box-warning">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Create Service</h3>
-                            </div>
+                        <!-- <div class="box box-warning"> -->
+                            <!-- <div class="box-header with-border">
+                                <h3 class="box-title"></h3>
+                            </div> -->
                             <!-- /.box-header -->
                             <div class="box-body">
                                 <form action="{{ route('service.store')}}" method="POST">
@@ -71,8 +71,8 @@
 
                                     <!-- text input -->
                                     <div class="form-group">
-                                        <label>Service Name</label>
-                                        <input type="text" name="service_name" class="form-control" placeholder="Service Name">
+                                        <label>{{ trans('site.ServiceName') }}</label>
+                                        <input type="text" name="service_name" class="form-control" placeholder="{{ trans('site.ServiceName') }}">
                                         @if ($errors->get('service_name'))
                                         <span for="textfield" class="help-block error" style="color:firebrick">
                                             @foreach ($errors->get('service_name') as $service_name)
@@ -83,8 +83,8 @@
                                     </div>
                                     <div class="form-group">
 
-                                        <label>Service Number</label>
-                                        <input type="text" name="service_number" class="form-control" placeholder="Service Number">
+                                        <label>{{ trans('site.ServiceNumber') }}</label>
+                                        <input type="text" name="service_number" class="form-control" placeholder="{{ trans('site.ServiceNumber') }}">
                                         @if ($errors->get('service_number'))
                                         <span for="textfield" class="help-block error" style="color:firebrick">
                                             @foreach ($errors->get('service_number') as $service_number)
@@ -94,13 +94,13 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label>Service Type</label>
+                                        <label>{{ trans('site.ServiceType') }}</label>
 
                                         <select class="form-control" name="service_type">
-                                            <option value="1">أجور خدمات اليد )الإصلاحات)</option>
+                                            <option value="1">أجور خدمات اليد -الإصلاحات</option>
                                             <option value="2">أجور الأعمال الخارجية </option>
-                                            <option value="3">قطع الغيار )مخزن داخلي) </option>
-                                            <option value="4">قطع غيار )مشتريات خارجية) </option>
+                                            <option value="3">قطع الغيار -مخزن داخلي </option>
+                                            <option value="4">قطع غيار -مشتريات خارجية </option>
 
                                         </select>
                                         @if ($errors->get('service_type'))
@@ -113,7 +113,7 @@
                                     </div>
                                     <div class="form-group">
 
-                                        <label>Service Cost</label>
+                                        <label>{{ trans('site.ServiceCost') }}</label>
                                         <input type="text" name="service_cost" class="form-control" placeholder="Service Cost">
                                         @if ($errors->get('service_cost'))
                                         <span for="textfield" class="help-block error" style="color:firebrick">
@@ -126,7 +126,7 @@
 
                                     <div class="form-group">
 
-                                        <label>Service Client Cost</label>
+                                        <label>{{ trans('site.ServiceClientCost') }}</label>
                                         <input type="text" name="service_client_cost" class="form-control" placeholder="Service Client Cost">
                                         @if ($errors->get('service_client_cost'))
                                         <span for="textfield" class="help-block error" style="color:firebrick">
@@ -138,8 +138,8 @@
                                     </div>
                                     <div class="form-group">
 
-                                        <label>Service Working Hours</label>
-                                        <input type="text" name="service_working_hours" class="form-control" placeholder="Service Working Hours">
+                                        <label>{{ trans('site.ServiceWorkingHours') }}</label>
+                                        <input type="text" name="service_working_hours" class="form-control" placeholder="{{ trans('site.ServiceWorkingHours') }}">
                                         @if ($errors->get('service_working_hours'))
                                         <span for="textfield" class="help-block error" style="color:firebrick">
                                             @foreach ($errors->get('service_working_hours') as $service_working_hours)
@@ -150,12 +150,12 @@
                                     </div>
 
 
-                                    <input type="submit" class="btn-primary" value="{{ trans('site.add') }}">
+                                    <input type="submit" class="btn btn-primary" value="{{ trans('site.add') }}">
 
                                 </form>
                             </div>
                             <!-- /.box-body -->
-                        </div>
+                        <!-- </div> -->
                     </div>
                     <!-- /.box-body -->
                 </div>

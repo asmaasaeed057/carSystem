@@ -8,6 +8,8 @@ use App\CustomInvoice;
 use App\CustomInvoiceItem;
 use App\Custom;
 use Auth;
+use App\CardTaxes;
+
 
 
 class CustomInvoiceController extends Controller
@@ -50,9 +52,10 @@ class CustomInvoiceController extends Controller
         } else {
             $number = 0;
         }
+        $taxes = CardTaxes::orderBy('taxes_id', 'desc')->first()->taxes_value;
 
         $services = Service::get();
-        return view('admin.customInvoice.create', compact('services', 'number'));
+        return view('admin.customInvoice.create', compact('services', 'number','taxes'));
     }
 
     /**
@@ -118,7 +121,8 @@ class CustomInvoiceController extends Controller
         $invoice = CustomInvoice::find($id);
         $invoice->update($request->only(
             [
-                'client_name'
+                'client_name',
+                'invoice_discount',
             ]
         ));
         $invoice->save();

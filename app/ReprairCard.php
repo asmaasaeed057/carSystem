@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class ReprairCard extends Model
 {
     //  
+    protected $table = 'reprair_cards';
+
     protected $fillable = [
 
         'status',

@@ -35,10 +35,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      {{ trans('site.Dashboard') }}
+      {{ trans('site.addCarType') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -50,7 +50,7 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+            <h3 class="box-title"></h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -59,10 +59,10 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <div class="box box-warning">
-              <div class="box-header with-border">
-                <h3 class="box-title">{{ trans('site.createClient') }}</h3>
-              </div>
+            <!-- <div class="box box-warning"> -->
+              <!-- <div class="box-header with-border">
+                <h3 class="box-title"></h3>
+              </div> -->
               <!-- /.box-header -->
               <div class="box-body">
                 <form action="{{ route('carType.store')}}" method="POST">
@@ -71,8 +71,8 @@
 
                   <!-- text input -->
                   <div class="form-group">
-                    <label>Car Type Name (Arabic)</label>
-                    <input type="text" name="name_ar" class="form-control" placeholder="Car Type Name">
+                    <label>{{ trans('site.NameAr') }}</label>
+                    <input type="text" name="name_ar" class="form-control" placeholder="{{ trans('site.NameAr') }}">
                     @if ($errors->get('name_ar'))
                     <span for="textfield" class="help-block error" style="color:firebrick">
                       @foreach ($errors->get('name_ar') as $name_ar)
@@ -83,8 +83,8 @@
                   </div>
 
                   <div class="form-group">
-                    <label>Car Type Name (English)</label>
-                    <input type="text" name="name_en" class="form-control" placeholder="Car Type Name">
+                    <label>{{ trans('site.NameEn') }}</label>
+                    <input type="text" name="name_en" class="form-control" placeholder="{{ trans('site.NameEn') }}">
                     @if ($errors->get('name_en'))
                     <span for="textfield" class="help-block error" style="color:firebrick">
                       @foreach ($errors->get('name_en') as $name_en)
@@ -101,7 +101,7 @@
                 </form>
               </div>
               <!-- /.box-body -->
-            </div>
+            <!-- </div> -->
           </div>
           <!-- /.box-body -->
         </div>

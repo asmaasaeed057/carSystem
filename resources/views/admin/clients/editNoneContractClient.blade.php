@@ -57,8 +57,8 @@
 
     var tr =
       '<tr>' +
-      '<td><select class="form-control" name="service_type[' + i + ']" id="service_type_' + i + '" onchange="changeService(' + i + ')"><option value="">Select</option><option value="1">أجور خدمات اليد )الإصلاحات)</option><option value="2">أجور الأعمال الخارجية </option><option value="3">قطع الغيار )مخزن داخلي) </option><option value="4">قطع غيار )مشتريات خارجية) </option></select></td>' +
-      '<td><select onchange="showPrice(' + i + ')" name="services[' + i + ']" id="services_' + i + '" class="form-control select2"><option value="">Select One</option></select></td>' +
+      '<td><select class="form-control" name="service_type[' + i + ']" id="service_type_' + i + '" onchange="changeService(' + i + ')"><option value=""><?php echo trans('site.options')?></option><option value="1">أجور خدمات اليد )الإصلاحات)</option><option value="2">أجور الأعمال الخارجية </option><option value="3">قطع الغيار )مخزن داخلي) </option><option value="4">قطع غيار )مشتريات خارجية) </option></select></td>' +
+      '<td><select onchange="showPrice(' + i + ')" name="services[' + i + ']" id="services_' + i + '" class="form-control select2"><option value=""><?php echo trans('site.options')?></option></select></td>' +
       '<td><div class="form-group"><input type="text" name="price[' + i + ']" id="price_' + i + '"></td>' +
       '<td><input type="button" class="btn btn-green add" value="+" onclick="addRow()"><input type="button" class="btn btn-danger delete" value="x" onclick="removeItem(this,' + i + ')"></td>' +
       '</tr>'
@@ -72,10 +72,10 @@
     var price = $('#price_' + count).val();
     var total2 = Number(total) - Number(price);
     var discount = Number($('#discount').val());
-    var totalWithDiscount=total2-discount;
+    var totalWithDiscount = total2 - discount;
     var taxes = Number($('#taxes').val());
-    var totalTaxes=(taxes*totalWithDiscount)/100;
-    var totalWithTaxes=Number(totalTaxes)+totalWithDiscount;
+    var totalTaxes = (taxes * totalWithDiscount) / 100;
+    var totalWithTaxes = Number(totalTaxes) + totalWithDiscount;
     $('#totalPriceWithTaxes').val(totalWithTaxes);
     $('#total_price').val(total2);
     if (confirm("هل أنت متأكد؟")) {
@@ -131,14 +131,14 @@
 
     })
   }
-  function cardDiscount()
-  {
+
+  function cardDiscount() {
     var discount = Number($('#discount').val());
-    var totalWithoutDiscount=Number($('#total_price').val());
-    var totalWithDiscount=totalWithoutDiscount-discount;
+    var totalWithoutDiscount = Number($('#total_price').val());
+    var totalWithDiscount = totalWithoutDiscount - discount;
     var taxes = Number($('#taxes').val());
-    var totalTaxes=(taxes*totalWithDiscount)/100;
-    var totalWithTaxes=Number(totalTaxes)+totalWithDiscount;
+    var totalTaxes = (taxes * totalWithDiscount) / 100;
+    var totalWithTaxes = Number(totalTaxes) + totalWithDiscount;
 
     $('#totalPriceWithTaxes').val(totalWithTaxes);
 
@@ -160,19 +160,19 @@
         var total = 0;
         $('#price_' + count).val(result);
         for (var p = 0; p <= count; p++) {
-          if ($('#price_' + p).val()){
+          if ($('#price_' + p).val()) {
 
-          var price = $('#price_' + p).val();
-          total += Number(price);
+            var price = $('#price_' + p).val();
+            total += Number(price);
           }
 
         }
         $('#total_price').val(total);
         var discount = Number($('#discount').val());
-        var totalWithDiscount=total-discount;
+        var totalWithDiscount = total - discount;
         var taxes = Number($('#taxes').val());
-        var totalTaxes=(taxes*totalWithDiscount)/100;
-        var totalWithTaxes=Number(totalTaxes)+totalWithDiscount;
+        var totalTaxes = (taxes * totalWithDiscount) / 100;
+        var totalWithTaxes = Number(totalTaxes) + totalWithDiscount;
 
 
         $('#totalPriceWithTaxes').val(totalWithTaxes);
@@ -192,10 +192,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      {{ trans('site.Dashboard') }}
+      {{ trans('site.editRepairCardNo') }} : {{$repairCard->card_number}}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -208,7 +208,7 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <h3 class="box-title">{{ trans('site.Dashboard') }}</h3>
+            <!-- <h3 class="box-title">{{ trans('site.Dashboard') }}</h3> -->
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -217,10 +217,10 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <div class="box box-warning">
-              <div class="box-header with-border">
+            <!-- <div class="box box-warning"> -->
+              <!-- <div class="box-header with-border">
                 <h3 class="box-title">Update</h3>
-              </div>
+              </div> -->
               <!-- /.box-header -->
               <div class="box-body">
                 <form action="{{ route('noneContractClient.updateNoneContractClient' ,$repairCard->id)}}" method="POST">
@@ -229,7 +229,7 @@
                   <!-- text input -->
                   <div class="box-body">
                     <div class="box-header with-border">
-                      <h3 class="box-title">Client Info</h3>
+                      <h3 class="box-title">{{ trans('site.clientInfo') }}</h3>
                     </div>
                     <div class="form-group">
                       <label>{{ trans('site.clientName') }}</label>
@@ -245,12 +245,12 @@
 
                   <div class="box-body">
                     <div class="box-header with-border">
-                      <h3 class="box-title">Car Info</h3>
+                      <h3 class="box-title">{{ trans('site.carInfo') }}</h3>
                     </div>
 
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>{{__('site.carCat')}}</label>
+                        <label>{{__('site.CarsCategory')}}</label>
                         <select class="form-control select2" name="car_brand_category_id" id="carCat" style="width: 100%;">
                           @foreach($carCategories as $category)
                           <option value="{{ $category->id }}" {{($category->id == $repairCard->car->car_brand_category_id) ? 'selected' : '' }}>
@@ -263,7 +263,7 @@
 
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>{{__('site.Cartype')}}</label>
+                        <label>{{__('site.carType')}}</label>
                         <select class="form-control select2" name="carType_id" id="CarType" style="width: 100%;">
                           @foreach($carTypes as $type)
                           <option value="{{$type->id}}" {{$type->id == $repairCard->car->carType_id ? "selected":""}}>{{$type->name_ar}}</option>
@@ -285,19 +285,19 @@
 
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Plate Number</label>
+                        <label>{{__('site.plate')}}</label>
                         <input class="form-control " type="text" name="platNo" id="" value="{{$repairCard->car->platNo}}">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Structure Number</label>
+                        <label>{{__('site.carStructureNumber')}}</label>
                         <input class="form-control " type="text" name="car_structure_number" id="" value="{{$repairCard->car->car_structure_number}}">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Color</label>
+                        <label>{{__('site.carColor')}}</label>
                         <input class="form-control " type="text" name="car_color" id="" value="{{$repairCard->car->car_color}}">
                       </div>
                     </div>
@@ -306,7 +306,7 @@
                   <!--repair card -------------------------------------->
                   <div class="box-body">
                     <div class="box-header with-border">
-                      <h3 class="box-title">Repair Card Info</h3>
+                      <h3 class="box-title">{{ trans('site.repairCardInfo') }}</h3>
                     </div>
                     <div class="col-md-12">
                       <label for="">
@@ -315,18 +315,18 @@
                       <textarea class="form-control" name="checkReprort" id="" cols="30" rows="10">{{$repairCard->checkReprort}}</textarea>
                     </div>
 
-                  <input type="text" id="taxes" value={{$repairCard->card_taxes}} name="card_taxes" hidden>
+                    <input type="text" id="taxes" value={{$repairCard->card_taxes}} name="card_taxes" hidden>
 
                   </div>
 
                   <div class="box-body">
-                    <div class="box-header with-border">
+                    <!-- <div class="box-header with-border">
                       <h3 class="box-title">Technical employee Info</h3>
-                    </div>
+                    </div> -->
                     <div class="col-md-6">
 
                       <div class="form-group">
-                        <label>Employee</label>
+                        <label>{{__('site.technicalEmployee')}}</label>
                         <select class="form-control" name="employee_id" id="" style="width: 100%;">
                           @foreach($employee as $emp)
                           <option value="{{ $emp->employee_id }}" {{($emp->employee_id == $repairCard->employee_id) ? 'selected' : '' }}>
@@ -341,22 +341,22 @@
 
 
                   <div class="container">
-                    <h2>Items</h2>
+                    <h2>{{__('site.services')}}</h2>
                     <table class="table table-condensed">
                       <thead>
                         <tr>
-                          <th>Service Type</th>
-                          <th>Services</th>
-                          <th>Price</th>
+                          <th>{{__('site.serviceType')}}</th>
+                          <th>{{__('site.service')}}</th>
+                          <th>{{__('site.price')}}</th>
                         </tr>
                       </thead>
                       <tbody id='services'>
                         <?php
                         $services = array(
-                          "1" => "أجور خدمات اليد )الإصلاحات)",
+                          "1" => "أجور خدمات اليد - الإصلاحات",
                           "2" => "أجور الأعمال الخارجية",
-                          "3" => "قطع الغيار )مخزن داخلي)",
-                          "4" => "قطع غيار )مشتريات خارجية) ",
+                          "3" => "قطع الغيار - مخزن داخلي",
+                          "4" => "قطع غيار - مشتريات خارجية",
                         );
                         ?>
                         <?php $total = 0; ?>
@@ -368,7 +368,7 @@
                         <tr>
                           <td>
                             <select class="form-control" name="service_type[{{$j}}]" id="service_type_{{$j}}" onchange="changeService({{$j}})">
-                              <option value="">Select</option>
+                              <option value="">{{__('site.options')}}</option>
 
                               @foreach($services as $i=> $service)
                               <option value="{{ $i }}" {{($i == $item->service->service_type) ? 'selected' : '' }}>
@@ -421,40 +421,40 @@
 
                         </tr>
                         <tr>
-                        <td colspan="2"></td>
-                        <td><strong>Discount</strong></td>
-                        <td>
-                        <input type="number" name="card_discount" id="discount" onkeyup="cardDiscount()" value="{{$repairCard->card_discount}}">
+                          <td colspan="2"></td>
+                          <td><strong>{{__('site.discount')}}</strong></td>
+                          <td>
+                            <input type="number" name="card_discount" id="discount" onkeyup="cardDiscount()" value="{{$repairCard->card_discount}}">
 
-                        </td>
+                          </td>
                         </tr>
                         <tr>
-                        <td colspan="2"></td>
-                        <td><strong>Total Price with taxes</strong></td>
-                        <?php $discount=$repairCard->card_discount ?>
-                        <?php $totalWithDiscount=$total-$discount ?>
-                        <?php $taxes = $repairCard->card_taxes / 100 ?>
-                        <?php $totalWithTaxes = $totalWithDiscount + ($taxes * $totalWithDiscount); ?>
+                          <td colspan="2"></td>
+                          <td><strong>{{__('site.totalWithTaxes')}}</strong></td>
+                          <?php $discount = $repairCard->card_discount ?>
+                          <?php $totalWithDiscount = $total - $discount ?>
+                          <?php $taxes = $repairCard->card_taxes / 100 ?>
+                          <?php $totalWithTaxes = $totalWithDiscount + ($taxes * $totalWithDiscount); ?>
 
 
-                        <td>
-                        <input type='text' name="totalPriceWithTaxes" id="totalPriceWithTaxes"  value="{{$totalWithTaxes}}" disabled>
+                          <td>
+                            <input type='text' name="totalPriceWithTaxes" id="totalPriceWithTaxes" value="{{$totalWithTaxes}}" disabled>
 
-                        </td>
+                          </td>
 
-                      </tr>
+                        </tr>
 
 
                       </tfoot>
                     </table>
                   </div>
 
-                  <input type="submit" class="btn-primary" value="Update">
+                  <input type="submit" class="btn btn-primary" value="{{__('site.update')}}">
 
                 </form>
               </div>
               <!-- /.box-body -->
-            </div>
+            <!-- </div> -->
           </div>
           <!-- /.box-body -->
         </div>

@@ -42,10 +42,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      {{ trans('site.Dashboard') }}
+      {{ trans('site.CompanyInfo') }}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('site.home') }}</a></li>
       <li class="active">{{ trans('site.Dashboard') }}</li>
     </ol>
   </section>
@@ -58,7 +58,7 @@
 
         <div class="box box-primary">
           <div class="box-header">
-            <h3 class="box-title">Company Details</h3>
+            <h3 class="box-title"></h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -69,17 +69,18 @@
 
           <div class="box-body">
 
-        <div class="box box-primary">
+        <!-- <div class="box box-primary"> -->
 
           <div class="box-body">
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Logo</th>
-                  <th>phones</th>
-                  <th>Addresses</th>
-                  <th>Notes</th>
+                  <th>{{ trans('site.Name') }}</th>
+                  <th>{{ trans('site.Logo') }}</th>
+                  <th>{{ trans('site.Phone') }}</th>
+                  <th>{{ trans('site.Address') }}</th>
+                  <th>{{ trans('site.Notes') }}</th>
+                  <th>{{ trans('site.Edit') }}</th>
 
 
                 </tr>
@@ -93,7 +94,7 @@
                   <td>{{$company->company_address}}</td>
                   <td>{{$company->company_notes}}</td>
 
-                  <td><a href="{{route('companyDetails.edit' ,$company->company_id)}}" class="btn btn-info">Edit</a></td>
+                  <td><a href="{{route('companyDetails.edit' ,$company->company_id)}}" class="btn btn-info"><i class="fa fa-edit" style="margin-right: 10px;" ></i>{{ trans('site.Edit') }}</a></td>
 
 
                 </tr>
@@ -102,7 +103,7 @@
 
 
             </table>
-          </div>
+          <!-- </div> -->
         </div>
         <!-- /.box-body -->
         <!-- /.box -->
