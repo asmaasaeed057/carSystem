@@ -133,8 +133,24 @@ return [
     'print' => 'Print',
     'confirm' => 'Confirm',
     'paid' => 'The amount paid is higher than the requested amount',
+    'cars' => 'Cars',
+    'todayClients' => "Today's Clients",
+    'totalClients' => 'Total Clients',
 
+    'todayCars' => "Today's Cars",
+    'totalCars' => 'Total Cars',
+    'carsUnderMaintenance' => 'Cars Under Maintenance',
 
+    'acceptedCards' => 'Accepted Cards',
+    'deniedCards' => 'Denied Cards',
+    'pandingCards' => 'Panding Cards',
+    'todayExpenses' => "Today's Expenses",
+    'totalExpense' => 'Total Expenses',
+    'todayCont' => "Today's Payments Contract Client",
+    'todayNoneCont' => "Today's Payments None Contract Client",
+    'todayTotal' => "Today's Total",
+    'todayRemain' => "Today's Remain",
+    'totalRemain' => 'Total Remain',
 
 
     'clientList' => 'Clients List',
@@ -214,8 +230,8 @@ return [
     'AddGroup' => 'Add Group',
 
     'contractClients' => 'Contract Clients',
-
-
+    'debts' => 'Debts',
+    'payments' => 'Payments',
 
 
 

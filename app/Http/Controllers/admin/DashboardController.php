@@ -49,49 +49,55 @@ class DashboardController extends Controller
     //payments
 
     $todayInvoicePayment = InvoicePayment::whereDate('invoice_payment_date', Carbon::today())->get()->sum('invoice_payment_amount');
-    // $todayInvoicePaymenyContract = InvoicePayment::whereDate('invoice_payment_date', Carbon::today())
-    // 	->join('client', 'repairCard.client_id', '=', 'client.id')
-
-    // ->with('invoice.repairCard.client')->where('client.client_type' , '=' , 'contract')->get()->sum('invoice_payment_amount');
 
 
+    //elmadyonat
 
-    // $todayInvoicePaymenyContract = InvoicePayment::with(array('invoice' => function($query)
-    // {
-    //      $query->where('invoice.repairCard.client.client_type' , '=' , 'contract');
-    //     //  $query->orderBy('orders.created_at', 'DESC');
-    // }))
-    //     // ->orderBy('date')
-    //     ->get();
-
-
-    // $todayInvoicePaymenyContract = DB::table('invoices')
-    // ->leftJoin('invoice_payment', 'invoices.invoice_id', '=', 'invoice.invoice_id')->orderBy('invoice_payment_amount', 'DESC')
-    // ->get();
-
-
-    $data = DB::table('invoice_payment')
+    $contractPayments = DB::table('invoice_payment')
       ->join('invoices', 'invoices.invoice_id', '=', 'invoice_payment.invoice_id')
+      ->whereDate('invoice_payment_date', Carbon::today())
       ->join('reprair_cards', 'reprair_cards.id', '=', 'invoices.repair_card_id')
       ->join('clients', 'clients.id', '=', 'reprair_cards.client_id')
       ->where('client_type', '=', 'contract')
       ->sum('invoice_payment.invoice_payment_amount');
-      // ->distinct()
-      // ->get();
+
+    $noneContractPayments = DB::table('invoice_payment')
+      ->join('invoices', 'invoices.invoice_id', '=', 'invoice_payment.invoice_id')
+      ->whereDate('invoice_payment_date', Carbon::today())
+
+      ->join('reprair_cards', 'reprair_cards.id', '=', 'invoices.repair_card_id')
+      ->join('clients', 'clients.id', '=', 'reprair_cards.client_id')
+      ->where('client_type', '!=', 'contract')
+      ->sum('invoice_payment.invoice_payment_amount');
 
 
-    //  $data = DB::table('city')
-    //  ->join('state', 'state.state_id', '=', 'city.state_id')
-    //  ->join('country', 'country.country_id', '=', 'state.country_id')
-    //  ->select('country.country_name', 'state.state_name', 'city.city_name')
-    //  ->get();
+    $invoicesContract = DB::table('invoices')
+      ->whereDate('invoice_date', Carbon::today())
+      ->join('reprair_cards', 'reprair_cards.id', '=', 'invoices.repair_card_id')
+      ->join('clients', 'clients.id', '=', 'reprair_cards.client_id')
+      ->where('client_type', '=', 'contract');
+
+    $todayTotalInvoices = $invoicesContract->sum('invoices.invoice_total');
+    $invoicesContract->leftJoin('invoice_payment', 'invoice_payment.invoice_id', '=', 'invoices.invoice_id');
+    $todayTotalPayment = $invoicesContract->sum('invoice_payment.invoice_payment_amount');
+    $todayRemainContract = $todayTotalInvoices - $todayTotalPayment;
 
 
 
-    // User::with('city.region')->get();
+    $invoicesTotalContract = DB::table('invoices')
+      ->join('reprair_cards', 'reprair_cards.id', '=', 'invoices.repair_card_id')
+      ->join('clients', 'clients.id', '=', 'reprair_cards.client_id')
+      ->where('client_type', '=', 'contract');
 
-    // dd($data);
-    // dd($totalCars);
+    $totalInvoices = $invoicesTotalContract->sum('invoices.invoice_total');
+    $invoicesTotalContract->leftJoin('invoice_payment', 'invoice_payment.invoice_id', '=', 'invoices.invoice_id');
+    $totalPayment = $invoicesTotalContract->sum('invoice_payment.invoice_payment_amount');
+    $totalRemainContract = $totalInvoices - $totalPayment;
+    // dd($totalRemainCotract);
+
+
+
+
 
 
     ////////////////////////////////////////////
@@ -112,7 +118,7 @@ class DashboardController extends Controller
 
 
     //dd($account);
-    return view('admin.index', compact('todayCars', 'totalAcceptedCars', 'totalCars', 'totalAcceptedCards', 'totalPandingCards', 'totalDeniedCards', 'todayExpenses', 'totalExpenses', 'todayInvoicePayment', 'account', 'todayConractClients', 'clients', 'carsQtn', 'totalContractClients', 'repairCardQty2'));
+    return view('admin.index', compact('todayCars', 'totalAcceptedCars', 'totalCars', 'totalAcceptedCards', 'totalPandingCards', 'totalDeniedCards', 'todayExpenses', 'totalExpenses', 'todayInvoicePayment', 'account', 'todayConractClients', 'clients', 'carsQtn', 'totalContractClients', 'contractPayments', 'noneContractPayments', 'totalRemainContract', 'todayRemainContract'));
   }
 
   public function client()

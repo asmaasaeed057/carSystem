@@ -81,7 +81,7 @@
                 <a><b>{{ $company->company_name }}</b></a>
               </div>
 
-              <a><b>phones:</b></a>{{ $company->company_phone }}
+              <a><b>{{ trans('site.companyPhone') }}:</b></a>{{ $company->company_phone }}
               <h2 style="text-align: center">{{ trans('site.repairCardNo') }}: {{$repairCard->card_number}}</h2>
 
 
@@ -332,8 +332,8 @@
           @if($repairCard->status =="denied" || $repairCard->status =="accepted")
           @else
 
-          <td><a class="btn btn-danger denied" href="{{route('denied' ,$repairCard->id)}}"> {{ trans('site.denied') }}</a></td>
-          <td><a class="btn btn-primary approve" href="{{route('approved' ,$repairCard->id)}}"> {{ trans('site.approved') }}</a></td>
+          <td><a class="btn btn-danger denied" href="{{route('denied' ,$repairCard->id)}}"><i class="fa fa-trash-o" style="margin-right: 10px;" ></i> {{ trans('site.denied') }}</a></td>
+          <td><a class="btn btn-primary approve" href="{{route('approved' ,$repairCard->id)}}"><i class="fa fa-check" style="margin-right: 10px;" ></i> {{ trans('site.approved') }}</a></td>
           @endif
           <button class="btn bg-navy margin" onclick="printDiv('printMe')" style="text-align:center"><i class="fa fa-print" style="margin-right: 10px;" ></i>{{ trans('site.print') }}</button>
           <!-- <td><a class="btn btn-warning"> Send Mail</a></td> -->

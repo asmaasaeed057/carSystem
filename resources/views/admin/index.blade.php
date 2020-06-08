@@ -6,12 +6,11 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Dashboard
-      <small>Control panel</small>
+      {{trans('site.Dashboard')}}
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Dashboard</li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{trans('site.home')}}</a></li>
+      <li class="active">{{trans('site.Dashboard')}}</li>
     </ol>
   </section>
 
@@ -19,91 +18,109 @@
   <section class="content">
     <!-- Small boxes (Stat box) -->
     <div class="row">
-      <div class="col-lg-3 col-xs-6">
+      <div class="col-lg-6 col-xs-12">
         <!-- small box -->
         <div class="small-box bg-aqua">
-          <div class="inner">
-              <p>Today's Clients: &nbsp;<span  style="font-weight:bold">{{$todayConractClients}}</span> </p>
-              <br>
-              <p>Total Clients: &nbsp;<span  style="font-weight:bold">{{$totalContractClients}}</span> </p>
+          <div class="inner" style="height: 113px">
+            <p>{{trans('site.todayClients')}}: &nbsp;<span style="font-weight:bold">{{$todayConractClients}}</span> </p>
+            <br>
+            <p>{{trans('site.totalClients')}} &nbsp;<span style="font-weight:bold">{{$totalContractClients}}</span> </p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-person"></i>
+          </div>
+
+          <a class="small-box-footer">{{trans('site.clients')}}<i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <!-- ./col -->
+      <div class="col-lg-6 col-xs-12">
+        <!-- small box -->
+        <div class="small-box bg-green">
+
+          <div class="inner" style="height: 113px">
+            <p>{{trans('site.todayCars')}}: &nbsp;<span style="font-weight:bold">{{$todayCars}}</span> </p>
+            <p>{{trans('site.totalCars')}}: &nbsp;<span style="font-weight:bold">{{$totalCars}}</span> </p>
+            <p>{{trans('site.carsUnderMaintenance')}}: &nbsp;<span style="font-weight:bold">{{$totalAcceptedCars}}</span> </p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-android-car"></i>
+          </div>
+          <a class="small-box-footer">{{trans('site.cars')}} <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- ./col -->
+      <div class="col-lg-6 col-xs-12">
+        <!-- small box -->
+        <div class="small-box bg-purple">
+
+          <div class="inner" style="height: 113px">
+            <p>{{trans('site.acceptedCards')}} : &nbsp;<span style="font-weight:bold">{{$totalAcceptedCards}}</span> </p>
+            <p>{{trans('site.pandingCards')}}: &nbsp;<span style="font-weight:bold">{{$totalPandingCards}}</span> </p>
+            <p>{{trans('site.deniedCards')}}: &nbsp;<span style="font-weight:bold">{{$totalDeniedCards}}</span> </p>
+          </div>
+
+          <div class="icon">
+            <i class="ion ion-card"></i>
+          </div>
+          <a class="small-box-footer">{{trans('site.repairCards')}}<i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-6 col-xs-12">
+        <!-- small box -->
+        <div class="small-box bg-blue">
+
+          <div class="inner" style="height: 113px">
+            <p>{{trans('site.todayExpenses')}} : &nbsp;<span style="font-weight:bold">{{$todayExpenses}}</span> </p>
+            <br>
+            <p>{{trans('site.totalExpense')}}: &nbsp;<span style="font-weight:bold">{{$totalExpenses}}</span> </p>
+          </div>
+
+          <div class="icon">
+            <i class="ion ion-share"></i>
+          </div>
+          <a class="small-box-footer">{{trans('site.Expenses')}}<i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <!-- ./col -->
+    </div>
+
+
+    <!-- ./col -->
+
+    <div class="row">
+
+      <div class="col-lg-6 col-xs-12">
+        <!-- small box -->
+        <div class="small-box bg-yellow">
+          <div class="inner" style="height: 113px">
+            <p>{{trans('site.todayCont')}}: &nbsp;<span style="font-weight:bold">{{$contractPayments}}</span> </p>
+            <p>{{trans('site.todayNoneCont')}}: &nbsp;<span style="font-weight:bold">{{$noneContractPayments}}</span> </p>
+            <p>{{trans('site.todayTotal')}}: &nbsp;<span style="font-weight:bold">{{$contractPayments + $noneContractPayments}} </span> </p>
           </div>
           <div class="icon">
             <i class="ion ion-bag"></i>
           </div>
-
-          <a href="{{route('client.create')}}" class="small-box-footer">{{trans('site.createClient')}}<i class="fa fa-arrow-circle-right"></i></a>
+          <a class="small-box-footer">{{trans('site.payments')}}<i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
-
-
-
-      <!-- ./col -->
-      <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-green">
-
-          <div class="inner">
-              <p>Today's Cars: &nbsp;<span  style="font-weight:bold">{{$todayCars}}</span> </p>
-              <p>Total Cars: &nbsp;<span  style="font-weight:bold">{{$totalCars}}</span> </p>
-              <p>Cars Under Maintenance: &nbsp;<span  style="font-weight:bold">{{$totalAcceptedCars}}</span> </p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-stats-bars"></i>
-          </div>
-          <a href="{{route('car.create')}}" class="small-box-footer">{{trans('site.addCar')}} <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-yellow">
-       
-          <div class="inner">
-              <p>Accepted Cards : &nbsp;<span  style="font-weight:bold">{{$totalAcceptedCards}}</span> </p>
-              <p>Pending Cards: &nbsp;<span  style="font-weight:bold">{{$totalPandingCards}}</span> </p>
-              <p>Denied Cards: &nbsp;<span  style="font-weight:bold">{{$totalDeniedCards}}</span> </p>
-          </div>
-          
-          <div class="icon">
-            <i class="ion ion-person-add"></i>
-          </div>
-          <a href="#" class="small-box-footer">{{trans('site.addRepairCar')}}<i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-
-
-      <div class="col-lg-3 col-xs-6">
+      <div class="col-lg-6 col-xs-12">
         <!-- small box -->
         <div class="small-box bg-red">
-       
-          <div class="inner">
-              <p>Today's Expenses : &nbsp;<span  style="font-weight:bold">{{$todayExpenses}}</span> </p>
-              <br>
-              <p>Total Expense: &nbsp;<span  style="font-weight:bold">{{$totalExpenses}}</span> </p>
-          </div>
-          
-          <div class="icon">
-            <i class="ion ion-pie-graph"></i>
-          </div>
-          <a href="#" class="small-box-footer">{{trans('site.addRepairCar')}}<i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-red">
-          <div class="inner">
-            <h3>{{$account}}</h3>
-
-            <p>{{ trans('site.bills')}}</p>
+          <div class="inner" style="height: 113px">
+            <p>{{trans('site.todayRemain')}} : &nbsp;<span style="font-weight:bold">{{$todayRemainContract}}</span> </p>
+            <br>
+            <p>{{trans('site.totalRemain')}}: &nbsp;<span style="font-weight:bold">{{$totalRemainContract}}</span> </p>
           </div>
           <div class="icon">
-            <i class="ion ion-pie-graph"></i>
+            <i class="ion ion-cash"></i>
           </div>
-          <a href="#" class="small-box-footer">{{trans('site.invoiceList')}}<i class="fa fa-arrow-circle-right"></i></a>
+          <a class="small-box-footer">{{trans('site.debts')}}<i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
-      <!-- ./col -->
     </div>
     <style>
       .tab {
@@ -182,53 +199,7 @@
     <!-- Main row -->
     <div class="row">
       <!-- Left col -->
-      <section class="col-lg-11 OFF connectedSortable">
-        <div class="tab">
-          <button class="tablinks" onclick="openCity(event, 'London')">{{ trans('site.clientList') }}</button>
-          <button class="tablinks" onclick="openCity(event, 'Paris')">{{ trans('site.invoice') }}</button>
-          <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
-        </div>
 
-        <!-- Tab content -->
-        <div id="London" class="tabcontent">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title">{{ trans('site.clientList') }}</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table class="table table-bordered">
-                <tbody>
-                  <tr>
-                    <th>{{ trans('site.clientName') }} </th>
-                    <th>{{ trans('site.phone') }} </th>
-                    <th>{{trans('site.address')}}</th>
-                  </tr>
-                  @foreach($clients as $value)
-                  <tr>
-                    <td>{{$value->fullName}}</td>
-                    <td>{{$value->phone}}</td>
-                    <td>{{$value->address}}</td>
-                  </tr>
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
-            <!-- /.box-body -->
-
-          </div>
-        </div>
-
-        <div id="Paris" class="tabcontent">
-          <h3>Paris</h3>
-          <p>Paris is the capital of France.</p>
-        </div>
-
-        <div id="Tokyo" class="tabcontent">
-          <h3>Tokyo</h3>
-          <p>Tokyo is the capital of Japan.</p>
-        </div>
-      </section>
       <!-- /.Left col -->
       <!-- right col (We are only adding the ID to make the widgets sortable)-->
       <section class="col-lg-5 connectedSortable">

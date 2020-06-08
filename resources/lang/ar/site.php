@@ -127,8 +127,24 @@ return [
     'confirm' => 'تآكيد',
     'showClient' => 'عرض تفاصيل عميل',
     'paid' => 'المبلغ المدفوع اعلى من المبلغ المطلوب',
+    'cars' => 'السيارات',
+    'todayClients' => 'العملاء المسجلين اليوم',
+    'totalClients' => 'إجمالي عدد العملاء',
 
+    'todayCars' => "السيارات المسجلة اليوم",
+    'totalCars' => 'إجمالي السيارات',
+    'carsUnderMaintenance' => 'السيارات تحت الإصلاح',
 
+    'acceptedCards' => ' البطاقات المعتمدة',
+    'deniedCards' => 'البطاقات المرفوضة',
+    'pandingCards' => 'البطاقات المنتظرة',
+    'todayExpenses' => 'مصروفات اليوم',
+    'totalExpense' => 'إجمالي المصروفات',
+    'todayCont' => 'إيرادات عملاء العقود اليوم',
+    'todayNoneCont' => 'إيرادات عملاء غير العقود اليوم',
+    'todayTotal' => 'إجمالي الإيرادات',
+    'todayRemain' => 'مديونات اليوم',
+    'totalRemain' => 'إجمالي المديونات',
 
 
 
@@ -208,8 +224,8 @@ return [
     'editAccount' => 'تعديل حساب',
     'AddGroup' => 'اضافة مجموعة',
     'contractClients' => 'عملاء العقود',
-
-
+    'debts' => 'المديونات',
+    'payments' => 'المدفوعات',
 
 
 

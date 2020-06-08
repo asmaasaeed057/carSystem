@@ -4,7 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Dashboard</title>
+    <?php $company = App\CompanyDetails::find(1); ?>
+
+    <title>{{$company->company_name}}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -13,6 +15,9 @@
     <link rel="stylesheet" href="{{ asset('FrontEnd') }}/bower_components/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('FrontEnd') }}/bower_components/Ionicons/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="{{ asset('FrontEnd') }}/dist/css/table.css">
+
     @yield('style')
 
     <!-- Theme style -->
@@ -261,7 +266,7 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header"></li>
-                    <li class="active treeview">
+                    <li class="active">
                         <a href="{{route('dashboard')}}">
                             <i class="fa fa-dashboard"></i> <span>{{ trans('site.Dashboard')}}</span>
                         </a>
@@ -566,10 +571,10 @@
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
-                <b>Version</b> 2.4.18
+                <!-- <b>Version</b> 2.4.18 -->
             </div>
-            <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE</a>.</strong> All rights
-            reserved.
+            <!-- <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE</a>.</strong> All rights
+            reserved. -->
         </footer>
 
         <!-- Control Sidebar -->
